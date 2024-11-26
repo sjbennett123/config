@@ -1,0 +1,41 @@
+
+[colors]
+draw_bold_text_with_bright_colors = false
+
+[colors.primary]
+background = "0x000000"
+foreground = "0xeaeaea"
+
+[font]
+size = 16.0
+
+[font.bold]
+family = "CaskaydiaCove NF"
+style = "Bold"
+
+[font.bold_italic]
+family = "CaskaydiaCove NF"
+style = "Bold Italic"
+
+[font.italic]
+family = "CaskaydiaCove NF"
+
+[font.normal]
+family = "CaskaydiaCove NF"
+style = "Book"
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mouse = "Right"
+
+[selection]
+save_to_clipboard = true
+
+[general]
+working_directory = 'C:\Users\AAA3AZZ\OneDrive - Solventum\Desktop'
+
+[terminal]
+
+[terminal.shell]
+args = ["-NoLogo"]
+program = 'C:\Program Files\PowerShell\7\pwsh.exe'
