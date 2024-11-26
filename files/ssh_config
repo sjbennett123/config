@@ -1,0 +1,250 @@
+# https://skydrive3m.sharepoint.com/teams/SSLInspection
+# https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/126551346/Using+Jitney+authentication+to+access+AWS+resources
+Host ocdi_ct_deploy
+    User ec2-user
+    ProxyCommand  C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --profile us-catalyst-nonprod-phi --region us-east-1 --target i-086c89ab631ce5457 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile %d\.ssh\ocdi-ct-runner-key.pem
+    IdentitiesOnly yes
+
+Host ocdi_ct_runner
+    User ec2-user
+    ProxyCommand  C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --profile us-catalyst-nonprod-phi --region us-east-1 --target i-0a6c5154176c3974c --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile %d\.ssh\ocdi-ct-runner-key.pem
+    IdentitiesOnly yes
+
+Host ocdi_ci_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-dev --region us-east-1 --target i-07cb074c1ba66a6cf --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\hcc_ci.pem
+    IdentitiesOnly yes
+
+Host ocdi_gi_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-dev --region us-east-1 --target i-07cb074c1ba66a6cf --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\hcc_gi.pem
+    IdentitiesOnly yes
+
+Host hcc_gi_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-dev --region us-east-1 --target i-07098f3e8ab53b254 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\hcc_gi.pem
+    IdentitiesOnly yes
+
+Host hcc_ci_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-dev --region us-east-1 --target i-0b6065f5a396552e7 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\hcc_ci.pem
+    IdentitiesOnly yes
+
+Host capd_gi_capd_services_1
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-nonprod-phi --region us-east-1 --target i-00f20a01f3583d2c6 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\hcc-ct.pem
+
+Host hcc_ct_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-nonprod-phi --region us-east-1 --target i-0ffa617c1f9a08870 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\hcc-ct.pem
+    IdentitiesOnly yes
+
+Host hcc_cqa_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-nonprod-phi --region us-east-1 --target i-0cff5a8d1e5dfe1e8 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\hcc_cqa.pem
+    IdentitiesOnly yes
+
+Host hcc_cpm_deploy hcc_pr_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile 3mhis-catalyst --region us-east-1 --target i-0bf9dfd9a57fedde4  --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\hcc-cpm.pem
+    IdentitiesOnly yes
+
+Host hcc_cpm_collab2
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile cpm --region us-east-1 --target i-0978a653f6d0253a3  --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\hcc-cpm.pem
+    
+Host cdi_gi_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-dev --region us-east-1 --target i-0744b09a89ea4bdeb --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\cdi-ucd-gi-key.pem
+    IdentitiesOnly yes
+
+Host cdi_ct_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-nonprod-phi --region us-east-1 --target i-0ab82de853cd68230   --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\cdi-collab-ctbeta.pem
+    IdentitiesOnly yes
+
+Host cdi_cqa_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-nonprod-phi --region us-east-1 --target i-0231c62098dcc0a3f --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\cqa_ucnpp_aws_collab.pem
+    IdentitiesOnly yes
+
+Host cdi_pr_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile cpm --region us-east-1 --target  i-0d7845c07942d6f6b --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\cdi-collab-priv-kypr.pem
+    IdentitiesOnly yes
+
+Host hcc_pa_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-prod-phi --region us-east-1 --target   i-0322b5825262693f4 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\230-hcc-collab-awscatpa-kypr.pem
+    IdentitiesOnly yes
+
+Host cdi_rd_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-dev --region us-east-1 --target 0b25558e7412f34b4 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\cdi-ucd-gi-key.pem
+
+Host cdi_rd_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-dev --region us-east-1 --target 0b25558e7412f34b4 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\cdi-ucd-gi-key.pem
+
+Host cdi_au_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile "aws ssm start-session --no-verify-ssl --profile sydney-catalyst-prod-phi --region ap-southeast-2 --target i-0bd50e609dab206ec --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\aupk-cdi-collab.pem
+    IdentitiesOnly yes
+
+Host cdi_pa_deploy
+    User ec2-user
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile pa --region us-east-1 --target   i-06cdcbf3bfd45f0f2 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\231-cdi-collab-awscatpa-kypr.pem
+    IdentitiesOnly yes
+
+Host capd_uae_deploy
+    HostName 10.0.3.85
+    User  scott.bennett
+    IdentityFile C:\Users\AAA3AZZ\.ssh\id_rsa
+    ConnectTimeout 2
+
+Host 3mpi
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile rd --region us-east-1 --target 094e7e8df78333428 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+
+Host capd_cpm_deploy #nv-cpm-pb-capd-bastion
+    User ec2-user
+    IdentityFile  ~/.ssh/nv-cpm-pb-capd
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws.exe ssm start-session --no-verify-ssl --profile 3mhis-catalyst  --region us-east-1 --target i-0fcaa4839e3ed4eee --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    PubkeyAuthentication yes
+    IdentitiesOnly yes
+
+Host capd2_cpm_deploy
+    User ec2-user
+    IdentityFile  ~/.ssh/cpm2.pem
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws.exe ssm start-session --no-verify-ssl --profile cpm --region us-east-1 --target i-0a2ece1892b222587 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    PubkeyAuthentication yes
+    IdentitiesOnly yes
+
+Host capd_pa_deploy 
+    User ec2-user
+    IdentityFile  ~/.ssh/nv-ucpp3-pa-capd
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile pa --region us-east-1 --target i-0efc417f13f079324 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    PubkeyAuthentication yes
+    IdentitiesOnly yes
+
+
+
+Host capd_de_deploy 
+    User ec2-user
+    IdentityFile  ~/.ssh/nv-cpm-pb-capd
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile"aws ssm start-session --no-verify-ssl --profile cpm --region us-east-1 --target i-05c95ce558fd61ba6 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    PubkeyAuthentication yes
+    IdentitiesOnly yes
+
+
+Host capd_ct_deploy 
+    User ec2-user
+    IdentityFile  ~/.ssh/nv-ucnpp-ct-capd
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile "aws ssm start-session --no-verify-ssl --profile us-catalyst-nonprod-phi --region us-east-1 --target i-08e16f17b20eb40b1 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    PubkeyAuthentication yes
+    IdentitiesOnly yes
+
+Host capd2_ct_deploy 
+    User ec2-user
+    IdentityFile  ~/.ssh/nv-ucnpp-ct-capd2
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile "aws ssm start-session --no-verify-ssl --profile us-catalyst-nonprod-phi --region us-east-1 --target i-0e3426c6f9d50fa48 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    PubkeyAuthentication yes
+    IdentitiesOnly yes
+
+Host capd_gi_deploy nv-ucd-gi-capd-bastion_i-04b371fc447fc912f
+    User ec2-user
+    IdentityFile C:\Users\AAA3AZZ\.ssh\nv-ucd-gi-capd
+    ProxyCommand C:\Program Files\PowerShell\7\pwsh.exe -Command "ssh-add -l;aws ssm start-session --no-verify-ssl --profile us-catalyst-dev --region us-east-1 --target i-04b371fc447fc912f  --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    PubkeyAuthentication yes
+    IdentitiesOnly yes
+    AddKeysToAgent yes
+# https://we.mmm.com/wiki/pages/viewpage.action?spaceKey=~ABBKWZZ&title=Deploying+to+ACAPD
+
+Host capd_ct_deploy #nv-cpm-pb-capd-bastion
+    User ec2-user
+    IdentityFile  ~/.ssh/nv-ucnpp-ct-capd
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws.exe ssm start-session --no-verify-ssl --profile ct --region us-east-1 --target i-08e16f17b20eb40b1 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    PubkeyAuthentication yes
+    IdentitiesOnly yes
+
+Host capd_ci_deploy
+    User ec2-user
+    IdentitiesOnly yes
+    IdentityFile   ~/.ssh/nv-ucd-ci-capd
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-dev --region us-east-1 --target i-0d9cb2be940615f0d  --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    PubkeyAuthentication yes
+    IdentitiesOnly yes
+
+Host capd_au_deploy
+    User ec2-user
+    IdentitiesOnly yes
+    IdentityFile ~/.ssh/syd-scpp-aupk-capd
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe  "aws ssm start-session --target i-05c95ce558fd61ba6 --document-name AWS-StartSSHSession --profile sydney-catalyst-prod-phi --region ap-southeast-2 --parameters 'portNumber=%p'"
+    PubkeyAuthentication yes
+
+Host capd_ca_deploy
+    User ec2-user
+    IdentitiesOnly yes
+    IdentityFile ~/.ssh/ca-ccpp-capm-capd
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile canada-catalyst-prod-phi --region ca-central-1 --target i-0020c568a19866ad5 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+
+Host capd_uk_deploy
+    User ec2-user
+    IdentitiesOnly yes
+    IdentityFile ~/.ssh/ldn-lcpp-ukpl-capd
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile london-catalyst-prod-phi --region eu-west-2 --target i-0a4e8ea6f9336548c --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    PubkeyAuthentication yes
+    
+Host capd_de_deploy
+    IdentitiesOnly yes
+    IdentityFile ~/.ssh/de-fcpp1-depb-capd
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile frankfurt-catalyst-prod-phi --region eu-central-1 --target i-0dda169fc9bb59379 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    PubkeyAuthentication yes
+
+Host capd_e2e
+    HostName utnpcmonaps001.mmm.com
+    user aaa3azz
+    IdentityFile ~/.ssh/id_rsa
+
+
+# global configuration
+Host *
+  SetEnv fzfenabled=true gitemail=sbennett@mmm.com gitname=Scott_Bennett gittoken=your_token TERM=xterm-256color GIT_ASKPASS=~/gitpassword.sh
+  ChallengeResponseAuthentication yes
+  # Need to have public keys for the agent to work. 
+  # ssh-keygen -f ~/.ssh/id_rsa -y > ~/.ssh/id_rsa.pub
+  ForwardAgent yes
+  IdentitiesOnly yes
+  User ec2-user
+  AddKeysToAgent yes
+  ForwardX11 no
+  ForwardX11Trusted no
+  HashKnownHosts yes
+  PasswordAuthentication yes
+  Port 22
+  ServerAliveCountMax 2
+  ServerAliveInterval 300
+  StrictHostKeyChecking no
+  User ec2-user
+  PreferredAuthentications publickey
+  PubkeyAuthentication yes
+
