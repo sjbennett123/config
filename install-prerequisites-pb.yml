@@ -1,0 +1,65 @@
+---
+- name: Creating a symbolic link python3 to python
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Get the distribution details
+      ansible.builtin.setup:
+        filter:
+          - ansible_distribution
+          - ansible_distribution_major_version
+
+    - name: Print the distriburion version
+      ansible.builtin.debug:
+        msg: "The version is {{ ansible_distribution_major_version }}"
+
+    - name: Creating a symbolic link python3 to python
+      ansible.builtin.file:
+        src: /usr/bin/python3
+        dest: /usr/bin/python
+        state: link
+        force: true
+      become: true
+      when: ansible_distribution_major_version == '2023'
+      tags:
+        - symlink
+
+- name: Install prerequisites on localhost
+  hosts: localhost
+  gather_facts: no
+  roles:
+    - install_prerequisites
+
+- name: Configure Deployment Host Packages on localhost
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Install Deployment host packages
+      import_role:
+        name: install_prerequisites
+        tasks_from: hostname_update.yml
+    - name: Install Deployment host packages
+      import_role:
+        name: install_prerequisites
+        tasks_from: configure_deployment_host.yml
+    - name: Install common prerequisites that are installed on remote hosts as well.
+      import_role:
+        name: install_prerequisites
+
+- name: Update hostnames
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Install Deployment host packages
+      import_role:
+        name: install_prerequisites
+        tasks_from: hostname_update.yml
+
+- name: Install prerequisites on remote hosts
+  hosts: all
+  gather_facts: no
+  serial:
+    - 5
+    - 100%
+  roles:
+    - install_prerequisites

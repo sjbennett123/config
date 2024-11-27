@@ -1,0 +1,78 @@
+---
+crowdstrike_agent_artifactory_url: https://artifactory-pit.mmodal-npd.com:443/artifactory/internal-yum-pit/falcon-sensor-6.43.0-14006.amzn2.x86_64.rpm
+splunk_installation_filename: splunkforwarder-7.1.2-a0c72a66db66-Linux-x86_64.tgz
+splunk_artifactory_url: "https://artifactory-pit.mmodal-npd.com/artifactory/external-repackaged-pit/capd/{{ splunk_installation_filename }}"
+
+# U.S. ONLY
+splunk_poll_url: https://splunkdeployer.3mhis.net:8089
+
+# US+CAN ONLY. Do not use this for International Deployments until you have verify with Matt M. that we can!
+install_crowdstrike: true
+crowdstrike_cid: 9785FF0D817B49B3B4B0D584B2D8BF23-B7
+
+######################################
+# Default Variables                  #
+######################################
+ec2_tags: {"ApplicationID": "{{ instance.stdout|from_json|json_query('ApplicationID') }}",
+           "ApplicationName": "{{ instance.stdout|from_json|json_query('ApplicationName') }}",
+           "Environment": "{{ instance.stdout|from_json|json_query('Environment') }}",
+           "Name": "{{ instance.stdout|from_json|json_query('Name')  }}",
+           "mmodal_env": "{{ instance.stdout|from_json|json_query('mmodal_env')  }}",
+           "mmodal_acct": "{{ instance.stdout|from_json|json_query('mmodal_acct')  }}",
+           "CountryCode": "{{ instance.stdout|from_json|json_query('CountryCode')  }}",
+           "ProductOwnerEmail": "{{ instance.stdout|from_json|json_query('ProductOwnerEmail')  }}",
+           "ResourceCreator": "{{ instance.stdout|from_json|json_query('ResourceCreator')  }}",
+           "AlternateEmail": "{{ instance.stdout|from_json|json_query('AlternateEmail')  }}",
+           "SubEnv": "{{ instance.stdout|from_json|json_query('SubEnv')  }}"}
+
+######################################
+# CPU Alarm Config                   #
+######################################
+cloudwatch_namespace: "AWS/EC2"
+cpu_time: "{{(( cpu_period/60)*cpu_eval_period)|int }}"
+cpu_period: 300
+cpu_metric: "CPUUtilization"
+cpu_statistic: "Maximum"
+cpu_dimensions: Name=InstanceId,Value={{ ansible_ec2_instance_id }} Name=cpu,Value=cpu-total Name=Application,Value={{ ec2_tags.ApplicationName }} Name=Environment,Value={{ ec2_tags.mmodal_env }} Name=ImageId,Value={{ ansible_ec2_ami_id }}
+cpu_eval_period: 6
+cpu_percent_unit: "Percent"
+cpu_warning_threshold: 75
+cpu_comparison_operator: "GreaterThanOrEqualToThreshold"
+
+######################################
+# Memory Alarm Config                #
+######################################
+mem_time: "{{ ((mem_period/60)*mem_eval_period)|int }}"
+mem_period: 300
+mem_metric: "MemUtilization"
+mem_statistic: "Maximum"
+mem_dimensions: "Name=InstanceId,Value={{ ansible_ec2_instance_id }} Name=Application,Value={{ ec2_tags.ApplicationName }} Name=Environment,Value={{ ec2_tags.mmodal_env }} Name=ImageId,Value={{ ansible_ec2_ami_id }}"
+mem_eval_period: 6
+mem_percent_unit: "Percent"
+mem_warning_threshold: 90
+mem_comparison_operator: "GreaterThanOrEqualToThreshold"
+
+######################################
+# Disk Alarm Config                  #
+######################################
+mounts: ["/"]
+disk_time: "{{ ((disk_period/60)*disk_eval_period)|int }}"
+disk_period: 1800
+disk_metric: "DiskUtilization"
+disk_statistic: "Maximum"
+disk_dimensions: Name=InstanceId,Value={{ ansible_ec2_instance_id }} Name=device,Value= Name=fstype,Value= Name=path,Value=
+disk_eval_period: 3
+disk_percent_unit: "Percent"
+disk_warning_threshold: 80
+disk_comparison_operator: "GreaterThanOrEqualToThreshold"
+
+alarm_deployment_retries: 5
+alarm_deployment_delay: 5
+
+######################################
+# SNS Topic                          #
+######################################
+
+sns_topic_arn: "arn:aws:sns:{{ ansible_ec2_placement_region }}:{{ ansible_ec2_instance_identity_document_accountid }}:{{ SubEnv }}-capd-cloudwatch-alarms-topic"
+ok_actions: "{{ sns_topic_arn }}"
+alarm_actions: "{{ sns_topic_arn }}"

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if [[ $(needs-restarting  -r) =~ "Reboot is required " ]]; then
+figlet "REBOOOT THIS SERVER TO APPLY PATCHES"
+fi

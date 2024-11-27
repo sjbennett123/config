@@ -1,0 +1,45 @@
+# .bashrc
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+if [ -f ~/capd-monitoring/bin/set_envars.sh  ]; then
+    source ~/capd-monitoring/bin/set_envars.sh
+fi
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+parse_git_dirty() {
+  [[ -n "$(git status -s 2> /dev/null)" ]] && echo ☠
+}
+
+parse_git_unpushed() {
+  [[ -n "$(git status 2> /dev/null | grep -E "Your branch is ahead of '.*' by ([0-9]*) commit.")" ]] && echo 🛸
+}
+
+parse_git_user() {
+     git config --get user.email 2> /dev/null
+}
+
+export PS1="\u@\h \[\033[32m\]\w\[\033[33m\] \$(parse_git_branch) \$(parse_git_user) \[\033[00m\] \$(parse_git_dirty) \$(parse_git_unpushed) \n$" 
+
+export LESS=-eFRX
+
+# Load all individual bashrc files
+if [ -d ~/.bashrc.d ]; then
+	for rc in ~/.bashrc.d/*; do
+		if [ -f "$rc" ]; then
+			. "$rc"
+		fi
+	done
+fi

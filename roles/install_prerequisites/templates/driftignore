@@ -1,0 +1,4 @@
+aws_lambda_function.hisdataops-ssi_deployer_updater
+aws_kms_key.*
+aws_kms_alias.*
+aws_lambda_function.*

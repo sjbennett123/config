@@ -1,0 +1,62 @@
+{
+  "agent": {
+    "metrics_collection_interval": 60,
+    "run_as_user": "root"
+  },
+  "metrics": {
+    "namespace": "AWS/EC2",
+    "append_dimensions": {
+      "InstanceId": "${aws:InstanceId}",
+      "ImageId": "${aws:ImageId}",
+      "Application": "{{ ec2_tags.ApplicationName }}",
+      "Environment": "{{ ec2_tags.SubEnv }}"
+    },
+    "metrics_collected": {
+      "disk": {
+        "measurement": [
+          {
+            "name": "used_percent",
+            "rename": "DiskUtilization",
+            "unit": "Percent"
+          }
+        ],
+        "metrics_collection_interval": 60,
+        "append_dimensions": {
+           "Application": "{{ ec2_tags.ApplicationName }}",
+           "Environment": "{{ ec2_tags.SubEnv }}"
+        },
+        "resources": [
+          "/"{% if 'capd_dbmongo' in group_names %},"/var/data/mongodb"{% endif %}        
+		]
+      },
+      "mem": {
+        "measurement": [
+         {
+            "name": "mem_used_percent",
+            "rename": "MemUtilization",
+            "unit": "Percent"
+          }
+        ],
+        "metrics_collection_interval": 60,
+        "append_dimensions": {
+           "Application": "{{ ec2_tags.ApplicationName }}",
+           "Environment": "{{ ec2_tags.SubEnv }}"
+        }
+      },
+      "cpu": {
+        "measurement": [
+          {
+            "name": "cpu_usage_active",
+            "rename": "CPUUtilization",
+            "unit": "Percent"
+          }
+        ],
+        "metrics_collection_interval": 60,
+        "append_dimensions": {
+           "Application": "{{ ec2_tags.ApplicationName }}",
+           "Environment": "{{ ec2_tags.SubEnv }}"
+        }
+      }
+    }
+  }
+}

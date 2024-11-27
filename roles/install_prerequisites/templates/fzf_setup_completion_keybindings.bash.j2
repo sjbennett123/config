@@ -1,0 +1,13 @@
+# Setup fzf
+# ---------
+if [[ ! "$PATH" == */home/{{ ansible_user | default(ansible_env.USER) }}/.fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/home/ec2-user/.fzf/bin"
+fi
+
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "/home/{{ ansible_user | default(ansible_env.USER) }}/.fzf/shell/completion.bash" 2> /dev/null
+
+# Key bindings
+# ------------
+source "/home/{{ ansible_user | default(ansible_env.USER) }}/.fzf/shell/key-bindings.bash"
