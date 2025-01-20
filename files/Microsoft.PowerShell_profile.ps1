@@ -14,6 +14,8 @@ Set-PSReadLineOption -PredictionSource None
 # add  C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path
 # <git-install-root>\etc\gitconfig
 
+# https://github.com/dahlbyk/posh-git
+# PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 Import-Module posh-git
 
 
@@ -59,12 +61,12 @@ Set-Alias vim nvim.exe
 Set-Alias vi nvim.exe
 
 # https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/12995020/Fed+Statically+Compiled+Federation+CLI
+# https://github.3mhealth.com/3MHISCloudEngineering/fed
 # fed requires google chrome https://www.google.com/chrome/
 
 # USAC username used to authenticate [%FED_USERNAME%]
 # USAC password used to authenticate [%FED_PASSWORD%]
 # alias jitney='fed --manual --idp jitney'
-
 
 function fl()
     {
@@ -74,7 +76,11 @@ function fu($envname)
     {
         fed --manual --idp jitney up $envname
     }
-
+function creds()
+    {
+        np $env:homedrive\$env:homepath\.aws\credentials
+    }
+    
 # https://curlie.io/
 # curl.exe -A "MS" https://webinstall.dev/curlie | powershell
 
@@ -84,8 +90,11 @@ Set-Alias g glow
 
 function repo()
     {
-        cd 'C:\Users\AAA3AZZ\OneDrive - Solventum\Documents\GitHub\'
-
+        cd $env:OneDrive\Documents\GitHub
+    }
+function dl()
+    {
+        cd $env:homedrive\$env:homepath\Downloads\
     }
 
 # https://github.com/eza-community/eza/releases/download/v0.17.0/eza.exe_x86_64-pc-windows-gnu.tar.gz
@@ -98,14 +107,25 @@ function lt()
     {
         eza --tree --git --icons --all
     }
+
 Set-Alias ls eza
+
 Set-Alias -Name dir -Value eza -Option AllScope
+
+# add nmap to path C:\Program Files (x86)\Nmap
+Set-Alias -Name nc -Value ncat -Option AllScope
+
+# add notepad++ dir to path C:\Program Files\Notepad++
+Set-Alias np notepad++
+Set-Alias notepad notepad++
+Set-Alias n++ notepad++
 
 # https://gigenet.dl.sourceforge.net/project/gnuwin32/wget/1.11.4-1/wget-1.11.4-1-setup.exe
 # add C:\Program Files (x86)\GnuWin32\bin\ to path
 
 # alacritty --version
 # https://github.com/alacritty/alacritty/releases
+# https://alacritty.org/config-alacritty.html
 # %APPDATA%\alacritty\alacritty.toml
 
 # https://jqlang.github.io/jq/
@@ -115,8 +135,13 @@ Set-Alias -Name dir -Value eza -Option AllScope
 # https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-i686-pc-windows-msvc.zip
 
 # https://www.python.org/downloads/
+# add to path
+# C:\Program Files\Python312\Scripts\
+# C:\Users\AAA3AZZ\AppData\Roaming\Python\Python312\site-packages\pre_commit
+# https://pre-commit.com/#install
 
 Set-Alias python C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python312\python
+Set-Alias python.exe C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python312\python
 
 # Jira cli
 # https://github.com/ankitpokhrel/jira-cli/releases/download/v1.5.1/jira_1.5.1_windows_x86_64.zip
@@ -216,3 +241,10 @@ Set-Alias tunnel tunnel.ps1
 
 # https://mmodal.atlassian.net/wiki/spaces/HCC/pages/42436191/Get+things+to+work+with+3M+s+custom+CA
 
+
+
+# fzfenabled
+# FED_PASSWORD
+# FED_USERNAME
+# Path
+which alacritty
