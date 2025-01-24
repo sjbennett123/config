@@ -101,6 +101,12 @@ function config_git()
         git push
         cd - 
     }
+
+function config_update()
+    {
+        difft  $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
+        cp  $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
+    }
 # https://curlie.io/
 # curl.exe -A "MS" https://webinstall.dev/curlie | powershell
 
