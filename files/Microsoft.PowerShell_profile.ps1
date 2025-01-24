@@ -17,7 +17,8 @@ Set-PSReadLineOption -PredictionSource None
 # https://github.com/dahlbyk/posh-git
 # PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 Import-Module posh-git
-
+# 
+# Set-Alias ghd $env:homedrive\$env:homepath\AppData\Local\GitHubDesktop.exe
 
 # Difftastic
 # https://github.com/Wilfred/difftastic/releases/download/0.53.1/difft-x86_64-pc-windows-msvc.zip
@@ -46,17 +47,22 @@ function env()
     {
         Get-ChildItem env:
     }
-    
+
 function pwd()
     {
         powershell -Command pwd
     }
+
 function e()
     {
         explorer .
     }
-    
-Set-Alias neovim nvim.exe
+
+function gr()
+    {
+        cd "$(git rev-parse --show-toplevel)"
+    }
+
 Set-Alias vim nvim.exe
 Set-Alias vi nvim.exe
 
@@ -80,7 +86,21 @@ function creds()
     {
         np $env:homedrive\$env:homepath\.aws\credentials
     }
-    
+
+function config()
+    {
+        np $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
+    }
+
+function config_git()
+    {
+        cp $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1
+        cd "$env:OneDrive\Documents\GitHub\config"
+        git add files\Microsoft.PowerShell_profile.ps1
+        git commit -m "updated Powershell configuration" 
+        git push
+        cd - 
+    }
 # https://curlie.io/
 # curl.exe -A "MS" https://webinstall.dev/curlie | powershell
 
@@ -131,6 +151,10 @@ Set-Alias n++ notepad++
 # https://jqlang.github.io/jq/
 
 # https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-i686-pc-windows-msvc.zip
+
+# https://github.com/phiresky/ripgrep-all
+# https://github.com/phiresky/ripgrep-all/releases/download/v0.10.6/ripgrep_all-v0.10.6-x86_64-pc-windows-msvc.zip
+# https://github.com/oschwartz10612/poppler-windows/releases/download/v24.08.0-0/Release-24.08.0-0.zip
 
 # https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-i686-pc-windows-msvc.zip
 
@@ -195,10 +219,12 @@ function capd_current()
     {
         jira issue list -q "project in ('CAPD', 'CHPROD', 'CHLAB') AND assignee in (618aea7df1ff560069c1ff24, 70121:b02faff2-b816-430d-b3bc-e7e08b7403bf, 6222858fb7e7c7007157fab1, 61a77f3e3618cd006feca193, 61dc62370586a20069a11899, 629df191932059006f8ec707, 5ffc99bd642089014136f0ad) AND summary !~ 'HCC' AND status IN ('In Development')"
     }
+
 function chlab()
     {
         jira issue list -q "project IN ('CHLAB') AND status != Closed AND component IN ('HCC-Collaborate','HCC Collaborate','CAPD')"
     }
+
 function chlab_hcc()
     {
         jira issue list -q "project IN ('CHLAB') AND status != Closed AND component IN ('HCC Collaborate')"
@@ -242,9 +268,18 @@ Set-Alias tunnel tunnel.ps1
 # https://mmodal.atlassian.net/wiki/spaces/HCC/pages/42436191/Get+things+to+work+with+3M+s+custom+CA
 
 
+Set-Alias s start
 
 # fzfenabled
 # FED_PASSWORD
 # FED_USERNAME
 # Path
-which alacritty
+
+function config_check()
+    {
+        which alacritty
+        which touch
+        which git
+        which fzf
+        which nvim
+    }
