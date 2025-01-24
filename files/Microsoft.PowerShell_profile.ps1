@@ -43,6 +43,11 @@ Set-PSReadlineKeyHandler -Key ctrl+d -Function ViExit
 
 Set-Alias which where.exe
 
+function pr()
+    {
+        gh pr list
+    }
+
 function env()
     {
         Get-ChildItem env:
