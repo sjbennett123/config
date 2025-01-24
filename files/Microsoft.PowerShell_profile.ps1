@@ -144,7 +144,7 @@ Set-Alias ls eza
 
 Set-Alias -Name dir -Value eza -Option AllScope
 
-# add nmap to path C:\Program Files (x86)\Nmap
+# add nmap dir to path C:\Program Files (x86)\Nmap
 Set-Alias -Name nc -Value ncat -Option AllScope
 
 # add notepad++ dir to path C:\Program Files\Notepad++
@@ -287,11 +287,14 @@ Set-Alias s start
 # FED_USERNAME
 # Path
 
-function config_check()
+function path_check()
     {
+        which tig
         which alacritty
         which touch
         which git
         which fzf
         which nvim
+        which notepad++
+        which touch
     }
