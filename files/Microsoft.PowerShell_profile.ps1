@@ -110,6 +110,9 @@ function config_git()
 
 function config_update()
     {
+        cd $env:OneDrive\Documents\GitHub\config
+        git pull
+        cd -
         difft  $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
         cp  $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
     }
