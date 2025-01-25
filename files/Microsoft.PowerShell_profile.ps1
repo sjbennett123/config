@@ -18,7 +18,7 @@ Set-PSReadLineOption -PredictionSource None
 # PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 Import-Module posh-git
 # 
-# Set-Alias ghd $env:homedrive\$env:homepath\AppData\Local\GitHubDesktop.exe
+Set-Alias ghd github
 
 # Difftastic
 # https://github.com/Wilfred/difftastic/releases/download/0.53.1/difft-x86_64-pc-windows-msvc.zip
@@ -292,6 +292,7 @@ Set-Alias s start
 
 function path_check()
     {
+        echo "tomato"
         which tig
         which alacritty
         which touch
