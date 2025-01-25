@@ -300,4 +300,10 @@ function path_check()
         which nvim
         which notepad++
         which touch
+        which difft
+        which jq
+        which eza
+        which gh
+        which glow
+        which nc
     }
