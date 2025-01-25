@@ -71,6 +71,9 @@ function gr()
 Set-Alias vim nvim.exe
 Set-Alias vi nvim.exe
 
+Set-Alias fb "$env:ProgramFiles\Caprine\Caprine.exe"
+Set-Alias messenger "$env:ProgramFiles\Caprine\Caprine.exe"
+
 # https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/12995020/Fed+Statically+Compiled+Federation+CLI
 # https://github.3mhealth.com/3MHISCloudEngineering/fed
 # fed requires google chrome https://www.google.com/chrome/
@@ -279,6 +282,7 @@ Set-Alias tunnel tunnel.ps1
 # https://github.com/atanunq/viu/releases
 
 # https://github.com/nickgerace/gfold/releases
+Set-Alias gf gfold
 
 # https://mmodal.atlassian.net/wiki/spaces/HCC/pages/42436191/Get+things+to+work+with+3M+s+custom+CA
 
@@ -292,10 +296,13 @@ Set-Alias s start
 
 function path_check()
     {
-        echo "tomato"
+        echo "tig"
         which tig
+        echo "alacritty"
         which alacritty
+        echo "touch"
         which touch
+        echo "touch"
         which git
         which fzf
         which nvim
@@ -307,4 +314,6 @@ function path_check()
         which gh
         which glow
         which nc
+        which rg
+
     }
