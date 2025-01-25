@@ -42,6 +42,8 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory
 Set-PSReadlineKeyHandler -Key ctrl+d -Function ViExit
 
 Set-Alias which where.exe
+# Get-Alias -Name gp*, sp* -Exclude *ps
+
 
 function pr()
     {
