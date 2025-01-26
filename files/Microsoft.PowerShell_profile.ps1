@@ -319,3 +319,7 @@ function path_check()
         which rg
 
     }
+    
+# Onefetch
+# https://github.com/o2sh/onefetch/releases
+Set-Alias of onefetch
