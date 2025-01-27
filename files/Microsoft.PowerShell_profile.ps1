@@ -353,3 +353,5 @@ Set-Alias system_properties sysdm.cpl
 # https://learn.microsoft.com/en-us/windows/powertoys/environment-variables
 
 Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
+
+#git add .; git commit -m updates; git push
