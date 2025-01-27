@@ -322,11 +322,16 @@ function path_check()
         which eza
         which gh
         which glow
-        which nc
+        echo "touch"
+        
+        which ncat
+        # https://nmap.org/dist/ncat-portable-5.59BETA1.zip
         which rg
+        which onefetch
 
     }
     
 # Onefetch
 # https://github.com/o2sh/onefetch/releases
 Set-Alias of onefetch
+Set-Alias nc netcat
