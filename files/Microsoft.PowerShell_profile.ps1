@@ -113,6 +113,7 @@ function config_git()
         difft $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
         cp $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1
         cd "$env:OneDrive\Documents\GitHub\config"
+        git pull
         git add files\Microsoft.PowerShell_profile.ps1
         git commit -m "updated Powershell configuration" 
         git push
@@ -124,7 +125,7 @@ function config_update()
         cd $env:OneDrive\Documents\GitHub\config
         git pull
         cd -
-        difft  $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
+        difft $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1
         cp  $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
     }
 # https://curlie.io/
