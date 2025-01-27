@@ -344,3 +344,10 @@ function path_check()
 # https://github.com/o2sh/onefetch/releases
 Set-Alias of onefetch
 # Set-Alias nc netcat
+
+# Control Panel
+Set-Alias system_properties sysdm.cpl
+
+# https://learn.microsoft.com/en-us/windows/powertoys/environment-variables
+
+Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
