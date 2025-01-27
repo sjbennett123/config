@@ -79,6 +79,8 @@ function gr()
 Set-Alias vim nvim.exe
 Set-Alias vi nvim.exe
 
+Set-Alias typora "$env:ProgramFiles\Typora\Typora.exe"
+
 Set-Alias fb "$env:ProgramFiles\Caprine\Caprine.exe"
 Set-Alias messenger "$env:ProgramFiles\Caprine\Caprine.exe"
 
