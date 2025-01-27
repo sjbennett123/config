@@ -41,9 +41,15 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory
 
 Set-PSReadlineKeyHandler -Key ctrl+d -Function ViExit
 
-Set-Alias which where.exe
-# Get-Alias -Name gp*, sp* -Exclude *ps
+# https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/where
+# https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-alias?view=powershell-7.4
 
+Set-Alias which where.exe
+function art($program)
+    {
+        where.exe $program
+        Get-Alias -Name $program
+    }
 
 function pr()
     {
@@ -311,19 +317,22 @@ function path_check()
         which alacritty
         echo "touch"
         which touch
-        echo "touch"
+        echo "git"
         which git
+        echo "fzf"
         which fzf
+        echo "nvim"
         which nvim
+        echo "notepad++"
         which notepad++
+        echo "notepad++"
         which touch
         which difft
         which jq
         which eza
         which gh
         which glow
-        echo "touch"
-        
+        echo "ncat"
         which ncat
         # https://nmap.org/dist/ncat-portable-5.59BETA1.zip
         which rg
@@ -334,4 +343,4 @@ function path_check()
 # Onefetch
 # https://github.com/o2sh/onefetch/releases
 Set-Alias of onefetch
-Set-Alias nc netcat
+# Set-Alias nc netcat
