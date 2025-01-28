@@ -3,6 +3,8 @@
 Set-PSReadLineOption -PredictionSource None
 # Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force
 
+Set-Alias typora "$env:ProgramFiles\Typora\Typora.exe"
+Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
 #     _______ __ 
 #   / ____(_) /_
 #  / / __/ / __/
