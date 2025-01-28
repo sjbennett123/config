@@ -357,3 +357,7 @@ Set-Alias system_properties sysdm.cpl
 Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
 
 #git add .; git commit -m updates; git push
+
+# sudo apt install neofetch
+# iwr -useb get.scoop.sh | iex
+# scoop install neofetch
