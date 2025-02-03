@@ -297,6 +297,7 @@ if (Test-Path($ChocolateyProfile)) {
 }
 
 Set-Alias tunnel tunnel.ps1
+Set-Alias ocditunnel ocditunnel.ps1
 
 # https://github.com/atanunq/viu/releases
 
