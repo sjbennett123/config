@@ -41,12 +41,19 @@ Import-Module Terminal-Icons
 Import-Module PSFzf
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 
+function history_full()
+    {
+        cat (Get-PSReadlineOption).HistorySavePath
+    }
+Set-Alias history history_full
+
 Set-PSReadlineKeyHandler -Key ctrl+d -Function ViExit
 
 # https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/where
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-alias?view=powershell-7.4
 
 Set-Alias which where.exe
+
 function art($program)
     {
         where.exe $program
