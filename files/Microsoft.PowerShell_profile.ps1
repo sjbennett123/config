@@ -268,7 +268,10 @@ function chlab()
     {
         jira issue list -q "project IN ('CHLAB') AND status != Closed AND component IN ('HCC-Collaborate','HCC Collaborate','CAPD')"
     }
-
+function carrie()
+    {
+        jira issue list -q "project IN ('OCDI','HCC') and assignee = 'Carolyn Williams' and status NOT IN ('closed','resolved')" --order-by updated
+    }
 function chlab_hcc()
     {
         jira issue list -q "project IN ('CHLAB') AND status != Closed AND component IN ('HCC Collaborate')"
