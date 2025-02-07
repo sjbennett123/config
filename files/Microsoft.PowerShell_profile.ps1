@@ -64,6 +64,11 @@ function pr()
     {
         gh pr list
     }
+    
+function prv($pull_request_number)
+    {
+        gh pr view $pull_request_number
+    }
 
 function env()
     {
