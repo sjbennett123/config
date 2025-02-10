@@ -80,6 +80,11 @@ function pwd()
         powershell -Command pwd
     }
 
+function ga()
+    {
+        gh run list
+    }
+
 function e()
     {
         explorer .
@@ -185,6 +190,7 @@ Set-Alias -Name dir -Value eza -Option AllScope
 Set-Alias -Name nc -Value ncat -Option AllScope
 
 # add notepad++ dir to path C:\Program Files\Notepad++
+Set-Alias n notepad++
 Set-Alias np notepad++
 Set-Alias notepad notepad++
 Set-Alias n++ notepad++
