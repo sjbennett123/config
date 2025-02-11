@@ -95,6 +95,10 @@ function gr()
         cd "$(git rev-parse --show-toplevel)"
     }
 
+# ~/AppData/Local/nvim/init.vim
+# let g:loaded_perl_provider = 0
+# C:\Users\AAA3AZZ\AppData\Local\nvim/init.lua
+# https://github.com/dense-analysis/ale
 Set-Alias vim nvim.exe
 Set-Alias vi nvim.exe
 
