@@ -136,10 +136,16 @@ function config()
 
 Set-Alias chrome "$env:ProgramFiles\Google\Chrome\Application\chrome.exe"
 
+function okta()
+    {
+        chrome https://3mhealth.okta.com
+    }
+
 function jitney()
     {
         chrome https://jitney.ujpnp-1.us.amz.3mhis.net
     }
+
 function config_git()
     {
         difft $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
