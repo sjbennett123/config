@@ -81,10 +81,12 @@ function pwd()
         powershell -Command pwd
     }
 
+
 function ga()
     {
         gh run list
     }
+Set-Alias gha ga
 
 function e()
     {
