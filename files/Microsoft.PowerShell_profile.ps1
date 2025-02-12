@@ -29,6 +29,7 @@ Set-Alias ghd github
 
 # https://github.com/cli/cli/releases/download/v2.43.1/gh_2.43.1_windows_amd64.msi
 
+# https://www.nerdfonts.com
 Import-Module Terminal-Icons
 
 # https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-i686-pc-windows-msvc.zip
@@ -358,6 +359,7 @@ function path_check()
         echo "notepad++"
         which touch
         which difft
+        # scoop install jq
         which jq
         which eza
         which gh
@@ -367,7 +369,6 @@ function path_check()
         # https://nmap.org/dist/ncat-portable-5.59BETA1.zip
         which rg
         which onefetch
-
     }
     
 # Onefetch
@@ -387,3 +388,25 @@ Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentv
 # sudo apt install neofetch
 # iwr -useb get.scoop.sh | iex
 # scoop install neofetch
+
+
+function ocdi_version($env)
+    {
+    if ($env -eq "ci") {
+            curl -s https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info | jq .
+    }
+    if ($env -eq "gi") {
+            curl -s https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info | jq .
+    }
+    else {
+            Write-Host ("tomato")
+          }
+    }
+
+
+
+
+function nexus()
+    {
+    chrome https://nexus.udapp-appsec.us.amz.3mhis.net/#browse/browse:hcbg-docker-us-east-1-hosted-sandbox
+    }
