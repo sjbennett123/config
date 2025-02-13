@@ -142,6 +142,10 @@ function config()
 
 Set-Alias chrome "$env:ProgramFiles\Google\Chrome\Application\chrome.exe"
 
+function standup()
+    {
+        chrome https://mmodal.atlassian.net/wiki/spaces/HCC/pages/1214480411/OCDI+Standup
+    }
 function okta()
     {
         chrome https://3mhealth.okta.com
