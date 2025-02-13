@@ -187,6 +187,11 @@ function dl()
     {
         cd $env:homedrive\$env:homepath\Downloads\
     }
+    
+function desktop()
+    {
+        cd $env:OneDrive\Desktop\
+    }
 
 # https://github.com/eza-community/eza/releases/download/v0.17.0/eza.exe_x86_64-pc-windows-gnu.tar.gz
 function ll()
