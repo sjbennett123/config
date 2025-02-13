@@ -88,6 +88,10 @@ function ga()
     }
 Set-Alias gha ga
 
+function gb()
+    {
+        gh browse
+    }
 function e()
     {
         explorer .
