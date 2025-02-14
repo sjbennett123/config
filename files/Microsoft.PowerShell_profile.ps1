@@ -61,6 +61,17 @@ function art($program)
         Get-Alias -Name $program
     }
 
+
+function gum()
+    {
+        # Get the latest metadata
+        $current_branch = git rev-parse --abbrev-ref HEAD
+        git fetch
+        git switch main
+        git pull
+        git switch $current_branch
+        git merge main
+    }
 function pr()
     {
         gh pr list
