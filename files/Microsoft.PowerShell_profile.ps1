@@ -61,22 +61,22 @@ function art($program)
         Get-Alias -Name $program
     }
 
-
 function gum()
     {
         # Get the latest metadata
         $current_branch = git rev-parse --abbrev-ref HEAD
-        git fetch
+        git fetchgb
         git switch main
         git pull
         git switch $current_branch
         git merge main
     }
+
 function pr()
     {
         gh pr list
     }
-    
+
 function prv($pull_request_number)
     {
         gh pr view $pull_request_number
@@ -441,4 +441,11 @@ function ocdi_version($env)
 function nexus()
     {
     chrome https://nexus.udapp-appsec.us.amz.3mhis.net/#browse/browse:hcbg-docker-us-east-1-hosted-sandbox
+    }
+
+# https://github.com/mikefarah/yq
+# scoop install yq
+function yaml2json($yamlfile)
+    {
+        yq -o=json '.'  $yamlfile
     }
