@@ -61,11 +61,22 @@ function art($program)
         Get-Alias -Name $program
     }
 
+function gum()
+    {
+        # Get the latest metadata
+        $current_branch = git rev-parse --abbrev-ref HEAD
+        git fetchgb
+        git switch main
+        git pull
+        git switch $current_branch
+        git merge main
+    }
+
 function pr()
     {
         gh pr list
     }
-    
+
 function prv($pull_request_number)
     {
         gh pr view $pull_request_number
@@ -144,8 +155,13 @@ Set-Alias chrome "$env:ProgramFiles\Google\Chrome\Application\chrome.exe"
 
 function standup()
     {
-        chrome https://mmodal.atlassian.net/wiki/spaces/HCC/pages/1214480411/OCDI+Standup
+        chrome https://mmodal.atlassian.net/wiki/spaces/OCDI/pages/1218314379/OCDI+Standup+Agenda
     }
+function twa()
+    {
+        chrome https://mmodal.atlassian.net/wiki/spaces/OCDI/pages/1218019437/Onboarding+Team+Working+Agreement+Definition+of+Ready+Definition+of+Done+CapEx
+    }
+    
 function okta()
     {
         chrome https://3mhealth.okta.com
@@ -349,7 +365,7 @@ $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
   Import-Module "$ChocolateyProfile"
 }
-
+# Remember to add the hcc and ocdi repos to your PATH
 Set-Alias tunnel tunnel.ps1
 Set-Alias ocditunnel ocditunnel.ps1
 
@@ -410,7 +426,7 @@ Set-Alias system_properties sysdm.cpl
 # https://learn.microsoft.com/en-us/windows/powertoys/environment-variables
 
 Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
-
+Set-Alias env_config env_edit 
 #git add .; git commit -m updates; git push
 
 # sudo apt install neofetch
@@ -437,4 +453,11 @@ function ocdi_version($env)
 function nexus()
     {
     chrome https://nexus.udapp-appsec.us.amz.3mhis.net/#browse/browse:hcbg-docker-us-east-1-hosted-sandbox
+    }
+
+# https://github.com/mikefarah/yq
+# scoop install yq
+function yaml2json($yamlfile)
+    {
+        yq -o=json '.'  $yamlfile
     }
