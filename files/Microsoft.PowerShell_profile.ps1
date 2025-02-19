@@ -461,3 +461,7 @@ function yaml2json($yamlfile)
     {
         yq -o=json '.'  $yamlfile
     }
+function json2yaml($jsonfile)
+    {
+            cat $jsonfile | yq -y
+    }
