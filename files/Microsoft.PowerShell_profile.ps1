@@ -447,7 +447,7 @@ function ocdi_version($env)
           }
     }
 
-
+# git config --global --type bool push.autoSetupRemote true
 
 
 function nexus()
