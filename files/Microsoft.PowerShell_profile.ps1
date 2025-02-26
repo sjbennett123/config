@@ -480,3 +480,5 @@ function json2yaml($jsonfile)
     {
             cat $jsonfile | yq -y
     }
+
+# git config --system core.longpaths true
