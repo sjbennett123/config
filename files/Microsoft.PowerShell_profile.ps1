@@ -324,6 +324,21 @@ function capd_current()
         jira issue list -q "project in ('CAPD', 'CHPROD', 'CHLAB') AND assignee in (618aea7df1ff560069c1ff24, 70121:b02faff2-b816-430d-b3bc-e7e08b7403bf, 6222858fb7e7c7007157fab1, 61a77f3e3618cd006feca193, 61dc62370586a20069a11899, 629df191932059006f8ec707, 5ffc99bd642089014136f0ad) AND summary !~ 'HCC' AND status IN ('In Development')"
     }
 
+function ocdi()
+    {
+        jira issue list -q "project in ('OCDI') AND status IN ('In Development')"
+    }
+
+function ocdi_ready()
+    {
+        jira issue list -q "project in ('OCDI') AND status IN ('Ready for Development')"
+    }
+
+function ocdi_cr()
+    {
+        jira issue list -q "project in ('OCDI') AND status IN ('Code Review')"
+    }
+
 function chlab()
     {
         jira issue list -q "project IN ('CHLAB') AND status != Closed AND component IN ('HCC-Collaborate','HCC Collaborate','CAPD')"
