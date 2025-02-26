@@ -65,7 +65,7 @@ function gum()
     {
         # Get the latest metadata
         $current_branch = git rev-parse --abbrev-ref HEAD
-        git fetchgb
+        git fetch
         git switch main
         git pull
         git switch $current_branch
