@@ -225,19 +225,16 @@ function desktop()
 # https://github.com/eza-community/eza/releases/download/v0.17.0/eza.exe_x86_64-pc-windows-gnu.tar.gz
 
 
-function ll()
-    {
-        eza --oneline
-    }
+
 
 function ll()
     {
-        eza -l --git --icons --all
+        eza -l --git --icons --all $($args)
     }
 
 function lt()
     {
-        eza --tree --git --icons --all
+        eza --tree --git --icons --all $($args)
     }
 
 Set-Alias ls eza
