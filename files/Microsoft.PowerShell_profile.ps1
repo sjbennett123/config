@@ -29,6 +29,11 @@ function fd()
         fd-find --hidden $($args)
     }
 
+function fdg()
+    {
+        fd-find $($args)
+    }
+    
 # Difftastic
 # https://github.com/Wilfred/difftastic/releases/download/0.53.1/difft-x86_64-pc-windows-msvc.zip
 # https://difftastic.wilfred.me.uk/git.html
