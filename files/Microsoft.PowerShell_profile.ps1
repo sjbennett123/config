@@ -207,10 +207,6 @@ function dropbox()
     {
       cd c:\Users\deadk\Dropbox
     }
-function repo()
-    {
-        cd $env:OneDrive\Documents\GitHub
-    }
 
 function repo()
     {
