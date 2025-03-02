@@ -203,6 +203,15 @@ function config_update()
 
 Set-Alias g glow
 
+function dropbox()
+    {
+      cd c:\Users\deadk\Dropbox
+    }
+function repo()
+    {
+        cd $env:OneDrive\Documents\GitHub
+    }
+
 function repo()
     {
         cd $env:OneDrive\Documents\GitHub
@@ -486,3 +495,4 @@ function json2yaml($jsonfile)
     }
 
 # git config --system core.longpaths true
+# pip install dice
