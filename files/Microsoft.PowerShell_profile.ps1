@@ -16,6 +16,11 @@ Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentv
 # add  C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path
 # <git-install-root>\etc\gitconfig
 
+function blame()
+    {
+        tig blame $($args)
+    }
+
 # https://github.com/dahlbyk/posh-git
 # PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 Import-Module posh-git
@@ -497,3 +502,10 @@ function json2yaml($jsonfile)
 
 # git config --system core.longpaths true
 # pip install dice
+
+
+# scoop install czkawka
+function dup()
+    {
+        czkawka.exe dup  --directories .
+    }
