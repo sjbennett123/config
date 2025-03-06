@@ -352,11 +352,16 @@ function ocdi_ready()
     {
         jira issue list -q "project in ('OCDI') AND status IN ('Ready for Development')"
     }
-
+Set-Alias ocdi_todo ocdi_ready
+ 
 function ocdi_cr()
     {
         jira issue list -q "project in ('OCDI') AND status IN ('Code Review')"
     }
+
+Set-Alias ocdi_codereview ocdi_cr
+Set-Alias ocdi_code_review ocdi_cr
+
 
 function chlab()
     {
