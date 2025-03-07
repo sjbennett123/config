@@ -272,7 +272,10 @@ Set-Alias n++ notepad++
 # https://alacritty.org/config-alacritty.html
 # AppData\Roaming\alacritty
 
-# %APPDATA%\alacritty\Roaming\alacritty.toml
+function alacritty_config()
+    {
+        s $env:APPDATA\alacritty\alacritty.toml
+    }
 
 # https://jqlang.github.io/jq/
 
