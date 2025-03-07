@@ -1,6 +1,15 @@
 # https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2
 # To turn off powershell autocomplete
 Set-PSReadLineOption -PredictionSource None
+
+Set-Alias which where.exe
+
+function history_full()
+    {
+        cat (Get-PSReadlineOption).HistorySavePath
+    }
+Set-Alias history history_full
+
 # Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force
 
 Set-Alias typora "$env:ProgramFiles\Typora\Typora.exe"
@@ -15,11 +24,15 @@ Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentv
 # make sure that the bin for git is inthe PATH so you get the Tig git history viewer
 # add  C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path
 # <git-install-root>\etc\gitconfig
+# git config --system core.longpaths true
+
+# git config --global --type bool push.autoSetupRemote true
 
 function blame()
     {
         tig blame $($args)
     }
+Set-Alias annotate blame
 
 # https://cli.github.com/
 
@@ -31,20 +44,40 @@ Import-Module posh-git
 Set-Alias ghd github
 
 
-function fd()
+
+
+
+$condition = which fd-find
+if ($condition) {
+    function fd()
     {
         fd-find --hidden $($args)
     }
-
-function fdg()
+    function fdg()
     {
         fd-find $($args)
     }
 
-# Difftastic
-# https://github.com/Wilfred/difftastic/releases/download/0.53.1/difft-x86_64-pc-windows-msvc.zip
-# https://difftastic.wilfred.me.uk/git.html
-# git config --global diff.external difft
+
+}
+else
+{
+ echo "install the fd find tool"
+ echo ""
+
+}
+
+$condition = which difftastic
+if ($condition) {
+}
+else
+{
+  echo "Install Difftastic the fantastic diff tool"
+  echo "https://github.com/Wilfred/difftastic/releases/download/0.53.1/difft-x86_64-pc-windows-msvc.zip"
+  echo "https://difftastic.wilfred.me.uk/git.html"
+  echo "git config --global diff.external difft"
+}
+
 
 # https://github.com/cli/cli/releases/download/v2.43.1/gh_2.43.1_windows_amd64.msi
 
@@ -55,24 +88,19 @@ Import-Module Terminal-Icons
 
 # https://github.com/junegunn/fzf/releases/download/0.32.1/fzf-0.32.1-windows_amd64.zip
 # add to windows path
-# add windows environment variable 
-# Variable Name: fzf_default_opts 
+# add windows environment variable
+# Variable Name: fzf_default_opts
 # Variable Value: --height 40% --border
 Import-Module PSFzf
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 
-function history_full()
-    {
-        cat (Get-PSReadlineOption).HistorySavePath
-    }
-Set-Alias history history_full
+
 
 Set-PSReadlineKeyHandler -Key ctrl+d -Function ViExit
 
 # https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/where
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-alias?view=powershell-7.4
 
-Set-Alias which where.exe
 
 function art($program)
     {
@@ -182,7 +210,7 @@ function twa()
     
 function okta()
     {
-        chrome https://3mhealth.okta.com
+        chromasdftps://3mhealth.okta.com
     }
 
 function jitney()
@@ -236,24 +264,33 @@ function desktop()
         cd $env:OneDrive\Desktop\
     }
 
-# https://github.com/eza-community/eza/releases/download/v0.17.0/eza.exe_x86_64-pc-windows-gnu.tar.gz
 
 
-
-
-function ll()
+$condition = which eza
+if ($condition) {
+    function ll()
     {
         eza -l --git --icons --all $($args)
     }
-
-function lt()
+    function ll()
+    {
+        eza -l --git --icons --all $($args)
+    }
+    function lt()
     {
         eza --tree --git --icons --all $($args)
     }
+    Set-Alias ls eza
+    Set-Alias -Name dir -Value eza -Option AllScope
 
-Set-Alias ls eza
 
-Set-Alias -Name dir -Value eza -Option AllScope
+}
+else
+{
+ echo "install the LS alterantive eza"
+ echo "https://github.com/eza-community/eza/releases/download/v0.17.0/eza.exe_x86_64-pc-windows-gnu.tar.gz"
+
+}
 
 # add nmap dir to path C:\Program Files (x86)\Nmap
 Set-Alias -Name nc -Value ncat -Option AllScope
@@ -267,23 +304,47 @@ Set-Alias n++ notepad++
 # https://gigenet.dl.sourceforge.net/project/gnuwin32/wget/1.11.4-1/wget-1.11.4-1-setup.exe
 # add C:\Program Files (x86)\GnuWin32\bin\ to path
 
-# alacritty --version
-# https://github.com/alacritty/alacritty/releases
-# https://alacritty.org/config-alacritty.html
-# AppData\Roaming\alacritty
 
-function alacritty_config()
-    {
-        s $env:APPDATA\alacritty\alacritty.toml
-    }
+$condition = which alacritty
+if ($condition) {
+    function alacritty_config()
+        {
+            alacritty --version
+            chrome https://alacritty.org/config-alacritty.html
+            s $env:APPDATA\alacritty\alacritty.toml
+        }
+}
+else
+{
+    echo "Install the Alactritty Terminal"
+    echo "https://github.com/alacritty/alacritty/releases"
+}
 
-# https://jqlang.github.io/jq/
+$condition = which jq
+if ($condition) {
 
-# https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-i686-pc-windows-msvc.zip
+}
+else
+{
+    echo "Install jq JSON Parser"
+    echo "https://jqlang.github.io/jq/"
+}
 
-# https://github.com/phiresky/ripgrep-all
-# https://github.com/phiresky/ripgrep-all/releases/download/v0.10.6/ripgrep_all-v0.10.6-x86_64-pc-windows-msvc.zip
-# https://github.com/oschwartz10612/poppler-windows/releases/download/v24.08.0-0/Release-24.08.0-0.zip
+$condition = which rg
+if ($condition) {
+
+}
+else
+{
+    echo "Install Ripgrep search tool"
+        # https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-i686-pc-windows-msvc.zip
+
+        # https://github.com/phiresky/ripgrep-all
+        # https://github.com/phiresky/ripgrep-all/releases/download/v0.10.6/ripgrep_all-v0.10.6-x86_64-pc-windows-msvc.zip
+        # https://github.com/oschwartz10612/poppler-windows/releases/download/v24.08.0-0/Release-24.08.0-0.zip
+}
+
+
 
 # https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-i686-pc-windows-msvc.zip
 
@@ -492,7 +553,6 @@ function ocdi_version($env)
           }
     }
 
-# git config --global --type bool push.autoSetupRemote true
 
 
 function nexus()
@@ -511,7 +571,6 @@ function json2yaml($jsonfile)
             cat $jsonfile | yq -y
     }
 
-# git config --system core.longpaths true
 # pip install dice
 
 
