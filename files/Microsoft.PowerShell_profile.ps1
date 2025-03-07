@@ -665,3 +665,8 @@ else
 # bandwich badwidth tool in rust
 
 # pastel rust
+#  scoop install pastel
+
+
+# https://github.com/sassman/t-rec-rs
+# windows support coming soon! 
