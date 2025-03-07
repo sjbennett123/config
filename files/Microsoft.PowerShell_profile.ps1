@@ -663,3 +663,5 @@ else
 
 
 # bandwich badwidth tool in rust
+
+# pastel rust
