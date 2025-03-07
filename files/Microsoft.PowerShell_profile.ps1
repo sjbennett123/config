@@ -21,13 +21,15 @@ function blame()
         tig blame $($args)
     }
 
+# https://cli.github.com/
+
+
 # https://github.com/dahlbyk/posh-git
 # PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 Import-Module posh-git
 # 
 Set-Alias ghd github
 
-# Fix an alias for FD so that it searches hidden files.
 
 function fd()
     {
@@ -38,7 +40,7 @@ function fdg()
     {
         fd-find $($args)
     }
-    
+
 # Difftastic
 # https://github.com/Wilfred/difftastic/releases/download/0.53.1/difft-x86_64-pc-windows-msvc.zip
 # https://difftastic.wilfred.me.uk/git.html
@@ -108,7 +110,6 @@ function pwd()
     {
         powershell -Command pwd
     }
-
 
 function ga()
     {
@@ -218,7 +219,7 @@ Set-Alias g glow
 
 function dropbox()
     {
-      cd c:\Users\deadk\Dropbox
+      cd $env:homedrive\$env:homepath\Dropbox
     }
 
 function repo()
@@ -269,7 +270,9 @@ Set-Alias n++ notepad++
 # alacritty --version
 # https://github.com/alacritty/alacritty/releases
 # https://alacritty.org/config-alacritty.html
-# %APPDATA%\alacritty\alacritty.toml
+# AppData\Roaming\alacritty
+
+# %APPDATA%\alacritty\Roaming\alacritty.toml
 
 # https://jqlang.github.io/jq/
 
