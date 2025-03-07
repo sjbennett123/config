@@ -1,3 +1,4 @@
+#!/usr/bin/env powershell -File
 # https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2
 # To turn off powershell autocomplete
 Set-PSReadLineOption -PredictionSource None
@@ -65,17 +66,15 @@ if ($condition) {
     {
         fd-find $($args)
     }
-
-
 }
 else
 {
- echo "install the fd find tool"
- echo ""
+    echo "install the fd find tool"
+    echo ""
 
 }
 
-$condition = which difftastic
+$condition = which difft
 if ($condition) {
 }
 else
@@ -94,14 +93,21 @@ Import-Module Terminal-Icons
 
 # https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-i686-pc-windows-msvc.zip
 
-# https://github.com/junegunn/fzf/releases/download/0.32.1/fzf-0.32.1-windows_amd64.zip
-# add to windows path
-# add windows environment variable
-# Variable Name: fzf_default_opts
-# Variable Value: --height 40% --border
-Import-Module PSFzf
-Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 
+$condition = which fzf
+if ($condition) {
+    Import-Module PSFzf
+    Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+}
+else
+{
+    echo "https://github.com/junegunn/fzf/releases/download/0.32.1/fzf-0.32.1-windows_amd64.zip"
+    # add to windows path
+    # add windows environment variable
+    # Variable Name: fzf_default_opts
+    # Variable Value: --height 40% --border
+    # fzfenabled
+}
 
 
 Set-PSReadlineKeyHandler -Key ctrl+d -Function ViExit
@@ -167,6 +173,16 @@ function gr()
         cd "$(git rev-parse --show-toplevel)"
     }
 
+$condition = Test-Path -Path "$env:ProgramFiles\Google\Chrome\Application\chrome.exe"
+if ($condition) {
+    Set-Alias chrome "$env:ProgramFiles\Google\Chrome\Application\chrome.exe"
+}
+else
+{
+    echo "install google chrome" 
+}
+
+
 # ~/AppData/Local/nvim/init.vim
 # let g:loaded_perl_provider = 0
 # C:\Users\AAA3AZZ\AppData\Local\nvim/init.lua
@@ -205,7 +221,7 @@ function config()
         np $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
     }
 
-Set-Alias chrome "$env:ProgramFiles\Google\Chrome\Application\chrome.exe"
+
 
 function standup()
     {
@@ -246,8 +262,6 @@ function config_update()
         difft $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
         cp  $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
     }
-# https://curlie.io/
-# curl.exe -A "MS" https://webinstall.dev/curlie | powershell
 
 # https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_Windows_x86_64.zip
 
@@ -271,7 +285,14 @@ function desktop()
     {
         cd $env:OneDrive\Desktop\
     }
+Set-Alias desk desktop
 
+
+function pictures()
+    {
+        cd $env:OneDrive\Pictures\
+    }
+Set-Alias pics pictures
 
 
 $condition = which eza
@@ -418,6 +439,11 @@ function capd_current()
         jira issue list -q "project in ('CAPD', 'CHPROD', 'CHLAB') AND assignee in (618aea7df1ff560069c1ff24, 70121:b02faff2-b816-430d-b3bc-e7e08b7403bf, 6222858fb7e7c7007157fab1, 61a77f3e3618cd006feca193, 61dc62370586a20069a11899, 629df191932059006f8ec707, 5ffc99bd642089014136f0ad) AND summary !~ 'HCC' AND status IN ('In Development')"
     }
 
+function ocdi_backlog()
+    {
+        jira issue list -q "project in ('OCDI') AND status IN ('Open')"
+    }
+
 function ocdi()
     {
         jira issue list -q "project in ('OCDI') AND status IN ('In Development')"
@@ -493,10 +519,7 @@ Set-Alias gf gfold
 
 Set-Alias s start
 
-# fzfenabled
-# FED_PASSWORD
-# FED_USERNAME
-# Path
+
 
 function path_check()
     {
@@ -587,3 +610,56 @@ function dup()
     {
         czkawka.exe dup  --directories .
     }
+
+
+# https://scoop.sh
+# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+# Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+
+
+$condition = which magick
+if ($condition) 
+{
+    Set-Alias img chafa
+
+}
+else
+{
+    echo "scoop install chafa"
+    echo "https://github.com/hpjansson/chafa"
+
+}
+
+
+$condition = which magick
+if ($condition) 
+{
+function ico($image)
+    {
+       $image_basename = (Get-Item $image ).Basename
+       $image_dot_ico = "$image_basename.ico"
+       magick -density 128x128 -background none $image -resize 128x128 $image_dot_ico
+    }
+}
+else
+{
+    echo "https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-44-Q16-HDRI-x64-dll.exe"
+}
+
+
+
+$condition = which curl
+if ($condition) {
+    
+}
+else
+{
+    echo "https://curl.se/windows/latest.cgi?p=win64-mingw.zip"
+}
+
+
+# jless -- Rust JSON viewer https://jless.io/
+# windows support is planned
+
+
+# bandwich badwidth tool in rust
