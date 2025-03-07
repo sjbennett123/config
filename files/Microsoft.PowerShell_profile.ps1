@@ -21,19 +21,27 @@ Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentv
 # \____/_/\__/  
 #               
 # https://git-scm.com/download/win
-# make sure that the bin for git is inthe PATH so you get the Tig git history viewer
-# add  C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path
+
 # <git-install-root>\etc\gitconfig
 # git config --system core.longpaths true
 
 # git config --global --type bool push.autoSetupRemote true
 
+
+$condition = which tig
+if ($condition) {
 function blame()
     {
         tig blame $($args)
     }
 Set-Alias annotate blame
-
+}
+else
+{
+echo "make sure that the bin for git is in the PATH"
+echo "so you get the tig git history viewer"
+echo "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path"
+}
 # https://cli.github.com/
 
 
