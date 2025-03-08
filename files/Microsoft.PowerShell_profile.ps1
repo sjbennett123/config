@@ -247,6 +247,7 @@ function config_git()
         difft $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
         cp $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1
         cd "$env:OneDrive\Documents\GitHub\config"
+        Invoke-ScriptAnalyzer files/Microsoft.PowerShell_profile.ps1
         git pull
         git add files\Microsoft.PowerShell_profile.ps1
         git commit -m "updated Powershell configuration" 
