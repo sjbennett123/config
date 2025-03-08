@@ -106,15 +106,19 @@ else
     # add windows environment variable
     # Variable Name: fzf_default_opts
     # Variable Value: --height 40% --border
-    # fzfenabled
 }
 
-
+# https://github.com/PowerShell/psreadline
+# Make it so that Control D exits a powershell window
+# https://learn.microsoft.com/en-us/powershell/module/psreadline/set-psreadlineoption?view=powershell-7.5
 Set-PSReadlineKeyHandler -Key ctrl+d -Function ViExit
+(Get-PSReadLineOption).HistorySearchCaseSensitive = $false
+
 
 # https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/where
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-alias?view=powershell-7.4
 
+# fix this up so that it works like which in unix where it checks a path then checks for alias or function
 
 function art($program)
     {
@@ -179,7 +183,8 @@ if ($condition) {
 }
 else
 {
-    echo "install google chrome" 
+    echo "install google chrome"
+    echo "https://www.google.com/chrome/dr/download"
 }
 
 
@@ -266,11 +271,22 @@ function config_update()
 
 # https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_Windows_x86_64.zip
 
-Set-Alias g glow
-
+$condition = which glow
+if ($condition) {
+  Set-Alias g glow
+}
+else
+{
+  echo "install glow"
+}
 function dropbox()
     {
       cd $env:homedrive\$env:homepath\Dropbox
+    }
+    
+function paper()
+    {
+      chrome https://www.dropbox.com/paper
     }
 
 function repo()
@@ -604,6 +620,7 @@ function json2yaml($jsonfile)
     }
 
 # pip install dice
+# which roll 
 
 
 # scoop install czkawka
@@ -612,7 +629,7 @@ function dup()
         czkawka.exe dup  --directories .
     }
 
-
+# which scoop
 # https://scoop.sh
 # Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 # Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
@@ -648,8 +665,6 @@ else
     echo "https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-44-Q16-HDRI-x64-dll.exe"
 }
 
-
-
 $condition = which curl
 if ($condition) {
     
@@ -659,19 +674,13 @@ else
     echo "https://curl.se/windows/latest.cgi?p=win64-mingw.zip"
 }
 
-
-# jless -- Rust JSON viewer https://jless.io/
-# windows support is planned
-
-
 # bandwich badwidth tool in rust
+# https://github.com/imsnif/bandwhich
+# https://npcap.com/dist/npcap-1.81.exe
 
-# pastel rust
+# pastel color display
 #  scoop install pastel
 
-
-# https://github.com/sassman/t-rec-rs
-# windows support coming soon! 
 
 # https://github.com/PowerShell/PSScriptAnalyzer
 # Install-Module -Name PSScriptAnalyzer -Force
@@ -679,3 +688,99 @@ else
 
 # Set-ExecutionPolicy Unrestricted
 # Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
+
+# https://github.com/Ace-Radom/figlet4win/releases/tag/1.0.1
+Set-Alias figlet "$env:ProgramFiles\figlet4win\figlet.exe"
+
+# jless -- Rust JSON viewer https://jless.io/
+# windows support is planned
+
+# https://github.com/sassman/t-rec-rs
+# windows support coming soon!
+
+# https://stackoverflow.com/questions/25576159/how-can-i-quickly-get-a-count-of-the-messages-in-a-users-mailbox
+
+
+# https://github.com/matriex/cmatrix
+# Set-Executionpolicy remotesigned
+# Import-Module .\cmatrix
+# Set-ScreenSaverTimeout -Seconds 5
+# Enable-ScreenSaver
+
+# https://opensource.com/article/18/12/linux-toy-aafire
+
+function fire {
+  param(
+    [int]$Height = 40,
+    [int]$Width = 100,
+    [int]$Iterations = 100
+  )
+
+  for ($i = 0; $i -lt $Iterations; $i++) {
+    $fire = @()
+    for ($y = 0; $y -lt $Height; $y++) {
+      $line = ""
+      for ($x = 0; $x -lt $Width; $x++) {
+        if ($y -eq $Height - 1) {
+          $line += "~"
+        } else {
+          $rand = Get-Random -Minimum 0 -Maximum 100
+          if ($rand -lt 20) {
+            $line += " "
+          } elseif ($rand -lt 50) {
+            $line += "."
+          } elseif ($rand -lt 80) {
+            $line += "o"
+          } else {
+            $line += "O"
+          }
+        }
+      }
+      $fire += $line
+    }
+    Clear-Host
+    $fire
+    Start-Sleep -Milliseconds 100
+  }
+}
+
+
+
+# Install-Module -Name PsMermaidTools -Scope CurrentUser
+# https://abbgrade.github.io/PsMermaidTools/
+
+$condition = which gcalcli
+if ($condition) {
+    Set-Alias gcal gcalcli
+    function agenda()
+    {
+        gcalcli agenda $($args)
+    }
+    function gcal_web(){
+      chrome https://calendar.google.com/calendar/u/0/r/week
+    }
+    
+    function gcal_config_git(){
+        difft $env:localappdata\gcalcli\config.toml $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml
+        cp $env:localappdata\gcalcli\config.toml $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml
+        cd "$env:OneDrive\Documents\GitHub\config"
+        git pull
+        git add files\gcal_config.toml
+        git commit -m "updated gcalcli configuration" 
+        git push
+        cd -
+        }
+    function gcal_config_update(){
+        cd "$env:OneDrive\Documents\GitHub\config"
+        difft  $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml $env:localappdata\gcalcli\config.toml
+        cp $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml $env:localappdata\gcalcli\config.toml 
+        git pull
+        cd -
+        }}
+else
+{
+    echo "https://github.com/insanum/gcalcli"
+    echo "pip install gcalcli --upgrade"
+    echo "~\AppData\Local\gcalcli\config.toml"
+}
+# cd $env:localappdata\gcalcli\
