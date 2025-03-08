@@ -617,7 +617,7 @@ function dup()
 # Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 
 
-$condition = which magick
+$condition = which chafa
 if ($condition) 
 {
     Set-Alias img chafa
