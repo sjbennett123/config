@@ -674,6 +674,7 @@ else
 
 # https://github.com/PowerShell/PSScriptAnalyzer
 # Install-Module -Name PSScriptAnalyzer -Force
+# Invoke-ScriptAnalyzer .\Microsoft.PowerShell_profile.ps1
 
 # Set-ExecutionPolicy Unrestricted
 # Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
