@@ -39,9 +39,9 @@ Set-Alias annotate blame
 }
 else
 {
-Write-Output "make sure that the bin for git is in the PATH"
-Write-Output "so you get the tig git history viewer"
-Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path"
+echo "make sure that the bin for git is in the PATH"
+echo "so you get the tig git history viewer"
+echo "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path"
 }
 # https://cli.github.com/
 
@@ -69,8 +69,8 @@ if ($condition) {
 }
 else
 {
-    Write-Output "install the fd find tool"
-    Write-Output ""
+    echo "install the fd find tool"
+    echo ""
 
 }
 
@@ -79,10 +79,10 @@ if ($condition) {
 }
 else
 {
-  Write-Output "Install Difftastic the fantastic diff tool"
-  Write-Output "https://github.com/Wilfred/difftastic/releases/download/0.53.1/difft-x86_64-pc-windows-msvc.zip"
-  Write-Output "https://difftastic.wilfred.me.uk/git.html"
-  Write-Output "git config --global diff.external difft"
+  echo "Install Difftastic the fantastic diff tool"
+  echo "https://github.com/Wilfred/difftastic/releases/download/0.53.1/difft-x86_64-pc-windows-msvc.zip"
+  echo "https://difftastic.wilfred.me.uk/git.html"
+  echo "git config --global diff.external difft"
 }
 
 
@@ -97,11 +97,11 @@ Import-Module Terminal-Icons
 $condition = which fzf
 if ($condition) {
     Import-Module PSFzf
-    Set-PsFzfOption -PSReadlinWrite-OutputrdProvider 'Ctrl+t' -PSReadlinWrite-OutputrdReverseHistory 'Ctrl+r'
+    Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 }
 else
 {
-    Write-Output "https://github.com/junegunn/fzf/releases/download/0.32.1/fzf-0.32.1-windows_amd64.zip"
+    echo "https://github.com/junegunn/fzf/releases/download/0.32.1/fzf-0.32.1-windows_amd64.zip"
     # add to windows path
     # add windows environment variable
     # Variable Name: fzf_default_opts
@@ -179,7 +179,7 @@ if ($condition) {
 }
 else
 {
-    Write-Output "install google chrome" 
+    echo "install google chrome" 
 }
 
 
@@ -317,8 +317,8 @@ if ($condition) {
 }
 else
 {
- Write-Output "install the LS alterantive eza"
- Write-Output "https://github.com/eza-community/eza/releases/download/v0.17.0/eza.exe_x86_64-pc-windows-gnu.tar.gz"
+ echo "install the LS alterantive eza"
+ echo "https://github.com/eza-community/eza/releases/download/v0.17.0/eza.exe_x86_64-pc-windows-gnu.tar.gz"
 
 }
 
@@ -346,8 +346,8 @@ if ($condition) {
 }
 else
 {
-    Write-Output "Install the Alactritty Terminal"
-    Write-Output "https://github.com/alacritty/alacritty/releases"
+    echo "Install the Alactritty Terminal"
+    echo "https://github.com/alacritty/alacritty/releases"
 }
 
 $condition = which jq
@@ -356,8 +356,8 @@ if ($condition) {
 }
 else
 {
-    Write-Output "Install jq JSON Parser"
-    Write-Output "https://jqlang.github.io/jq/"
+    echo "Install jq JSON Parser"
+    echo "https://jqlang.github.io/jq/"
 }
 
 $condition = which rg
@@ -366,7 +366,7 @@ if ($condition) {
 }
 else
 {
-    Write-Output "Install Ripgrep search tool"
+    echo "Install Ripgrep search tool"
         # https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-i686-pc-windows-msvc.zip
 
         # https://github.com/phiresky/ripgrep-all
@@ -399,12 +399,12 @@ Set-Alias python.exe C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python312\py
 
 function j()
     {
-        jira issue list -q "project IN ('CHLAB','CHPROD','HCC','Write-Output','DECOM') AND assignee IN (currentUser()) AND status != Closed"
+        jira issue list -q "project IN ('CHLAB','CHPROD','HCC','ECHO','DECOM') AND assignee IN (currentUser()) AND status != Closed"
     }
     
 function jh()
     {
-        jira issue list --history -q "project IN ('CHLAB','CHPROD','HCC','Write-Output','DECOM')"
+        jira issue list --history -q "project IN ('CHLAB','CHPROD','HCC','ECHO','DECOM')"
     }
 function jv($a)
     {
@@ -524,21 +524,21 @@ Set-Alias s start
 
 function path_check()
     {
-        Write-Output "tig"
+        echo "tig"
         which tig
-        Write-Output "alacritty"
+        echo "alacritty"
         which alacritty
-        Write-Output "touch"
+        echo "touch"
         which touch
-        Write-Output "git"
+        echo "git"
         which git
-        Write-Output "fzf"
+        echo "fzf"
         which fzf
-        Write-Output "nvim"
+        echo "nvim"
         which nvim
-        Write-Output "notepad++"
+        echo "notepad++"
         which notepad++
-        Write-Output "notepad++"
+        echo "notepad++"
         which touch
         which difft
         # scoop install jq
@@ -546,7 +546,7 @@ function path_check()
         which eza
         which gh
         which glow
-        Write-Output "ncat"
+        echo "ncat"
         which ncat
         # https://nmap.org/dist/ncat-portable-5.59BETA1.zip
         which rg
@@ -626,9 +626,9 @@ if ($condition)
 }
 else
 {
-  Write-Output "chafa image viewer"
-  Write-Output "https://github.com/hpjansson/chafa"
-  Write-Output "scoop install chafa"
+  echo "chafa image viewer"
+  echo "https://github.com/hpjansson/chafa"
+  echo "scoop install chafa"
 
 }
 
@@ -645,7 +645,7 @@ function ico($image)
 }
 else
 {
-    Write-Output "https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-44-Q16-HDRI-x64-dll.exe"
+    echo "https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-44-Q16-HDRI-x64-dll.exe"
 }
 
 
@@ -656,7 +656,7 @@ if ($condition) {
 }
 else
 {
-    Write-Output "https://curl.se/windows/latest.cgi?p=win64-mingw.zip"
+    echo "https://curl.se/windows/latest.cgi?p=win64-mingw.zip"
 }
 
 
