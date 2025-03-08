@@ -625,8 +625,9 @@ if ($condition)
 }
 else
 {
-    echo "scoop install chafa"
-    echo "https://github.com/hpjansson/chafa"
+  echo "chafa image viewer"
+  echo "https://github.com/hpjansson/chafa"
+  echo "scoop install chafa"
 
 }
 
@@ -670,3 +671,9 @@ else
 
 # https://github.com/sassman/t-rec-rs
 # windows support coming soon! 
+
+# https://github.com/PowerShell/PSScriptAnalyzer
+# Install-Module -Name PSScriptAnalyzer -Force
+
+# Set-ExecutionPolicy Unrestricted
+# Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
