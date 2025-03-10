@@ -13,12 +13,30 @@ Set-Alias history history_full
 
 # Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force
 
-Set-Alias typora "$env:ProgramFiles\Typora\Typora.exe"
-# https://typora.io/
-# https://download.typora.io/windows/typora-setup-x64.exe
 
 
-Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
+
+$condition = Test-Path -Path "$env:ProgramFiles\Typora\Typora.exe"
+if ($condition) {
+    Set-Alias typora "$env:ProgramFiles\Typora\Typora.exe"
+}
+else
+{
+    echo "Install Typora Markdown Editor"
+    echo "https://typora.io"
+    echo "https://download.typora.io/windows/typora-setup-x64.exe"
+}
+
+$condition = Test-Path -Path "$env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe"
+if ($condition) {
+    Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
+
+}
+else
+{
+    echo "Install Powertoys"
+}
+
 #     _______ __
 #   / ____(_) /_
 #  / / __/ / __/
@@ -35,11 +53,11 @@ Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentv
 
 $condition = which tig
 if ($condition) {
-function blame()
-    {
-        tig blame $($args)
-    }
-Set-Alias annotate blame
+    function blame()
+        {
+            tig blame $($args)
+        }
+    Set-Alias annotate blame
 }
 else
 {
@@ -578,6 +596,7 @@ function path_check()
 # Onefetch
 # https://github.com/o2sh/onefetch/releases
 Set-Alias of onefetch
+
 # Set-Alias nc netcat
 
 # Control Panel
@@ -629,11 +648,18 @@ function json2yaml($jsonfile)
 # which roll
 
 
-# scoop install czkawka
-function dup()
+$condition = which chafa
+if ($condition){
+    function dup()
     {
         czkawka.exe dup  --directories .
     }
+}
+else
+{
+    echo "scoop install czkawka"
+}
+
 
 $condition = which scoop
 if ($condition)
@@ -687,12 +713,30 @@ else
     echo "https://curl.se/windows/latest.cgi?p=win64-mingw.zip"
 }
 
-# bandwich badwidth tool in rust
+
+$condition = which bandwhich
+if ($condition)
+{
+}
+else
+{
+# bandwhich badwidth tool in rust
 # https://github.com/imsnif/bandwhich
 # https://npcap.com/dist/npcap-1.81.exe
+}
 
-# pastel color display
-#  scoop install pastel
+
+
+$condition = which pastel
+if ($condition)
+{
+}
+else
+{
+    echo "install pastel color display"
+    echo "scoop install pastel"
+}
+
 
 
 # https://github.com/PowerShell/PSScriptAnalyzer
@@ -770,6 +814,7 @@ if ($condition) {
     {
         gcalcli calw $($args)
     }
+    Set-Alias week calw
     function agenda()
     {
         gcalcli agenda $($args)
@@ -800,6 +845,8 @@ else
     echo "https://github.com/insanum/gcalcli"
     echo "pip install gcalcli --upgrade"
     echo "~\AppData\Local\gcalcli\config.toml"
+    echo "you will need a token from"
+    echo "https://console.cloud.google.com"
 }
 
 
