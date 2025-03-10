@@ -338,15 +338,11 @@ $condition = which eza
 if ($condition) {
     function ll()
     {
-        eza -l --git --icons --all $($args)
-    }
-    function ll()
-    {
-        eza -l --git --icons --all $($args)
+        eza -l --git --icons $($args)
     }
     function lt()
     {
-        eza --tree --git --icons --all $($args)
+        eza --tree --git --icons $($args)
     }
     Set-Alias ls eza
     Set-Alias -Name dir -Value eza -Option AllScope
