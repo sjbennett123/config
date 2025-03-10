@@ -61,9 +61,9 @@ if ($condition) {
 }
 else
 {
-echo "make sure that the bin for git is in the PATH"
-echo "so you get the tig git history viewer"
-echo "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path"
+    echo "make sure that the bin for git is in the PATH"
+    echo "so you get the tig git history viewer"
+    echo "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path"
 }
 # https://cli.github.com/
 
@@ -360,6 +360,7 @@ else
 
 }
 
+
 # add nmap dir to path C:\Program Files (x86)\Nmap
 Set-Alias -Name nc -Value ncat -Option AllScope
 
@@ -397,6 +398,8 @@ else
     echo "Install jq JSON Parser"
     echo "https://jqlang.github.io/jq/"
 }
+
+
 
 $condition = which rg
 if ($condition) {
@@ -554,6 +557,8 @@ else
 Set-Alias tunnel tunnel.ps1
 Set-Alias ocditunnel ocditunnel.ps1
 
+
+
 # https://github.com/atanunq/viu/releases
 
 # https://github.com/nickgerace/gfold/releases
@@ -652,6 +657,7 @@ echo "https://scoop.sh"
 }
 
 
+
 $condition = which chafa
 if ($condition)
 {
@@ -694,16 +700,16 @@ else
 }
 
 
-$condition = which bandwhich
-if ($condition)
-{
-}
-else
-{
-# bandwhich badwidth tool in rust
-# https://github.com/imsnif/bandwhich
-# https://npcap.com/dist/npcap-1.81.exe
-}
+# $condition = which bandwhich
+# if ($condition)
+# {
+# }
+# else
+# {
+  # echo "Install bandwhich badwidth tool in rust"
+  # echo "https://github.com/imsnif/bandwhich"
+  # echo "https://npcap.com/dist/npcap-1.81.exe"
+# }
 
 
 
@@ -853,3 +859,5 @@ else
 
 # remove context menu entries
 
+# add aws cli check
+# update notepadd plus plus settings
