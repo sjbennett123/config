@@ -22,9 +22,9 @@ Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentv
 #     _______ __
 #   / ____(_) /_
 #  / / __/ / __/
-# / /_/ / / /_ 
-# \____/_/\__/ 
-# 
+# / /_/ / / /_
+# \____/_/\__/
+
 # https://git-scm.com/download/win
 
 # <git-install-root>\etc\gitconfig
@@ -53,7 +53,7 @@ echo "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path"
 # https://github.com/dahlbyk/posh-git
 # PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 Import-Module posh-git
-# 
+
 Set-Alias ghd github
 
 
@@ -240,7 +240,7 @@ function twa()
     {
         chrome https://mmodal.atlassian.net/wiki/spaces/OCDI/pages/1218019437/Onboarding+Team+Working+Agreement+Definition+of+Ready+Definition+of+Done+CapEx
     }
-    
+
 function okta()
     {
         chromasdftps://3mhealth.okta.com
@@ -421,7 +421,7 @@ function j()
     {
         jira issue list -q "project IN ('CHLAB','CHPROD','HCC','ECHO','DECOM') AND assignee IN (currentUser()) AND status != Closed"
     }
-    
+
 function jh()
     {
         jira issue list --history -q "project IN ('CHLAB','CHPROD','HCC','ECHO','DECOM')"
@@ -477,7 +477,7 @@ function ocdi_ready()
         jira issue list -q "project in ('OCDI') AND status IN ('Ready for Development')"
     }
 Set-Alias ocdi_todo ocdi_ready
- 
+
 function ocdi_cr()
     {
         jira issue list -q "project in ('OCDI') AND status IN ('Code Review')"
@@ -574,7 +574,7 @@ function path_check()
         which rg
         which onefetch
     }
-    
+
 # Onefetch
 # https://github.com/o2sh/onefetch/releases
 Set-Alias of onefetch
@@ -662,7 +662,7 @@ else
 
 
 $condition = which magick
-if ($condition) 
+if ($condition)
 {
 function ico($image)
     {
@@ -677,8 +677,9 @@ else
 }
 
 $condition = which curl
-if ($condition) {
-    
+if ($condition)
+{
+
 }
 else
 {
