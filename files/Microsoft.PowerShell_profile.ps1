@@ -364,12 +364,17 @@ else
 # add nmap dir to path C:\Program Files (x86)\Nmap
 Set-Alias -Name nc -Value ncat -Option AllScope
 
-# add notepad++ dir to path C:\Program Files\Notepad++
-Set-Alias n notepad++
-Set-Alias np notepad++
-Set-Alias notepad notepad++
-Set-Alias n++ notepad++
-
+$condition = Test-Path -Path "$env:ProgramFiles\Notepad++\notepad++.exe"
+if ($condition) {
+    Set-Alias n $env:ProgramFiles\Notepad++\notepad++.exe
+    Set-Alias np $env:ProgramFiles\Notepad++\notepad++.exe
+    Set-Alias notepad $env:ProgramFiles\Notepad++\notepad++.exe
+    Set-Alias n++ $env:ProgramFiles\Notepad++\notepad++.exe
+}
+else
+{
+    echo "https://notepad-plus-plus.org/downloads/"
+}
 # https://gigenet.dl.sourceforge.net/project/gnuwin32/wget/1.11.4-1/wget-1.11.4-1-setup.exe
 # add C:\Program Files (x86)\GnuWin32\bin\ to path
 
@@ -559,7 +564,6 @@ Set-Alias ocditunnel ocditunnel.ps1
 
 
 
-# https://github.com/atanunq/viu/releases
 
 # https://github.com/nickgerace/gfold/releases
 Set-Alias gf gfold
@@ -669,6 +673,8 @@ else
   echo "chafa image viewer"
   echo "https://github.com/hpjansson/chafa"
   echo "scoop install chafa"
+  # https://github.com/atanunq/viu/releases
+
 
 }
 
@@ -849,15 +855,34 @@ else
     echo "https://console.cloud.google.com"
 }
 
+$condition = which j2lint
+if ($condition) {
+    
+}
+else
+{
+    echo "https://pypi.org/project/j2lint/"
+    echo "pip install j2lint"
+}
+
+$condition = which aws
+if ($condition) {
+}
+else
+{
+    echo "https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html"
+    echo "https://awscli.amazonaws.com/AWSCLIV2.msi"
+    echo "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/windows/SessionManagerPluginSetup.exe"
+}
+
+
 
 ####
-#   _            _
-#  | |_ ___   __| | ___
+#  _            _
+# | |_ ___   __| | ___
 # | __/ _ \ / _` |/ _ \
 # | || (_) | (_| | (_) |
-# \__\___/ \__,_|\___/
+#  \__\___/ \__,_|\___/
 
 # remove context menu entries
 
-# add aws cli check
-# update notepadd plus plus settings
