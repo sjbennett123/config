@@ -19,12 +19,12 @@ Set-Alias typora "$env:ProgramFiles\Typora\Typora.exe"
 
 
 Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
-#     _______ __ 
+#     _______ __
 #   / ____(_) /_
 #  / / __/ / __/
-# / /_/ / / /_  
-# \____/_/\__/  
-#               
+# / /_/ / / /_ 
+# \____/_/\__/ 
+# 
 # https://git-scm.com/download/win
 
 # <git-install-root>\etc\gitconfig
@@ -259,9 +259,9 @@ function config_git()
         Invoke-ScriptAnalyzer files/Microsoft.PowerShell_profile.ps1
         git pull
         git add files\Microsoft.PowerShell_profile.ps1
-        git commit -m "updated Powershell configuration" 
+        git commit -m "updated Powershell configuration"
         git push
-        cd - 
+        cd -
     }
 
 function config_update()
@@ -287,7 +287,7 @@ function dropbox()
     {
       cd $env:homedrive\$env:homepath\Dropbox
     }
-    
+
 function paper()
     {
       chrome https://www.dropbox.com/paper
@@ -297,17 +297,17 @@ function repo()
     {
         cd $env:OneDrive\Documents\GitHub
     }
+
 function dl()
     {
         cd $env:homedrive\$env:homepath\Downloads\
     }
-    
+
 function desktop()
     {
         cd $env:OneDrive\Desktop\
     }
 Set-Alias desk desktop
-
 
 function pictures()
     {
@@ -412,7 +412,7 @@ Set-Alias python.exe C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python312\py
 # uses api token from https://id.atlassian.com/manage-profile/security/api-tokens
 # Set JIRA_API_TOKEN env variable
 # jira init
-# for server enter 
+# for server enter
 # https://mmodal.atlassian.net
 # Set JIRA_PAGER env variable to bat or glow if you like! C:\Windows\System32\bat.exe C:\Windows\System32\glow.exe
 
@@ -426,6 +426,7 @@ function jh()
     {
         jira issue list --history -q "project IN ('CHLAB','CHPROD','HCC','ECHO','DECOM')"
     }
+
 function jv($a)
     {
         jira issue view $a
@@ -446,11 +447,12 @@ function hcc_open()
     {q
         jira issue list -q "project = HCC AND (labels in (HCC_DevOps, hcc-devops) OR component = 'HCC DevOps') AND status = Open"
     }
-    
+
 function hcc_current()
     {
         jira issue list -q "project = HCC AND (labels in (HCC_DevOps, hcc-devops) OR component = 'HCC DevOps') AND status = 'In Development'"
     }
+
 function capd()
     {
         jira issue list -q "project in ('CAPD', 'CHPROD', 'CHLAB') AND assignee in (618aea7df1ff560069c1ff24, 70121:b02faff2-b816-430d-b3bc-e7e08b7403bf, 6222858fb7e7c7007157fab1, 61a77f3e3618cd006feca193, 61dc62370586a20069a11899, 629df191932059006f8ec707, 5ffc99bd642089014136f0ad) AND summary !~ 'HCC' AND status NOT IN ('Closed','Resolved')"
@@ -584,7 +586,7 @@ Set-Alias system_properties sysdm.cpl
 # https://learn.microsoft.com/en-us/windows/powertoys/environment-variables
 
 Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
-Set-Alias env_config env_edit 
+Set-Alias env_config env_edit
 #git add .; git commit -m updates; git push
 
 # sudo apt install neofetch
@@ -624,7 +626,7 @@ function json2yaml($jsonfile)
     }
 
 # pip install dice
-# which roll 
+# which roll
 
 
 # scoop install czkawka
@@ -633,14 +635,19 @@ function dup()
         czkawka.exe dup  --directories .
     }
 
-# which scoop
-# https://scoop.sh
+$condition = which scoop
+if ($condition)
+{}
+else
+{
+echo "https://scoop.sh"
 # Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 # Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+}
 
 
 $condition = which chafa
-if ($condition) 
+if ($condition)
 {
     Set-Alias img chafa
 
@@ -758,7 +765,6 @@ $condition = which gcalcli
 if ($condition) {
     Set-Alias gcal gcalcli
     Set-Alias cal gcal
-
     function calw()
     {
         gcalcli calw $($args)
@@ -777,14 +783,14 @@ if ($condition) {
         cd "$env:OneDrive\Documents\GitHub\config"
         git pull
         git add files\gcal_config.toml
-        git commit -m "updated gcalcli configuration" 
+        git commit -m "updated gcalcli configuration"
         git push
         cd -
         }
     function gcal_config_update(){
         cd "$env:OneDrive\Documents\GitHub\config"
         difft  $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml $env:localappdata\gcalcli\config.toml
-        cp $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml $env:localappdata\gcalcli\config.toml 
+        cp $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml $env:localappdata\gcalcli\config.toml
         git pull
         cd -
         }}
@@ -803,5 +809,5 @@ else
 # | || (_) | (_| | (_) |
 # \__\___/ \__,_|\___/
 
-# remove context menu entries 
+# remove context menu entries
 
