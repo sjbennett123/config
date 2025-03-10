@@ -537,14 +537,18 @@ function chprod_capd()
     }
 # Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
+
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+  Import-Module "$ChocolateyProfile"
+}
+else
+{
 # Import the Chocolatey Profile that contains the necessary code to enable
 # tab-completions to function for `choco`.
 # Be aware that if you are missing these lines from your profile, tab completion
 # for `choco` will not function.
 # See https://ch0.co/tab-completion for details.
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-  Import-Module "$ChocolateyProfile"
 }
 # Remember to add the hcc and ocdi repos to your PATH
 Set-Alias tunnel tunnel.ps1
@@ -562,36 +566,7 @@ Set-Alias s start
 
 
 
-function path_check()
-    {
-        echo "tig"
-        which tig
-        echo "alacritty"
-        which alacritty
-        echo "touch"
-        which touch
-        echo "git"
-        which git
-        echo "fzf"
-        which fzf
-        echo "nvim"
-        which nvim
-        echo "notepad++"
-        which notepad++
-        echo "notepad++"
-        which touch
-        which difft
-        # scoop install jq
-        which jq
-        which eza
-        which gh
-        which glow
-        echo "ncat"
-        which ncat
-        # https://nmap.org/dist/ncat-portable-5.59BETA1.zip
-        which rg
-        which onefetch
-    }
+
 
 # Onefetch
 # https://github.com/o2sh/onefetch/releases
@@ -616,7 +591,7 @@ Set-Alias env_config env_edit
 function ocdi_version($env)
     {
     if ($env -eq "ci") {
-      curl -s https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info | jq .
+        curl -s https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info | jq .
     }
     if ($env -eq "gi") {
         curl -s https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info | jq .
@@ -641,11 +616,16 @@ function yaml2json($yamlfile)
     }
 function json2yaml($jsonfile)
     {
-            cat $jsonfile | yq -y
+        cat $jsonfile | yq -y
     }
 
-# pip install dice
-# which roll
+$condition = which roll
+if ($condition){
+}
+else
+{
+    pip install dice
+}
 
 
 $condition = which chafa
@@ -737,17 +717,31 @@ else
     echo "scoop install pastel"
 }
 
-
-
-# https://github.com/PowerShell/PSScriptAnalyzer
-# Install-Module -Name PSScriptAnalyzer -Force
-# Invoke-ScriptAnalyzer .\Microsoft.PowerShell_profile.ps1
-
-# Set-ExecutionPolicy Unrestricted
+# $condition = which Invoke-ScriptAnalyzer
+# if ($condition)
+# {
+# }
+# else
+# {
+ # echo "https://github.com/PowerShell/PSScriptAnalyzer"
+ # echo "Install-Module -Name PSScriptAnalyzer -Force"
+ # echo "Invoke-ScriptAnalyzer .\Microsoft.PowerShell_profile.ps1"
+ # Set-ExecutionPolicy Unrestricted
 # Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
+# }
 
-# https://github.com/Ace-Radom/figlet4win/releases/tag/1.0.1
-Set-Alias figlet "$env:ProgramFiles\figlet4win\figlet.exe"
+
+
+
+$condition = Test-Path -Path "$env:ProgramFiles\figlet4win\figlet.exe"
+if ($condition) {
+    Set-Alias figlet "$env:ProgramFiles\figlet4win\figlet.exe"
+}
+else
+{
+    echo "https://github.com/Ace-Radom/figlet4win/releases/tag/1.0.1"
+}
+
 
 # jless -- Rust JSON viewer https://jless.io/
 # windows support is planned
@@ -859,4 +853,3 @@ else
 
 # remove context menu entries
 
-# Invoke-ScriptAnalyzer
