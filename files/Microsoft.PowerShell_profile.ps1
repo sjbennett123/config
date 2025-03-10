@@ -14,6 +14,10 @@ Set-Alias history history_full
 # Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force
 
 Set-Alias typora "$env:ProgramFiles\Typora\Typora.exe"
+# https://typora.io/
+# https://download.typora.io/windows/typora-setup-x64.exe
+
+
 Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
 #     _______ __ 
 #   / ____(_) /_
@@ -591,10 +595,10 @@ Set-Alias env_config env_edit
 function ocdi_version($env)
     {
     if ($env -eq "ci") {
-            curl -s https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info | jq .
+      curl -s https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info | jq .
     }
     if ($env -eq "gi") {
-            curl -s https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info | jq .
+        curl -s https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info | jq .
     }
     else {
             Write-Host ("tomato")
@@ -657,7 +661,7 @@ function ico($image)
     {
        $image_basename = (Get-Item $image ).Basename
        $image_dot_ico = "$image_basename.ico"
-       magick -density 128x128 -background none $image -resize 128x128 $image_dot_ico
+       magick -density 512x512 -background none $image -resize 128x128 $image_dot_ico
     }
 }
 else
@@ -671,6 +675,7 @@ if ($condition) {
 }
 else
 {
+    echo "Install CuRL!"
     echo "https://curl.se/windows/latest.cgi?p=win64-mingw.zip"
 }
 
@@ -752,6 +757,12 @@ function fire {
 $condition = which gcalcli
 if ($condition) {
     Set-Alias gcal gcalcli
+    Set-Alias cal gcal
+
+    function calw()
+    {
+        gcalcli calw $($args)
+    }
     function agenda()
     {
         gcalcli agenda $($args)
@@ -759,7 +770,7 @@ if ($condition) {
     function gcal_web(){
       chrome https://calendar.google.com/calendar/u/0/r/week
     }
-    
+    Set-Alias gcalweb gcal_web
     function gcal_config_git(){
         difft $env:localappdata\gcalcli\config.toml $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml
         cp $env:localappdata\gcalcli\config.toml $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml
@@ -783,4 +794,14 @@ else
     echo "pip install gcalcli --upgrade"
     echo "~\AppData\Local\gcalcli\config.toml"
 }
-# cd $env:localappdata\gcalcli\
+
+
+####
+#   _            _
+#  | |_ ___   __| | ___
+# | __/ _ \ / _` |/ _ \
+# | || (_) | (_| | (_) |
+# \__\___/ \__,_|\___/
+
+# remove context menu entries 
+
