@@ -210,17 +210,25 @@ else
 }
 
 
-# ~/AppData/Local/nvim/init.vim
 # let g:loaded_perl_provider = 0
 # C:\Users\AAA3AZZ\AppData\Local\nvim/init.lua
+# https://gist.github.com/jeffcasavant/6ff061d5fd32ed3a7d3eb27639cd223f
 # https://github.com/dense-analysis/ale
 Set-Alias vim nvim.exe
 Set-Alias vi nvim.exe
 
-Set-Alias typora "$env:ProgramFiles\Typora\Typora.exe"
+$condition = Test-Path -Path "$env:ProgramFiles\Typora\Typora.exe"
+if ($condition) {
+    Set-Alias typora "$env:ProgramFiles\Typora\Typora.exe"
+}
 
-Set-Alias fb "$env:ProgramFiles\Caprine\Caprine.exe"
-Set-Alias messenger "$env:ProgramFiles\Caprine\Caprine.exe"
+$condition = Test-Path -Path "$env:ProgramFiles\Caprine\Caprine.exe"
+if ($condition) {
+    Set-Alias fb "$env:ProgramFiles\Caprine\Caprine.exe"
+    Set-Alias messenger "$env:ProgramFiles\Caprine\Caprine.exe"
+}
+
+
 
 # https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/12995020/Fed+Statically+Compiled+Federation+CLI
 # https://github.3mhealth.com/3MHISCloudEngineering/fed
@@ -336,6 +344,9 @@ Set-Alias pics pictures
 
 $condition = which eza
 if ($condition) {
+    Set-Alias ls eza
+    Set-Alias -Name dir -Value eza -Option AllScope
+    
     function ll()
     {
         eza -l --git --icons $($args)
@@ -344,9 +355,6 @@ if ($condition) {
     {
         eza --tree --git --icons $($args)
     }
-    Set-Alias ls eza
-    Set-Alias -Name dir -Value eza -Option AllScope
-
 
 }
 else
@@ -882,3 +890,4 @@ else
 
 # remove context menu entries
 
+# https://watchexec.github.io/downloads/watchexec/
