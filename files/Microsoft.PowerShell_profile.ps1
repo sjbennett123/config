@@ -40,6 +40,10 @@ else
     echo "Install Powertoys"
 }
 
+Set-Alias recycle Clear-RecycleBin
+# to hide recycle bin from desktop
+# personalization > themes > desktop icon settings 
+
 #     _______ __
 #   / ____(_) /_
 #  / / __/ / __/
