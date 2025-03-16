@@ -264,6 +264,11 @@ function twa()
     {
         chrome https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/995559324/Onboarding+Team+Working+Agreement+Definition+of+Ready+Definition+of+Done+CapEx
     }
+function pulse()
+    {
+        chrome https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/995571909/Team+Pulse+2025
+    }
+  Set-Alias teampulse pulse
 
 function okta()
     {
