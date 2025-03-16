@@ -14,7 +14,10 @@ Set-Alias history history_full
 # Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force
 
 
-
+function slack()
+    {
+        C:\Users\AAA3AZZ\AppData\Local\slack\slack.exe
+    }
 
 $condition = Test-Path -Path "$env:ProgramFiles\Typora\Typora.exe"
 if ($condition) {
@@ -190,7 +193,7 @@ function gb()
     }
 function e()
     {
-        explorer .
+        explorer . &
     }
 
 function gr()
