@@ -867,6 +867,15 @@ else
     echo "pip install j2lint"
 }
 
+$condition = which hugo
+if ($condition) {
+    
+}
+else
+{
+    echo "http://hugo.io/"
+}
+
 $condition = which aws
 if ($condition) {
 }
