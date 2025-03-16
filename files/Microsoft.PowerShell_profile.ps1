@@ -594,18 +594,33 @@ Set-Alias env_config env_edit
 # sudo apt install neofetch
 # iwr -useb get.scoop.sh | iex
 # scoop install neofetch
+# Set-Alias nf neofetch
 
 
 function ocdi_version($env)
     {
     if ($env -eq "ci") {
-        curl -s https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info | jq .
+        if (curl -s --fail https://ocdi.ucd-ci.us.amz.3mhis.net/ocdi-services-backend/actuator/info)
+        {
+            curl -s https://ocdi.ucd-ci.us.amz.3mhis.net/ocdi-services-backend/actuator/info | jq .
+        }
+        else
+        {
+            curl -v https://ocdi.ucd-ci.us.amz.3mhis.net/ocdi-services-backend/actuator/info
+        }
     }
     if ($env -eq "gi") {
-        curl -s https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info | jq .
+        if (curl -s --fail https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info)
+        {
+            curl -s https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info | jq .
+        }
+        else
+        {
+            curl -v https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info
+        }
     }
     else {
-            Write-Host ("tomato")
+            Write-Host ("curls endpoints and gives the current version. Currt options are gi and ci")
           }
     }
 
