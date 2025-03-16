@@ -92,8 +92,7 @@ if ($condition) {
 else
 {
     echo "install the fd find tool"
-    echo ""
-
+    echo "https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-i686-pc-windows-msvc.zip"
 }
 
 $condition = which difft
@@ -228,8 +227,6 @@ if ($condition) {
     Set-Alias messenger "$env:ProgramFiles\Caprine\Caprine.exe"
 }
 
-
-
 # https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/12995020/Fed+Statically+Compiled+Federation+CLI
 # https://github.3mhealth.com/3MHISCloudEngineering/fed
 # fed requires google chrome https://www.google.com/chrome/
@@ -256,15 +253,13 @@ function config()
         np $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
     }
 
-
-
 function standup()
     {
-        chrome https://mmodal.atlassian.net/wiki/spaces/OCDI/pages/1218314379/OCDI+Standup+Agenda
+        chrome https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/995572603/OCDI+Standup+Agenda
     }
 function twa()
     {
-        chrome https://mmodal.atlassian.net/wiki/spaces/OCDI/pages/1218019437/Onboarding+Team+Working+Agreement+Definition+of+Ready+Definition+of+Done+CapEx
+        chrome https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/995559324/Onboarding+Team+Working+Agreement+Definition+of+Ready+Definition+of+Done+CapEx
     }
 
 function okta()
@@ -355,12 +350,11 @@ if ($condition) {
     {
         eza --tree --git --icons $($args)
     }
-
 }
 else
 {
- echo "install the LS alterantive eza"
- echo "https://github.com/eza-community/eza/releases/download/v0.17.0/eza.exe_x86_64-pc-windows-gnu.tar.gz"
+    echo "install the LS alterantive eza"
+    echo "https://github.com/eza-community/eza/releases/download/v0.17.0/eza.exe_x86_64-pc-windows-gnu.tar.gz"
 
 }
 
@@ -406,9 +400,8 @@ else
 {
     echo "Install jq JSON Parser"
     echo "https://jqlang.github.io/jq/"
+    echo "scoop install jq"
 }
-
-
 
 $condition = which rg
 if ($condition) {
@@ -426,7 +419,6 @@ else
 
 
 
-# https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-i686-pc-windows-msvc.zip
 
 # https://www.python.org/downloads/
 # add to path
@@ -759,11 +751,7 @@ else
 }
 
 
-# jless -- Rust JSON viewer https://jless.io/
-# windows support is planned
 
-# https://github.com/sassman/t-rec-rs
-# windows support coming soon!
 
 # https://stackoverflow.com/questions/25576159/how-can-i-quickly-get-a-count-of-the-messages-in-a-users-mailbox
 
@@ -811,8 +799,6 @@ function fire {
   }
 }
 
-
-
 # Install-Module -Name PsMermaidTools -Scope CurrentUser
 # https://abbgrade.github.io/PsMermaidTools/
 
@@ -859,6 +845,15 @@ else
     echo "https://console.cloud.google.com"
 }
 
+$condition = which watchexec
+if ($condition) {
+    
+}
+else
+{
+    echo "https://watchexec.github.io/downloads/watchexec/"
+}
+
 $condition = which j2lint
 if ($condition) {
     
@@ -879,9 +874,6 @@ else
     echo "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/windows/SessionManagerPluginSetup.exe"
 }
 
-
-
-####
 #  _            _
 # | |_ ___   __| | ___
 # | __/ _ \ / _` |/ _ \
@@ -889,5 +881,20 @@ else
 #  \__\___/ \__,_|\___/
 
 # remove context menu entries
+# Disable file locksmith in powertoys
+# Disable powerrename in powertoys
 
-# https://watchexec.github.io/downloads/watchexec/
+# HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Shell Extensions
+# https://menumaid.en.softonic.com/download
+# https://www.elevenforum.com/t/add-or-remove-edit-in-notepad-context-menu-in-windows-11.20485/
+
+# Remove open with visual studio code
+# HKEY_CLASSES_ROOT\Directory\Background\shell
+# AnyCode
+
+
+# jless -- Rust JSON viewer https://jless.io/
+# windows support is planned
+
+# https://github.com/sassman/t-rec-rs
+# windows support coming soon!
