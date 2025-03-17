@@ -3,6 +3,10 @@
 # To turn off powershell autocomplete
 Set-PSReadLineOption -PredictionSource None
 
+
+
+# scoop install bat
+# scoop install less
 Set-Alias which where.exe
 
 function history_full()
