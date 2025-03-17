@@ -944,3 +944,6 @@ else
 
 # https://github.com/sassman/t-rec-rs
 # windows support coming soon!
+
+
+# pip install termdown
