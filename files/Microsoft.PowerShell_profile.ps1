@@ -441,15 +441,21 @@ else
 Set-Alias python C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python312\python
 Set-Alias python.exe C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python312\python
 
-# Jira cli
-# https://github.com/ankitpokhrel/jira-cli/releases/download/v1.5.1/jira_1.5.1_windows_x86_64.zip
-# uses api token from https://id.atlassian.com/manage-profile/security/api-tokens
-# Set JIRA_API_TOKEN env variable
-# jira init
-# for server enter
-# https://mmodal.atlassian.net
-# Set JIRA_PAGER env variable to bat or glow if you like! C:\Windows\System32\bat.exe C:\Windows\System32\glow.exe
+$condition = which jira
+if ($condition) {
 
+}
+else
+{
+    # Jira cli
+    # https://github.com/ankitpokhrel/jira-cli/releases/download/v1.5.1/jira_1.5.1_windows_x86_64.zip
+    # uses api token from https://id.atlassian.com/manage-profile/security/api-tokens
+    # Set JIRA_API_TOKEN env variable
+    # jira init
+    # for server enter
+    # https://mmodal.atlassian.net
+    # Set JIRA_PAGER env variable to bat or glow if you like! C:\Windows\System32\bat.exe C:\Windows\System32\glow.exe
+}
 
 function j()
     {
