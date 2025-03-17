@@ -264,6 +264,13 @@ function config()
         np $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
     }
 
+
+
+function marketplace()
+    {
+        chrome https://www.facebook.com/marketplace
+    }
+
 function standup()
     {
         chrome https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/995572603/OCDI+Standup+Agenda
@@ -947,3 +954,5 @@ else
 
 
 # pip install termdown
+
+# 
