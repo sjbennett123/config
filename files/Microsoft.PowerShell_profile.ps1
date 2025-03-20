@@ -385,6 +385,12 @@ else
 # add nmap dir to path C:\Program Files (x86)\Nmap
 Set-Alias -Name nc -Value ncat -Option AllScope
 
+# https://superuser.com/questions/701995/default-save-type-as-unix-in-notepad
+# Default save as unix line endings
+#     Settings > Preferences > New document / Default directory > Format Line Ending
+# 2 space tabs
+#     Settings > Preferences > Indentation > Indent Settings > Indent Size 2
+
 $condition = Test-Path -Path "$env:ProgramFiles\Notepad++\notepad++.exe"
 if ($condition) {
     Set-Alias n $env:ProgramFiles\Notepad++\notepad++.exe
@@ -518,6 +524,25 @@ function ocdi_backlog()
         jira issue list -q "project in ('OCDI') AND status IN ('Open')"
     }
 
+function ocdi_backlog_web()
+    {
+        chrome https://mmodal.atlassian.net/jira/software/c/projects/OCDI/boards/909/backlog
+    }
+
+function ocdi_epics()
+    {
+        jira issue list -q "project in ('OCDI')  and type = Epic AND status NOT IN ('Closed')" --order-by updated
+    }
+
+Set-Alias ocdi_epic ocdi_epics
+
+function ocdi_epics_web()
+    {
+        chrome https://mmodal.atlassian.net/issues/?filter=40398
+    }
+Set-Alias ocdi_epic_web ocdi_epics_web
+
+
 function ocdi()
     {
         jira issue list -q "project in ('OCDI') AND status IN ('In Development')"
@@ -532,6 +557,11 @@ Set-Alias ocdi_todo ocdi_ready
 function ocdi_cr()
     {
         jira issue list -q "project in ('OCDI') AND status IN ('Code Review')"
+    }
+
+function ja()
+    {
+        jira issue assign $($args) $(jira me)
     }
 
 Set-Alias ocdi_codereview ocdi_cr
