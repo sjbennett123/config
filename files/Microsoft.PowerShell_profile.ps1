@@ -985,4 +985,8 @@ else
 
 # pip install termdown
 
-# 
+
+function dnd()
+    {
+        chrome https://scottjbennett.com/ttrpg/dnd/
+    }
