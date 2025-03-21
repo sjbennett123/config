@@ -3,6 +3,10 @@
 # To turn off powershell autocomplete
 Set-PSReadLineOption -PredictionSource None
 
+
+
+# scoop install bat
+# scoop install less
 Set-Alias which where.exe
 
 function history_full()
@@ -260,6 +264,13 @@ function config()
         np $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
     }
 
+
+
+function marketplace()
+    {
+        chrome https://www.facebook.com/marketplace
+    }
+
 function standup()
     {
         chrome https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/995572603/OCDI+Standup+Agenda
@@ -374,6 +385,12 @@ else
 # add nmap dir to path C:\Program Files (x86)\Nmap
 Set-Alias -Name nc -Value ncat -Option AllScope
 
+# https://superuser.com/questions/701995/default-save-type-as-unix-in-notepad
+# Default save as unix line endings
+#     Settings > Preferences > New document / Default directory > Format Line Ending
+# 2 space tabs
+#     Settings > Preferences > Indentation > Indent Settings > Indent Size 2
+
 $condition = Test-Path -Path "$env:ProgramFiles\Notepad++\notepad++.exe"
 if ($condition) {
     Set-Alias n $env:ProgramFiles\Notepad++\notepad++.exe
@@ -441,15 +458,21 @@ else
 Set-Alias python C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python312\python
 Set-Alias python.exe C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python312\python
 
-# Jira cli
-# https://github.com/ankitpokhrel/jira-cli/releases/download/v1.5.1/jira_1.5.1_windows_x86_64.zip
-# uses api token from https://id.atlassian.com/manage-profile/security/api-tokens
-# Set JIRA_API_TOKEN env variable
-# jira init
-# for server enter
-# https://mmodal.atlassian.net
-# Set JIRA_PAGER env variable to bat or glow if you like! C:\Windows\System32\bat.exe C:\Windows\System32\glow.exe
+$condition = which jira
+if ($condition) {
 
+}
+else
+{
+    # Jira cli
+    # https://github.com/ankitpokhrel/jira-cli/releases/download/v1.5.1/jira_1.5.1_windows_x86_64.zip
+    # uses api token from https://id.atlassian.com/manage-profile/security/api-tokens
+    # Set JIRA_API_TOKEN env variable
+    # jira init
+    # for server enter
+    # https://mmodal.atlassian.net
+    # Set JIRA_PAGER env variable to bat or glow if you like! C:\Windows\System32\bat.exe C:\Windows\System32\glow.exe
+}
 
 function j()
     {
@@ -501,6 +524,25 @@ function ocdi_backlog()
         jira issue list -q "project in ('OCDI') AND status IN ('Open')"
     }
 
+function ocdi_backlog_web()
+    {
+        chrome https://mmodal.atlassian.net/jira/software/c/projects/OCDI/boards/909/backlog
+    }
+
+function ocdi_epics()
+    {
+        jira issue list -q "project in ('OCDI')  and type = Epic AND status NOT IN ('Closed')" --order-by updated
+    }
+
+Set-Alias ocdi_epic ocdi_epics
+
+function ocdi_epics_web()
+    {
+        chrome https://mmodal.atlassian.net/issues/?filter=40398
+    }
+Set-Alias ocdi_epic_web ocdi_epics_web
+
+
 function ocdi()
     {
         jira issue list -q "project in ('OCDI') AND status IN ('In Development')"
@@ -515,6 +557,11 @@ Set-Alias ocdi_todo ocdi_ready
 function ocdi_cr()
     {
         jira issue list -q "project in ('OCDI') AND status IN ('Code Review')"
+    }
+
+function ja()
+    {
+        jira issue assign $($args) $(jira me)
     }
 
 Set-Alias ocdi_codereview ocdi_cr
@@ -934,3 +981,8 @@ else
 
 # https://github.com/sassman/t-rec-rs
 # windows support coming soon!
+
+
+# pip install termdown
+
+# 
