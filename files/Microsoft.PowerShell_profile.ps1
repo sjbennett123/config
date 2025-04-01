@@ -275,15 +275,17 @@ function standup()
     {
         chrome https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/995572603/OCDI+Standup+Agenda
     }
-function twa()
+function ocdi_twa()
     {
         chrome https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/995559324/Onboarding+Team+Working+Agreement+Definition+of+Ready+Definition+of+Done+CapEx
     }
-function roadmap()
+Set-Alias twa ocdi_twa
+
+function ocdi_roadmap()
     {
         chrome https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/995575505/OCDI+Pre-Visit+Post-Visit+and+Reporting+Roadmap
     }
-    
+Set-Alias roadmap ocdi_roadmap
 function pulse()
     {
         chrome https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/995571909/Team+Pulse+2025
