@@ -995,3 +995,6 @@ function dnd()
     {
         chrome https://scottjbennett.com/ttrpg/dnd/
     }
+    
+# dos2unix
+# https://sourceforge.net/projects/dos2unix/files/latest/download
