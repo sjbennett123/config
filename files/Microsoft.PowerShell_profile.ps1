@@ -698,11 +698,18 @@ function nexus()
 # scoop install yq
 function yaml2json($yamlfile)
     {
-        yq -o=json '.'  $yamlfile
+        $yamlfile_basename = (Get-Item $yamlfile ).Basename
+        $yamlfile_dot_json = "$yamlfile_basename.json"
+        yq -o=json '.'  $yamlfile > $yamlfile_dot_json
+        
     }
 function json2yaml($jsonfile)
     {
-        cat $jsonfile | yq -y
+        $jsonfile_basename = (Get-Item $jsonfile ).Basename
+        $jsonfile_dot_yaml = "$jsonfile_basename.yml"
+        echo "---" > $jsonfile_dot_yaml
+        cat $jsonfile | yq -P >> $jsonfile_dot_yaml
+        dos2unix -q $jsonfile_dot_yaml
     }
 
 $condition = which roll
