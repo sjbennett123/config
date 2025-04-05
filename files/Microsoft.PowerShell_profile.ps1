@@ -471,8 +471,8 @@ if ($condition) {
 }
 else
 {
-    # Jira cli
-    # https://github.com/ankitpokhrel/jira-cli/releases/download/v1.5.1/jira_1.5.1_windows_x86_64.zip
+    echo "install the ira cli"
+    echo "https://github.com/ankitpokhrel/jira-cli/releases/download/v1.5.1/jira_1.5.1_windows_x86_64.zip"
     # uses api token from https://id.atlassian.com/manage-profile/security/api-tokens
     # Set JIRA_API_TOKEN env variable
     # jira init
