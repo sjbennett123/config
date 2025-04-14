@@ -999,6 +999,10 @@ else
 
 # pip install termdown
 
+# https://www.ffmpeg.org/
+# https://www.ffmpeg.org/download.html
+# 
+# choco install ffmpeg-full
 
 function dnd()
     {
