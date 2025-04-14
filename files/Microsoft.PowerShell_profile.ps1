@@ -998,11 +998,14 @@ else
 
 
 # pip install termdown
-
-# https://www.ffmpeg.org/
-# https://www.ffmpeg.org/download.html
-# 
-# choco install ffmpeg-full
+$condition = which ffmpeg
+if ($condition) {
+}
+else
+{
+ echo "https://www.ffmpeg.org"
+ echo "choco install ffmpeg-full"
+}
 
 function dnd()
     {
