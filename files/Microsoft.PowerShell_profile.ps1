@@ -209,6 +209,9 @@ function gr()
         cd "$(git rev-parse --show-toplevel)"
     }
 
+
+
+
 $condition = Test-Path -Path "$env:ProgramFiles\Google\Chrome\Application\chrome.exe"
 if ($condition) {
     Set-Alias chrome "$env:ProgramFiles\Google\Chrome\Application\chrome.exe"
@@ -294,7 +297,7 @@ function pulse()
 
 function okta()
     {
-        chromasdftps://3mhealth.okta.com
+        chrome https://3mhealth.okta.com
     }
 
 function jitney()
@@ -1021,3 +1024,14 @@ function dnd()
 # https://sourceforge.net/projects/dos2unix/files/latest/download
 
 # https://github.com/Rigellute/spotify-tui
+
+
+function lastpass()
+    {
+        chrome  https://lastpass.com/vault/
+    }
+
+function lastpass()
+    {
+        chrome https://scottjbennett.com/owlbear
+    }
