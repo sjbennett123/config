@@ -325,6 +325,9 @@ function config_update()
         cd -
         difft $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
         cp  $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
+        # hide config files
+        # 
+        Set-ItemProperty -Path "$env:USERPROFILE/.bash_history" -Name Attributes -Value Hidden
     }
 
 # https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_Windows_x86_64.zip
@@ -1035,3 +1038,6 @@ function lastpass()
     {
         chrome https://scottjbennett.com/owlbear
     }
+    
+# hide
+# .bash_history
