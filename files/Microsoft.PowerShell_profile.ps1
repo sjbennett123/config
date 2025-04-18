@@ -332,8 +332,10 @@ if ($condition) {
 }
 else
 {
-  echo "install glow"
+  echo "Install Glow"
+  echo "https://github.com/charmbracelet/glow" 
 }
+
 function dropbox()
     {
       cd $env:homedrive\$env:homepath\Dropbox
@@ -346,7 +348,7 @@ function paper()
 
 function repo()
     {
-        cd $env:OneDrive\Documents\GitHub
+        cd $env:OneDrive\Documents\GitHub\$($args)
     }
 
 function dl()
@@ -418,6 +420,7 @@ if ($condition) {
     function alacritty_config()
         {
             alacritty --version
+            echo "https://github.com/alacritty/alacritty/release"b
             chrome https://alacritty.org/config-alacritty.html
             s $env:APPDATA\alacritty\alacritty.toml
         }
@@ -894,6 +897,8 @@ $condition = which gcalcli
 if ($condition) {
     Set-Alias gcal gcalcli
     Set-Alias cal gcal
+    Set-Alias calendar gcal
+
     function calw()
     {
         gcalcli calw $($args)
@@ -1014,3 +1019,5 @@ function dnd()
     
 # dos2unix
 # https://sourceforge.net/projects/dos2unix/files/latest/download
+
+# https://github.com/Rigellute/spotify-tui
