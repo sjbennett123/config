@@ -1043,7 +1043,7 @@ function lastpass()
         chrome  https://lastpass.com/vault/
     }
 
-function lastpass()
+function owlbear()
     {
         chrome https://scottjbennett.com/owlbear
     }
