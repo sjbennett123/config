@@ -1,13 +1,56 @@
 #!/usr/bin/env powershell -File
 # https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2
 # To turn off powershell autocomplete
+
 Set-PSReadLineOption -PredictionSource None
-
-
-
-# scoop install bat
-# scoop install less
 Set-Alias which where.exe
+
+$condition = which python
+if ($condition) {
+}
+else
+{
+	echo "https://www.python.org/downloads/windows/"
+	echo "https://www.python.org/ftp/python/3.13.3/python-3.13.3-amd64.exe"
+	echo "C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python313"
+	echo "C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python313\Scripts\"
+}
+
+$condition = which choco
+if ($condition) {
+}
+else
+{
+echo "https://chocolatey.org/install"
+echo "https://community.chocolatey.org/api/v2/package/chocolatey"
+echo "Install-Package C:\Path\To\Some\File.nupkg"
+}
+ 
+$condition = which scoop
+if ($condition) {
+}
+else
+{
+	Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+	Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+}
+
+$condition = which less
+if ($condition) {
+}
+else
+{
+	scoop install less
+}
+
+$condition = which bat
+if ($condition) {
+}
+else
+{
+	scoop install bat
+}
+
 
 function history_full()
     {
@@ -37,11 +80,11 @@ else
 $condition = Test-Path -Path "$env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe"
 if ($condition) {
     Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
-
 }
 else
 {
     echo "Install Powertoys"
+	echo "https://github.com/microsoft/PowerToys/releases/tag/v0.90.1" 
 }
 
 Set-Alias recycle Clear-RecycleBin
@@ -72,9 +115,11 @@ if ($condition) {
 }
 else
 {
+	echo "https://gitforwindows.org/"
     echo "make sure that the bin for git is in the PATH"
     echo "so you get the tig git history viewer"
     echo "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path"
+	echo "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\cmd"
 }
 # https://cli.github.com/
 
@@ -240,6 +285,9 @@ if ($condition) {
     Set-Alias fb "$env:ProgramFiles\Caprine\Caprine.exe"
     Set-Alias messenger "$env:ProgramFiles\Caprine\Caprine.exe"
 }
+
+# https://github.com/sindresorhus/caprine
+# https://github.com/sindresorhus/caprine/releases/latest
 
 # https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/12995020/Fed+Statically+Compiled+Federation+CLI
 # https://github.3mhealth.com/3MHISCloudEngineering/fed
@@ -464,7 +512,7 @@ if ($condition) {
 else
 {
     echo "Install Ripgrep search tool"
-        # https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-i686-pc-windows-msvc.zip
+    echo "https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-i686-pc-windows-msvc.zip"
 
         # https://github.com/phiresky/ripgrep-all
         # https://github.com/phiresky/ripgrep-all/releases/download/v0.10.6/ripgrep_all-v0.10.6-x86_64-pc-windows-msvc.zip
@@ -683,16 +731,18 @@ function ocdi_version($env)
     if ($env -eq "ci") {
         if (curl -s --fail https://ocdi.ucd-ci.us.amz.3mhis.net/ocdi-services-backend/actuator/info)
         {
+            figlet CI
             curl -s https://ocdi.ucd-ci.us.amz.3mhis.net/ocdi-services-backend/actuator/info | jq .
         }
         else
         {
-            curl -v https://ocdi.ucd-ci.us.amz.3mhis.net/ocdi-services-backend/actuator/info
+            figlet FAILURE
         }
     }
     if ($env -eq "gi") {
         if (curl -s --fail https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info)
         {
+            figlet GI
             curl -s https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info | jq .
         }
         else
@@ -701,7 +751,7 @@ function ocdi_version($env)
         }
     }
     else {
-            Write-Host ("curls endpoints and gives the current version. Currt options are gi and ci")
+            Write-Host ("curls endpoints and gives the current version. Current options are gi and ci")
           }
     }
 
@@ -712,8 +762,16 @@ function nexus()
     chrome https://nexus.udapp-appsec.us.amz.3mhis.net/#browse/browse:hcbg-docker-us-east-1-hosted-sandbox
     }
 
-# https://github.com/mikefarah/yq
-# scoop install yq
+
+$condition = which yq
+if ($condition){
+	}
+else
+{
+	echo "https://github.com/mikefarah/yq"
+    scoop install yq
+}
+
 function yaml2json($yamlfile)
     {
         $yamlfile_basename = (Get-Item $yamlfile ).Basename
@@ -748,7 +806,7 @@ if ($condition){
 }
 else
 {
-    echo "scoop install czkawka"
+    scoop install czkawka
 }
 
 
@@ -774,7 +832,7 @@ else
 {
   echo "chafa image viewer"
   echo "https://github.com/hpjansson/chafa"
-  echo "scoop install chafa"
+  scoop install chafa
   # https://github.com/atanunq/viu/releases
 
 
@@ -793,7 +851,7 @@ function ico($image)
 }
 else
 {
-    echo "https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-44-Q16-HDRI-x64-dll.exe"
+    echo "https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-47-Q16-HDRI-x64-dll.exe"
 }
 
 $condition = which curl
@@ -828,7 +886,7 @@ if ($condition)
 else
 {
     echo "install pastel color display"
-    echo "scoop install pastel"
+    scoop install pastel
 }
 
 # $condition = which Invoke-ScriptAnalyzer
@@ -947,7 +1005,7 @@ if ($condition) {
 else
 {
     echo "https://github.com/insanum/gcalcli"
-    echo "pip install gcalcli --upgrade"
+    pip install gcalcli --upgrade
     echo "~\AppData\Local\gcalcli\config.toml"
     echo "you will need a token from"
     echo "https://console.cloud.google.com"
@@ -969,7 +1027,7 @@ if ($condition) {
 else
 {
     echo "https://pypi.org/project/j2lint/"
-    echo "pip install j2lint"
+    pip install j2lint
 }
 
 $condition = which hugo
@@ -979,6 +1037,8 @@ if ($condition) {
 else
 {
     echo "http://hugo.io/"
+	scoop install hugo-extended
+
 }
 
 $condition = which aws
@@ -1024,7 +1084,7 @@ if ($condition) {
 else
 {
  echo "https://www.ffmpeg.org"
- echo "choco install ffmpeg-full"
+ choco install ffmpeg-full
 }
 
 function dnd()
@@ -1036,17 +1096,22 @@ function dnd()
 # https://sourceforge.net/projects/dos2unix/files/latest/download
 
 # https://github.com/Rigellute/spotify-tui
+# spt.exe
+# scoop bucket add scoop-bucket https://github.com/Rigellute/scoop-bucket
+# scoop install spotify-tui
 
 
 function lastpass()
     {
-        chrome  https://lastpass.com/vault/
+        chrome https://lastpass.com/vault/
     }
 
 function owlbear()
     {
         chrome https://scottjbennett.com/owlbear
     }
-    
+
 # hide
 # .bash_history
+
+# https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/1035206741/OCDI+Demo+Script+and+Flow
