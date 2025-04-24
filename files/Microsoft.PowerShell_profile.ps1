@@ -395,15 +395,25 @@ function config_update()
 		if ($condition) {
 			Set-ItemProperty -Path "$env:USERPROFILE/.git-credentials" -Name Attributes -Value Hidden
 		}
-        # Set-ItemProperty -Path "$env:USERPROFILE/.gitconfig" -Name Attributes -Value Hidden
-        # Set-ItemProperty -Path "$env:USERPROFILE/.viminfo" -Name Attributes -Value Hidden
-        # Set-ItemProperty -Path "$env:USERPROFILE/.lesshst" -Name Attributes -Value Hidden
+		$condition = Test-Path -Path "$env:USERPROFILE/.gitconfig"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.gitconfig" -Name Attributes -Value Hidden
+        }
+		$condition = Test-Path -Path "$env:USERPROFILE/.viminfo"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.viminfo" -Name Attributes -Value Hidden
+        }
+		$condition = Test-Path -Path "$env:USERPROFILE/.lesshst"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.lesshst" -Name Attributes -Value Hidden
+		}
         # Set-ItemProperty -Path "$env:USERPROFILE/.tig_history" -Name Attributes -Value Hidden
         # Set-ItemProperty -Path "$env:USERPROFILE/.yamllint" -Name Attributes -Value Hidden
         # Set-ItemProperty -Path "$env:USERPROFILE/.wslconfig" -Name Attributes -Value Hidden
         # Set-ItemProperty -Path "$env:USERPROFILE/.affinity" -Name Attributes -Value Hidden
         # Set-ItemProperty -Path "$env:USERPROFILE/.android" -Name Attributes -Value Hidden
         # Set-ItemProperty -Path "$env:USERPROFILE/.rustup" -Name Attributes -Value Hidden
+		# Set-ItemProperty -Path "$env:USERPROFILE/.python_history" -Name Attributes -Value Hidden
     }
 
 
