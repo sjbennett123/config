@@ -100,9 +100,10 @@ Set-Alias recycle Clear-RecycleBin
 # https://git-scm.com/download/win
 
 # <git-install-root>\etc\gitconfig
-# git config --system core.longpaths true
 
+# git config --global core.longpaths true
 # git config --global --type bool push.autoSetupRemote true
+# git config --global windows.appendAtomically false
 
 
 $condition = which tig
