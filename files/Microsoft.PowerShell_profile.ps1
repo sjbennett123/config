@@ -268,26 +268,38 @@ else
 }
 
 
-# let g:loaded_perl_provider = 0
-# C:\Users\AAA3AZZ\AppData\Local\nvim/init.lua
-# https://gist.github.com/jeffcasavant/6ff061d5fd32ed3a7d3eb27639cd223f
-# https://github.com/dense-analysis/ale
-Set-Alias vim nvim.exe
-Set-Alias vi nvim.exe
+
+$condition = which nvim
+if ($condition) {
+	Set-Alias vim nvim.exe
+	Set-Alias vi nvim.exe
+}
+else
+{
+	# let g:loaded_perl_provider = 0
+	# C:\Users\AAA3AZZ\AppData\Local\nvim/init.lua
+	# https://gist.github.com/jeffcasavant/6ff061d5fd32ed3a7d3eb27639cd223f
+	# https://github.com/dense-analysis/ale
+	# https://github.com/neovim/neovim/releases/download/v0.11.0/nvim-win64.msi
+	# https://github.com/neovide/neovide/releases/download/0.15.0/neovide.msi
+}
 
 $condition = Test-Path -Path "$env:ProgramFiles\Typora\Typora.exe"
 if ($condition) {
     Set-Alias typora "$env:ProgramFiles\Typora\Typora.exe"
 }
-
-$condition = Test-Path -Path "$env:ProgramFiles\Caprine\Caprine.exe"
+# C:\Users\AAA3AZZ\AppData\Local\Programs\Caprine
+$condition = which Caprine.exe
 if ($condition) {
     Set-Alias fb "$env:ProgramFiles\Caprine\Caprine.exe"
     Set-Alias messenger "$env:ProgramFiles\Caprine\Caprine.exe"
 }
+else
+{
+	echo "https://github.com/sindresorhus/caprine"
+    echo "https://github.com/sindresorhus/caprine/releases/latest"
+}
 
-# https://github.com/sindresorhus/caprine
-# https://github.com/sindresorhus/caprine/releases/latest
 
 # https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/12995020/Fed+Statically+Compiled+Federation+CLI
 # https://github.3mhealth.com/3MHISCloudEngineering/fed
@@ -1115,3 +1127,7 @@ function owlbear()
 # .bash_history
 
 # https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/1035206741/OCDI+Demo+Script+and+Flow
+
+
+# reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+
