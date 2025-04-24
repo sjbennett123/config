@@ -387,17 +387,23 @@ function config_update()
         difft $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
         cp  $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
         # hide config files
-        Set-ItemProperty -Path "$env:USERPROFILE/.bash_history" -Name Attributes -Value Hidden
-        Set-ItemProperty -Path "$env:USERPROFILE/.git-credentials" -Name Attributes -Value Hidden
-        Set-ItemProperty -Path "$env:USERPROFILE/.gitconfig" -Name Attributes -Value Hidden
-        Set-ItemProperty -Path "$env:USERPROFILE/.viminfo" -Name Attributes -Value Hidden
-        Set-ItemProperty -Path "$env:USERPROFILE/.lesshst" -Name Attributes -Value Hidden
-        Set-ItemProperty -Path "$env:USERPROFILE/.tig_history" -Name Attributes -Value Hidden
-        Set-ItemProperty -Path "$env:USERPROFILE/.yamllint" -Name Attributes -Value Hidden
-        Set-ItemProperty -Path "$env:USERPROFILE/.wslconfig" -Name Attributes -Value Hidden
-        Set-ItemProperty -Path "$env:USERPROFILE/.affinity" -Name Attributes -Value Hidden
-        Set-ItemProperty -Path "$env:USERPROFILE/.android" -Name Attributes -Value Hidden
-        Set-ItemProperty -Path "$env:USERPROFILE/.rustup" -Name Attributes -Value Hidden
+		$condition = Test-Path -Path "$env:USERPROFILE/.bash_history"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.bash_history" -Name Attributes -Value Hidden
+		}
+		$condition = Test-Path -Path "$env:USERPROFILE/.git-credentials"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.git-credentials" -Name Attributes -Value Hidden
+		}
+        # Set-ItemProperty -Path "$env:USERPROFILE/.gitconfig" -Name Attributes -Value Hidden
+        # Set-ItemProperty -Path "$env:USERPROFILE/.viminfo" -Name Attributes -Value Hidden
+        # Set-ItemProperty -Path "$env:USERPROFILE/.lesshst" -Name Attributes -Value Hidden
+        # Set-ItemProperty -Path "$env:USERPROFILE/.tig_history" -Name Attributes -Value Hidden
+        # Set-ItemProperty -Path "$env:USERPROFILE/.yamllint" -Name Attributes -Value Hidden
+        # Set-ItemProperty -Path "$env:USERPROFILE/.wslconfig" -Name Attributes -Value Hidden
+        # Set-ItemProperty -Path "$env:USERPROFILE/.affinity" -Name Attributes -Value Hidden
+        # Set-ItemProperty -Path "$env:USERPROFILE/.android" -Name Attributes -Value Hidden
+        # Set-ItemProperty -Path "$env:USERPROFILE/.rustup" -Name Attributes -Value Hidden
     }
 
 
