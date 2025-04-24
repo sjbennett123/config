@@ -327,6 +327,7 @@ function config()
     {
         np $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
     }
+    Set-Alias config_edit config
 
 
 
