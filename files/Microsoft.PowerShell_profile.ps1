@@ -468,7 +468,7 @@ function config_update()
 		}
 		$condition = Test-Path -Path "$env:USERPROFILE/.python_history"
 		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.ruspython_historytup" -Name Attributes -Value Hidden
+			Set-ItemProperty -Path "$env:USERPROFILE/.python_history" -Name Attributes -Value Hidden
 		}
 
     }
