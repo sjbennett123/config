@@ -470,7 +470,10 @@ function config_update()
 		if ($condition) {
 			Set-ItemProperty -Path "$env:USERPROFILE/.python_history" -Name Attributes -Value Hidden
 		}
-
+		$condition = Test-Path -Path "$env:USERPROFILE/.config"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.config" -Name Attributes -Value Hidden
+		}
     }
 
 
