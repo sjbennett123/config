@@ -12,18 +12,44 @@ else
 {
 	Write-Output "https://www.python.org/downloads/windows/"
 	Write-Output "https://www.python.org/ftp/python/3.13.3/python-3.13.3-amd64.exe"
+	Write-Output "add to path"
 	Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python313"
 	Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python313\Scripts\"
 }
 
+Function touch
+{
+    $file = $args[0]
+    if($file -eq $null) {
+        throw "No filename supplied"
+    }
+
+    if(Test-Path $file)
+    {
+        (Get-ChildItem $file).LastWriteTime = Get-Date
+    }
+    else
+    {
+        echo $null > $file
+    }
+}
+
+
+$condition = which tail
+if ($condition) {
+}
+else
+{
+	Write-Output "Add GNU utilities for Win32"
+	Write-Output "https://unxutils.sourceforge.net"
+}
 $condition = which choco
 if ($condition) {
 }
 else
 {
-Write-Output "https://chocolatey.org/install"
-Write-Output "https://community.chocolatey.org/api/v2/package/chocolatey"
-Write-Output "Install-Package C:\Path\To\Some\File.nupkg"
+	Write-Output "https://chocolatey.org/install"
+	Write-Output "https://community.chocolatey.org/api/v2/package/chocolatey"
 }
  
 $condition = which scoop
@@ -416,13 +442,35 @@ function config_update()
 		if ($condition) {
 			Set-ItemProperty -Path "$env:USERPROFILE/.lesshst" -Name Attributes -Value Hidden
 		}
-        # Set-ItemProperty -Path "$env:USERPROFILE/.tig_history" -Name Attributes -Value Hidden
-        # Set-ItemProperty -Path "$env:USERPROFILE/.yamllint" -Name Attributes -Value Hidden
-        # Set-ItemProperty -Path "$env:USERPROFILE/.wslconfig" -Name Attributes -Value Hidden
-        # Set-ItemProperty -Path "$env:USERPROFILE/.affinity" -Name Attributes -Value Hidden
-        # Set-ItemProperty -Path "$env:USERPROFILE/.android" -Name Attributes -Value Hidden
-        # Set-ItemProperty -Path "$env:USERPROFILE/.rustup" -Name Attributes -Value Hidden
-		# Set-ItemProperty -Path "$env:USERPROFILE/.python_history" -Name Attributes -Value Hidden
+		$condition = Test-Path -Path "$env:USERPROFILE/.tig_history"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.tig_history" -Name Attributes -Value Hidden
+		}
+		$condition = Test-Path -Path "$env:USERPROFILE/.yamllint"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.yamllint" -Name Attributes -Value Hidden
+		}
+		$condition = Test-Path -Path "$env:USERPROFILE/.wslconfig"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.wslconfig" -Name Attributes -Value Hidden
+		}
+		$condition = Test-Path -Path "$env:USERPROFILE/.affinity"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.affinity" -Name Attributes -Value Hidden
+		}
+		$condition = Test-Path -Path "$env:USERPROFILE/.android"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.android" -Name Attributes -Value Hidden
+		}
+		$condition = Test-Path -Path "$env:USERPROFILE/.rustup"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.rustup" -Name Attributes -Value Hidden
+		}
+		$condition = Test-Path -Path "$env:USERPROFILE/.python_history"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.ruspython_historytup" -Name Attributes -Value Hidden
+		}
+
     }
 
 
