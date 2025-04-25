@@ -10,10 +10,10 @@ if ($condition) {
 }
 else
 {
-	echo "https://www.python.org/downloads/windows/"
-	echo "https://www.python.org/ftp/python/3.13.3/python-3.13.3-amd64.exe"
-	echo "C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python313"
-	echo "C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python313\Scripts\"
+	Write-Output "https://www.python.org/downloads/windows/"
+	Write-Output "https://www.python.org/ftp/python/3.13.3/python-3.13.3-amd64.exe"
+	Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python313"
+	Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python313\Scripts\"
 }
 
 $condition = which choco
@@ -21,9 +21,9 @@ if ($condition) {
 }
 else
 {
-echo "https://chocolatey.org/install"
-echo "https://community.chocolatey.org/api/v2/package/chocolatey"
-echo "Install-Package C:\Path\To\Some\File.nupkg"
+Write-Output "https://chocolatey.org/install"
+Write-Output "https://community.chocolatey.org/api/v2/package/chocolatey"
+Write-Output "Install-Package C:\Path\To\Some\File.nupkg"
 }
  
 $condition = which scoop
@@ -51,7 +51,6 @@ else
 	scoop install bat
 }
 
-
 function history_full()
     {
         cat (Get-PSReadlineOption).HistorySavePath
@@ -72,19 +71,22 @@ if ($condition) {
 }
 else
 {
-    echo "Install Typora Markdown Editor"
-    echo "https://typora.io"
-    echo "https://download.typora.io/windows/typora-setup-x64.exe"
+    Write-Output "Install Typora Markdown Editor"
+    Write-Output "https://typora.io"
+    Write-Output "https://download.typora.io/windows/typora-setup-x64.exe"
 }
+	Set-Alias system_properties sysdm.cpl
 
 $condition = Test-Path -Path "$env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe"
 if ($condition) {
     Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
+	Set-Alias env_config env_edit
 }
 else
 {
-    echo "Install Powertoys"
-	echo "https://github.com/microsoft/PowerToys/releases/tag/v0.90.1" 
+    Write-Output "Install Powertoys"
+	Write-Output "# https://learn.microsoft.com/en-us/windows/powertoys/environment-variables"
+	Write-Output "https://github.com/microsoft/PowerToys/releases/tag/v0.90.1" 
 }
 
 Set-Alias recycle Clear-RecycleBin
@@ -116,13 +118,14 @@ if ($condition) {
 }
 else
 {
-	echo "https://gitforwindows.org/"
-    echo "make sure that the bin for git is in the PATH"
-    echo "so you get the tig git history viewer"
-    echo "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path"
-	echo "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\cmd"
+	Write-Output "https://gitforwindows.org/"
+    Write-Output "make sure that the bin for git is in the PATH"
+    Write-Output "so you get the tig git history viewer"
+    Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path"
+	Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\cmd"
 }
-# https://cli.github.com/
+
+
 
 
 # https://github.com/dahlbyk/posh-git
@@ -148,8 +151,8 @@ if ($condition) {
 }
 else
 {
-    echo "install the fd find tool"
-    echo "https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-i686-pc-windows-msvc.zip"
+    Write-Output "install the fd find tool"
+    Write-Output "https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-i686-pc-windows-msvc.zip"
 }
 
 $condition = which difft
@@ -157,10 +160,10 @@ if ($condition) {
 }
 else
 {
-  echo "Install Difftastic the fantastic diff tool"
-  echo "https://github.com/Wilfred/difftastic/releases/download/0.53.1/difft-x86_64-pc-windows-msvc.zip"
-  echo "https://difftastic.wilfred.me.uk/git.html"
-  echo "git config --global diff.external difft"
+  Write-Output "Install Difftastic the fantastic diff tool"
+  Write-Output "https://github.com/Wilfred/difftastic/releases/download/0.53.1/difft-x86_64-pc-windows-msvc.zip"
+  Write-Output "https://difftastic.wilfred.me.uk/git.html"
+  Write-Output "git config --global diff.external difft"
 }
 
 
@@ -175,15 +178,18 @@ Import-Module Terminal-Icons
 $condition = which fzf
 if ($condition) {
     Import-Module PSFzf
-    Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+    Set-PsFzfOption -PSReadlinWrite-OutputrdProvider 'Ctrl+t' -PSReadlinWrite-OutputrdReverseHistory 'Ctrl+r'
 }
 else
 {
-    echo "https://github.com/junegunn/fzf/releases/download/0.32.1/fzf-0.32.1-windows_amd64.zip"
-    # add to windows path
-    # add windows environment variable
-    # Variable Name: fzf_default_opts
-    # Variable Value: --height 40% --border
+	Write-Output "Install the FZF Fuzzy Finder"
+    Write-Output "https://github.com/junegunn/fzf/releases/download/0.32.1/fzf-0.32.1-windows_amd64.zip"
+}
+if ($Env:fzf_default_opts) 
+{}
+else{
+    Write-Output "Variable Name: fzf_default_opts"
+    Write-Output "Variable Value: --height 40% --border"
 }
 
 # https://github.com/PowerShell/psreadline
@@ -214,6 +220,8 @@ function gum()
         git switch $current_branch
         git merge main
     }
+	
+# https://cli.github.com/
 
 function pr()
     {
@@ -264,8 +272,8 @@ if ($condition) {
 }
 else
 {
-    echo "install google chrome"
-    echo "https://www.google.com/chrome/dr/download"
+    Write-Output "install google chrome"
+    Write-Output "https://www.google.com/chrome/dr/download"
 }
 
 
@@ -297,8 +305,8 @@ if ($condition) {
 }
 else
 {
-	echo "https://github.com/sindresorhus/caprine"
-    echo "https://github.com/sindresorhus/caprine/releases/latest"
+	Write-Output "https://github.com/sindresorhus/caprine"
+    Write-Output "https://github.com/sindresorhus/caprine/releases/latest"
 }
 
 
@@ -423,9 +431,9 @@ if ($condition) {
 }
 else
 {
-  echo "Install Glow"
-  echo "https://github.com/charmbracelet/glow" 
-  echo "https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_Windows_x86_64.zip"
+  Write-Output "Install Glow"
+  Write-Output "https://github.com/charmbracelet/glow" 
+  Write-Output "https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_Windows_x86_64.zip"
 }
 
 function dropbox()
@@ -477,14 +485,13 @@ if ($condition) {
 }
 else
 {
-    echo "install the LS alterantive eza"
-    echo "https://github.com/eza-community/eza/releases/download/v0.17.0/eza.exe_x86_64-pc-windows-gnu.tar.gz"
+    Write-Output "install the LS alterantive eza"
+    Write-Output "https://github.com/eza-community/eza/releases/download/v0.17.0/eza.exe_x86_64-pc-windows-gnu.tar.gz"
 
 }
 
 
-# add nmap dir to path C:\Program Files (x86)\Nmap
-Set-Alias -Name nc -Value ncat -Option AllScope
+
 
 # https://superuser.com/questions/701995/default-save-type-as-unix-in-notepad
 # Default save as unix line endings
@@ -501,7 +508,7 @@ if ($condition) {
 }
 else
 {
-    echo "https://notepad-plus-plus.org/downloads/"
+    Write-Output "https://notepad-plus-plus.org/downloads/"
 }
 # https://gigenet.dl.sourceforge.net/project/gnuwin32/wget/1.11.4-1/wget-1.11.4-1-setup.exe
 # add C:\Program Files (x86)\GnuWin32\bin\ to path
@@ -512,15 +519,15 @@ if ($condition) {
     function alacritty_config()
         {
             alacritty --version
-            echo "https://github.com/alacritty/alacritty/release"b
+            Write-Output "https://github.com/alacritty/alacritty/release"b
             chrome https://alacritty.org/config-alacritty.html
             s $env:APPDATA\alacritty\alacritty.toml
         }
 }
 else
 {
-    echo "Install the Alactritty Terminal"
-    echo "https://github.com/alacritty/alacritty/releases"
+    Write-Output "Install the Alactritty Terminal"
+    Write-Output "https://github.com/alacritty/alacritty/releases"
 }
 
 $condition = which jq
@@ -529,9 +536,9 @@ if ($condition) {
 }
 else
 {
-    echo "Install jq JSON Parser"
-    echo "https://jqlang.github.io/jq/"
-    echo "scoop install jq"
+    Write-Output "Install jq JSON Parser"
+    Write-Output "https://jqlang.github.io/jq/"
+    Write-Output "scoop install jq"
 }
 
 $condition = which rg
@@ -540,8 +547,8 @@ if ($condition) {
 }
 else
 {
-    echo "Install Ripgrep search tool"
-    echo "https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-i686-pc-windows-msvc.zip"
+    Write-Output "Install Ripgrep search tool"
+    Write-Output "https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-i686-pc-windows-msvc.zip"
 
         # https://github.com/phiresky/ripgrep-all
         # https://github.com/phiresky/ripgrep-all/releases/download/v0.10.6/ripgrep_all-v0.10.6-x86_64-pc-windows-msvc.zip
@@ -566,8 +573,8 @@ if ($condition) {
 }
 else
 {
-    echo "install the ira cli"
-    echo "https://github.com/ankitpokhrel/jira-cli/releases/download/v1.5.1/jira_1.5.1_windows_x86_64.zip"
+    Write-Output "install the ira cli"
+    Write-Output "https://github.com/ankitpokhrel/jira-cli/releases/download/v1.5.1/jira_1.5.1_windows_x86_64.zip"
     # uses api token from https://id.atlassian.com/manage-profile/security/api-tokens
     # Set JIRA_API_TOKEN env variable
     # jira init
@@ -578,12 +585,12 @@ else
 
 function j()
     {
-        jira issue list -q "project IN ('CHLAB','CHPROD','HCC','ECHO','DECOM') AND assignee IN (currentUser()) AND status != Closed"
+        jira issue list -q "project IN ('CHLAB','CHPROD','HCC','Write-Output','DECOM') AND assignee IN (currentUser()) AND status != Closed"
     }
 
 function jh()
     {
-        jira issue list --history -q "project IN ('CHLAB','CHPROD','HCC','ECHO','DECOM')"
+        jira issue list --history -q "project IN ('CHLAB','CHPROD','HCC','Write-Output','DECOM')"
     }
 
 function jv($a)
@@ -731,28 +738,51 @@ Set-Alias gf gfold
 Set-Alias s start
 
 
+$condition = which onefetch
+if ($condition) {
+	Set-Alias of onefetch
+}
+else
+{
+	Write-Output "https://github.com/o2sh/onefetch/releases"
+}
+
+$condition = which onefetch
+if ($condition) {
+	Set-Alias of onefetch
+}
+else
+{
+	Write-Output "https://github.com/o2sh/onefetch/releases"
+}
+
+$condition = which ncat
+if ($condition) {
+	Set-Alias nc ncat
+}
+else
+{
+	Write-Output "Install Netcat"
+	Write-Output "https://nmap.org/ncat/"
+	
+}
 
 
-
-# Onefetch
-# https://github.com/o2sh/onefetch/releases
-Set-Alias of onefetch
-
-# Set-Alias nc netcat
+$condition = which neofetch
+if ($condition) {
+	Set-Alias nf neofetch
+}
+else
+{
+	scoop install neofetch
+}
 
 # Control Panel
-Set-Alias system_properties sysdm.cpl
 
-# https://learn.microsoft.com/en-us/windows/powertoys/environment-variables
-
-Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
-Set-Alias env_config env_edit
 #git add .; git commit -m updates; git push
 
 # sudo apt install neofetch
 # iwr -useb get.scoop.sh | iex
-# scoop install neofetch
-# Set-Alias nf neofetch
 
 
 function ocdi_version($env)
@@ -765,10 +795,10 @@ function ocdi_version($env)
         }
         else
         {
-            figlet FAILURE
+            curl -v https://ocdi.ucd-ci.us.amz.3mhis.net/ocdi-services-backend/actuator/info
         }
     }
-    if ($env -eq "gi") {
+    elseif  ($env -eq "gi") {
         if (curl -s --fail https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info)
         {
             figlet GI
@@ -779,9 +809,11 @@ function ocdi_version($env)
             curl -v https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info
         }
     }
-    else {
-            Write-Host ("curls endpoints and gives the current version. Current options are gi and ci")
-          }
+    else 
+	{
+		Write-Host ("curls endpoints and gives the current version.")
+		Write-Host ("Current options are gi and ci")
+	}
     }
 
 
@@ -797,7 +829,7 @@ if ($condition){
 	}
 else
 {
-	echo "https://github.com/mikefarah/yq"
+	Write-Output "https://github.com/mikefarah/yq"
     scoop install yq
 }
 
@@ -812,7 +844,7 @@ function json2yaml($jsonfile)
     {
         $jsonfile_basename = (Get-Item $jsonfile ).Basename
         $jsonfile_dot_yaml = "$jsonfile_basename.yml"
-        echo "---" > $jsonfile_dot_yaml
+        Write-Output "---" > $jsonfile_dot_yaml
         cat $jsonfile | yq -P >> $jsonfile_dot_yaml
         dos2unix -q $jsonfile_dot_yaml
     }
@@ -844,7 +876,7 @@ if ($condition)
 {}
 else
 {
-echo "https://scoop.sh"
+Write-Output "https://scoop.sh"
 # Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 # Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 }
@@ -859,8 +891,8 @@ if ($condition)
 }
 else
 {
-  echo "chafa image viewer"
-  echo "https://github.com/hpjansson/chafa"
+  Write-Output "chafa image viewer"
+  Write-Output "https://github.com/hpjansson/chafa"
   scoop install chafa
   # https://github.com/atanunq/viu/releases
 
@@ -880,7 +912,7 @@ function ico($image)
 }
 else
 {
-    echo "https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-47-Q16-HDRI-x64-dll.exe"
+    Write-Output "https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-47-Q16-HDRI-x64-dll.exe"
 }
 
 $condition = which curl
@@ -890,8 +922,8 @@ if ($condition)
 }
 else
 {
-    echo "Install CuRL!"
-    echo "https://curl.se/windows/latest.cgi?p=win64-mingw.zip"
+    Write-Output "Install CuRL!"
+    Write-Output "https://curl.se/windows/latest.cgi?p=win64-mingw.zip"
 }
 
 
@@ -901,9 +933,9 @@ else
 # }
 # else
 # {
-  # echo "Install bandwhich badwidth tool in rust"
-  # echo "https://github.com/imsnif/bandwhich"
-  # echo "https://npcap.com/dist/npcap-1.81.exe"
+  # Write-Output "Install bandwhich badwidth tool in rust"
+  # Write-Output "https://github.com/imsnif/bandwhich"
+  # Write-Output "https://npcap.com/dist/npcap-1.81.exe"
 # }
 
 
@@ -914,7 +946,7 @@ if ($condition)
 }
 else
 {
-    echo "install pastel color display"
+    Write-Output "install pastel color display"
     scoop install pastel
 }
 
@@ -924,9 +956,9 @@ else
 # }
 # else
 # {
- # echo "https://github.com/PowerShell/PSScriptAnalyzer"
- # echo "Install-Module -Name PSScriptAnalyzer -Force"
- # echo "Invoke-ScriptAnalyzer .\Microsoft.PowerShell_profile.ps1"
+ # Write-Output "https://github.com/PowerShell/PSScriptAnalyzer"
+ # Write-Output "Install-Module -Name PSScriptAnalyzer -Force"
+ # Write-Output "Invoke-ScriptAnalyzer .\Microsoft.PowerShell_profile.ps1"
  # Set-ExecutionPolicy Unrestricted
 # Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
 # }
@@ -940,7 +972,7 @@ if ($condition) {
 }
 else
 {
-    echo "https://github.com/Ace-Radom/figlet4win/releases/tag/1.0.1"
+    Write-Output "https://github.com/Ace-Radom/figlet4win/releases/tag/1.0.1"
 }
 
 
@@ -1033,11 +1065,11 @@ if ($condition) {
         }}
 else
 {
-    echo "https://github.com/insanum/gcalcli"
+    Write-Output "https://github.com/insanum/gcalcli"
     pip install gcalcli --upgrade
-    echo "~\AppData\Local\gcalcli\config.toml"
-    echo "you will need a token from"
-    echo "https://console.cloud.google.com"
+    Write-Output "~\AppData\Local\gcalcli\config.toml"
+    Write-Output "you will need a token from"
+    Write-Output "https://console.cloud.google.com"
 }
 
 $condition = which watchexec
@@ -1046,7 +1078,7 @@ if ($condition) {
 }
 else
 {
-    echo "https://watchexec.github.io/downloads/watchexec/"
+    Write-Output "https://watchexec.github.io/downloads/watchexec/"
 }
 
 $condition = which j2lint
@@ -1055,7 +1087,7 @@ if ($condition) {
 }
 else
 {
-    echo "https://pypi.org/project/j2lint/"
+    Write-Output "https://pypi.org/project/j2lint/"
     pip install j2lint
 }
 
@@ -1065,7 +1097,7 @@ if ($condition) {
 }
 else
 {
-    echo "http://hugo.io/"
+    Write-Output "http://hugo.io/"
 	scoop install hugo-extended
 
 }
@@ -1075,9 +1107,9 @@ if ($condition) {
 }
 else
 {
-    echo "https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html"
-    echo "https://awscli.amazonaws.com/AWSCLIV2.msi"
-    echo "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/windows/SessionManagerPluginSetup.exe"
+    Write-Output "https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html"
+    Write-Output "https://awscli.amazonaws.com/AWSCLIV2.msi"
+    Write-Output "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/windows/SessionManagerPluginSetup.exe"
 }
 
 #  _            _
@@ -1106,13 +1138,20 @@ else
 # windows support coming soon!
 
 
-# pip install termdown
+$condition = which termdown
+if ($condition) {
+}
+else
+{
+	pip install termdown
+}
+
 $condition = which ffmpeg
 if ($condition) {
 }
 else
 {
- echo "https://www.ffmpeg.org"
+ Write-Output "https://www.ffmpeg.org"
  choco install ffmpeg-full
 }
 
@@ -1121,13 +1160,27 @@ function dnd()
         chrome https://scottjbennett.com/ttrpg/dnd/
     }
     
-# dos2unix
-# https://sourceforge.net/projects/dos2unix/files/latest/download
+# 
 
-# https://github.com/Rigellute/spotify-tui
-# spt.exe
-# scoop bucket add scoop-bucket https://github.com/Rigellute/scoop-bucket
-# scoop install spotify-tui
+$condition = which dos2unix
+if ($condition) {
+}
+else
+{
+	Write-Output "https://sourceforge.net/projects/dos2unix/files/latest/download"
+}
+
+
+$condition = which spt.exe
+if ($condition) {
+}
+else
+{
+	Write-Output "https://github.com/Rigellute/spotify-tui"
+	scoop bucket add scoop-bucket https://github.com/Rigellute/scoop-bucket
+    scoop install spotify-tui
+}
+
 
 
 function lastpass()
