@@ -93,24 +93,24 @@ function slack()
 
 $condition = Test-Path -Path "$env:ProgramFiles\Typora\Typora.exe"
 if ($condition) {
-    Set-Alias typora "$env:ProgramFiles\Typora\Typora.exe"
+  Set-Alias typora "$env:ProgramFiles\Typora\Typora.exe"
 }
 else
 {
-    Write-Output "Install Typora Markdown Editor"
-    Write-Output "https://typora.io"
-    Write-Output "https://download.typora.io/windows/typora-setup-x64.exe"
+  Write-Output "Install Typora Markdown Editor"
+  Write-Output "https://typora.io"
+  Write-Output "https://download.typora.io/windows/typora-setup-x64.exe"
 }
 	Set-Alias system_properties sysdm.cpl
 
 $condition = Test-Path -Path "$env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe"
 if ($condition) {
-    Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
-	Set-Alias env_config env_edit
+  Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
+  Set-Alias env_config env_edit
 }
 else
 {
-    Write-Output "Install Powertoys"
+  Write-Output "Install Powertoys"
 	Write-Output "# https://learn.microsoft.com/en-us/windows/powertoys/environment-variables"
 	Write-Output "https://github.com/microsoft/PowerToys/releases/tag/v0.90.1" 
 }
@@ -158,9 +158,14 @@ else
 # PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 Import-Module posh-git
 
-Set-Alias ghd github
-
-
+$condition = which github
+if ($condition) {
+	Set-Alias ghd github
+}
+else
+{
+	echo "install github desktop"
+}
 
 
 
@@ -198,31 +203,49 @@ else
 # https://www.nerdfonts.com
 Import-Module Terminal-Icons
 
-# https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-i686-pc-windows-msvc.zip
 
+$condition = which bat
+if ($condition) {
+}
+else
+{
+	echo "# https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-i686-pc-windows-msvc.zip"
+}
+
+$condition = which rustc
+if ($condition) {
+}
+else
+{
+	echo "install rust"
+}
 
 $condition = which fzf
 if ($condition) {
-    Import-Module PSFzf
-    Set-PsFzfOption -PSReadlinWrite-OutputrdProvider 'Ctrl+t' -PSReadlinWrite-OutputrdReverseHistory 'Ctrl+r'
 }
 else
 {
 	Write-Output "Install the FZF Fuzzy Finder"
-    Write-Output "https://github.com/junegunn/fzf/releases/download/0.32.1/fzf-0.32.1-windows_amd64.zip"
+  Write-Output "https://github.com/junegunn/fzf/releases/download/0.32.1/fzf-0.32.1-windows_amd64.zip"
 }
+
 if ($Env:fzf_default_opts) 
 {}
 else{
-    Write-Output "Variable Name: fzf_default_opts"
-    Write-Output "Variable Value: --height 40% --border"
+	Write-Output "Variable Name: fzf_default_opts"
+	Write-Output "Variable Value: --height 40% --border"
 }
+
+Import-Module PSFzf
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
+Set-PSReadlineKeyHandler -Key ctrl+d -Function ViExit
+(Get-PSReadLineOption).HistorySearchCaseSensitive = $false
 
 # https://github.com/PowerShell/psreadline
 # Make it so that Control D exits a powershell window
 # https://learn.microsoft.com/en-us/powershell/module/psreadline/set-psreadlineoption?view=powershell-7.5
-Set-PSReadlineKeyHandler -Key ctrl+d -Function ViExit
-(Get-PSReadLineOption).HistorySearchCaseSensitive = $false
+
 
 
 # https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/where
@@ -246,8 +269,14 @@ function gum()
         git switch $current_branch
         git merge main
     }
-	
-# https://cli.github.com/
+
+$condition = which gh
+if ($condition) {
+}
+else
+{
+   Write-Output "https://cli.github.com/"
+}
 
 function pr()
     {
@@ -332,7 +361,7 @@ if ($condition) {
 else
 {
 	Write-Output "https://github.com/sindresorhus/caprine"
-    Write-Output "https://github.com/sindresorhus/caprine/releases/latest"
+	Write-Output "https://github.com/sindresorhus/caprine/releases/latest"
 }
 
 
@@ -433,11 +462,11 @@ function config_update()
 		$condition = Test-Path -Path "$env:USERPROFILE/.gitconfig"
 		if ($condition) {
 			Set-ItemProperty -Path "$env:USERPROFILE/.gitconfig" -Name Attributes -Value Hidden
-        }
+    }
 		$condition = Test-Path -Path "$env:USERPROFILE/.viminfo"
 		if ($condition) {
 			Set-ItemProperty -Path "$env:USERPROFILE/.viminfo" -Name Attributes -Value Hidden
-        }
+    }
 		$condition = Test-Path -Path "$env:USERPROFILE/.lesshst"
 		if ($condition) {
 			Set-ItemProperty -Path "$env:USERPROFILE/.lesshst" -Name Attributes -Value Hidden
@@ -474,8 +503,14 @@ function config_update()
 		if ($condition) {
 			Set-ItemProperty -Path "$env:USERPROFILE/.config" -Name Attributes -Value Hidden
 		}
-    }
-
+}
+# .cargo
+# .config
+# .rustup
+# .gitconfig
+# .lesshst
+# _lesshst
+# alias ssh_config n .ssh/config
 
 $condition = which glow
 if ($condition) {
@@ -545,11 +580,7 @@ else
 
 
 
-# https://superuser.com/questions/701995/default-save-type-as-unix-in-notepad
-# Default save as unix line endings
-#     Settings > Preferences > New document / Default directory > Format Line Ending
-# 2 space tabs
-#     Settings > Preferences > Indentation > Indent Settings > Indent Size 2
+
 
 $condition = Test-Path -Path "$env:ProgramFiles\Notepad++\notepad++.exe"
 if ($condition) {
@@ -1125,18 +1156,14 @@ else
 }
 
 $condition = which watchexec
-if ($condition) {
-    
-}
+if ($condition) {}
 else
 {
     Write-Output "https://watchexec.github.io/downloads/watchexec/"
 }
 
 $condition = which j2lint
-if ($condition) {
-    
-}
+if ($condition) {}
 else
 {
     Write-Output "https://pypi.org/project/j2lint/"
@@ -1144,25 +1171,79 @@ else
 }
 
 $condition = which hugo
-if ($condition) {
-    
-}
+if ($condition) {}
 else
 {
-    Write-Output "http://hugo.io/"
+  Write-Output "http://hugo.io/"
 	scoop install hugo-extended
 
 }
 
 $condition = which aws
 if ($condition) {
+	
 }
 else
 {
+	  
     Write-Output "https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html"
     Write-Output "https://awscli.amazonaws.com/AWSCLIV2.msi"
     Write-Output "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/windows/SessionManagerPluginSetup.exe"
 }
+
+
+
+
+$condition = which termdown
+if ($condition) {
+}
+else
+{
+	pip install termdown
+}
+
+$condition = which ffmpeg
+if ($condition) {
+}
+else
+{
+  Write-Output "https://www.ffmpeg.org"
+	choco install ffmpeg-full
+}
+
+function dnd()
+    {
+        chrome https://scottjbennett.com/ttrpg/dnd/
+    }
+
+$condition = which dos2unix
+if ($condition) {
+}
+else
+{
+	Write-Output "https://sourceforge.net/projects/dos2unix/files/latest/download"
+}
+
+
+$condition = which spt.exe
+if ($condition) {
+}
+else
+{
+	Write-Output "https://github.com/Rigellute/spotify-tui"
+	scoop bucket add scoop-bucket https://github.com/Rigellute/scoop-bucket
+  scoop install spotify-tui
+}
+
+function lastpass()
+    {
+        chrome https://lastpass.com/vault/
+    }
+
+function owlbear()
+    {
+        chrome https://scottjbennett.com/owlbear
+    }
 
 #  _            _
 # | |_ ___   __| | ___
@@ -1188,68 +1269,3 @@ else
 
 # https://github.com/sassman/t-rec-rs
 # windows support coming soon!
-
-
-$condition = which termdown
-if ($condition) {
-}
-else
-{
-	pip install termdown
-}
-
-$condition = which ffmpeg
-if ($condition) {
-}
-else
-{
- Write-Output "https://www.ffmpeg.org"
- choco install ffmpeg-full
-}
-
-function dnd()
-    {
-        chrome https://scottjbennett.com/ttrpg/dnd/
-    }
-    
-# 
-
-$condition = which dos2unix
-if ($condition) {
-}
-else
-{
-	Write-Output "https://sourceforge.net/projects/dos2unix/files/latest/download"
-}
-
-
-$condition = which spt.exe
-if ($condition) {
-}
-else
-{
-	Write-Output "https://github.com/Rigellute/spotify-tui"
-	scoop bucket add scoop-bucket https://github.com/Rigellute/scoop-bucket
-    scoop install spotify-tui
-}
-
-
-
-function lastpass()
-    {
-        chrome https://lastpass.com/vault/
-    }
-
-function owlbear()
-    {
-        chrome https://scottjbennett.com/owlbear
-    }
-
-# hide
-# .bash_history
-
-# https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/1035206741/OCDI+Demo+Script+and+Flow
-
-
-# reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
-
