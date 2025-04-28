@@ -471,6 +471,10 @@ function config_update()
 		if ($condition) {
 			Set-ItemProperty -Path "$env:USERPROFILE/.lesshst" -Name Attributes -Value Hidden
 		}
+		$condition = Test-Path -Path "$env:USERPROFILE/_lesshst"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/_lesshst" -Name Attributes -Value Hidden
+		}
 		$condition = Test-Path -Path "$env:USERPROFILE/.tig_history"
 		if ($condition) {
 			Set-ItemProperty -Path "$env:USERPROFILE/.tig_history" -Name Attributes -Value Hidden
@@ -503,12 +507,16 @@ function config_update()
 		if ($condition) {
 			Set-ItemProperty -Path "$env:USERPROFILE/.config" -Name Attributes -Value Hidden
 		}
+		$condition = Test-Path -Path "$env:USERPROFILE/.cargo"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.cargo" -Name Attributes -Value Hidden
+		}
+		$condition = Test-Path -Path "$env:USERPROFILE/.rustup"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.rustup" -Name Attributes -Value Hidden
+		}
 }
-# .cargo
-# .config
-# .rustup
-# .gitconfig
-# .lesshst
+
 # _lesshst
 # alias ssh_config n .ssh/config
 
