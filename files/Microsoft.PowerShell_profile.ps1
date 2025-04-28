@@ -516,9 +516,11 @@ function config_update()
 			Set-ItemProperty -Path "$env:USERPROFILE/.rustup" -Name Attributes -Value Hidden
 		}
 }
+function ssh_config()
+    {
+      np $env:homedrive\$env:homepath\.ssh\config
+    }
 
-# _lesshst
-# alias ssh_config n .ssh/config
 
 $condition = which glow
 if ($condition) {
