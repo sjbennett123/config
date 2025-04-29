@@ -240,6 +240,8 @@ Import-Module PSFzf
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 Set-PSReadlineKeyHandler -Key ctrl+d -Function ViExit
+Set-PSReadlineKeyHandler -Chord Ctrl+a -Function BeginningOfLine
+Set-PSReadlineKeyHandler -Chord Ctrl+k -Function DeleteToEnd
 (Get-PSReadLineOption).HistorySearchCaseSensitive = $false
 
 # https://github.com/PowerShell/psreadline
@@ -1260,6 +1262,8 @@ function owlbear()
 # | __/ _ \ / _` |/ _ \
 # | || (_) | (_| | (_) |
 #  \__\___/ \__,_|\___/
+
+# add netflify cli
 
 # remove context menu entries
 # Disable file locksmith in powertoys
