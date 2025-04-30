@@ -662,7 +662,7 @@ else
 # add to path
 # C:\Program Files\Python312\Scripts\
 # C:\Users\AAA3AZZ\AppData\Roaming\Python\Python312\site-packages\pre_commit
-# https://pre-commit.com/#install
+
 
 Set-Alias python C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python312\python
 Set-Alias python.exe C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python312\python
@@ -1179,6 +1179,18 @@ else
     Write-Output "https://watchexec.github.io/downloads/watchexec/"
 }
 
+$condition = which pre-commit
+if ($condition) {
+}
+else
+{
+    Write-Output "https://pre-commit.com/"
+		# https://pre-commit.com/#install
+		# https://github.com/pre-commit/pre-commit.com/blob/main/sections/advanced.md
+		# SKIP=ansible-lint
+    pip install pre-commit
+}
+
 $condition = which j2lint
 if ($condition) {}
 else
@@ -1232,6 +1244,15 @@ function dnd()
     {
         chrome https://scottjbennett.com/ttrpg/dnd/
     }
+
+$condition = which yamllint
+if ($condition) {
+}
+else
+{
+	# Write-Output "https://sourceforge.net/projects/dos2unix/files/latest/download"
+	pip install yamllint
+}
 
 $condition = which dos2unix
 if ($condition) {
