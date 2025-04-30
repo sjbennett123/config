@@ -555,10 +555,12 @@ function repo()
         cd $env:OneDrive\Documents\GitHub\$($args)
     }
 
-function dl()
+function downloads()
     {
         cd $env:homedrive\$env:homepath\Downloads\
     }
+Set-Alias dl downloads
+
 
 function desktop()
     {
