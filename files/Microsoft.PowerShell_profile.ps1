@@ -564,7 +564,7 @@ Set-Alias dl downloads
 
 function desktop()
     {
-        cd $env:OneDrive\Desktop\
+        cd $env:homedrive\$env:homepath\Desktop\
     }
 Set-Alias desk desktop
 
@@ -1292,6 +1292,9 @@ function owlbear()
     {
         chrome https://scottjbennett.com/owlbear
     }
+
+# https://crates.io/crates/du-dust
+
 
 # $condition = which netlify-cli
 # if ($condition) {
