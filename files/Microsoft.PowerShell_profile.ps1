@@ -145,9 +145,9 @@ if ($condition) {
 else
 {
 	Write-Output "https://gitforwindows.org/"
-    Write-Output "make sure that the bin for git is in the PATH"
-    Write-Output "so you get the tig git history viewer"
-    Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path"
+	Write-Output "make sure that the bin for git is in the PATH"
+	Write-Output "so you get the tig git history viewer"
+	Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path"
 	Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\cmd"
 }
 
@@ -164,7 +164,7 @@ if ($condition) {
 }
 else
 {
-	echo "install github desktop"
+	Write-Output "install github desktop"
 }
 
 
@@ -209,7 +209,7 @@ if ($condition) {
 }
 else
 {
-	echo "# https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-i686-pc-windows-msvc.zip"
+	Write-Output "# https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-i686-pc-windows-msvc.zip"
 }
 
 $condition = which rustc
@@ -217,7 +217,7 @@ if ($condition) {
 }
 else
 {
-	echo "install rust"
+	Write-Output "install rust"
 }
 
 $condition = which fzf
@@ -320,9 +320,6 @@ function gr()
         cd "$(git rev-parse --show-toplevel)"
     }
 
-
-
-
 $condition = Test-Path -Path "$env:ProgramFiles\Google\Chrome\Application\chrome.exe"
 if ($condition) {
     Set-Alias chrome "$env:ProgramFiles\Google\Chrome\Application\chrome.exe"
@@ -332,8 +329,6 @@ else
     Write-Output "install google chrome"
     Write-Output "https://www.google.com/chrome/dr/download"
 }
-
-
 
 $condition = which nvim
 if ($condition) {
@@ -421,11 +416,12 @@ function ocdi_roadmap()
         chrome https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/995575505/OCDI+Pre-Visit+Post-Visit+and+Reporting+Roadmap
     }
 Set-Alias roadmap ocdi_roadmap
+
 function pulse()
     {
         chrome https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/995571909/Team+Pulse+2025
     }
-  Set-Alias teampulse pulse
+Set-Alias teampulse pulse
 
 function okta()
     {
@@ -523,6 +519,7 @@ function config_update()
 			Set-ItemProperty -Path "$env:USERPROFILE/.rustup" -Name Attributes -Value Hidden
 		}
 }
+
 function ssh_config()
     {
       np $env:homedrive\$env:homepath\.ssh\config
@@ -574,7 +571,6 @@ function pictures()
     }
 Set-Alias pics pictures
 
-
 $condition = which eza
 if ($condition) {
     Set-Alias ls eza
@@ -595,11 +591,6 @@ else
     Write-Output "https://github.com/eza-community/eza/releases/download/v0.17.0/eza.exe_x86_64-pc-windows-gnu.tar.gz"
 
 }
-
-
-
-
-
 
 $condition = Test-Path -Path "$env:ProgramFiles\Notepad++\notepad++.exe"
 if ($condition) {
@@ -1172,6 +1163,8 @@ else
     Write-Output "~\AppData\Local\gcalcli\config.toml"
     Write-Output "you will need a token from"
     Write-Output "https://console.cloud.google.com"
+		Write-Output "In Microsoft Terminal"
+		Write-Output "gcalcli init"
 }
 
 $condition = which watchexec
