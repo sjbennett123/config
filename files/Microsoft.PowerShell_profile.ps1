@@ -517,6 +517,10 @@ function config_update()
 		if ($condition) {
 			Set-ItemProperty -Path "$env:USERPROFILE/.cargo" -Name Attributes -Value Hidden
 		}
+		$condition = Test-Path -Path "$env:USERPROFILE/.cache"
+		if ($condition) {
+			Set-ItemProperty -Path "$env:USERPROFILE/.cache" -Name Attributes -Value Hidden
+		}
 		$condition = Test-Path -Path "$env:USERPROFILE/.rustup"
 		if ($condition) {
 			Set-ItemProperty -Path "$env:USERPROFILE/.rustup" -Name Attributes -Value Hidden
