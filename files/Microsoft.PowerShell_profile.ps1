@@ -279,7 +279,7 @@ if ($condition) {
 else
 {
    Write-Output "https://cli.github.com/"
-	 # https://github.com/cli/cli/releases/download/v2.43.1/gh_2.43.1_windows_amd64.msi
+	 Write-Output "https://github.com/cli/cli/releases/download/v2.43.1/gh_2.43.1_windows_amd64.msi"
 
 }
 
