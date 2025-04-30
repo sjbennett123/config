@@ -1,8 +1,8 @@
 #!/usr/bin/env powershell -File
 # https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2
-# To turn off powershell autocomplete
+# https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-7.5
 
-Set-PSReadLineOption -PredictionSource None
+
 Set-Alias which where.exe
 
 $condition = which python
@@ -198,7 +198,6 @@ else
 }
 
 
-# https://github.com/cli/cli/releases/download/v2.43.1/gh_2.43.1_windows_amd64.msi
 
 # https://www.nerdfonts.com
 Import-Module Terminal-Icons
@@ -222,6 +221,7 @@ else
 
 $condition = which fzf
 if ($condition) {
+		Import-Module PSFzf
 }
 else
 {
@@ -236,7 +236,8 @@ else{
 	Write-Output "Variable Value: --height 40% --border"
 }
 
-Import-Module PSFzf
+# To turn off powershell autocomplete
+Set-PSReadLineOption -PredictionSource None
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 Set-PSReadlineKeyHandler -Key ctrl+d -Function ViExit
@@ -278,6 +279,8 @@ if ($condition) {
 else
 {
    Write-Output "https://cli.github.com/"
+	 # https://github.com/cli/cli/releases/download/v2.43.1/gh_2.43.1_windows_amd64.msi
+
 }
 
 function pr()
@@ -661,18 +664,17 @@ Set-Alias python.exe C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python312\py
 
 $condition = which jira
 if ($condition) {
-
 }
 else
 {
     Write-Output "install the ira cli"
     Write-Output "https://github.com/ankitpokhrel/jira-cli/releases/download/v1.5.1/jira_1.5.1_windows_x86_64.zip"
-    # uses api token from https://id.atlassian.com/manage-profile/security/api-tokens
-    # Set JIRA_API_TOKEN env variable
-    # jira init
-    # for server enter
-    # https://mmodal.atlassian.net
-    # Set JIRA_PAGER env variable to bat or glow if you like! C:\Windows\System32\bat.exe C:\Windows\System32\glow.exe
+    Write-Output "uses api token from https://id.atlassian.com/manage-profile/security/api-tokens"
+    Write-Output "Set JIRA_API_TOKEN env variable"
+    Write-Output "jira init"
+    Write-Output "for server enter"
+    Write-Output "https://mmodal.atlassian.net"
+    Write-Output "Set JIRA_PAGER env variable to bat or glow if you like!"
 }
 
 function j()
@@ -1225,9 +1227,6 @@ else
     Write-Output "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/windows/SessionManagerPluginSetup.exe"
 }
 
-
-
-
 $condition = which termdown
 if ($condition) {
 }
@@ -1255,7 +1254,6 @@ if ($condition) {
 }
 else
 {
-	# Write-Output "https://sourceforge.net/projects/dos2unix/files/latest/download"
 	pip install yamllint
 }
 
@@ -1267,6 +1265,13 @@ else
 	Write-Output "https://sourceforge.net/projects/dos2unix/files/latest/download"
 }
 
+$condition = which git
+if ($condition) {
+}
+else
+{
+	Write-Output "install git"
+}
 
 $condition = which spt.exe
 if ($condition) {
