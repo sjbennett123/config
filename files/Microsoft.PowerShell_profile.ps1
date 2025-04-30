@@ -625,7 +625,6 @@ else
 
 $condition = which jq
 if ($condition) {
-
 }
 else
 {
@@ -821,9 +820,14 @@ Set-Alias ocditunnel ocditunnel.ps1
 
 
 
-
-# https://github.com/nickgerace/gfold/releases
-Set-Alias gf gfold
+$condition = which gfold
+if ($condition) {
+	Set-Alias gf gfold
+}
+else
+{
+	Write-Output "git clone https://github.com/nickgerace/gfold.git; cd gfold; cargo install"
+}
 
 # https://mmodal.atlassian.net/wiki/spaces/HCC/pages/42436191/Get+things+to+work+with+3M+s+custom+CA
 
@@ -874,8 +878,7 @@ else
 
 #git add .; git commit -m updates; git push
 
-# sudo apt install neofetch
-# iwr -useb get.scoop.sh | iex
+
 
 
 function ocdi_version($env)
@@ -987,9 +990,6 @@ else
   Write-Output "chafa image viewer"
   Write-Output "https://github.com/hpjansson/chafa"
   scoop install chafa
-  # https://github.com/atanunq/viu/releases
-
-
 }
 
 
@@ -1167,6 +1167,15 @@ else
 		Write-Output "gcalcli init"
 }
 
+
+$condition = Get-Service ssh-agent | Where-Object {$_.Status -eq "Stopped"}
+if ($condition) {
+    Write-Output "Start the ssh agent service"
+		Write-Output "open services and start the service and set the startup type to Automatic"
+		Write-Output "OpenSSH Authentication Agent"
+}
+
+
 $condition = which watchexec
 if ($condition) {}
 else
@@ -1182,7 +1191,8 @@ else
     Write-Output "https://pre-commit.com/"
 		# https://pre-commit.com/#install
 		# https://github.com/pre-commit/pre-commit.com/blob/main/sections/advanced.md
-		# SKIP=ansible-lint
+		Write-Output  "Set environment variable to skip ansible lint"
+		Write-Output  "SKIP=ansible-lint"
     pip install pre-commit
 }
 
@@ -1278,13 +1288,22 @@ function owlbear()
         chrome https://scottjbennett.com/owlbear
     }
 
+# $condition = which netlify-cli
+# if ($condition) {
+# }
+# else
+# {
+	# npm install -g netlify-cli
+# }
+
+
+
 #  _            _
 # | |_ ___   __| | ___
 # | __/ _ \ / _` |/ _ \
 # | || (_) | (_| | (_) |
 #  \__\___/ \__,_|\___/
 
-# add netflify cli
 
 # remove context menu entries
 # Disable file locksmith in powertoys
