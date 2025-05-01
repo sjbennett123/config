@@ -358,6 +358,7 @@
   ansible.builtin.get_url:
     url: https://github.com/sharkdp/fd/releases/download/v8.3.2/fd-v8.3.2-x86_64-unknown-linux-musl.tar.gz
     dest: /opt/installers/fd.tar.gz
+    validate_certs: false
   tags: fd
   when: fd_version_before_install.failed
 
@@ -409,6 +410,7 @@
   ansible.builtin.get_url:
     url: https://github.com/sharkdp/bat/releases/download/v0.19.0/bat-v0.19.0-x86_64-unknown-linux-gnu.tar.gz
     dest: /opt/installers/bat.tar.gz
+    validate_certs: false
   tags: bat
 
 - name: Unarchive bat
@@ -449,6 +451,7 @@
   ansible.builtin.get_url:
     url: https://github.com/charmbracelet/glow/releases/download/v1.4.1/glow_1.4.1_linux_x86_64.tar.gz
     dest: /opt/installers/glow.tar.gz
+    validate_certs: false
   tags: glow
 
 - name: Unarchive glow
@@ -482,6 +485,7 @@
   ansible.builtin.get_url:
     url: https://github.com/ogham/exa/releases/download/v0.10.0/exa-linux-x86_64-v0.10.0.zip
     dest: /opt/installers/exa.zip
+    validate_certs: false
   tags: exa
 
 - name: Extract exa
@@ -693,6 +697,7 @@
   ansible.builtin.get_url:
     url: https://github.com/tstack/lnav/releases/download/v0.10.1/lnav-0.10.1-musl-64bit.zip
     dest: /opt/installers/lnav.tar.gz
+    validate_certs: false
   tags: lnav
 
 - name: Unarchive lnav
@@ -727,6 +732,7 @@
   ansible.builtin.get_url:
     url: https://releases.hashicorp.com/terraform/1.1.5/terraform_1.1.5_linux_amd64.zip
     dest: /opt/installers/terraform.zip
+    validate_certs: false
   tags: terraform
 
 - name: Unarchive Terraform
@@ -783,6 +789,7 @@
   ansible.builtin.get_url:
     url: https://github.com/Wilfred/difftastic/releases/download/0.32.0/difft-x86_64-unknown-linux-gnu.tar.gz
     dest: /opt/installers/difftastic.zip
+    validate_certs: false
   tags: difftastic
 
 - name: Unarchive Difftastic

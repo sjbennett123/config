@@ -12,71 +12,8 @@
       ansible.builtin.debug:
         msg: "The version is {{ ansible_distribution_major_version }}"
 
-- name: Install docker, python and Java modules
-  become: true
-  tags:
-    - prerequisites
-  block:
-
-    - name: Install docker python module with pip (used to be docker-py)
-      pip:
-        name: docker
-        # extra_args needed for workaround
-        extra_args: "--ignore-installed --use-feature=2020-resolver"
-
-    - name: Install classic requests python module with pip
-      pip:
-        name: "requests==2.31.0"
-        # extra_args needed for workaround
-        extra_args: "--ignore-installed"
-        executable: /usr/bin/pip3
-
-    - name: Install Java (for keytool)
-      command: 'amazon-linux-extras install -y java-openjdk11'
-      when: ansible_distribution_major_version != '2023'
-
-    - name: Install java-21-amazon-corretto (for keytool) for 2023 Corretto is a build of OpenJDK. 'java --version' will show openjdk version installed
-      dnf:
-        name: java-21-amazon-corretto
-        state: present
-      when: ansible_distribution_major_version == '2023'
-
-    - name: "Install docker for Amazon Linux 2"
-      command: 'amazon-linux-extras install docker -y'
-      when: ansible_distribution_major_version != '2023'
-
-    - name: "Install docker for Amazon Linux 2023"
-      dnf:
-        name: docker
-        state: present
-      when: ansible_distribution_major_version == '2023'
-
-    - name: Enable docker service at startup
-      service:
-        name: docker
-        state: started
-        enabled: true
-
-    - name: creating capd user
-      user:
-        name: capd
-        state: present
-      become: true
-
 - name: Install Troubleshooting Tools
   block:
-    - name: install epel from amazon linux extras
-      command:
-        cmd: sudo amazon-linux-extras install epel -y
-      tags: epel
-      when: ansible_distribution == 'Amazon' and ansible_distribution_major_version != '2023'
-
-    - name: install filecache so that connect script will work
-      pip:
-        name: filecache
-        executable: /usr/bin/pip3
-      become: true
-      tags: connect
 
     - name: install yamllint
       pip:
@@ -240,6 +177,7 @@
       ansible.builtin.get_url:
         url: https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep-13.0.0-x86_64-unknown-linux-musl.tar.gz
         dest: /opt/installers/rg.tar.gz
+        validate_certs: false
       tags: rg
 
     - name: Extract rg
