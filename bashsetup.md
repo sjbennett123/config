@@ -6,4 +6,5 @@
 sudo apt-get install python3
 
 sudo apt-get install python3-pip
-
+sudo apt install figlet
+sudo apt install dos2unix
