@@ -16,9 +16,9 @@
   block:
 
     - name: install yamllint
-      pip:
+      apt:
         name: yamllint
-        executable: /usr/bin/pip3
+        state: present
       become: true
       tags: yamllint
 
@@ -44,7 +44,6 @@
         path: "{{ item }}"
         state: directory
         mode: '0755'
-        owner: "{{ ansible_user | default(ansible_env.USER) }}"
       with_items:
         - /opt/installers
         - ~/.bashrc.d
@@ -154,6 +153,7 @@
       ansible.builtin.get_url:
         url: https://github.com/Wilfred/difftastic/releases/download/0.32.0/difft-x86_64-unknown-linux-gnu.tar.gz
         dest: /opt/installers/difftastic.zip
+        validate_certs: false
       tags: difftastic
 
     - name: Unarchive Difftastic
@@ -220,6 +220,19 @@
       tags: fzf
       diff: false
 
+    - name: Download fzf
+      ansible.builtin.get_url:
+        url: https://github.com/junegunn/fzf/releases/download/0.33.0/fzf-0.33.0-linux_amd64.tar.gz
+        dest: ~/.fzf/fzf.tar.gz
+        validate_certs: false
+      tags: fzf
+
+    - name: Extract rg
+      ansible.builtin.unarchive:
+        src: ~/.fzf/fzf.tar.gz
+        dest: ~/.fzf/
+      tags: rg
+
     - name: dowload fzf binary
       command:
         chdir: ~/.fzf
@@ -236,27 +249,10 @@
       tags: fzf
       become: true
 
-    - name: allow fzfenabled environment variable over ssh
-      ansible.builtin.lineinfile:
-        path: /etc/ssh/sshd_config
-        line: 'AcceptEnv fzfenabled'
-      tags: fzf
-      become: true
-      register: sshdchanged
-
-    - name: restart sshd if config file changed
-      systemd:
-        name: sshd
-        state: restarted
-      become: yes
-      when: sshdchanged.changed is true
-      tags: fzf
-
     - name: install jq
-      yum:
+      apt:
         name: jq
         state: present
-        use_backend: "{{ 'dnf' if  ansible_distribution_major_version == '2023' else 'yum' }}"
       register: jq
       retries: 5
       until: jq is success
@@ -264,7 +260,7 @@
       tags: jq
 
     - name: install ncdu
-      yum:
+      apt:
         name: ncdu
         state: present
       register: ncdu
@@ -272,32 +268,73 @@
       until: ncdu is success
       become: true
       tags: ncdu
-      when: ansible_distribution_major_version != '2023'
-
-    - name: Install ncdu for AL2023
-      dnf:
-        name: http://packages.eu-central-1.amazonaws.com/2018.03/main/c31535f74c6e/x86_64/Packages/ncdu-1.10-1.3.amzn1.x86_64.rpm
-        state: present
-        disable_gpg_check: True
-      become: true
-      ignore_errors: true
-      when: ansible_distribution_major_version == '2023'
 
     - name: install htop
-      yum:
+      apt:
         name: htop
         state: present
-        use_backend: "{{ 'dnf' if  ansible_distribution_major_version == '2023' else 'yum' }}"
       register: htop
       retries: 5
       until: htop is success
       become: true
       tags: htop
 
+    - name: retreive fd version
+      command:
+        cmd: "fd --version"
+      register: fd_version_before_install
+      changed_when: false
+      ignore_errors: true
+      tags: fd
+
+    - name: Download fd
+      ansible.builtin.get_url:
+        url: https://github.com/sharkdp/fd/releases/download/v8.3.2/fd-v8.3.2-x86_64-unknown-linux-musl.tar.gz
+        dest: /opt/installers/fd.tar.gz
+        validate_certs: false
+      tags: fd
+      when: fd_version_before_install.failed
+
+    - name: Extract fd
+      ansible.builtin.unarchive:
+        remote_src: true
+        src: /opt/installers/fd.tar.gz
+        dest: /opt/installers
+      tags: fd
+      when: fd_version_before_install.failed
+
+    - name: Install fd
+      copy:
+        src: "/opt/installers/fd-v8.3.2-x86_64-unknown-linux-musl/{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: 0755
+      with_items:
+        - {src: 'fd', dest: '/usr/bin/fd'}
+      become: true
+      when: fd_version_before_install.failed
+      tags: fd
+
+    - name: Install fd autocomplete
+      copy:
+        src: "/opt/installers/fd-v8.3.2-x86_64-unknown-linux-musl/{{ item.src }}"
+        dest: "{{ item.dest }}"
+      with_items:
+        - {src: 'autocomplete/fd.bash', dest: '~/.bashrc.d/fd.bash'}
+      tags: fd
+      when: fd_version_before_install.failed
+
+    - name: retreive fd version
+      command:
+        cmd: "fd --version"
+      register: fd_version_after_install
+      tags: fd
+      when: fd_version_before_install.failed
+
     - name: Download lnav
       ansible.builtin.get_url:
         url: https://github.com/tstack/lnav/releases/download/v0.10.1/lnav-0.10.1-musl-64bit.zip
         dest: /opt/installers/lnav.tar.gz
+        validate_certs: false
       tags: lnav
 
     - name: Unarchive lnav
@@ -329,210 +366,75 @@
         msg: "Lnav Log Navigator Installed! for details see https://github.com/tstack/lnav version is {{ lnav_version.stdout }}"
       tags: lnav
 
-    - name: Ensure ngxtop is installed
-      pip:
-        name: ngxtop
-        executable: /usr/bin/pip3
-      tags: ngxtop
-      become: true
-  ignore_errors: true
+- name: Create Bashrc directory
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  with_items:
+    - ~/.bashrc.d
 
-- name: Congigure CloudWatch Agent and alarms
-  become: true
-  tags:
-    - cloudwatch_agent
-    - prerequisites
-  when: ansible_distribution is defined and ansible_distribution == 'Amazon'
-  block:
-
-    - name: "Ensure /opt/aws/amazon-cloudwatch-agent/bin/ exists"
-      file:
-        path: /opt/aws/amazon-cloudwatch-agent/bin
-        state: directory
-        mode: '0755'
-
-    - name: Gather ec2 Metadata using the ec2_metadata_facts module.
-      ec2_metadata_facts:  # yamllint disable-line rule:empty-values
-      changed_when: false
-
-    - name: Collect EC2 tags using the aws cli
-      # if aws command is not in the PATH you may need to do a symbolic link.... sudo ln -s /usr/local/bin/aws /usr/bin/aws
-      shell: |
-        aws ec2 describe-instances --region {{ ansible_ec2_placement_region }} --instance-ids {{ ansible_ec2_instance_id }} --output json | jq -r '.Reservations[0].Instances[].Tags | map({"key": .Key, "value": .Value}) | from_entries'
-      register: instance
-      check_mode: false
-      changed_when: false
-      failed_when: "'ApplicationID' not in instance.stdout"
-
-    - name: "Adding capd.config to /opt/aws/amazon-cloudwatch-agent/bin/capd-config.json"
-      template:
-        src: "capd-config.json"
-        dest: "/opt/aws/amazon-cloudwatch-agent/bin/capd-config.json"
-        owner: root
-        group: root
-        mode: u=rw,g=r,o=r
-
-    - name: "Enable CloudWatch Agent with capd-config.json"
-      shell: '/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/capd-config.json'
-
-    - name: "Ensure CloudWatch Agent has restarted"
-      systemd:
-        name: amazon-cloudwatch-agent
-        state: restarted
-
-    - name: "Get Coudwatch status sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a status"
-      command:
-        cmd: "sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a status"
-      register: cloudwatch_status
-      changed_when: false
-
-    - name: Display Cloudwatch status"
-      debug:
-        msg:
-          - "{{ cloudwatch_status.stdout }}"
-          - "The amazon cloudwatch metrics for Memory and Disk usage are not gathered automatically. We use the Cloudwatch service to send those metrics to be monitored."
-          - "Logs can be located /opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log"
-          - "Troubleshooting page https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/troubleshooting-CloudWatch-Agent.html"
-
-    - name: CPU Utilization Alarm
-      # We are getting some of these variables from the task "Gather ec2 Metadata using the ec2_metadata_facts module."
-      shell: |
-        aws cloudwatch put-metric-alarm \
-        --region {{ ansible_ec2_placement_region }} \
-        --alarm-name 229-{{ SubEnv }}-capd-{{ group_names[1] | default('') }}-cpu-utilization-{{ ansible_ec2_local_hostname }} \
-        --alarm-description "{{ cpu_metric }} >= {{ cpu_warning_threshold }} {{ cpu_percent_unit }} for {{ cpu_time }}+ Minutes on {{ ec2_tags.Name }} instance {{ ansible_ec2_instance_id }}" \
-        --metric-name {{ cpu_metric }} \
-        --ok-actions {{ ok_actions }} \
-        --alarm-actions {{ alarm_actions }} \
-        --namespace {{ cloudwatch_namespace }} \
-        --statistic {{ cpu_statistic }} \
-        --dimensions {{ cpu_dimensions }} \
-        --period {{ cpu_period }} \
-        --unit {{ cpu_percent_unit }} \
-        --evaluation-periods {{ cpu_eval_period }} \
-        --threshold {{ cpu_warning_threshold }} \
-        --comparison-operator {{ cpu_comparison_operator }}
-      register: cpu_warning_alarm_output
-      until: cpu_warning_alarm_output.rc == 0
-      retries: "{{ alarm_deployment_retries }}"
-      delay: "{{ alarm_deployment_delay }}"
-
-    - name: Memory Utilization Alarm
-      shell: |
-        aws cloudwatch put-metric-alarm \
-        --region {{ ansible_ec2_placement_region }} \
-        --alarm-name 229-{{ SubEnv }}-capd-{{ group_names[1] | default('') }}-memory-utilization-{{ ansible_ec2_local_hostname }} \
-        --alarm-description "{{ mem_metric }} >= {{ mem_warning_threshold }} {{ mem_percent_unit }} for {{ mem_time }}+ Minutes on {{ ec2_tags.Name }} instance {{ ansible_ec2_instance_id }}" \
-        --metric-name {{ mem_metric }} \
-        --ok-actions {{ ok_actions }} \
-        --alarm-actions {{ alarm_actions }} \
-        --namespace {{ cloudwatch_namespace }} \
-        --statistic {{ mem_statistic }} \
-        --dimensions {{ mem_dimensions }} \
-        --period {{ mem_period }} \
-        --unit {{ mem_percent_unit }} \
-        --evaluation-periods {{ mem_eval_period }} \
-        --threshold {{ mem_warning_threshold }} \
-        --comparison-operator {{ mem_comparison_operator }}
-      register: mem_alarm_output
-      until: mem_alarm_output.rc == 0
-      retries: "{{ alarm_deployment_retries }}"
-      delay: "{{ alarm_deployment_delay }}"
-
-    - name: retrieve mounts using shell command
-      shell: |
-        df -x tmpfs -x devtmpfs -x overlay --output=source,fstype,target | tr -s ' ' | jq -sR 'split("\n") | .[1:-1] | map(split(" ")) | map({"device": .[0], "fstype": .[1], "path": .[2],})'
-      register: machine_mounts
-      changed_when: false
-
-    - name: Disk Utilization Alarm
-      shell: |
-          aws cloudwatch put-metric-alarm \
-          --region {{ ansible_ec2_placement_region }} \
-          --alarm-name 229-{{ SubEnv }}-capd-{{ group_names[1] | default('') }}-disk-utilization-{{ ansible_ec2_local_hostname }} \
-          --alarm-description "{{ disk_metric }} >= {{ disk_warning_threshold }} {{ disk_percent_unit }} for {{ disk_time }}+ Minutes on {{ ec2_tags.Name }} instance {{ ansible_ec2_instance_id }}" \
-          --metric-name {{ disk_metric }} \
-          --ok-actions {{ ok_actions }} \
-          --alarm-actions {{ alarm_actions }} \
-          --namespace {{ cloudwatch_namespace }} \
-          --statistic {{ disk_statistic }} \
-          --dimensions Name=InstanceId,Value={{ ansible_ec2_instance_id }} Name=ImageId,Value={{ ansible_ec2_ami_id }} Name=device,Value={{ item.device.split('/')[-1] }} Name=fstype,Value={{ item.fstype }} Name=path,Value={{ item.path }} Name=Application,Value={{ ec2_tags.ApplicationName }} Name=Environment,Value={{ ec2_tags.mmodal_env }} \
-          --period {{ disk_period }} \
-          --unit {{ disk_percent_unit }} \
-          --evaluation-periods {{ disk_eval_period }} \
-          --threshold {{ disk_warning_threshold }} \
-          --comparison-operator {{ disk_comparison_operator }}
-      register: disk_warning_alarm_output
-      until: disk_warning_alarm_output.rc == 0
-      retries: "{{ alarm_deployment_retries }}"
-      delay: "{{ alarm_deployment_delay }}"
-      with_items: "{{ machine_mounts.stdout }}"
-
-#Amazon recommends migrating to systemd timers instead of cron because systemd provides more functionality.
-#A future version of Amazon Linux may not support classic cron jobs at all and may complete the transition to systemd timers.
-- name: Install the 'cronie' package.
-  yum:
-    name: cronie
-    state: present
-    use_backend: "{{ 'dnf' if  ansible_distribution_major_version == '2023' else 'yum' }}"
-  become: true
-  tags: cron
-  when: ansible_distribution_major_version == '2023'
-
-- name: Enable the 'cronie' service
-  ansible.builtin.systemd:
-    name: crond
-    enabled: true
-  tags: cron
-  when: ansible_distribution_major_version == '2023'
-
-- name: Start the 'cronie' service
-  ansible.builtin.systemd:
-    name: crond
-    state: started
-  tags: cron
-  become: true
-  when: ansible_distribution_major_version == '2023'
-
-- name: Add cron task to restart qualys-cloud-agent
-  ansible.builtin.cron:
-    name: "Restart qualys-cloud-agent"
-    minute: "30"
-    hour: "5"
-    job: "systemctl restart qualys-cloud-agent> /dev/null"
-    user: root
-  become: true
-  tags: qualys, cron
-
-- name: gather prerequsites
-  setup:
-    gather_subset:
-      - 'date_time'
-  tags: always
-
-- name: add note to /etc/update-motd.d/ noting when prerequisites were updated
+- name: template bashrc configurations
   template:
-    src: motd/90-prerequisites.j2
-    dest: /etc/update-motd.d/80-prerequisites
-    mode: 0755
-  become: true
-  tags: motd
-  ignore_errors: true
-  register: motd_status
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '0644'
+  with_items:
+    - {src: 'bashrc.j2', dest: '~/.bashrc'}
+    - {src: 'tmux.bash', dest: '~/.bashrc.d/tmux.bash'}
+    - {src: 'exa.bash', dest: '~/.bashrc.d/exa.bash'}
+    - {src: 'history.bash', dest: '~/.bashrc.d/history.bash'}
+    - {src: 'fzf.bash.j2', dest: '~/.bashrc.d/fzf.bash'}
+    - {src: 'ansible.bash', dest: '~/.bashrc.d/ansible.bash'}
+    - {src: 'autojump.bash', dest: '~/.bashrc.d/autojump.bash'}
+    - {src: 'kcat.bash', dest: '~/.bashrc.d/kcat.bash'}
+    - {src: 'glow.bash', dest: '~/.bashrc.d/glow.bash'}
+    - {src: 'terraform.bash', dest: '~/.bashrc.d/terraform.bash'}
+    - {src: 'git.bash', dest: '~/.bashrc.d/git.bash'}
+  tags: bashrc
 
-- name: update motd in the other place
+- name: template tmux Configuration
   template:
-    src: motd/90-prerequisites.j2
-    dest: /etc/motd.d/80-prerequisites
-    mode: 0755
-  become: true
-  when: motd_status.failed
-  tags: motd
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - {src: 'tmux.conf.j2', dest: '~/.tmux.conf'}
 
-- name: refresh motd
-  command:
-    cmd: /usr/bin/systemctl --quiet restart update-motd
-  become: true
-  tags: motd
-  ignore_errors: true
-  when: ansible_distribution_major_version != '2023'
+- name: Create vim plugin directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  with_items:
+    - ~/.vim/pack/git-plugins/start
+    -  ~/.vim/pack/git-plugins/start/ale
+    - ~/.vim/pack/git-plugins/start/ansible-vim
+    - ~/.vim/pack/git-plugins/start/indentline
+  tags: vim
+
+- name: clone ale plugin repo
+  ansible.builtin.git:
+    repo: https://github.com/dense-analysis/ale.git
+    dest: ~/.vim/pack/git-plugins/start/ale
+  tags: vim
+  diff: false
+
+- name: clone ansible-vim plugin repo
+  ansible.builtin.git:
+    repo: https://github.com/pearofducks/ansible-vim
+    dest: ~/.vim/pack/git-plugins/start/ansible-vim
+  tags: vim
+  diff: false
+
+- name: Cline Indentline repo
+  ansible.builtin.git:
+    repo: https://github.com/Yggdroot/indentLine.git
+    dest: ~/.vim/pack/git-plugins/start/indentline
+  tags: vim
+  diff: false
+
+- name: template vimrc
+  template:
+    src: vimrc.j2
+    dest: ~/.vimrc
+  tags: vim

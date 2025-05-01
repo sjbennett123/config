@@ -1,8 +1,4 @@
- if  (command -v fzf > /dev/null)  &&  [[ ! -v fzfenabled ]]; then
-     alias f='source ~/.fzf.bash'
-     export PATH="$HOME/.fzf/bin:$PATH"
-fi
-if  (command -v fzf > /dev/null)  &&  [[ -v fzfenabled ]]; then
+
     source ~/.fzf.bash
     export PATH="$HOME/.fzf/bin:$PATH"
-fi
+
