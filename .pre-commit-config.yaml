@@ -1,0 +1,21 @@
+---
+# Update the rev variable with the release version that you want, from the yamllint repo
+# You can pass your custom .yamllint with args attribute.
+repos:
+  # https://yamllint.readthedocs.io/en/stable/
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.29.0
+    hooks:
+      - id: yamllint
+
+  # https://ansible.readthedocs.io/projects/lint/configuring/#pre-commit-setup
+  - repo: https://github.com/ansible/ansible-lint
+    rev: v6.22.0 # put latest release tag from https://github.com/ansible/ansible-lint/releases/
+    hooks:
+      - id: ansible-lint
+
+  - repo: https://github.com/aristanetworks/j2lint.git
+    rev: v1.1.0
+    hooks:
+      - id: j2lint
+        args: [--ignore, jinja-statements-indentation, jinja-variable-format, single-statement-per-line, --]
