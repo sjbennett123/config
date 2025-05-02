@@ -1300,13 +1300,13 @@ function owlbear()
 # https://crates.io/crates/du-dust
 
 
-# $condition = which netlify-cli
-# if ($condition) {
-# }
-# else
-# {
-  # npm install -g netlify-cli
-# }
+$condition = which netlify
+if ($condition) {
+}
+else
+{
+  npm install -g netlify-cli
+}
 
 
 
