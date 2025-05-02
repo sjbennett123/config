@@ -10,11 +10,11 @@ if ($condition) {
 }
 else
 {
-	Write-Output "https://www.python.org/downloads/windows/"
-	Write-Output "https://www.python.org/ftp/python/3.13.3/python-3.13.3-amd64.exe"
-	Write-Output "add to path"
-	Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python313"
-	Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python313\Scripts\"
+  Write-Output "https://www.python.org/downloads/windows/"
+  Write-Output "https://www.python.org/ftp/python/3.13.3/python-3.13.3-amd64.exe"
+  Write-Output "add to path"
+  Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python313"
+  Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python313\Scripts\"
 }
 
 Function touch
@@ -40,16 +40,16 @@ if ($condition) {
 }
 else
 {
-	Write-Output "Add GNU utilities for Win32"
-	Write-Output "https://unxutils.sourceforge.net"
+  Write-Output "Add GNU utilities for Win32"
+  Write-Output "https://unxutils.sourceforge.net"
 }
 $condition = which choco
 if ($condition) {
 }
 else
 {
-	Write-Output "https://chocolatey.org/install"
-	Write-Output "https://community.chocolatey.org/api/v2/package/chocolatey"
+  Write-Output "https://chocolatey.org/install"
+  Write-Output "https://community.chocolatey.org/api/v2/package/chocolatey"
 }
  
 $condition = which scoop
@@ -57,8 +57,8 @@ if ($condition) {
 }
 else
 {
-	Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-	Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+  Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 }
 
 $condition = which less
@@ -66,7 +66,7 @@ if ($condition) {
 }
 else
 {
-	scoop install less
+  scoop install less
 }
 
 $condition = which bat
@@ -74,7 +74,7 @@ if ($condition) {
 }
 else
 {
-	scoop install bat
+  scoop install bat
 }
 
 function history_full()
@@ -101,7 +101,7 @@ else
   Write-Output "https://typora.io"
   Write-Output "https://download.typora.io/windows/typora-setup-x64.exe"
 }
-	Set-Alias system_properties sysdm.cpl
+  Set-Alias system_properties sysdm.cpl
 
 $condition = Test-Path -Path "$env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe"
 if ($condition) {
@@ -111,8 +111,8 @@ if ($condition) {
 else
 {
   Write-Output "Install Powertoys"
-	Write-Output "# https://learn.microsoft.com/en-us/windows/powertoys/environment-variables"
-	Write-Output "https://github.com/microsoft/PowerToys/releases/tag/v0.90.1" 
+  Write-Output "# https://learn.microsoft.com/en-us/windows/powertoys/environment-variables"
+  Write-Output "https://github.com/microsoft/PowerToys/releases/tag/v0.90.1" 
 }
 
 Set-Alias recycle Clear-RecycleBin
@@ -144,11 +144,11 @@ if ($condition) {
 }
 else
 {
-	Write-Output "https://gitforwindows.org/"
-	Write-Output "make sure that the bin for git is in the PATH"
-	Write-Output "so you get the tig git history viewer"
-	Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path"
-	Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\cmd"
+  Write-Output "https://gitforwindows.org/"
+  Write-Output "make sure that the bin for git is in the PATH"
+  Write-Output "so you get the tig git history viewer"
+  Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path"
+  Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\cmd"
 }
 
 
@@ -160,11 +160,11 @@ Import-Module posh-git
 
 $condition = which github
 if ($condition) {
-	Set-Alias ghd github
+  Set-Alias ghd github
 }
 else
 {
-	Write-Output "install github desktop"
+  Write-Output "install github desktop"
 }
 
 
@@ -208,7 +208,7 @@ if ($condition) {
 }
 else
 {
-	Write-Output "# https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-i686-pc-windows-msvc.zip"
+  Write-Output "# https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-i686-pc-windows-msvc.zip"
 }
 
 $condition = which rustc
@@ -216,24 +216,24 @@ if ($condition) {
 }
 else
 {
-	Write-Output "install rust"
+  Write-Output "install rust"
 }
 
 $condition = which fzf
 if ($condition) {
-		Import-Module PSFzf
+    Import-Module PSFzf
 }
 else
 {
-	Write-Output "Install the FZF Fuzzy Finder"
+  Write-Output "Install the FZF Fuzzy Finder"
   Write-Output "https://github.com/junegunn/fzf/releases/download/0.32.1/fzf-0.32.1-windows_amd64.zip"
 }
 
 if ($Env:fzf_default_opts) 
 {}
 else{
-	Write-Output "Variable Name: fzf_default_opts"
-	Write-Output "Variable Value: --height 40% --border"
+  Write-Output "Variable Name: fzf_default_opts"
+  Write-Output "Variable Value: --height 40% --border"
 }
 
 # To turn off powershell autocomplete
@@ -279,7 +279,7 @@ if ($condition) {
 else
 {
    Write-Output "https://cli.github.com/"
-	 Write-Output "https://github.com/cli/cli/releases/download/v2.43.1/gh_2.43.1_windows_amd64.msi"
+   Write-Output "https://github.com/cli/cli/releases/download/v2.43.1/gh_2.43.1_windows_amd64.msi"
 
 }
 
@@ -335,17 +335,17 @@ else
 
 $condition = which nvim
 if ($condition) {
-	Set-Alias vim nvim.exe
-	Set-Alias vi nvim.exe
+  Set-Alias vim nvim.exe
+  Set-Alias vi nvim.exe
 }
 else
 {
-	# let g:loaded_perl_provider = 0
-	# C:\Users\AAA3AZZ\AppData\Local\nvim/init.lua
-	# https://gist.github.com/jeffcasavant/6ff061d5fd32ed3a7d3eb27639cd223f
-	# https://github.com/dense-analysis/ale
-	# https://github.com/neovim/neovim/releases/download/v0.11.0/nvim-win64.msi
-	# https://github.com/neovide/neovide/releases/download/0.15.0/neovide.msi
+  # let g:loaded_perl_provider = 0
+  # C:\Users\AAA3AZZ\AppData\Local\nvim/init.lua
+  # https://gist.github.com/jeffcasavant/6ff061d5fd32ed3a7d3eb27639cd223f
+  # https://github.com/dense-analysis/ale
+  # https://github.com/neovim/neovim/releases/download/v0.11.0/nvim-win64.msi
+  # https://github.com/neovide/neovide/releases/download/0.15.0/neovide.msi
 }
 
 $condition = Test-Path -Path "$env:ProgramFiles\Typora\Typora.exe"
@@ -360,8 +360,8 @@ if ($condition) {
 }
 else
 {
-	Write-Output "https://github.com/sindresorhus/caprine"
-	Write-Output "https://github.com/sindresorhus/caprine/releases/latest"
+  Write-Output "https://github.com/sindresorhus/caprine"
+  Write-Output "https://github.com/sindresorhus/caprine/releases/latest"
 }
 
 
@@ -457,74 +457,74 @@ function config_update()
         difft $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
         cp  $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
         # hide config files
-		$condition = Test-Path -Path "$env:USERPROFILE/.bash_history"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.bash_history" -Name Attributes -Value Hidden
-		}
-		$condition = Test-Path -Path "$env:USERPROFILE/.git-credentials"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.git-credentials" -Name Attributes -Value Hidden
-		}
-		$condition = Test-Path -Path "$env:USERPROFILE/.gitconfig"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.gitconfig" -Name Attributes -Value Hidden
+    $condition = Test-Path -Path "$env:USERPROFILE/.bash_history"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.bash_history" -Name Attributes -Value Hidden
     }
-		$condition = Test-Path -Path "$env:USERPROFILE/.viminfo"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.viminfo" -Name Attributes -Value Hidden
+    $condition = Test-Path -Path "$env:USERPROFILE/.git-credentials"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.git-credentials" -Name Attributes -Value Hidden
     }
-		$condition = Test-Path -Path "$env:USERPROFILE/.lesshst"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.lesshst" -Name Attributes -Value Hidden
-		}
-		$condition = Test-Path -Path "$env:USERPROFILE/_lesshst"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/_lesshst" -Name Attributes -Value Hidden
-		}
-		$condition = Test-Path -Path "$env:USERPROFILE/.tig_history"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.tig_history" -Name Attributes -Value Hidden
-		}
-		$condition = Test-Path -Path "$env:USERPROFILE/.yamllint"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.yamllint" -Name Attributes -Value Hidden
-		}
-		$condition = Test-Path -Path "$env:USERPROFILE/.wslconfig"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.wslconfig" -Name Attributes -Value Hidden
-		}
-		$condition = Test-Path -Path "$env:USERPROFILE/.affinity"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.affinity" -Name Attributes -Value Hidden
-		}
-		$condition = Test-Path -Path "$env:USERPROFILE/.android"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.android" -Name Attributes -Value Hidden
-		}
-		$condition = Test-Path -Path "$env:USERPROFILE/.rustup"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.rustup" -Name Attributes -Value Hidden
-		}
-		$condition = Test-Path -Path "$env:USERPROFILE/.python_history"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.python_history" -Name Attributes -Value Hidden
-		}
-		$condition = Test-Path -Path "$env:USERPROFILE/.config"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.config" -Name Attributes -Value Hidden
-		}
-		$condition = Test-Path -Path "$env:USERPROFILE/.cargo"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.cargo" -Name Attributes -Value Hidden
-		}
-		$condition = Test-Path -Path "$env:USERPROFILE/.cache"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.cache" -Name Attributes -Value Hidden
-		}
-		$condition = Test-Path -Path "$env:USERPROFILE/.rustup"
-		if ($condition) {
-			Set-ItemProperty -Path "$env:USERPROFILE/.rustup" -Name Attributes -Value Hidden
-		}
+    $condition = Test-Path -Path "$env:USERPROFILE/.gitconfig"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.gitconfig" -Name Attributes -Value Hidden
+    }
+    $condition = Test-Path -Path "$env:USERPROFILE/.viminfo"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.viminfo" -Name Attributes -Value Hidden
+    }
+    $condition = Test-Path -Path "$env:USERPROFILE/.lesshst"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.lesshst" -Name Attributes -Value Hidden
+    }
+    $condition = Test-Path -Path "$env:USERPROFILE/_lesshst"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/_lesshst" -Name Attributes -Value Hidden
+    }
+    $condition = Test-Path -Path "$env:USERPROFILE/.tig_history"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.tig_history" -Name Attributes -Value Hidden
+    }
+    $condition = Test-Path -Path "$env:USERPROFILE/.yamllint"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.yamllint" -Name Attributes -Value Hidden
+    }
+    $condition = Test-Path -Path "$env:USERPROFILE/.wslconfig"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.wslconfig" -Name Attributes -Value Hidden
+    }
+    $condition = Test-Path -Path "$env:USERPROFILE/.affinity"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.affinity" -Name Attributes -Value Hidden
+    }
+    $condition = Test-Path -Path "$env:USERPROFILE/.android"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.android" -Name Attributes -Value Hidden
+    }
+    $condition = Test-Path -Path "$env:USERPROFILE/.rustup"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.rustup" -Name Attributes -Value Hidden
+    }
+    $condition = Test-Path -Path "$env:USERPROFILE/.python_history"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.python_history" -Name Attributes -Value Hidden
+    }
+    $condition = Test-Path -Path "$env:USERPROFILE/.config"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.config" -Name Attributes -Value Hidden
+    }
+    $condition = Test-Path -Path "$env:USERPROFILE/.cargo"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.cargo" -Name Attributes -Value Hidden
+    }
+    $condition = Test-Path -Path "$env:USERPROFILE/.cache"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.cache" -Name Attributes -Value Hidden
+    }
+    $condition = Test-Path -Path "$env:USERPROFILE/.rustup"
+    if ($condition) {
+      Set-ItemProperty -Path "$env:USERPROFILE/.rustup" -Name Attributes -Value Hidden
+    }
 }
 
 function ssh_config()
@@ -828,11 +828,11 @@ Set-Alias ocditunnel ocditunnel.ps1
 
 $condition = which gfold
 if ($condition) {
-	Set-Alias gf gfold
+  Set-Alias gf gfold
 }
 else
 {
-	Write-Output "git clone https://github.com/nickgerace/gfold.git; cd gfold; cargo install"
+  Write-Output "git clone https://github.com/nickgerace/gfold.git; cd gfold; cargo install"
 }
 
 # https://mmodal.atlassian.net/wiki/spaces/HCC/pages/42436191/Get+things+to+work+with+3M+s+custom+CA
@@ -843,41 +843,41 @@ Set-Alias s start
 
 $condition = which onefetch
 if ($condition) {
-	Set-Alias of onefetch
+  Set-Alias of onefetch
 }
 else
 {
-	Write-Output "https://github.com/o2sh/onefetch/releases"
+  Write-Output "https://github.com/o2sh/onefetch/releases"
 }
 
 $condition = which onefetch
 if ($condition) {
-	Set-Alias of onefetch
+  Set-Alias of onefetch
 }
 else
 {
-	Write-Output "https://github.com/o2sh/onefetch/releases"
+  Write-Output "https://github.com/o2sh/onefetch/releases"
 }
 
 $condition = which ncat
 if ($condition) {
-	Set-Alias nc ncat
+  Set-Alias nc ncat
 }
 else
 {
-	Write-Output "Install Netcat"
-	Write-Output "https://nmap.org/ncat/"
-	
+  Write-Output "Install Netcat"
+  Write-Output "https://nmap.org/ncat/"
+  
 }
 
 
 $condition = which neofetch
 if ($condition) {
-	Set-Alias nf neofetch
+  Set-Alias nf neofetch
 }
 else
 {
-	scoop install neofetch
+  scoop install neofetch
 }
 
 # Control Panel
@@ -912,10 +912,10 @@ function ocdi_version($env)
         }
     }
     else 
-	{
-		Write-Host ("curls endpoints and gives the current version.")
-		Write-Host ("Current options are gi and ci")
-	}
+  {
+    Write-Host ("curls endpoints and gives the current version.")
+    Write-Host ("Current options are gi and ci")
+  }
     }
 
 
@@ -928,10 +928,10 @@ function nexus()
 
 $condition = which yq
 if ($condition){
-	}
+  }
 else
 {
-	Write-Output "https://github.com/mikefarah/yq"
+  Write-Output "https://github.com/mikefarah/yq"
     scoop install yq
 }
 
@@ -1169,16 +1169,16 @@ else
     Write-Output "~\AppData\Local\gcalcli\config.toml"
     Write-Output "you will need a token from"
     Write-Output "https://console.cloud.google.com"
-		Write-Output "In Microsoft Terminal"
-		Write-Output "gcalcli init"
+    Write-Output "In Microsoft Terminal"
+    Write-Output "gcalcli init"
 }
 
 
 $condition = Get-Service ssh-agent | Where-Object {$_.Status -eq "Stopped"}
 if ($condition) {
     Write-Output "Start the ssh agent service"
-		Write-Output "open services and start the service and set the startup type to Automatic"
-		Write-Output "OpenSSH Authentication Agent"
+    Write-Output "open services and start the service and set the startup type to Automatic"
+    Write-Output "OpenSSH Authentication Agent"
 }
 
 
@@ -1195,10 +1195,10 @@ if ($condition) {
 else
 {
     Write-Output "https://pre-commit.com/"
-		# https://pre-commit.com/#install
-		# https://github.com/pre-commit/pre-commit.com/blob/main/sections/advanced.md
-		Write-Output  "Set environment variable to skip ansible lint"
-		Write-Output  "SKIP=ansible-lint"
+    # https://pre-commit.com/#install
+    # https://github.com/pre-commit/pre-commit.com/blob/main/sections/advanced.md
+    Write-Output  "Set environment variable to skip ansible lint"
+    Write-Output  "SKIP=ansible-lint"
     pip install pre-commit
 }
 
@@ -1215,17 +1215,17 @@ if ($condition) {}
 else
 {
   Write-Output "http://hugo.io/"
-	scoop install hugo-extended
+  scoop install hugo-extended
 
 }
 
 $condition = which aws
 if ($condition) {
-	
+  
 }
 else
 {
-	  
+    
     Write-Output "https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html"
     Write-Output "https://awscli.amazonaws.com/AWSCLIV2.msi"
     Write-Output "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/windows/SessionManagerPluginSetup.exe"
@@ -1236,7 +1236,7 @@ if ($condition) {
 }
 else
 {
-	pip install termdown
+  pip install termdown
 }
 
 $condition = which ffmpeg
@@ -1245,7 +1245,7 @@ if ($condition) {
 else
 {
   Write-Output "https://www.ffmpeg.org"
-	choco install ffmpeg-full
+  choco install ffmpeg-full
 }
 
 function dnd()
@@ -1258,7 +1258,7 @@ if ($condition) {
 }
 else
 {
-	pip install yamllint
+  pip install yamllint
 }
 
 $condition = which dos2unix
@@ -1266,7 +1266,7 @@ if ($condition) {
 }
 else
 {
-	Write-Output "https://sourceforge.net/projects/dos2unix/files/latest/download"
+  Write-Output "https://sourceforge.net/projects/dos2unix/files/latest/download"
 }
 
 $condition = which git
@@ -1274,7 +1274,7 @@ if ($condition) {
 }
 else
 {
-	Write-Output "install git"
+  Write-Output "install git"
 }
 
 $condition = which spt.exe
@@ -1282,8 +1282,8 @@ if ($condition) {
 }
 else
 {
-	Write-Output "https://github.com/Rigellute/spotify-tui"
-	scoop bucket add scoop-bucket https://github.com/Rigellute/scoop-bucket
+  Write-Output "https://github.com/Rigellute/spotify-tui"
+  scoop bucket add scoop-bucket https://github.com/Rigellute/scoop-bucket
   scoop install spotify-tui
 }
 
@@ -1305,7 +1305,7 @@ function owlbear()
 # }
 # else
 # {
-	# npm install -g netlify-cli
+  # npm install -g netlify-cli
 # }
 
 
