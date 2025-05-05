@@ -4,15 +4,9 @@
 
 # To reload the powershell profile run & $profile
 
-Set-Alias which where.exe
+Set-Alias -Name which2 -Value Get-Command 
+Set-Alias -Name which -Value where.exe
 
-Function ugh
-{
-    $command = $args[0]
-    # https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/where
-    where \q $command
-    Get-Alias -erroraction 'silentlycontinue'  $command 
-}
 
 $condition = where.exe python
 if ($condition) {
@@ -66,7 +60,7 @@ else
   Write-Output "Add GNU utilities for Win32"
   Write-Output "https://unxutils.sourceforge.net"
 }
-$condition = which choco
+$condition = where.exe choco
 if ($condition) {
 }
 else
@@ -75,7 +69,7 @@ else
   Write-Output "https://community.chocolatey.org/api/v2/package/chocolatey"
 }
  
-$condition = which scoop
+$condition = where.exe scoop
 if ($condition) {
 }
 else
@@ -274,16 +268,6 @@ Set-PSReadlineKeyHandler -Chord Ctrl+k -Function DeleteToEnd
 
 
 
-# https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/where
-# https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-alias?view=powershell-7.4
-
-# fix this up so that it works like which in unix where it checks a path then checks for alias or function
-
-function art($program)
-    {
-        where.exe $program
-        Get-Alias -Name $program
-    }
 
 function gum()
     {
