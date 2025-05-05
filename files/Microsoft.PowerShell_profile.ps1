@@ -2,8 +2,17 @@
 # https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-7.5
 
+# To reload the powershell profile run & $profile
 
 Set-Alias which where.exe
+
+Function ugh
+{
+    $command = $args[0]
+    # https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/where
+    where \q $command
+    Get-Alias -erroraction 'silentlycontinue'  $command 
+}
 
 $condition = which python
 if ($condition) {
@@ -327,10 +336,17 @@ function gb()
     {
         gh browse
     }
+
 function e()
     {
         explorer .
     }
+function explorer_restart()
+    {
+            Get-Process Explorer | Stop-Process
+            Start-Process Explorer
+    }
+
 
 function gr()
     {
@@ -572,6 +588,12 @@ function repo()
     {
         cd $env:OneDrive\Documents\GitHub\$($args)
     }
+    
+function stat()
+    {
+      Get-Item $($args) | Format-List
+    }
+    
 function repo_update()
     {
         cd $env:OneDrive\Documents\GitHub\
@@ -585,7 +607,10 @@ function repo_update()
         cd -
     }
 
-
+function gitc()
+    {
+        git add .; git commit -m updates; git push;
+    }
 
 function downloads()
     {
