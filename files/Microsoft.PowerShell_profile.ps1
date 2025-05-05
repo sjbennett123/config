@@ -16,6 +16,20 @@ else
   Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python313"
   Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python313\Scripts\"
 }
+# https://www.python.org/downloads/
+# add to path
+# C:\Program Files\Python312\Scripts\
+# C:\Users\AAA3AZZ\AppData\Roaming\Python\Python312\site-packages\pre_commit
+# PYTHONPATH 
+# PYTHONHOME
+# C:\Users\AAA3AZZ\AppData\Roaming\Python\Python313\Scripts
+
+# $condition = Test-Path -Path "C:\Python313"
+# if ($condition) {
+  # Set-Alias python C:\Python313\python
+# }
+
+# Set-Alias python.exe C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python312\python
 
 Function touch
 {
@@ -315,7 +329,7 @@ function gb()
     }
 function e()
     {
-        explorer . &
+        explorer .
     }
 
 function gr()
@@ -558,6 +572,20 @@ function repo()
     {
         cd $env:OneDrive\Documents\GitHub\$($args)
     }
+function repo_update()
+    {
+        cd $env:OneDrive\Documents\GitHub\
+        $gitdirs = Get-ChildItem -Directory
+        foreach ($dir in $gitdirs)
+        {
+          cd $dir
+          git pull -q
+          cd ..
+        }
+        cd -
+    }
+
+
 
 function downloads()
     {
@@ -657,14 +685,7 @@ else
 
 
 
-# https://www.python.org/downloads/
-# add to path
-# C:\Program Files\Python312\Scripts\
-# C:\Users\AAA3AZZ\AppData\Roaming\Python\Python312\site-packages\pre_commit
 
-
-Set-Alias python C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python312\python
-Set-Alias python.exe C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python312\python
 
 $condition = which jira
 if ($condition) {
@@ -1300,13 +1321,14 @@ function owlbear()
 # https://crates.io/crates/du-dust
 
 
-$condition = which netlify
-if ($condition) {
-}
-else
-{
-  npm install -g netlify-cli
-}
+# $condition = which netlify
+# if ($condition) {
+# }
+# else
+# {
+#	npm set strict-ssl false
+#  npm install -g netlify-cli 
+# }
 
 
 
@@ -1316,6 +1338,7 @@ else
 # | || (_) | (_| | (_) |
 #  \__\___/ \__,_|\___/
 
+# https://devblogs.microsoft.com/commandline/share-environment-vars-between-wsl-and-windows/
 
 # remove context menu entries
 # Disable file locksmith in powertoys
