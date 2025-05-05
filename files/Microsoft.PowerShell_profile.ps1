@@ -14,7 +14,7 @@ Function ugh
     Get-Alias -erroraction 'silentlycontinue'  $command 
 }
 
-$condition = which python
+$condition = where.exe python
 if ($condition) {
 }
 else
@@ -58,7 +58,7 @@ Function touch
 }
 
 
-$condition = which tail
+$condition = where.exe tail
 if ($condition) {
 }
 else
