@@ -18,4 +18,4 @@ repos:
     rev: v1.1.0
     hooks:
       - id: j2lint
-        args: [--ignore, jinja-statements-indentation, jinja-variable-format, single-statement-per-line, --]
+        args: [--ignore, jinja-statements-indentation, jinja-variable-format, single-statement-per-line, jinja-variable-lower-case, --]
