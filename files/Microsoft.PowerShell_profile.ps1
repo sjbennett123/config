@@ -276,7 +276,7 @@ function gum()
         $current_branch = git rev-parse --abbrev-ref HEAD
         git fetch
         git switch main
-        git pull
+        git pull -q 
         git switch $current_branch
         git merge main
     }
@@ -457,7 +457,7 @@ function config_git()
         cp $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1
         cd "$env:OneDrive\Documents\GitHub\config"
         # Invoke-ScriptAnalyzer files/Microsoft.PowerShell_profile.ps1
-        git pull
+        git pull -q
         git add files\Microsoft.PowerShell_profile.ps1
         git commit -m "updated Powershell configuration"
         git push
@@ -467,7 +467,7 @@ function config_git()
 function config_update()
     {
         cd $env:OneDrive\Documents\GitHub\config
-        git pull
+        git pull -q
         cd -
         difft $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
         cp  $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
