@@ -4,7 +4,7 @@
 
 # To reload the powershell profile run & $profile
 
-Set-Alias -Name which -Value Get-Command 
+Set-Alias -Name which -Value Get-Command
 
 
 $condition = where.exe python
@@ -22,7 +22,7 @@ else
 # add to path
 # C:\Program Files\Python312\Scripts\
 # C:\Users\AAA3AZZ\AppData\Roaming\Python\Python312\site-packages\pre_commit
-# PYTHONPATH 
+# PYTHONPATH
 # PYTHONHOME
 # C:\Users\AAA3AZZ\AppData\Roaming\Python\Python313\Scripts
 
@@ -36,7 +36,7 @@ else
 Function touch
 {
     $file = $args[0]
-    if($file -eq $null) {
+    if($null -eq $file) {
         throw "No filename supplied"
     }
 
@@ -46,7 +46,7 @@ Function touch
     }
     else
     {
-        echo $null > $file
+        Write-Output $null > $file
     }
 }
 
@@ -67,7 +67,7 @@ else
   Write-Output "https://chocolatey.org/install"
   Write-Output "https://community.chocolatey.org/api/v2/package/chocolatey"
 }
- 
+
 $condition = where.exe scoop
 if ($condition) {
 }
@@ -128,12 +128,12 @@ else
 {
   Write-Output "Install Powertoys"
   Write-Output "# https://learn.microsoft.com/en-us/windows/powertoys/environment-variables"
-  Write-Output "https://github.com/microsoft/PowerToys/releases/tag/v0.90.1" 
+  Write-Output "https://github.com/microsoft/PowerToys/releases/tag/v0.90.1"
 }
 
 Set-Alias recycle Clear-RecycleBin
 # to hide recycle bin from desktop
-# personalization > themes > desktop icon settings 
+# personalization > themes > desktop icon settings
 
 #     _______ __
 #   / ____(_) /_
@@ -246,7 +246,7 @@ else
   Write-Output "https://github.com/junegunn/fzf/releases/download/0.32.1/fzf-0.32.1-windows_amd64.zip"
 }
 
-if ($Env:fzf_default_opts) 
+if ($Env:fzf_default_opts)
 {}
 else{
   Write-Output "Variable Name: fzf_default_opts"
@@ -275,7 +275,7 @@ function gum()
         $current_branch = git rev-parse --abbrev-ref HEAD
         git fetch
         git switch main
-        git pull -q 
+        git pull -q
         git switch $current_branch
         git merge main
     }
@@ -334,7 +334,7 @@ function explorer_restart()
 
 function gr()
     {
-        cd "$(git rev-parse --show-toplevel)"
+        Set-Location "$(git rev-parse --show-toplevel)"
     }
 
 $condition = Test-Path -Path "$env:ProgramFiles\Google\Chrome\Application\chrome.exe"
@@ -453,23 +453,25 @@ function jitney()
 function config_git()
     {
         difft $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
-        cp $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1
-        cd "$env:OneDrive\Documents\GitHub\config"
+        Copy-Item $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1
+        Set-Location "$env:OneDrive\Documents\GitHub\config"
+        # Install-PSResource -Name PSScriptAnalyzer -Reinstall
+        # https://learn.microsoft.com/en-us/powershell/utility-modules/psscriptanalyzer/overview?view=ps-modules
         # Invoke-ScriptAnalyzer files/Microsoft.PowerShell_profile.ps1
         git pull -q
         git add files\Microsoft.PowerShell_profile.ps1
         git commit -m "updated Powershell configuration"
         git push
-        cd -
+        Set-Location -
     }
 
 function config_update()
     {
-        cd $env:OneDrive\Documents\GitHub\config
+        Set-Location $env:OneDrive\Documents\GitHub\config
         git pull -q
-        cd -
+        Set-Location -
         difft $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
-        cp  $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
+        Copy-Item  $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
         # hide config files
     $condition = Test-Path -Path "$env:USERPROFILE/.bash_history"
     if ($condition) {
@@ -554,13 +556,13 @@ if ($condition) {
 else
 {
   Write-Output "Install Glow"
-  Write-Output "https://github.com/charmbracelet/glow" 
+  Write-Output "https://github.com/charmbracelet/glow"
   Write-Output "https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_Windows_x86_64.zip"
 }
 
 function dropbox()
     {
-      cd $env:homedrive\$env:homepath\Dropbox
+      Set-Location $env:homedrive\$env:homepath\Dropbox
     }
 
 function paper()
@@ -570,25 +572,25 @@ function paper()
 
 function repo()
     {
-        cd $env:OneDrive\Documents\GitHub\$($args)
+        Set-Location $env:OneDrive\Documents\GitHub\$($args)
     }
-    
+
 function stat()
     {
       Get-Item $($args) | Format-List
     }
-    
+
 function repo_update()
     {
-        cd $env:OneDrive\Documents\GitHub\
+        Set-Location $env:OneDrive\Documents\GitHub\
         $gitdirs = Get-ChildItem -Directory
         foreach ($dir in $gitdirs)
         {
-          cd $dir
+          Set-Location $dir
           git pull -q
-          cd ..
+          Set-Location ..
         }
-        cd -
+        Set-Location -
     }
 
 function gitc()
@@ -598,20 +600,20 @@ function gitc()
 
 function downloads()
     {
-        cd $env:homedrive\$env:homepath\Downloads\
+        Set-Location $env:homedrive\$env:homepath\Downloads\
     }
 Set-Alias dl downloads
 
 
 function desktop()
     {
-        cd $env:homedrive\$env:homepath\Desktop\
+        Set-Location $env:homedrive\$env:homepath\Desktop\
     }
 Set-Alias desk desktop
 
 function pictures()
     {
-        cd $env:OneDrive\Pictures\
+        Set-Location $env:OneDrive\Pictures\
     }
 Set-Alias pics pictures
 
@@ -619,7 +621,6 @@ $condition = where.exe eza
 if ($condition) {
     Set-Alias ls eza
     Set-Alias -Name dir -Value eza -Option AllScope
-    
     function ll()
     {
         eza -l --git --icons $($args)
@@ -658,7 +659,7 @@ if ($condition) {
             alacritty --version
             Write-Output "https://github.com/alacritty/alacritty/release"b
             chrome https://alacritty.org/config-alacritty.html
-            s $env:APPDATA\alacritty\alacritty.toml
+            start $env:APPDATA\alacritty\alacritty.toml
         }
 }
 else
@@ -824,7 +825,7 @@ function jenny_ocdi()
     {
         jira issue list -q "project IN ('OCDI') and assignee = '70121:4978c4d9-686d-41d9-9c16-8dfe84615137' and status NOT IN ('closed','resolved')" --order-by updated
     }
-    
+
 function chlab_hcc()
     {
         jira issue list -q "project IN ('CHLAB') AND status != Closed AND component IN ('HCC Collaborate')"
@@ -909,7 +910,6 @@ else
 {
   Write-Output "Install Netcat"
   Write-Output "https://nmap.org/ncat/"
-  
 }
 
 
@@ -953,10 +953,10 @@ function ocdi_version($env)
             curl -v https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info
         }
     }
-    else 
+    else
   {
-    Write-Host ("curls endpoints and gives the current version.")
-    Write-Host ("Current options are gi and ci")
+    Write-Output ("curls endpoints and gives the current version.")
+    Write-Output ("Current options are gi and ci")
   }
     }
 
@@ -982,14 +982,13 @@ function yaml2json($yamlfile)
         $yamlfile_basename = (Get-Item $yamlfile ).Basename
         $yamlfile_dot_json = "$yamlfile_basename.json"
         yq -o=json '.'  $yamlfile > $yamlfile_dot_json
-        
     }
 function json2yaml($jsonfile)
     {
         $jsonfile_basename = (Get-Item $jsonfile ).Basename
         $jsonfile_dot_yaml = "$jsonfile_basename.yml"
         Write-Output "---" > $jsonfile_dot_yaml
-        cat $jsonfile | yq -P >> $jsonfile_dot_yaml
+        Get-Content $jsonfile | yq -P >> $jsonfile_dot_yaml
         dos2unix -q $jsonfile_dot_yaml
     }
 
@@ -1025,13 +1024,10 @@ Write-Output "https://scoop.sh"
 # Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 }
 
-
-
 $condition = where.exe chafa
 if ($condition)
 {
     Set-Alias img chafa
-
 }
 else
 {
@@ -1039,7 +1035,6 @@ else
   Write-Output "https://github.com/hpjansson/chafa"
   scoop install chafa
 }
-
 
 $condition = where.exe magick
 if ($condition)
@@ -1067,7 +1062,6 @@ else
     Write-Output "https://curl.se/windows/latest.cgi?p=win64-mingw.zip"
 }
 
-
 # $condition = which bandwhich
 # if ($condition)
 # {
@@ -1079,9 +1073,7 @@ else
   # Write-Output "https://npcap.com/dist/npcap-1.81.exe"
 # }
 
-
-
-$condition = which pastel
+$condition = where.exe pastel
 if ($condition)
 {
 }
@@ -1189,20 +1181,20 @@ if ($condition) {
     Set-Alias gcalweb gcal_web
     function gcal_config_git(){
         difft $env:localappdata\gcalcli\config.toml $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml
-        cp $env:localappdata\gcalcli\config.toml $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml
-        cd "$env:OneDrive\Documents\GitHub\config"
+        Copy-Item $env:localappdata\gcalcli\config.toml $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml
+        Set-Location "$env:OneDrive\Documents\GitHub\config"
         git pull
         git add files\gcal_config.toml
         git commit -m "updated gcalcli configuration"
         git push
-        cd -
+        Set-Location -
         }
     function gcal_config_update(){
-        cd "$env:OneDrive\Documents\GitHub\config"
+        Copy-Item "$env:OneDrive\Documents\GitHub\config"
         difft  $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml $env:localappdata\gcalcli\config.toml
-        cp $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml $env:localappdata\gcalcli\config.toml
+        Copy-Item $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml $env:localappdata\gcalcli\config.toml
         git pull
-        cd -
+        Set-Location -
         }}
 else
 {
@@ -1263,11 +1255,9 @@ else
 
 $condition = where.exe aws
 if ($condition) {
-  
 }
 else
 {
-    
     Write-Output "https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html"
     Write-Output "https://awscli.amazonaws.com/AWSCLIV2.msi"
     Write-Output "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/windows/SessionManagerPluginSetup.exe"
@@ -1348,10 +1338,8 @@ function owlbear()
 # else
 # {
 #	npm set strict-ssl false
-#  npm install -g netlify-cli 
+#  npm install -g netlify-cli
 # }
-
-
 
 #  _            _
 # | |_ ___   __| | ___
@@ -1375,7 +1363,7 @@ function owlbear()
 # DELETE KEY ----- AnyCode
 
 
-# Remove open Git Gui Here and Git Bash Here 
+# Remove open Git Gui Here and Git Bash Here
 # delete the below keys
 # HKEY_CLASSES_ROOT\Directory\shell\git_gui
 # HKEY_CLASSES_ROOT\Directory\shell\git_shell
