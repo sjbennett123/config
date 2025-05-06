@@ -149,6 +149,7 @@ Set-Alias recycle Clear-RecycleBin
 # git config --global core.longpaths true
 # git config --global --type bool push.autoSetupRemote true
 # git config --global windows.appendAtomically false
+# git config --global credential.helper cache
 
 
 $condition = which tig
