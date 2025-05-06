@@ -4,8 +4,7 @@
 
 # To reload the powershell profile run & $profile
 
-Set-Alias -Name which2 -Value Get-Command 
-Set-Alias -Name which -Value where.exe
+Set-Alias -Name which -Value Get-Command 
 
 
 $condition = where.exe python
@@ -78,7 +77,7 @@ else
   Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 }
 
-$condition = which less
+$condition = where.exe less
 if ($condition) {
 }
 else
@@ -86,7 +85,7 @@ else
   scoop install less
 }
 
-$condition = which bat
+$condition = where.exe bat
 if ($condition) {
 }
 else
@@ -152,7 +151,7 @@ Set-Alias recycle Clear-RecycleBin
 # git config --global credential.helper "cache --timeout=60480000"
 
 
-$condition = which tig
+$condition = where.exe tig
 if ($condition) {
     function blame()
         {
@@ -176,7 +175,7 @@ else
 # PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 Import-Module posh-git
 
-$condition = which github
+$condition = where.exe github
 if ($condition) {
   Set-Alias ghd github
 }
@@ -187,7 +186,7 @@ else
 
 
 
-$condition = which fd-find
+$condition = where.exe fd-find
 if ($condition) {
     function fd()
     {
@@ -204,7 +203,7 @@ else
     Write-Output "https://github.com/sharkdp/fd/releases/download/v9.0.0/fd-v9.0.0-i686-pc-windows-msvc.zip"
 }
 
-$condition = which difft
+$condition = where.exe difft
 if ($condition) {
 }
 else
@@ -221,7 +220,7 @@ else
 Import-Module Terminal-Icons
 
 
-$condition = which bat
+$condition = where.exe bat
 if ($condition) {
 }
 else
@@ -229,7 +228,7 @@ else
   Write-Output "# https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-i686-pc-windows-msvc.zip"
 }
 
-$condition = which rustc
+$condition = where.exe rustc
 if ($condition) {
 }
 else
@@ -237,7 +236,7 @@ else
   Write-Output "install rust"
 }
 
-$condition = which fzf
+$condition = where.exe fzf
 if ($condition) {
     Import-Module PSFzf
 }
