@@ -1,3 +1,4 @@
+#!/bin/bash
 # .bashrc
 # If not running interactively, don't do anything
 case $- in
@@ -37,9 +38,9 @@ export LESS=-eFRX
 
 # Load all individual bashrc files
 if [ -d ~/.bashrc.d ]; then
-	for rc in ~/.bashrc.d/*; do
-		if [ -f "$rc" ]; then
-			. "$rc"
-		fi
-	done
+  for rc in ~/.bashrc.d/*; do
+    if [ -f "$rc" ]; then
+      . "$rc"
+    fi
+  done
 fi

@@ -389,8 +389,10 @@
     - {src: 'autojump.bash', dest: '~/.bashrc.d/autojump.bash'}
     - {src: 'kcat.bash', dest: '~/.bashrc.d/kcat.bash'}
     - {src: 'glow.bash', dest: '~/.bashrc.d/glow.bash'}
-    - {src: 'terraform.bash', dest: '~/.bashrc.d/terraform.bash'}
-    - {src: 'git.bash', dest: '~/.bashrc.d/git.bash'}
+    - {src: 'terraform.bash.j2', dest: '~/.bashrc.d/terraform.bash'}
+    - {src: 'git.bash.j2', dest: '~/.bashrc.d/git.bash'}
+    - {src: 'ssh.bash.j2', dest: '~/.bashrc.d/ssh.bash'}
+    - {src: 'aws.bash.j2', dest: '~/.bashrc.d/git.bash'}
   tags: bashrc
 
 - name: template tmux Configuration
