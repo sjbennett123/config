@@ -149,7 +149,7 @@ Set-Alias recycle Clear-RecycleBin
 # git config --global core.longpaths true
 # git config --global --type bool push.autoSetupRemote true
 # git config --global windows.appendAtomically false
-# git config --global credential.helper cache
+# git config --global credential.helper "cache --timeout=60480000"
 
 
 $condition = which tig
@@ -1360,8 +1360,18 @@ function owlbear()
 
 # Remove open with visual studio code
 # HKEY_CLASSES_ROOT\Directory\Background\shell
-# AnyCode
+# HKEY_CLASSES_ROOT\Directory\shell\
+# DELETE KEY ----- AnyCode
 
+
+# Remove open Git Gui Here and Git Bash Here 
+# delete the below keys
+# HKEY_CLASSES_ROOT\Directory\shell\git_gui
+# HKEY_CLASSES_ROOT\Directory\shell\git_shell
+# HKEY_CLASSES_ROOT\LibraryFolder\background\shell\git_gui
+# HKEY_CLASSES_ROOT\LibraryFolder\background\shell\git_shell
+# HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\git_gui
+# HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\git_shell
 
 # jless -- Rust JSON viewer https://jless.io/
 # windows support is planned
