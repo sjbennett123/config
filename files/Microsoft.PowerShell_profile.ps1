@@ -347,7 +347,7 @@ else
     Write-Output "https://www.google.com/chrome/dr/download"
 }
 
-$condition = which nvim
+$condition = where.exe nvim
 if ($condition) {
   Set-Alias vim nvim.exe
   Set-Alias vi nvim.exe
@@ -367,7 +367,7 @@ if ($condition) {
     Set-Alias typora "$env:ProgramFiles\Typora\Typora.exe"
 }
 # C:\Users\AAA3AZZ\AppData\Local\Programs\Caprine
-$condition = which Caprine.exe
+$condition = where.exe Caprine.exe
 if ($condition) {
     Set-Alias fb "$env:ProgramFiles\Caprine\Caprine.exe"
     Set-Alias messenger "$env:ProgramFiles\Caprine\Caprine.exe"
@@ -547,7 +547,7 @@ function ssh_config()
     }
 
 
-$condition = which glow
+$condition = where.exe glow
 if ($condition) {
   Set-Alias g glow
 }
@@ -615,7 +615,7 @@ function pictures()
     }
 Set-Alias pics pictures
 
-$condition = which eza
+$condition = where.exe eza
 if ($condition) {
     Set-Alias ls eza
     Set-Alias -Name dir -Value eza -Option AllScope
@@ -651,7 +651,7 @@ else
 # add C:\Program Files (x86)\GnuWin32\bin\ to path
 
 
-$condition = which alacritty
+$condition = where.exe alacritty
 if ($condition) {
     function alacritty_config()
         {
@@ -667,7 +667,7 @@ else
     Write-Output "https://github.com/alacritty/alacritty/releases"
 }
 
-$condition = which jq
+$condition = where.exe jq
 if ($condition) {
 }
 else
