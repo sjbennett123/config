@@ -280,7 +280,7 @@ function gum()
         git merge main
     }
 
-$condition = which gh
+$condition = where.exe gh
 if ($condition) {
 }
 else
@@ -369,8 +369,8 @@ if ($condition) {
 # C:\Users\AAA3AZZ\AppData\Local\Programs\Caprine
 $condition = where.exe Caprine.exe
 if ($condition) {
-    Set-Alias fb "$env:ProgramFiles\Caprine\Caprine.exe"
-    Set-Alias messenger "$env:ProgramFiles\Caprine\Caprine.exe"
+    Set-Alias -Name fb -Value "Caprine.exe"
+    Set-Alias -Name messenger -Value "Caprine.exe"
 }
 else
 {
@@ -677,7 +677,7 @@ else
     Write-Output "scoop install jq"
 }
 
-$condition = which rg
+$condition = where.exe rg
 if ($condition) {
 
 }
@@ -696,7 +696,7 @@ else
 
 
 
-$condition = which jira
+$condition = where.exe jira
 if ($condition) {
 }
 else
@@ -809,10 +809,22 @@ function chlab()
     {
         jira issue list -q "project IN ('CHLAB') AND status != Closed AND component IN ('HCC-Collaborate','HCC Collaborate','CAPD')"
     }
+
 function carrie()
     {
         jira issue list -q "project IN ('OCDI','HCC') and assignee = 'Carolyn Williams' and status NOT IN ('closed','resolved')" --order-by updated
     }
+
+function jenny()
+    {
+        jira issue list -q "project IN ('OCDI','HCC') and assignee = '70121:4978c4d9-686d-41d9-9c16-8dfe84615137' and status NOT IN ('closed','resolved')" --order-by updated
+    }
+
+function jenny_ocdi()
+    {
+        jira issue list -q "project IN ('OCDI') and assignee = '70121:4978c4d9-686d-41d9-9c16-8dfe84615137' and status NOT IN ('closed','resolved')" --order-by updated
+    }
+    
 function chlab_hcc()
     {
         jira issue list -q "project IN ('CHLAB') AND status != Closed AND component IN ('HCC Collaborate')"
@@ -825,18 +837,18 @@ function chlab_capd()
 
 function chprod()
     {
-        jira issue list -q "project IN ('CHPROD') AND status != Closed AND component IN ('HCC-Collaborate','HCC Collaborate','CAPD') and key NOT IN('CHPROD-46823','CHPROD-48189') "
+        jira issue list -q "project IN ('CHPROD') AND status != Closed AND component IN ('HCC-Collaborate','HCC Collaborate','CAPD') and key NOT IN('CHPROD-46823','CHPROD-48189')"
     }
+
 function chprod_hcc()
     {
         jira issue list -q "project IN ('CHPROD') AND status != Closed AND component IN ('HCC-Collaborate','HCC Collaborate')"
     }
+
 function chprod_capd()
     {
         jira issue list -q "project IN ('CHPROD') AND status != Closed AND component IN ('CAPD') and key and key NOT IN('CHPROD-46823','CHPROD-48189') "
     }
-# Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
 
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
@@ -856,7 +868,7 @@ Set-Alias ocditunnel ocditunnel.ps1
 
 
 
-$condition = which gfold
+$condition = where.exe gfold
 if ($condition) {
   Set-Alias gf gfold
 }
@@ -871,7 +883,7 @@ else
 Set-Alias s start
 
 
-$condition = which onefetch
+$condition = where.exe onefetch
 if ($condition) {
   Set-Alias of onefetch
 }
@@ -880,7 +892,7 @@ else
   Write-Output "https://github.com/o2sh/onefetch/releases"
 }
 
-$condition = which onefetch
+$condition = where.exe onefetch
 if ($condition) {
   Set-Alias of onefetch
 }
@@ -889,7 +901,7 @@ else
   Write-Output "https://github.com/o2sh/onefetch/releases"
 }
 
-$condition = which ncat
+$condition = where.exe ncat
 if ($condition) {
   Set-Alias nc ncat
 }
@@ -901,7 +913,7 @@ else
 }
 
 
-$condition = which neofetch
+$condition = where.exe neofetch
 if ($condition) {
   Set-Alias nf neofetch
 }
@@ -956,7 +968,7 @@ function nexus()
     }
 
 
-$condition = which yq
+$condition = where.exe yq
 if ($condition){
   }
 else
@@ -981,7 +993,7 @@ function json2yaml($jsonfile)
         dos2unix -q $jsonfile_dot_yaml
     }
 
-$condition = which roll
+$condition = where.exe roll
 if ($condition){
 }
 else
@@ -990,7 +1002,7 @@ else
 }
 
 
-$condition = which chafa
+$condition = where.exe chafa
 if ($condition){
     function dup()
     {
@@ -1003,7 +1015,7 @@ else
 }
 
 
-$condition = which scoop
+$condition = where.exe scoop
 if ($condition)
 {}
 else
@@ -1015,7 +1027,7 @@ Write-Output "https://scoop.sh"
 
 
 
-$condition = which chafa
+$condition = where.exe chafa
 if ($condition)
 {
     Set-Alias img chafa
@@ -1029,7 +1041,7 @@ else
 }
 
 
-$condition = which magick
+$condition = where.exe magick
 if ($condition)
 {
 function ico($image)
@@ -1044,7 +1056,7 @@ else
     Write-Output "https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-47-Q16-HDRI-x64-dll.exe"
 }
 
-$condition = which curl
+$condition = where.exe curl
 if ($condition)
 {
 
@@ -1156,7 +1168,7 @@ function fire {
 # Install-Module -Name PsMermaidTools -Scope CurrentUser
 # https://abbgrade.github.io/PsMermaidTools/
 
-$condition = which gcalcli
+$condition = where.exe gcalcli
 if ($condition) {
     Set-Alias gcal gcalcli
     Set-Alias cal gcal
@@ -1212,14 +1224,14 @@ if ($condition) {
 }
 
 
-$condition = which watchexec
+$condition = where.exe watchexec
 if ($condition) {}
 else
 {
     Write-Output "https://watchexec.github.io/downloads/watchexec/"
 }
 
-$condition = which pre-commit
+$condition = where.exe pre-commit
 if ($condition) {
 }
 else
@@ -1232,7 +1244,7 @@ else
     pip install pre-commit
 }
 
-$condition = which j2lint
+$condition = where.exe j2lint
 if ($condition) {}
 else
 {
@@ -1240,7 +1252,7 @@ else
     pip install j2lint
 }
 
-$condition = which hugo
+$condition = where.exe hugo
 if ($condition) {}
 else
 {
@@ -1249,7 +1261,7 @@ else
 
 }
 
-$condition = which aws
+$condition = where.exe aws
 if ($condition) {
   
 }
@@ -1261,7 +1273,7 @@ else
     Write-Output "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/windows/SessionManagerPluginSetup.exe"
 }
 
-$condition = which termdown
+$condition = where.exe termdown
 if ($condition) {
 }
 else
@@ -1269,7 +1281,7 @@ else
   pip install termdown
 }
 
-$condition = which ffmpeg
+$condition = where.exe ffmpeg
 if ($condition) {
 }
 else
@@ -1283,7 +1295,7 @@ function dnd()
         chrome https://scottjbennett.com/ttrpg/dnd/
     }
 
-$condition = which yamllint
+$condition = where.exe yamllint
 if ($condition) {
 }
 else
@@ -1291,7 +1303,7 @@ else
   pip install yamllint
 }
 
-$condition = which dos2unix
+$condition = where.exe dos2unix
 if ($condition) {
 }
 else
@@ -1299,7 +1311,7 @@ else
   Write-Output "https://sourceforge.net/projects/dos2unix/files/latest/download"
 }
 
-$condition = which git
+$condition = where.exe git
 if ($condition) {
 }
 else
@@ -1307,7 +1319,7 @@ else
   Write-Output "install git"
 }
 
-$condition = which spt.exe
+$condition = where.exe spt.exe
 if ($condition) {
 }
 else
