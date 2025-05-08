@@ -427,7 +427,7 @@
     - {src: 'terraform.bash.j2', dest: '~/.bashrc.d/terraform.bash'}
     - {src: 'git.bash.j2', dest: '~/.bashrc.d/git.bash'}
     - {src: 'ssh.bash.j2', dest: '~/.bashrc.d/ssh.bash'}
-    - {src: 'aws.bash.j2', dest: '~/.bashrc.d/git.bash'}
+    - {src: 'aws.bash.j2', dest: '~/.bashrc.d/aws.bash'}
     - {src: 'vim.bash.j2', dest: '~/.bashrc.d/vim.bash'}
   tags: bashrc
 

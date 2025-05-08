@@ -3,4 +3,4 @@ if [ ! -d "$HOME/.ssh" ]; then
   mkdir ~/.ssh
 fi
 
-
+sed -r 's/C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe //' ~/.ssh/config > ~/.ssh/config
