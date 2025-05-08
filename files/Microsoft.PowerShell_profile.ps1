@@ -28,7 +28,7 @@ else
 
 # $condition = Test-Path -Path "C:\Python313"
 # if ($condition) {
-  # Set-Alias python C:\Python313\python
+# Set-Alias python C:\Python313\python
 # }
 
 # Set-Alias python.exe C:\Users\AAA3AZZ\AppData\Local\Programs\Python\Python312\python
@@ -73,6 +73,7 @@ if ($condition) {
 }
 else
 {
+  Write-Output "https://scoop.sh"
   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
   Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 }
@@ -95,7 +96,7 @@ else
 
 function history_full()
     {
-        cat (Get-PSReadlineOption).HistorySavePath
+        Get-Content (Get-PSReadlineOption).HistorySavePath
     }
 Set-Alias history history_full
 
@@ -149,7 +150,8 @@ Set-Alias recycle Clear-RecycleBin
 # git config --global --type bool push.autoSetupRemote true
 # git config --global windows.appendAtomically false
 # git config --global credential.helper "cache --timeout=60480000"
-
+# git config --global user.email "you@example.com"
+# git config --global user.name "Your Name"
 
 $condition = where.exe tig
 if ($condition) {
@@ -266,9 +268,6 @@ Set-PSReadlineKeyHandler -Chord Ctrl+k -Function DeleteToEnd
 # Make it so that Control D exits a powershell window
 # https://learn.microsoft.com/en-us/powershell/module/psreadline/set-psreadlineoption?view=powershell-7.5
 
-
-
-
 function gum()
     {
         # Get the latest metadata
@@ -287,7 +286,6 @@ else
 {
    Write-Output "https://cli.github.com/"
    Write-Output "https://github.com/cli/cli/releases/download/v2.43.1/gh_2.43.1_windows_amd64.msi"
-
 }
 
 function pr()
@@ -313,6 +311,7 @@ function pwd()
 function ga()
     {
         gh run list
+        # gh run list -b main -L 1
     }
 Set-Alias gha ga
 
@@ -544,10 +543,30 @@ function config_update()
 }
 
 function ssh_config()
+  {
+        np $env:homedrive\$env:homepath\.ssh\config
+  }
+
+function ssh_config_update()
     {
-      np $env:homedrive\$env:homepath\.ssh\config
+        Set-Location $env:OneDrive\Documents\GitHub\config
+        git pull -q
+        Set-Location -
+        difft $env:OneDrive\Documents\GitHub\config\files\ssh_config $env:homepath\.ssh\config
+        Copy-Item $env:OneDrive\Documents\GitHub\config\files\ssh_config $env:homepath\.ssh\config
     }
 
+function ssh_config_git()
+    {
+        difft $env:homepath\.ssh\config $env:OneDrive\Documents\GitHub\config\files\ssh_config
+        Copy-Item $env:homepath\.ssh\config $env:OneDrive\Documents\GitHub\config\files\ssh_config
+        Set-Location "$env:OneDrive\Documents\GitHub\config"
+        git pull -q
+        git add files\ssh_config
+        git commit -m "updated Solventum ssh configuration"
+        git push
+        Set-Location -
+    }
 
 $condition = where.exe glow
 if ($condition) {
@@ -659,7 +678,7 @@ if ($condition) {
             alacritty --version
             Write-Output "https://github.com/alacritty/alacritty/release"b
             chrome https://alacritty.org/config-alacritty.html
-            start $env:APPDATA\alacritty\alacritty.toml
+            Start-Process $env:APPDATA\alacritty\alacritty.toml
         }
 }
 else
@@ -959,8 +978,6 @@ function ocdi_version($env)
     Write-Output ("Current options are gi and ci")
   }
     }
-
-
 
 function nexus()
     {
@@ -1377,3 +1394,6 @@ function owlbear()
 
 # https://github.com/sassman/t-rec-rs
 # windows support coming soon!
+
+# scoop bucket add nerd-fonts
+# scoop install Cascadia-Code
