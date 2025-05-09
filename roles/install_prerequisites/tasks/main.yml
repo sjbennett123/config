@@ -79,14 +79,16 @@
         path: "{{ item }}"
         state: directory
         mode: '0755'
+        owner: sbennett
+        group: sbennett
       with_items:
         - /opt/installers
         - ~/.bashrc.d
         - /opt/installers/lnav
         - /opt/installers/difftastic
         - /opt/installers/awscli
-      tags: lnav, lazydocker, difftastic, rg
       become: true
+      tags: lnav, lazydocker, difftastic, rg, awscli
 
     - name: get the aws cli version
       command: aws --version
@@ -120,26 +122,29 @@
     - name: Download aws cli
       ansible.builtin.get_url:
         url: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
-        dest: /opt/installers/awscliv2.zip
+        dest: /opt/installers/awscli/awscliv2.zip
         force: false
       tags: awscli
       register: awscli_download
+      become: true
       when: awscli_version is search("aws-cli/1") or awscli_version.rc == 2
 
-    - name: Download aws cli
+    - name: Download aws cli session manager plugin
       ansible.builtin.get_url:
         url: "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb"
-        dest: /opt/installers/session-manager-plugin.deb
+        dest: /opt/installers/awscli/session-manager-plugin.deb
         force: false
       tags: awscli
+      become: true
       register: awscli_download
 
     - name: Extract aws cli
       ansible.builtin.unarchive:
-        src: /opt/installers/awscliv2.zip
+        src: /opt/installers/awscli/awscliv2.zip
         dest: /opt/installers
         remote_src: true
       tags: awscli
+      become: true
       when: awscli_version is search("aws-cli/1") or awscli_version.rc == 2
 
     - name: remove /usr/bin/aws
@@ -425,7 +430,7 @@
   with_items:
     - {src: 'bashrc.j2', dest: '~/.bashrc'}
     - {src: 'tmux.bash', dest: '~/.bashrc.d/tmux.bash'}
-    - {src: 'exa.bash', dest: '~/.bashrc.d/exa.bash'}
+    - {src: 'eza.bash', dest: '~/.bashrc.d/eza.bash'}
     - {src: 'history.bash', dest: '~/.bashrc.d/history.bash'}
     - {src: 'fzf.bash.j2', dest: '~/.bashrc.d/fzf.bash'}
     - {src: 'ansible.bash', dest: '~/.bashrc.d/ansible.bash'}
@@ -484,6 +489,9 @@
     src: vimrc.j2
     dest: ~/.vimrc
   tags: vim
+# wget https://github.com/sharkdp/bat/releases/download/v0.25.0/bat_0.25.0_amd64.deb
+
+# suod apt install eza
 # sudo apt install rustup
 #  rustup default stable
 # sudo apt install pre-commit
