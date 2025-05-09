@@ -126,6 +126,14 @@
       register: awscli_download
       when: awscli_version is search("aws-cli/1") or awscli_version.rc == 2
 
+    - name: Download aws cli
+      ansible.builtin.get_url:
+        url: "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb"
+        dest: /opt/installers/session-manager-plugin.deb
+        force: false
+      tags: awscli
+      register: awscli_download
+
     - name: Extract aws cli
       ansible.builtin.unarchive:
         src: /opt/installers/awscliv2.zip
