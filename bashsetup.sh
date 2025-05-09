@@ -4,6 +4,7 @@
 # https://askubuntu.com/questions/334318/sudoers-file-enable-nopasswd-for-user-all-commands
 # %sudo  ALL=(ALL) NOPASSWD: ALL
 
+touch "$HOME/.hushlogin"
 
 sudo apt-get install python3 -y
 

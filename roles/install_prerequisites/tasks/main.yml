@@ -495,3 +495,6 @@
 # sudo apt install rustup
 #  rustup default stable
 # sudo apt install pre-commit
+# touch /root/.hushlogin
+# sshx
+# sudo apt-get install protobuf-compiler
