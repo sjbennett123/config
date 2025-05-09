@@ -13,6 +13,7 @@ suodo apt-get install unzip -y
 
 sudo apt-get install ansible -y 
 
+git config --global credential.helper "cache --timeout=60480000"
 git config --global core.longpaths true
 git config --global --type bool push.autoSetupRemote true
 git config --global windows.appendAtomically false
