@@ -484,3 +484,6 @@
     src: vimrc.j2
     dest: ~/.vimrc
   tags: vim
+# sudo apt install rustup
+#  rustup default stable
+# sudo apt install pre-commit

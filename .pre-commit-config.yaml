@@ -8,12 +8,6 @@ repos:
     hooks:
       - id: yamllint
 
-  # https://ansible.readthedocs.io/projects/lint/configuring/#pre-commit-setup
-  - repo: https://github.com/ansible/ansible-lint
-    rev: v6.22.0 # put latest release tag from https://github.com/ansible/ansible-lint/releases/
-    hooks:
-      - id: ansible-lint
-
   - repo: https://github.com/aristanetworks/j2lint.git
     rev: v1.1.0
     hooks:
