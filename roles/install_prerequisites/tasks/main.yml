@@ -264,13 +264,13 @@
         repo: https://github.com/junegunn/fzf.git
         dest: ~/.fzf
         depth: 1
-        version: 0.33.0
+        version: v0.62.0
       tags: fzf
       diff: false
 
     - name: Download fzf
       ansible.builtin.get_url:
-        url: https://github.com/junegunn/fzf/releases/download/0.33.0/fzf-0.33.0-linux_amd64.tar.gz
+        url: https://github.com/junegunn/fzf/releases/download/v0.62.0/fzf-0.62.0-linux_amd64.tar.gz
         dest: ~/.fzf/fzf.tar.gz
         validate_certs: false
       tags: fzf
