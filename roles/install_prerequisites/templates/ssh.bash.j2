@@ -5,6 +5,8 @@ fi
 
 if [[ ! -e "$HOME/.ssh/windows_ssh_config" && -e /mnt/c/Users/AAA3AZZ/.ssh/config ]]; then
   ln -s /mnt/c/Users/AAA3AZZ/.ssh/config windows_ssh_config      
+  ln -s /mnt/c/Users/AAA3AZZ/.ssh/*.pub .
+  ln -s /mnt/c/Users/AAA3AZZ/.ssh/*.pem .
 fi
 
  sed -r 's/C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe //' ~/.ssh/windows_ssh_config > ~/.ssh/config
