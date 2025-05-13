@@ -667,8 +667,15 @@ else
 {
     Write-Output "https://notepad-plus-plus.org/downloads/"
 }
-# https://gigenet.dl.sourceforge.net/project/gnuwin32/wget/1.11.4-1/wget-1.11.4-1-setup.exe
-# add C:\Program Files (x86)\GnuWin32\bin\ to path
+$condition = where.exe wget.exe
+if ($condition) {
+
+}
+else
+{
+    Write-Output "https://gigenet.dl.sourceforge.net/project/gnuwin32/wget/1.11.4-1/wget-1.11.4-1-setup.exe"
+    Write-Output "add C:\Program Files (x86)\GnuWin32\bin\ to path"
+}
 
 
 $condition = where.exe alacritty
@@ -975,7 +982,9 @@ function ocdi_version($env)
     else
   {
     Write-Output ("curls endpoints and gives the current version.")
-    Write-Output ("Current options are gi and ci")
+    Write-Output ("Current options are gi https://ocdi.ucd-gi.us.amz.3mhis.net/ocdi-services-backend/actuator/info")
+    Write-Output ("Current options are ci https://ocdi.ucd-ci.us.amz.3mhis.net/ocdi-services-backend/actuator/info")
+
   }
     }
 
@@ -1397,3 +1406,5 @@ function owlbear()
 
 # scoop bucket add nerd-fonts
 # scoop install Cascadia-Code
+
+# https://sshx.s3.amazonaws.com/sshx-x86_64-pc-windows-msvc.zip
