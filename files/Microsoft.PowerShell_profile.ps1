@@ -642,11 +642,15 @@ if ($condition) {
     Set-Alias -Name dir -Value eza -Option AllScope
     function ll()
     {
-        eza -l --git --icons $($args)
+        eza -l --git --icons --hyperlink --group-directories-first $($args)
+    }
+    function ld()
+    {
+        eza -l --git --icons --total-size --hyperlink --group-directories-first$($args)
     }
     function lt()
     {
-        eza --tree --git --icons $($args)
+        eza --tree --git --icons --hyperlink $($args)
     }
 }
 else
