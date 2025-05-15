@@ -317,6 +317,16 @@
       become: true
       tags: ncdu
 
+    - name: install ncdu
+      apt:
+        deb: https://example.com/python-ppq_0.1-1_all.deb
+        state: present
+      register: ncdu
+      retries: 5
+      until: ncdu is success
+      become: true
+      tags: ncdu
+
     - name: install htop
       apt:
         name: htop
@@ -326,6 +336,41 @@
       until: htop is success
       become: true
       tags: htop
+
+    - name: retreive eza version
+      command:
+        cmd: "eza --version"
+      register: eza_version_before_install
+      changed_when: false
+      ignore_errors: true
+      tags: eza
+
+    - name: Download eza
+      ansible.builtin.get_url:
+        url: https://github.com/eza-community/eza/releases/download/v0.21.3/eza_x86_64-unknown-linux-gnu.zip
+        dest: /opt/installers/eza.zip
+        validate_certs: false
+      tags: eza
+      when: eza_version_before_install.failed
+
+    - name: Extract eza
+      ansible.builtin.unarchive:
+        remote_src: true
+        src: /opt/installers/eza.zip
+        dest: /opt/installers
+      tags: eza
+      when: eza_version_before_install.failed
+
+    - name: Install fd
+      copy:
+        src: "/opt/installers/{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: 0755
+      with_items:
+        - {src: 'eza', dest: '/usr/bin/eza'}
+      become: true
+      when: eza_version_before_install.failed
+      tags: fd
 
     - name: retreive fd version
       command:
