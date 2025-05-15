@@ -27,7 +27,12 @@
         state: present
       become: true
       tags: rustup
-#  rustup default stable
+      register: rustup
+
+    - name: set rustup default to stable
+      ansible.builtin.command: rustup default stable
+      become: true
+      when: rustup.changed
 
     - name: install protobuf-compiler
       apt:
