@@ -20,36 +20,71 @@
         state: present
       become: true
       tags: python3
+
+    - name: install rustup
+      apt:
+        name: rustup
+        state: present
+      become: true
+      tags: rustup
+#  rustup default stable
+
+    - name: install protobuf-compiler
+      apt:
+        name: protobuf-compiler
+        state: present
+      become: true
+      tags: protobuf-compiler
+
+    - name: install pre-commit
+      apt:
+        name: pre-commit
+        state: present
+      become: true
+      tags: pre-commit
+
+    - name: install shellcheck
+      apt:
+        name: shellcheck
+        state: present
+      become: true
+      tags: shellcheck
+
     - name: install python3-pip
       apt:
         name: python3-pip
         state: present
       become: true
       tags: python3-pip
+
     - name: install ansible
       apt:
         name: ansible
         state: present
       become: true
       tags: python3
+
     - name: install dos2unix
       apt:
         name: dos2unix
         state: present
       become: true
       tags: dos2unix
+
     - name: install unzip
       apt:
         name: unzip
         state: present
       become: true
       tags: unzip
+
     - name: install figlet
       apt:
         name: figlet
         state: present
       become: true
       tags: figlet
+
     - name: install yamllint
       apt:
         name: yamllint
@@ -357,6 +392,11 @@
       tags: eza
       when: eza_version_before_install.failed
 
+    - name: Install bat
+      ansible.builtin.apt:
+        deb: https://github.com/sharkdp/bat/releases/download/v0.25.0/bat_0.25.0_amd64.deb
+      become: true
+
     - name: Install fd
       copy:
         src: "/opt/installers/{{ item.src }}"
@@ -487,11 +527,21 @@
     - {src: 'chrome.bash.j2', dest: '~/.bashrc.d/chrome.bash'}
   tags: bashrc
 
-# https://stackoverflow.com/questions/13732826/convert-pem-to-crt-and-key
-# openssl x509 -outform der -in combined-solventum.pem -out combined-solventum.crt
-# sudo cp *.crt /usr/local/share/ca-certificates/
-# sudo update-ca-certificates
-# https://dev.to/wayofthepie/a-rust-cli-for-decoding-certs-280i
+- name: Copy Solventum man in the middle certs
+  ansible.builtin.copy:
+    src: "{{ item.name }}"
+    dest: "/usr/local/share/ca-certificates/{{ item.name }}"
+  become: true
+  with_items:
+    - {name: '3MHEALTH-ROOTCA.crt' }
+    - {name: '3MHealth-CA01.crt' }
+    - {name: '3MHealth-CA02.crt' }
+  tags: mitm_certs
+
+- name: Update certificate store
+  ansible.builtin.command: sudo update-ca-certificates
+  become: true
+  tags: mitm_certs
 
 - name: template tmux Configuration
   template:
@@ -538,12 +588,14 @@
     src: vimrc.j2
     dest: ~/.vimrc
   tags: vim
-# wget https://github.com/sharkdp/bat/releases/download/v0.25.0/bat_0.25.0_amd64.deb
 
-# suod apt install eza
-# sudo apt install rustup
-#  rustup default stable
-# sudo apt install pre-commit
-# touch /root/.hushlogin
-# sshx
-# sudo apt-get install protobuf-compiler
+- name: ensure hushlogin is created for current user
+  ansible.builtin.file:
+    path: ~/.hushlogin
+    state: touch
+
+- name: ensure hushlogin is created for root
+  ansible.builtin.file:
+    path: /root/.hushlogin
+    state: touch
+  become: true

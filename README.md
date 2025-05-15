@@ -21,3 +21,7 @@ systemd=true
 https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/195526712/Nautilus+File+Explorer+on+WSL
 
 apt install shellcheck
+
+Uses precommit
+
+pre-commit run --all-files
