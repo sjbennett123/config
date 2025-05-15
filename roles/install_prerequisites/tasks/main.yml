@@ -627,6 +627,7 @@
     validation: required
   become: true
   tags: sudoers
+
 - name: copy aptcron script to root user home directory
   copy:
     src: aptcron.bash
@@ -643,3 +644,9 @@
     job: "/root/aptcron.bash"
   become: true
   tags: apt
+
+- name: Copy using inline content
+  ansible.builtin.copy:
+    content: '# instructions on how to use the systemd syslog'
+    dest: /var/log/cron
+  tags: cron
