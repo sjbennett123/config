@@ -651,3 +651,4 @@
     content: '# instructions on how to use the systemd syslog'
     dest: /var/log/cron
   tags: cron
+  become: true
