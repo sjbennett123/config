@@ -11,7 +11,7 @@
     - name: Print the distriburion version
       ansible.builtin.debug:
         msg: "The version is {{ ansible_distribution_major_version }}"
-        
+
 - name: create wsl.conf
   copy:
     src: wsl.conf
@@ -617,7 +617,7 @@
 
 # https://askubuntu.com/questions/334318/sudoers-file-enable-nopasswd-for-user-all-commands
 # %sudo  ALL=(ALL) NOPASSWD: ALL
-- name: Change sudo group to not require password 
+- name: Change sudo group to not require password
   community.general.sudoers:
     name: sudo
     group: sudo
@@ -627,3 +627,19 @@
     validation: required
   become: true
   tags: sudoers
+- name: copy aptcron script to root user home directory
+  copy:
+    src: aptcron.bash
+    dest: /root/aptcron.bash
+    mode: '0644'
+  tags: apt
+  become: true
+
+- name: Copy script to run apt update and upgrade on boot
+  ansible.builtin.cron:
+    special_time: reboot
+    name: Patching on system start
+    user: root
+    job: "/root/aptcron.bash"
+  become: true
+  tags: apt
