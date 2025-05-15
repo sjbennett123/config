@@ -317,16 +317,6 @@
       become: true
       tags: ncdu
 
-    - name: install ncdu
-      apt:
-        deb: https://example.com/python-ppq_0.1-1_all.deb
-        state: present
-      register: ncdu
-      retries: 5
-      until: ncdu is success
-      become: true
-      tags: ncdu
-
     - name: install htop
       apt:
         name: htop
