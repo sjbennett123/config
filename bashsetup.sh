@@ -12,7 +12,9 @@ sudo apt-get install python3-pip -y
 
 suodo apt-get install unzip -y
 
-sudo apt-get install ansible -y 
+sudo apt-get install ansible -y
+
+sudo apt install nautilus -y
 
 git config --global credential.helper "cache --timeout=60480000"
 git config --global core.longpaths true
