@@ -656,7 +656,7 @@ if ($condition) {
 else
 {
     Write-Output "install the LS alterantive eza"
-    Write-Output "https://github.com/eza-community/eza/releases/download/v0.21.3/eza.exe_x86_64-pc-windows-gnu.zip"
+    Write-Output "https://github.com/eza-community/eza/releases/download/v0.21.3/eza.exe_x86_64-pc-windows-gnu.zip"ll
 }
 
 $condition = where.exe notepad++.exe
@@ -1138,58 +1138,6 @@ else
 {
     Write-Output "https://github.com/Ace-Radom/figlet4win/releases/tag/1.0.1"
 }
-
-
-
-
-# https://stackoverflow.com/questions/25576159/how-can-i-quickly-get-a-count-of-the-messages-in-a-users-mailbox
-
-
-# https://github.com/matriex/cmatrix
-# Set-Executionpolicy remotesigned
-# Import-Module .\cmatrix
-# Set-ScreenSaverTimeout -Seconds 5
-# Enable-ScreenSaver
-
-# https://opensource.com/article/18/12/linux-toy-aafire
-
-function fire {
-  param(
-    [int]$Height = 40,
-    [int]$Width = 100,
-    [int]$Iterations = 100
-  )
-
-  for ($i = 0; $i -lt $Iterations; $i++) {
-    $fire = @()
-    for ($y = 0; $y -lt $Height; $y++) {
-      $line = ""
-      for ($x = 0; $x -lt $Width; $x++) {
-        if ($y -eq $Height - 1) {
-          $line += "~"
-        } else {
-          $rand = Get-Random -Minimum 0 -Maximum 100
-          if ($rand -lt 20) {
-            $line += " "
-          } elseif ($rand -lt 50) {
-            $line += "."
-          } elseif ($rand -lt 80) {
-            $line += "o"
-          } else {
-            $line += "O"
-          }
-        }
-      }
-      $fire += $line
-    }
-    Clear-Host
-    $fire
-    Start-Sleep -Milliseconds 100
-  }
-}
-
-# Install-Module -Name PsMermaidTools -Scope CurrentUser
-# https://abbgrade.github.io/PsMermaidTools/
 
 $condition = where.exe gcalcli
 if ($condition) {
