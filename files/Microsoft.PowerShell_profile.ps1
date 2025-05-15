@@ -656,20 +656,21 @@ if ($condition) {
 else
 {
     Write-Output "install the LS alterantive eza"
-    Write-Output "https://github.com/eza-community/eza/releases/download/v0.17.0/eza.exe_x86_64-pc-windows-gnu.tar.gz"
-
+    Write-Output "https://github.com/eza-community/eza/releases/download/v0.21.3/eza.exe_x86_64-pc-windows-gnu.zip"
 }
 
-$condition = Test-Path -Path "$env:ProgramFiles\Notepad++\notepad++.exe"
+$condition = where.exe notepad++.exe
 if ($condition) {
-    Set-Alias n $env:ProgramFiles\Notepad++\notepad++.exe
-    Set-Alias np $env:ProgramFiles\Notepad++\notepad++.exe
-    Set-Alias notepad $env:ProgramFiles\Notepad++\notepad++.exe
-    Set-Alias n++ $env:ProgramFiles\Notepad++\notepad++.exe
+    Set-Alias n notepad++.exe
+    Set-Alias np n
+    Set-Alias notepad n
+    Set-Alias n++ n
 }
 else
 {
     Write-Output "https://notepad-plus-plus.org/downloads/"
+    Write-Output "add to path"
+    Write-Output "C:\Program Files\Notepad++"
 }
 $condition = where.exe wget.exe
 if ($condition) {
