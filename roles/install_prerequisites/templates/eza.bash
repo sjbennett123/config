@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ command -v exa > /dev/null ]; 
+if command -v exa > /dev/null ; 
 then
         alias ls='exa --git --color-scale'
         alias ll='exa -l --git --color-scale'
