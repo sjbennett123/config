@@ -259,6 +259,12 @@
         msg: "rg Installed! for details see https://github.com version is {{ rg_version.stdout }}"
       tags: rg
 
+    - name: install go
+      apt:
+        name: golang-go
+        state: present
+      become: true
+
     - name: clone fzf repo
       ansible.builtin.git:
         repo: https://github.com/junegunn/fzf.git
