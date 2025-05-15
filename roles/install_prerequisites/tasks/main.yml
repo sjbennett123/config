@@ -609,3 +609,13 @@
 
 # https://askubuntu.com/questions/334318/sudoers-file-enable-nopasswd-for-user-all-commands
 # %sudo  ALL=(ALL) NOPASSWD: ALL
+- name: Change sudo group to not require password 
+  community.general.sudoers:
+    name: sudo
+    group: sudo
+    state: present
+    commands: ALL
+    nopassword: true
+    validation: required
+  become: true
+  tags: sudoers
