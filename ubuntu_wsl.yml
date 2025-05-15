@@ -1,6 +1,6 @@
 ---
 - name: Install prerequisites on localhost
   hosts: localhost
-  gather_facts: false
+  gather_facts: true
   roles:
     - install_prerequisites

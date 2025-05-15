@@ -19,6 +19,7 @@
     mode: '0644'
   tags: wsl
   become: true
+  when: "ansible_env.WSL_DISTRO_NAME"
 
 - name: Install Troubleshooting Tools
   block:
