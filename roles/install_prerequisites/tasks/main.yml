@@ -597,10 +597,15 @@
 - name: ensure hushlogin is created for current user
   ansible.builtin.file:
     path: ~/.hushlogin
-    state: touch
+    state: file
+  tags: hushlogin
 
 - name: ensure hushlogin is created for root
   ansible.builtin.file:
     path: /root/.hushlogin
-    state: touch
+    state: file
   become: true
+  tags: hushlogin
+
+# https://askubuntu.com/questions/334318/sudoers-file-enable-nopasswd-for-user-all-commands
+# %sudo  ALL=(ALL) NOPASSWD: ALL
