@@ -1162,7 +1162,7 @@ if ($condition) {
         difft $env:localappdata\gcalcli\config.toml $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml
         Copy-Item $env:localappdata\gcalcli\config.toml $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml
         Set-Location "$env:OneDrive\Documents\GitHub\config"
-        git pull
+        git pull -q
         git add files\gcal_config.toml
         git commit -m "updated gcalcli configuration"
         git push
@@ -1172,7 +1172,7 @@ if ($condition) {
         Copy-Item "$env:OneDrive\Documents\GitHub\config"
         difft  $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml $env:localappdata\gcalcli\config.toml
         Copy-Item $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml $env:localappdata\gcalcli\config.toml
-        git pull
+        git pull -q
         Set-Location -
         }}
 else
