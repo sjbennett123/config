@@ -11,6 +11,14 @@
     - name: Print the distriburion version
       ansible.builtin.debug:
         msg: "The version is {{ ansible_distribution_major_version }}"
+        
+- name: create wsl.conf
+  copy:
+    src: wsl.conf
+    dest: /etc/wsl.conf
+    mode: '0644'
+  tags: wsl
+  become: true
 
 - name: Install Troubleshooting Tools
   block:
