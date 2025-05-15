@@ -1,10 +1,10 @@
 #!/bin/bash
-if command -v exa > /dev/null ; 
+if command -v eza > /dev/null ; 
 then
-        alias ls='exa --git --color-scale'
-        alias ll='exa -l --git --color-scale'
-        alias lt='exa --git --tree --color-scale'
-        alias lll='exa --git --extended --long --color-scale'
+        alias ls='eza --git --color-scale --hyperlink --group-directories-first'
+        alias ll='eza -l --git --color-scale --hyperlink --group-directories-first'
+        alias lt='eza --git --tree --color-scale --hyperlink --group-directories-first'
+        alias lll='eza --git --extended --long --color-scale --hyperlink --group-directories-first'
 else
         alias ll='ls -l'
 fi

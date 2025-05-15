@@ -487,6 +487,12 @@
     - {src: 'chrome.bash.j2', dest: '~/.bashrc.d/chrome.bash'}
   tags: bashrc
 
+# https://stackoverflow.com/questions/13732826/convert-pem-to-crt-and-key
+# openssl x509 -outform der -in combined-solventum.pem -out combined-solventum.crt
+# sudo cp *.crt /usr/local/share/ca-certificates/
+# sudo update-ca-certificates
+# https://dev.to/wayofthepie/a-rust-cli-for-decoding-certs-280i
+
 - name: template tmux Configuration
   template:
     src: "{{ item.src }}"
@@ -541,3 +547,4 @@
 # touch /root/.hushlogin
 # sshx
 # sudo apt-get install protobuf-compiler
+# curl --insecure -vvI https://www.example.com 2>&1 | awk 'BEGIN { cert=0 } /^\* SSL connection/ { cert=1 } /^\*/ { if (cert) print }'
