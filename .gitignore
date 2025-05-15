@@ -1,0 +1,13 @@
+*.pem
+
+# Ignore vim files:
+*~
+*.swp
+*.swo
+
+# Local Netlify folder
+.netlify
+*.afpub~lock~
+*.afphoto~lock~
+*.afdesign~lock~
+~$w*
