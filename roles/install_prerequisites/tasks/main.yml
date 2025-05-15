@@ -551,10 +551,12 @@
     - {name: '3MHealth-CA01.crt' }
     - {name: '3MHealth-CA02.crt' }
   tags: mitm_certs
+  register: mitm_certs
 
 - name: Update certificate store
   ansible.builtin.command: sudo update-ca-certificates
   become: true
+  when: mitm_certs.changed
   tags: mitm_certs
 
 - name: template tmux Configuration
