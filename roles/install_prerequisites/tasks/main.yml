@@ -482,7 +482,9 @@
     - {src: 'git.bash.j2', dest: '~/.bashrc.d/git.bash'}
     - {src: 'ssh.bash.j2', dest: '~/.bashrc.d/ssh.bash'}
     - {src: 'aws.bash.j2', dest: '~/.bashrc.d/aws.bash'}
+    - {src: 'explorer.bash.j2', dest: '~/.bashrc.d/explorer.bash'}
     - {src: 'vim.bash.j2', dest: '~/.bashrc.d/vim.bash'}
+    - {src: 'chrome.bash.j2', dest: '~/.bashrc.d/chrome.bash'}
   tags: bashrc
 
 - name: template tmux Configuration
