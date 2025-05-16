@@ -5,6 +5,8 @@
 # To reload the powershell profile run & $profile
 
 Set-Alias -Name which -Value Get-Command
+Set-Alias -Name cron -Value taskschd.msc
+
 
 
 $condition = where.exe python
