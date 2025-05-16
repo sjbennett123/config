@@ -1,2 +1,5 @@
 #!/bin/bash
-alias wsl="figlet 'you are already in WSL you big dummy'
+
+if [[ -z "${WSL_DISTRO_NAME}" ]]; then
+   alias wsl="figlet 'You are already in WSL.'; figlet 'You big dummy!'"
+fi

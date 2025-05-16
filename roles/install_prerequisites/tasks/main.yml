@@ -539,7 +539,7 @@
     - {src: 'explorer.bash.j2', dest: '~/.bashrc.d/explorer.bash'}
     - {src: 'vim.bash.j2', dest: '~/.bashrc.d/vim.bash'}
     - {src: 'chrome.bash.j2', dest: '~/.bashrc.d/chrome.bash'}
-    - {src: 'wsl.bash.j2', dest: '~/.bashrc.d/cwsl.bash.j2'}
+    - {src: 'wsl.bash.j2', dest: '~/.bashrc.d/wsl.bash'}
   tags: bashrc
 
 - name: Copy Solventum man in the middle certs
@@ -553,6 +553,7 @@
     - {name: '3MHealth-CA02.crt' }
   tags: mitm_certs
   register: mitm_certs
+  when: ansible_env.NAME != 'scottthinkpad'
 
 - name: Update certificate store
   ansible.builtin.command: sudo update-ca-certificates
