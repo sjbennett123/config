@@ -509,6 +509,14 @@
         msg: "Lnav Log Navigator Installed! for details see https://github.com/tstack/lnav version is {{ lnav_version.stdout }}"
       tags: lnav
 
+    - name: install cmatrix
+      apt:
+        name: cmatrix
+        state: present
+      become: true
+      tags: cmatrix
+      register: cmatrix
+
 - name: Create Bashrc directory
   ansible.builtin.file:
     path: "{{ item }}"
