@@ -1,9 +1,5 @@
-#!/usr/bin/env powershell -File
+#!/bin/bash
 
-$gitdirs = Get-ChildItem -Directory
-foreach ($dir in $gitdirs)
-{
-  cd $dir
-  git pull -q
-  cd ..
-}
+for dir in */; do
+  echo "$dir"
+done
