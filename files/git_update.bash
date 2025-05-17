@@ -1,5 +1,5 @@
 #!/bin/bash
 
 for dir in */; do
-  echo "$dir"
+  git pull -q
 done
