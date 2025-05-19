@@ -1,9 +1,8 @@
 #!/usr/bin/env powershell -File
-
 $gitdirs = Get-ChildItem -Directory
 foreach ($dir in $gitdirs)
 {
-  cd $dir
+  Set-Location $dir
   git pull -q
-  cd ..
+  Set-Location ..
 }
