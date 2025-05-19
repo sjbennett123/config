@@ -254,7 +254,7 @@ if ($Env:fzf_default_opts)
 {}
 else{
   Write-Output "Variable Name: fzf_default_opts"
-  Write-Output "Variable Value: --height 40% --border"
+  Write-Output "Variable Value: --height 40% --border   --bind '?:toggle-preview'    --preview-window=:hidden"
 }
 
 # To turn off powershell autocomplete
