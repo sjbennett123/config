@@ -1,5 +1,12 @@
 # https://skydrive3m.sharepoint.com/teams/SSLInspection
 # https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/126551346/Using+Jitney+authentication+to+access+AWS+resources
+
+Host ocdi_cpm_deploy
+    User ec2-user
+    ProxyCommand  C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --profile 3mhis-catalyst --region us-east-1 --target i-0434852fea5f1fc7f --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    IdentityFile C:\Users\AAA3AZZ\.ssh\hcc-cpm.pem
+    IdentitiesOnly yes
+
 Host ocdi_ct_deploy
     User ec2-user
     ProxyCommand  C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --profile us-catalyst-nonprod-phi --region us-east-1 --target i-086c89ab631ce5457 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
@@ -26,7 +33,7 @@ Host ocdi_gi_deploy
 
 Host hcc_gi_deploy
     User ec2-user
-    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-dev --region us-east-1 --target i-07098f3e8ab53b254 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+    ProxyCommand C:\Wi:q:qndows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-dev --region us-east-1 --target i-07098f3e8ab53b254 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
     IdentityFile C:\Users\AAA3AZZ\.ssh\hcc_gi.pem
     IdentitiesOnly yes
 
@@ -220,6 +227,12 @@ Host capd_de_deploy
     ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile frankfurt-catalyst-prod-phi --region eu-central-1 --target i-0dda169fc9bb59379 --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
     PubkeyAuthentication yes
 
+Host a9drqzz_hcc_dev
+    IdentitiesOnly yes
+    ProxyCommand C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "aws ssm start-session --no-verify-ssl --profile us-catalyst-dev --region us-east-1 --target i-040af697ef12f62af"
+    User ec2-user
+    # User ssm-user
+
 Host capd_e2e
     HostName utnpcmonaps001.mmm.com
     user aaa3azz
@@ -248,3 +261,4 @@ Host *
   PreferredAuthentications publickey
   PubkeyAuthentication yes
 
+# ssm-user
