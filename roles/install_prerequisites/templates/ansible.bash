@@ -1,3 +1,3 @@
 #!/bin/bash
 alias ap='ansible-playbook'
-
+alias al='ansible-lint'

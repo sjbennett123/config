@@ -2,7 +2,7 @@
 - name: Get information about the distribution
   tags: distribution_info, cloudwatch_agent
   block:
-    - name: get the distribution details
+    - name: Get the distribution details
       ansible.builtin.setup:
         filter:
           - ansible_distribution
@@ -12,8 +12,8 @@
       ansible.builtin.debug:
         msg: "The version is {{ ansible_distribution_major_version }}"
 
-- name: create wsl.conf
-  copy:
+- name: Create wsl.conf
+  ansible.builtin.copy:
     src: wsl.conf
     dest: /etc/wsl.conf
     mode: '0644'
@@ -23,91 +23,98 @@
 
 - name: Install Troubleshooting Tools
   block:
-    - name: install lynx
-      apt:
-        name: lynx
+    - name: Install watchexec
+      ansible.builtin.apt:
+        deb: https://github.com/watchexec/watchexec/releases/download/v2.3.2/watchexec-2.3.2-x86_64-unknown-linux-gnu.deb
         state: present
       become: true
-      tags: lynx
+      tags: watchexec
 
-    - name: install python3
-      apt:
+    - name: Install ansible-lint
+      ansible.builtin.apt:
+        name: ansible-lint
+        state: present
+      become: true
+      tags: ansible
+
+    - name: Install python3
+      ansible.builtin.apt:
         name: python3
         state: present
       become: true
       tags: python3
 
-    - name: install rustup
-      apt:
+    - name: Install rustup
+      ansible.builtin.apt:
         name: rustup
         state: present
       become: true
       tags: rustup
       register: rustup
 
-    - name: set rustup default to stable
+    - name: Set rustup default to stable
       ansible.builtin.command: rustup default stable
       become: true
       when: rustup.changed
 
-    - name: install protobuf-compiler
-      apt:
+    - name: Install protobuf-compiler
+      ansible.builtin.apt:
         name: protobuf-compiler
         state: present
       become: true
       tags: protobuf-compiler
 
-    - name: install pre-commit
-      apt:
+    - name: Install pre-commit
+      ansible.builtin.apt:
         name: pre-commit
         state: present
       become: true
       tags: pre-commit
 
-    - name: install shellcheck
-      apt:
+    - name: Install shellcheck
+      ansible.builtin.apt:
         name: shellcheck
         state: present
       become: true
       tags: shellcheck
 
-    - name: install python3-pip
-      apt:
+    - name: Install python3-pip
+      ansible.builtin.apt:
         name: python3-pip
         state: present
       become: true
       tags: python3-pip
 
-    - name: install ansible
-      apt:
+    - name: Install ansible
+      ansible.builtin.apt:
         name: ansible
         state: present
       become: true
       tags: python3
 
-    - name: install dos2unix
-      apt:
+    - name: Install dos2unix
+      ansible.builtin.apt:
         name: dos2unix
         state: present
       become: true
       tags: dos2unix
 
-    - name: install unzip
-      apt:
+    - name: Install unzip
+      ansible.builtin.apt:
         name: unzip
         state: present
       become: true
       tags: unzip
 
-    - name: install figlet
-      apt:
+    - name: Install figlet
+      ansible.builtin.apt:
         name: figlet
         state: present
       become: true
       tags: figlet
 
-    - name: install yamllint
-      apt:
+    - name: Install yamllint
+      ansible.builtin.apt:
         name: yamllint
         state: present
       become: true
@@ -123,8 +130,8 @@
         - ~/.config/yamllint
       tags: yamllint
 
-    - name: configure yamllint
-      copy:
+    - name: Configure yamllint
+      ansible.builtin.copy:
         src: yamllint_config
         dest: ~/.config/yamllint/config
         mode: '0755'
@@ -146,20 +153,20 @@
       become: true
       tags: lnav, lazydocker, difftastic, rg, awscli
 
-    - name: get the aws cli version
-      command: aws --version
+    - name: Get the aws cli version
+      ansible.builtin.command: aws --version
       register: awscli_version
       tags: awscli
       failed_when: false
       changed_when: false
 
     - name: Legacy aws cli version detected!
-      debug:
+      ansible.builtin.debug:
         var: awscli_version.stdout
       tags: awscli
       when: awscli_version is search("aws-cli/1")
 
-    - name: remove aws cli if installed
+    - name: Remove aws cli if installed
       ansible.builtin.pip:
         name: awscli
         state: absent
@@ -167,7 +174,7 @@
       become: true
       when: awscli_version is search("aws-cli/1")
 
-    - name: remove /usr/bin/aws
+    - name: Remove /usr/bin/aws
       ansible.builtin.file:
         path: /usr/bin/aws
         state: absent
@@ -203,7 +210,7 @@
       become: true
       when: awscli_version is search("aws-cli/1") or awscli_version.rc == 2
 
-    - name: remove /usr/bin/aws
+    - name: Remove /usr/bin/aws
       ansible.builtin.file:
         path: /usr/local/aws-cli/v2/current
         state: absent
@@ -211,8 +218,8 @@
       tags: awscli
       when: awscli_version is search("aws-cli/1")
 
-    - name: install aws cli
-      command:
+    - name: Install aws cli
+      ansible.builtin.command:
         chdir: /opt/installers/aws
         cmd: sudo ./install
       tags: awscli
@@ -234,22 +241,22 @@
         mode: '0755'
       tags: awscli
 
-    - name: template aws configuration file
-      template:
+    - name: Template aws configuration file
+      ansible.builtin.template:
         src: aws_cli_config
         dest: ~/.aws/config
         mode: '0664'
       tags: awscli
 
-    - name: get the aws cli version
-      command: aws --version
+    - name: Get the aws cli version
+      ansible.builtin.command: aws --version
       register: awscli_version
       tags: awscli
       failed_when: false
       changed_when: false
 
-    - name: print the version
-      debug:
+    - name: Print the awscli version
+      ansible.builtin.debug:
         var: awscli_version.stdout
       tags: awscli
 
@@ -268,7 +275,7 @@
       tags: difftastic
 
     - name: Install Difftastic
-      copy:
+      ansible.builtin.copy:
         src: "/opt/installers/difftastic/{{ item.src }}"
         dest: "{{ item.dest }}"
         mode: 0755
@@ -293,7 +300,7 @@
       become: true
 
     - name: Install rg
-      copy:
+      ansible.builtin.copy:
         src: "/opt/installers/ripgrep-13.0.0-x86_64-unknown-linux-musl/{{ item.src }}"
         dest: "{{ item.dest }}"
         mode: 0755
@@ -303,25 +310,25 @@
       become: true
       tags: rg
 
-    - name: retreive rg version
-      command:
+    - name: Retreive rg version
+      ansible.builtin.command:
         cmd: "rg --version"
       register: rg_version
       tags: rg
       changed_when: false
 
-    - name: display rg version
-      debug:
+    - name: Display rg version
+      ansible.builtin.debug:
         msg: "rg Installed! for details see https://github.com version is {{ rg_version.stdout }}"
       tags: rg
 
-    - name: install go
-      apt:
+    - name: Install go
+      ansible.builtin.apt:
         name: golang-go
         state: present
       become: true
 
-    - name: clone fzf repo
+    - name: Clone fzf repo
       ansible.builtin.git:
         repo: https://github.com/junegunn/fzf.git
         dest: ~/.fzf
@@ -343,24 +350,24 @@
         dest: ~/.fzf/
       tags: rg
 
-    - name: dowload fzf binary
-      command:
+    - name: Dowload fzf binary
+      ansible.builtin.command:
         chdir: ~/.fzf
         cmd: ./install --bin
       tags: fzf
       register: fzf
       changed_when: fzf.stdout is not search("Already exists")
 
-    - name: install fzf
-      copy:
+    - name: Install fzf
+      ansible.builtin.copy:
         src: ~/.fzf/bin/fzf
         dest: /usr/bin/fzf
         mode: 0755
       tags: fzf
       become: true
 
-    - name: install jq
-      apt:
+    - name: Install jq
+      ansible.builtin.apt:
         name: jq
         state: present
       register: jq
@@ -369,8 +376,8 @@
       become: true
       tags: jq
 
-    - name: install ncdu
-      apt:
+    - name: Install ncdu
+      ansible.builtin.apt:
         name: ncdu
         state: present
       register: ncdu
@@ -379,8 +386,8 @@
       become: true
       tags: ncdu
 
-    - name: install htop
-      apt:
+    - name: Install htop
+      ansible.builtin.apt:
         name: htop
         state: present
       register: htop
@@ -389,8 +396,8 @@
       become: true
       tags: htop
 
-    - name: retreive eza version
-      command:
+    - name: Retreive eza version
+      ansible.builtin.command:
         cmd: "eza --version"
       register: eza_version_before_install
       changed_when: false
@@ -419,7 +426,7 @@
       become: true
 
     - name: Install fd
-      copy:
+      ansible.builtin.copy:
         src: "/opt/installers/{{ item.src }}"
         dest: "{{ item.dest }}"
         mode: 0755
@@ -429,8 +436,8 @@
       when: eza_version_before_install.failed
       tags: fd
 
-    - name: retreive fd version
-      command:
+    - name: Retreive fd version
+      ansible.builtin.command:
         cmd: "fd --version"
       register: fd_version_before_install
       changed_when: false
@@ -454,7 +461,7 @@
       when: fd_version_before_install.failed
 
     - name: Install fd
-      copy:
+      ansible.builtin.copy:
         src: "/opt/installers/fd-v8.3.2-x86_64-unknown-linux-musl/{{ item.src }}"
         dest: "{{ item.dest }}"
         mode: 0755
@@ -465,7 +472,7 @@
       tags: fd
 
     - name: Install fd autocomplete
-      copy:
+      ansible.builtin.copy:
         src: "/opt/installers/fd-v8.3.2-x86_64-unknown-linux-musl/{{ item.src }}"
         dest: "{{ item.dest }}"
       with_items:
@@ -473,8 +480,8 @@
       tags: fd
       when: fd_version_before_install.failed
 
-    - name: retreive fd version
-      command:
+    - name: Retreive fd version
+      ansible.builtin.command:
         cmd: "fd --version"
       register: fd_version_after_install
       tags: fd
@@ -495,7 +502,7 @@
       become: true
 
     - name: Install lnav
-      copy:
+      ansible.builtin.copy:
         src: "/opt/installers/lnav/lnav-0.10.1/{{ item.src }}"
         dest: "{{ item.dest }}"
         mode: 0755
@@ -504,20 +511,20 @@
       become: true
       tags: lnav
 
-    - name: check lnav version
-      command:
+    - name: Check lnav version
+      ansible.builtin.command:
         cmd: lnav -V
       register: lnav_version
       tags: lnav
       changed_when: false
 
-    - name: display lnav information
-      debug:
+    - name: Display lnav information
+      ansible.builtin.debug:
         msg: "Lnav Log Navigator Installed! for details see https://github.com/tstack/lnav version is {{ lnav_version.stdout }}"
       tags: lnav
 
-    - name: install cmatrix
-      apt:
+    - name: Install cmatrix
+      ansible.builtin.apt:
         name: cmatrix
         state: present
       become: true
@@ -532,8 +539,8 @@
   with_items:
     - ~/.bashrc.d
 
-- name: template bashrc configurations
-  template:
+- name: Template bashrc configurations
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: '0644'
@@ -576,8 +583,8 @@
   when: mitm_certs.changed
   tags: mitm_certs
 
-- name: template tmux Configuration
-  template:
+- name: Template tmux Configuration
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
   with_items:
@@ -595,41 +602,42 @@
     - ~/.vim/pack/git-plugins/start/indentline
   tags: vim
 
-- name: clone ale plugin repo
+- name: Clone ale plugin repo
   ansible.builtin.git:
     repo: https://github.com/dense-analysis/ale.git
     dest: ~/.vim/pack/git-plugins/start/ale
   tags: vim
   diff: false
 
-- name: clone ansible-vim plugin repo
+- name: Clone ansible-vim plugin repo
   ansible.builtin.git:
     repo: https://github.com/pearofducks/ansible-vim
     dest: ~/.vim/pack/git-plugins/start/ansible-vim
   tags: vim
   diff: false
 
-- name: Cline Indentline repo
+- name: Clone Indentline repo
   ansible.builtin.git:
     repo: https://github.com/Yggdroot/indentLine.git
     dest: ~/.vim/pack/git-plugins/start/indentline
   tags: vim
   diff: false
 
-- name: template vimrc
-  template:
+- name: Template vimrc
+  ansible.builtin.template:
     src: vimrc.j2
     dest: ~/.vimrc
+    mode: '0755'
   tags: vim
 
-- name: ensure hushlogin is created for current user
+- name: Ensure hushlogin is created for current user
   ansible.builtin.file:
     path: ~/.hushlogin
     state: file
   tags: hushlogin
   when: "ansible_env.WSL_DISTRO_NAME"
 
-- name: ensure hushlogin is created for root
+- name: Ensure hushlogin is created for root
   ansible.builtin.file:
     path: /root/.hushlogin
     state: file
@@ -650,8 +658,8 @@
   become: true
   tags: sudoers
 
-- name: copy aptcron script to root user home directory
-  copy:
+- name: Copy aptcron script to root user home directory
+  ansible.builtin.copy:
     src: aptcron.bash
     dest: /root/aptcron.bash
     mode: '0644'
@@ -671,5 +679,6 @@
   ansible.builtin.copy:
     content: '# instructions on how to use the systemd syslog'
     dest: /var/log/cron
+    mode: '0644'
   tags: cron
   become: true
