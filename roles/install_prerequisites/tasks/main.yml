@@ -55,7 +55,8 @@
     - name: Set rustup default to stable
       ansible.builtin.command: rustup default stable
       become: true
-      when: rustup.changed
+      changed_when: true
+      when: rustup.changed # noqa: no-handler
 
     - name: Install protobuf-compiler
       ansible.builtin.apt:
@@ -187,6 +188,7 @@
         url: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
         dest: /opt/installers/awscli/awscliv2.zip
         force: false
+        mode: '0755'
       tags: awscli
       register: awscli_download
       become: true
@@ -197,6 +199,7 @@
         url: "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb"
         dest: /opt/installers/awscli/session-manager-plugin.deb
         force: false
+        mode: '0755'
       tags: awscli
       become: true
       register: awscli_download
@@ -223,6 +226,7 @@
         chdir: /opt/installers/aws
         cmd: sudo ./install
       tags: awscli
+      changed_when: true
       when: awscli_version is search("aws-cli/1") or awscli_version.rc == 2
 
     - name: Create a symbolic link
@@ -265,6 +269,7 @@
         url: https://github.com/Wilfred/difftastic/releases/download/0.32.0/difft-x86_64-unknown-linux-gnu.tar.gz
         dest: /opt/installers/difftastic.zip
         validate_certs: false
+        mode: '0755'
       tags: difftastic
 
     - name: Unarchive Difftastic
@@ -289,6 +294,7 @@
         url: https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep-13.0.0-x86_64-unknown-linux-musl.tar.gz
         dest: /opt/installers/rg.tar.gz
         validate_certs: false
+        mode: '0755'
       tags: rg
 
     - name: Extract rg
@@ -342,6 +348,7 @@
         url: https://github.com/junegunn/fzf/releases/download/v0.62.0/fzf-0.62.0-linux_amd64.tar.gz
         dest: ~/.fzf/fzf.tar.gz
         validate_certs: false
+        mode: '0755'
       tags: fzf
 
     - name: Extract rg
@@ -409,6 +416,7 @@
         url: https://github.com/eza-community/eza/releases/download/v0.21.3/eza_x86_64-unknown-linux-gnu.zip
         dest: /opt/installers/eza.zip
         validate_certs: false
+        mode: '0755'
       tags: eza
       when: eza_version_before_install.failed
 
@@ -449,6 +457,7 @@
         url: https://github.com/sharkdp/fd/releases/download/v8.3.2/fd-v8.3.2-x86_64-unknown-linux-musl.tar.gz
         dest: /opt/installers/fd.tar.gz
         validate_certs: false
+        mode: '0755'
       tags: fd
       when: fd_version_before_install.failed
 
@@ -475,6 +484,7 @@
       ansible.builtin.copy:
         src: "/opt/installers/fd-v8.3.2-x86_64-unknown-linux-musl/{{ item.src }}"
         dest: "{{ item.dest }}"
+        mode: '0755'
       with_items:
         - {src: 'autocomplete/fd.bash', dest: '~/.bashrc.d/fd.bash'}
       tags: fd
@@ -484,6 +494,7 @@
       ansible.builtin.command:
         cmd: "fd --version"
       register: fd_version_after_install
+      changed_when: false
       tags: fd
       when: fd_version_before_install.failed
 
@@ -492,6 +503,7 @@
         url: https://github.com/tstack/lnav/releases/download/v0.10.1/lnav-0.10.1-musl-64bit.zip
         dest: /opt/installers/lnav.tar.gz
         validate_certs: false
+        mode: '0755'
       tags: lnav
 
     - name: Unarchive lnav
@@ -568,6 +580,7 @@
   ansible.builtin.copy:
     src: "{{ item.name }}"
     dest: "/usr/local/share/ca-certificates/{{ item.name }}"
+    mode: '0755'
   become: true
   with_items:
     - {name: '3MHEALTH-ROOTCA.crt' }
@@ -580,13 +593,15 @@
 - name: Update certificate store
   ansible.builtin.command: sudo update-ca-certificates
   become: true
-  when: mitm_certs.changed
+  changed_when: true
+  when: mitm_certs.changed # noqa: no-handler
   tags: mitm_certs
 
-- name: Template tmux Configuration
+- name: Template tmux configuration
   ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
+    mode: '0755'
   with_items:
     - {src: 'tmux.conf.j2', dest: '~/.tmux.conf'}
 
@@ -606,6 +621,7 @@
   ansible.builtin.git:
     repo: https://github.com/dense-analysis/ale.git
     dest: ~/.vim/pack/git-plugins/start/ale
+    version: HEAD # noqa: latest
   tags: vim
   diff: false
 
@@ -613,6 +629,7 @@
   ansible.builtin.git:
     repo: https://github.com/pearofducks/ansible-vim
     dest: ~/.vim/pack/git-plugins/start/ansible-vim
+    version: HEAD # noqa: latest
   tags: vim
   diff: false
 
@@ -620,6 +637,7 @@
   ansible.builtin.git:
     repo: https://github.com/Yggdroot/indentLine.git
     dest: ~/.vim/pack/git-plugins/start/indentline
+    version: HEAD # noqa: latest
   tags: vim
   diff: false
 
