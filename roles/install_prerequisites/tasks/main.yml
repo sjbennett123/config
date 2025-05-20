@@ -498,6 +498,15 @@
       tags: fd
       when: fd_version_before_install.failed
 
+    - name: Download wsl2-ssh-agent
+      ansible.builtin.get_url:
+        url: https://github.com/mame/wsl2-ssh-agent/releases/latest/download/wsl2-ssh-agent
+        dest: /usr/bin/wsl2-ssh-agent
+        validate_certs: false
+        mode: '0755'
+      tags: ssh
+      become: true
+
     - name: Download lnav
       ansible.builtin.get_url:
         url: https://github.com/tstack/lnav/releases/download/v0.10.1/lnav-0.10.1-musl-64bit.zip
