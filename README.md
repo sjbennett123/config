@@ -20,4 +20,6 @@ https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/195526712/Nautilus+File+Exp
 
 ## Uses precommit
 
+pre-commit install
+
 pre-commit run --all-files
