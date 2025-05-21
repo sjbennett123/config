@@ -709,3 +709,7 @@
     mode: '0644'
   tags: cron
   become: true
+
+# wget https://github.com/ankitpokhrel/jira-cli/releases/download/v1.6.0/jira_1.6.0_linux_x86_64.tar.gz
+# /home/sbennett/.config/.jira/.config.yml
+# C:\Users\AAA3AZZ/.config/.jira/.config.yml
