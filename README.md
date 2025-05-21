@@ -1,6 +1,6 @@
 ALL=(ALL) NOPASSWD:ALL
 
-
+test
 
 update environment variables
 
