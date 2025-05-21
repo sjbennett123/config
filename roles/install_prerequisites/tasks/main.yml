@@ -272,22 +272,7 @@
         mode: '0755'
       tags: difftastic
 
-    - name: Unarchive Difftastic
-      ansible.builtin.unarchive:
-        src: /opt/installers/difftastic.zip
-        dest: /opt/installers/difftastic
-      become: true
-      tags: difftastic
-
-    - name: Install Difftastic
-      ansible.builtin.copy:
-        src: "/opt/installers/difftastic/{{ item.src }}"
-        dest: "{{ item.dest }}"
-        mode: 0755
-      with_items:
-        - {src: 'difft', dest: '/usr/bin/difft'}
-      become: true
-      tags: difftastic
+bbbbbbbbbb
 
     - name: Download rg
       ansible.builtin.get_url:
@@ -710,6 +695,29 @@
   tags: cron
   become: true
 
-# wget https://github.com/ankitpokhrel/jira-cli/releases/download/v1.6.0/jira_1.6.0_linux_x86_64.tar.gz
+- name: Download jira cli
+  ansible.builtin.get_url:
+    url: https://github.com/ankitpokhrel/jira-cli/releases/download/v1.6.0/jira_1.6.0_linux_x86_64.tar.gz
+    dest: /opt/installers/jira.tar.gz
+    validate_certs: false
+    mode: '0755'
+  tags: jira
+
+- name: Unarchive jira cli
+  ansible.builtin.unarchive:
+    src: /opt/installers/jira.tar.gz
+    dest: /opt/installers/difftastic
+  become: true
+  tags: jira
+
+# - name: Install Difftastic
+  # ansible.builtin.copy:
+    # src: "/opt/installers/difftastic/{{ item.src }}"
+    # dest: "{{ item.dest }}"
+    # mode: 0755
+  # with_items:
+    # - {src: 'difft', dest: '/usr/bin/difft'}
+  # become: true
+  # tags: difftastic
 # /home/sbennett/.config/.jira/.config.yml
 # C:\Users\AAA3AZZ/.config/.jira/.config.yml
