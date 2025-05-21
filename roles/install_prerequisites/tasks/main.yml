@@ -151,8 +151,9 @@
         - /opt/installers/lnav
         - /opt/installers/difftastic
         - /opt/installers/awscli
+        - /opt/installers/jira
       become: true
-      tags: lnav, lazydocker, difftastic, rg, awscli
+      tags: lnav, lazydocker, difftastic, rg, awscli, jira
 
     - name: Get the aws cli version
       ansible.builtin.command: aws --version
@@ -704,18 +705,18 @@
 - name: Unarchive jira cli
   ansible.builtin.unarchive:
     src: /opt/installers/jira.tar.gz
-    dest: /opt/installers/difftastic
+    dest: /opt/installers/jira
   become: true
   tags: jira
 
-# - name: Install Difftastic
-  # ansible.builtin.copy:
-    # src: "/opt/installers/difftastic/{{ item.src }}"
-    # dest: "{{ item.dest }}"
-    # mode: 0755
-  # with_items:
-    # - {src: 'difft', dest: '/usr/bin/difft'}
-  # become: true
-  # tags: difftastic
+- name: Install Jira CLI
+  ansible.builtin.copy:
+    src: "/opt/installers/difftastic/jira_1.6.0_linux_x86_64/bin/{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: 0755
+  with_items:
+    - {src: 'jira', dest: '/usr/bin/jira'}
+  become: true
+  tags: jira
 # /home/sbennett/.config/.jira/.config.yml
 # C:\Users\AAA3AZZ/.config/.jira/.config.yml
