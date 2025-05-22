@@ -254,7 +254,7 @@ if ($Env:fzf_default_opts)
 {}
 else{
   Write-Output "Variable Name: fzf_default_opts"
-  Write-Output "Variable Value: --height 40% --border   --bind '?:toggle-preview'    --preview-window=:hidden"
+  Write-Output "Variable Value: --height 40% --border --bind '?:toggle-preview' --preview-window=:hidden"
 }
 
 # To turn off powershell autocomplete
@@ -1161,8 +1161,9 @@ if ($condition) {
     }
     Set-Alias gcalweb gcal_web
     function gcal_config_git(){
-        difft $env:localappdata\gcalcli\config.toml $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml
-        Copy-Item $env:localappdata\gcalcli\config.toml $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml
+        # 
+        difft $env:localappdata\gcalcli\config.toml $env:OneDrive\Documents\GitHub\config\files\gcalcli_config.toml
+        Copy-Item $env:localappdata\gcalcli\config.toml $env:OneDrive\Documents\GitHub\config\files\gcalcli_config.toml
         Set-Location "$env:OneDrive\Documents\GitHub\config"
         git pull -q
         git add files\gcal_config.toml
@@ -1172,8 +1173,8 @@ if ($condition) {
         }
     function gcal_config_update(){
         Copy-Item "$env:OneDrive\Documents\GitHub\config"
-        difft  $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml $env:localappdata\gcalcli\config.toml
-        Copy-Item $env:OneDrive\Documents\GitHub\config\files\gcal_config.toml $env:localappdata\gcalcli\config.toml
+        difft  $env:OneDrive\Documents\GitHub\config\files\gcalcli_config.toml $env:localappdata\gcalcli\config.toml
+        Copy-Item $env:OneDrive\Documents\GitHub\config\files\gcalcli_config.toml $env:localappdata\gcalcli\config.toml
         git pull -q
         Set-Location -
         }}
@@ -1233,9 +1234,18 @@ else
   scoop install hugo-extended
 
 }
+# where session-manager-plugin
 
+# aws ssm start-session --profile 3mhis-catalyst --region us-east-1 --target i-0434852fea5f1fc7f
+function ssm {
+        param($profile, $instanceid)
+        aws ec2 describe-tags --profile $profile --filters "Name=resource-id,Values=$instanceid" "Name=key,Values=Name" |jq -r .Tags[].Value
+        aws ssm start-session --profile $profile --region us-east-1 --target $instanceid
+    }
+    
 $condition = where.exe aws
 if ($condition) {
+  
 }
 else
 {
@@ -1251,6 +1261,11 @@ else
 {
   pip install termdown
 }
+
+
+# C:\Users\AAA3AZZ\AppData\Local\Postman
+# choco install postman
+
 
 $condition = where.exe ffmpeg
 if ($condition) {
