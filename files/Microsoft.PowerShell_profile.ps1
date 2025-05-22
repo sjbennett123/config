@@ -1236,11 +1236,26 @@ else
 }
 # where session-manager-plugin
 
-# aws ssm start-session --profile 3mhis-catalyst --region us-east-1 --target i-0434852fea5f1fc7f
 function ssm {
         param($profile, $instanceid)
+        
+        if ($profile -eq 830301468378){
+          Set-Variable -Name "profile" -Value "us-catalyst-dev"
+        }
+        if ($profile -eq 316401171432){
+          Set-Variable -Name "profile" -Value "us-catalyst-nonprod-phi"
+        }
+        if ($profile -eq 557690604736){
+          Set-Variable -Name "profile" -Value "us-ocdi-prod-phi"
+        }
+        if ($profile -eq 030442966757){
+          Set-Variable -Name "profile" -Value "3mhis-catalyst"
+        }
+        if ($profile -eq 692859943168){
+          Set-Variable -Name "profile" -Value "us-ocdi-non-prod-non-phi"
+        }
         aws ec2 describe-tags --profile $profile --filters "Name=resource-id,Values=$instanceid" "Name=key,Values=Name" |jq -r .Tags[].Value
-        aws ssm start-session --profile $profile --region us-east-1 --target $instanceid
+        aws ssm start-session --profile $profile --target $instanceid
     }
     
 $condition = where.exe aws
