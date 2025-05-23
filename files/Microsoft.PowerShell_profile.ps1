@@ -615,8 +615,11 @@ function repo_update()
     }
 
 function gitc()
-    {
+    {   
+        Set-Location "$(git rev-parse --show-toplevel)";
+        git pull -q;
         git add .; git commit -m updates; git push;
+        cd -;
     }
 
 function downloads()
