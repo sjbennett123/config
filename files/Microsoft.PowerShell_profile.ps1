@@ -7,8 +7,6 @@
 Set-Alias -Name which -Value Get-Command
 Set-Alias -Name cron -Value taskschd.msc
 
-
-
 $condition = where.exe python
 if ($condition) {
 }
@@ -151,7 +149,7 @@ Set-Alias recycle Clear-RecycleBin
 # git config --global core.longpaths true
 # git config --global --type bool push.autoSetupRemote true
 # git config --global windows.appendAtomically false
-# git config --global credential.helper "cache --timeout=60480000"
+# git config --global credential.helper "store"
 # git config --global user.email "you@example.com"
 # git config --global user.name "Your Name"
 
@@ -165,15 +163,12 @@ if ($condition) {
 }
 else
 {
-  Write-Output "https://gitforwindows.org/"
+  Write-Output "https://gitforwindows.org"
   Write-Output "make sure that the bin for git is in the PATH"
   Write-Output "so you get the tig git history viewer"
   Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\bin\ to path"
   Write-Output "C:\Users\AAA3AZZ\AppData\Local\Programs\Git\cmd"
 }
-
-
-
 
 # https://github.com/dahlbyk/posh-git
 # PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
@@ -187,8 +182,6 @@ else
 {
   Write-Output "install github desktop"
 }
-
-
 
 $condition = where.exe fd-find
 if ($condition) {
@@ -222,6 +215,8 @@ else
 
 # https://www.nerdfonts.com
 Import-Module Terminal-Icons
+# scoop bucket add nerd-fonts
+# scoop install Cascadia-Code
 
 
 $condition = where.exe bat
@@ -1226,10 +1221,10 @@ else
 {
   Write-Output "http://hugo.io/"
   scoop install hugo-extended
-
 }
-# where session-manager-plugin
 
+$condition = Get-Command session-manager-plugin.exe
+if ($condition) {
 function ssm {
         param($profile, $instanceid)
         
@@ -1251,7 +1246,13 @@ function ssm {
         aws ec2 describe-tags --profile $profile --filters "Name=resource-id,Values=$instanceid" "Name=key,Values=Name" |jq -r .Tags[].Value
         aws ssm start-session --profile $profile --target $instanceid
     }
-    
+}
+else
+{
+    Write-Output "install the session manager plugin"
+    Write-Output "https://docs.aws.amazon.com/systems-manager/latest/userguide/install-plugin-windows.html"
+    Write-Output "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/windows/SessionManagerPluginSetup.exe"
+}
 $condition = where.exe aws
 if ($condition) {
   
@@ -1383,7 +1384,6 @@ function owlbear()
 # https://github.com/sassman/t-rec-rs
 # windows support coming soon!
 
-# scoop bucket add nerd-fonts
-# scoop install Cascadia-Code
+
 
 # https://sshx.s3.amazonaws.com/sshx-x86_64-pc-windows-msvc.zip
