@@ -173,7 +173,8 @@ else
 # https://github.com/dahlbyk/posh-git
 # PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 Import-Module posh-git
-
+Import-Module PSCalendar
+# https://github.com/jdhitsolutions/PSCalendar
 $condition = where.exe github
 if ($condition) {
   Set-Alias ghd github
@@ -1133,7 +1134,6 @@ else
 $condition = where.exe gcalcli
 if ($condition) {
     Set-Alias gcal gcalcli
-    Set-Alias cal gcal
     Set-Alias calendar gcal
 
     function calw()
