@@ -20,5 +20,5 @@ if [ -e "$HOME/.ssh/windows_ssh_config" ] ; then
  sed -r 's/C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe //' ~/.ssh/windows_ssh_config > ~/.ssh/config
 fi
 
-eval $($HOME/wsl2-ssh-agent)
+eval $(wsl2-ssh-agent)
 
