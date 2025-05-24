@@ -356,11 +356,20 @@ if ($condition) {
 else
 {
   # let g:loaded_perl_provider = 0
-  # C:\Users\AAA3AZZ\AppData\Local\nvim/init.lua
   # https://gist.github.com/jeffcasavant/6ff061d5fd32ed3a7d3eb27639cd223f
-  # https://github.com/dense-analysis/ale
-  # https://github.com/neovim/neovim/releases/download/v0.11.0/nvim-win64.msi
-  # https://github.com/neovide/neovide/releases/download/0.15.0/neovide.msi
+  Write-Output "https://github.com/neovim/neovim/releases/download/v0.11.0/nvim-win64.msi"
+  Write-Output "https://github.com/neovide/neovide/releases/download/0.15.0/neovide.msi"
+}
+
+$condition = Test-Path $env:LOCALAPPDATA\nvim\init.lua -PathType Leaf
+if ($condition) {
+}
+else
+{
+     Write-Output "$env:LOCALAPPDATA\nvim\"
+
+   Write-Output "$env:LOCALAPPDATA\nvim\"
+   # https://github.com/dense-analysis/ale
 }
 
 $condition = Test-Path -Path "$env:ProgramFiles\Typora\Typora.exe"
@@ -405,9 +414,7 @@ function config()
     {
         np $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
     }
-    Set-Alias config_edit config
-
-
+Set-Alias config_edit config
 
 function onedrive()
     {
@@ -423,6 +430,7 @@ function standup()
     {
         chrome https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/995572603/OCDI+Standup+Agenda
     }
+
 function ocdi_twa()
     {
         chrome https://3mhealth.atlassian.net/wiki/spaces/OCDI/pages/995559324/Onboarding+Team+Working+Agreement+Definition+of+Ready+Definition+of+Done+CapEx
@@ -618,7 +626,9 @@ function gitc()
     {   
         Set-Location "$(git rev-parse --show-toplevel)";
         git pull -q;
-        git add .; git commit -m updates; git push;
+        git add .;
+        git commit -m updates;
+        git push;
         cd -;
     }
 
@@ -716,22 +726,12 @@ else
 
 $condition = where.exe rg
 if ($condition) {
-
 }
 else
 {
     Write-Output "Install Ripgrep search tool"
     Write-Output "https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-i686-pc-windows-msvc.zip"
-
-        # https://github.com/phiresky/ripgrep-all
-        # https://github.com/phiresky/ripgrep-all/releases/download/v0.10.6/ripgrep_all-v0.10.6-x86_64-pc-windows-msvc.zip
-        # https://github.com/oschwartz10612/poppler-windows/releases/download/v24.08.0-0/Release-24.08.0-0.zip
 }
-
-
-
-
-
 
 $condition = where.exe jira
 if ($condition) {
@@ -916,9 +916,7 @@ else
 
 # https://mmodal.atlassian.net/wiki/spaces/HCC/pages/42436191/Get+things+to+work+with+3M+s+custom+CA
 
-
 Set-Alias s start
-
 
 $condition = where.exe onefetch
 if ($condition) {
@@ -957,13 +955,6 @@ else
 {
   scoop install neofetch
 }
-
-# Control Panel
-
-#git add .; git commit -m updates; git push
-
-
-
 
 function ocdi_version($env)
     {
