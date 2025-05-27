@@ -174,6 +174,7 @@ else
 # PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
 Import-Module posh-git
 Import-Module PSCalendar
+# Install-PSResource PSCalendar
 # https://github.com/jdhitsolutions/PSCalendar
 $condition = where.exe github
 if ($condition) {
@@ -357,14 +358,14 @@ else
   Write-Output "https://github.com/neovide/neovide/releases/download/0.15.0/neovide.msi"
 }
 
-$condition = Test-Path $env:LOCALAPPDATA\nvim\init.lua -PathType Leaf
+$condition = Test-Path $env:LOCALAPPDATA\nvim\init.vim -PathType Leaf
 if ($condition) {
 }
 else
 {
-     Write-Output "$env:LOCALAPPDATA\nvim\"
-
-   Write-Output "$env:LOCALAPPDATA\nvim\"
+     Write-Output "create your init.vim at the following location"
+     Write-Output "$env:LOCALAPPDATA\nvim\init.vim"
+     
    # https://github.com/dense-analysis/ale
 }
 
@@ -386,6 +387,7 @@ else
 
 
 # https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/12995020/Fed+Statically+Compiled+Federation+CLI
+# https://teams.microsoft.com/l/channel/19%3Aa683a8d136774d7ebb297da5d09b6ab7%40thread.tacv2/Fed%20-%20Support?groupId=fc1db881-0935-4edc-9869-c7a4f3f1977e&tenantId=c3bf4e61-4ab4-4b2b-bd3a-fc85c7a1c0f1
 # https://github.3mhealth.com/3MHISCloudEngineering/fed
 # fed requires google chrome https://www.google.com/chrome/
 
