@@ -6,6 +6,7 @@
 
 Set-Alias -Name which -Value Get-Command
 Set-Alias -Name cron -Value taskschd.msc
+Set-Alias -Name ifconfig -Value ipconfig
 
 $condition = where.exe python
 if ($condition) {
