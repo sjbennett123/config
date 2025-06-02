@@ -901,6 +901,7 @@ else
 # Remember to add the hcc and ocdi repos to your PATH
 Set-Alias tunnel tunnel.ps1
 Set-Alias ocditunnel ocditunnel.ps1
+Set-Alias ocdi_tunnel ocditunnel.ps1
 
 
 
