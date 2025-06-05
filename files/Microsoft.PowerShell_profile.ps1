@@ -1140,7 +1140,12 @@ $condition = where.exe gcalcli
 if ($condition) {
     Set-Alias gcal gcalcli
     Set-Alias calendar gcal
-
+    
+    function cald()
+    {
+        gcalcli agenda 8am 11pm
+    }
+    Set-Alias day cald
     function calw()
     {
         gcalcli calw $($args)
