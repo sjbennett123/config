@@ -319,6 +319,7 @@ function gb()
     {
         gh browse
     }
+Set-Alias ghb gb
 
 function e()
     {
