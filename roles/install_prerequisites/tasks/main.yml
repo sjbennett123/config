@@ -727,3 +727,12 @@
   tags: jira
 # /home/sbennett/.config/.jira/.config.yml
 # C:\Users\AAA3AZZ/.config/.jira/.config.yml
+
+
+# sudo yum install ncurses-devel
+# wget https://github.com/jonas/tig/releases/download/tig-2.5.12/tig-2.5.12.tar.gz
+# tar -xf tig-2.5.12.tar.gz
+# cd tig-2.5.12/
+# ./configure
+# make
+# sudo make install
