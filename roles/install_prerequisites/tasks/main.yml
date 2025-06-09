@@ -728,11 +728,49 @@
 # /home/sbennett/.config/.jira/.config.yml
 # C:\Users\AAA3AZZ/.config/.jira/.config.yml
 
+- name: Install ncurses-devel for Tig
+  ansible.builtin.apt:
+    name: ncurses-devel
+    state: present
+  become: true
+  tags: tig
 
-# sudo yum install ncurses-devel
-# wget https://github.com/jonas/tig/releases/download/tig-2.5.12/tig-2.5.12.tar.gz
+- name: Download rg
+  ansible.builtin.get_url:
+    url: https://github.com/jonas/tig/releases/download/tig-2.5.12/tig-2.5.12.tar.gz
+    dest: /opt/installers/tig.tar.gz
+    validate_certs: false
+    mode: '0755'
+  tags: gitg
+
+- name: Extract tig
+  ansible.builtin.unarchive:
+    src: /opt/installers/tig.tar.gz
+    dest: /opt/installers
+    remote_src: true
+  tags: tig
+  become: true
+
+- name: Install tig
+  ansible.builtin.copy:
+    src: "/opt/installers/ripgrep-13.0.0-x86_64-unknown-linux-musl/{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: 0755
+    remote_src: true
+  with_items:
+    - {src: 'rg', dest: '/usr/bin/rg'}
+  become: true
+  tags: tig,never
+
+- name: Retreive rg version
+  ansible.builtin.command:
+    cmd: "rg --version"
+  register: rg_version
+  tags: tig,never
+  changed_when: false
 # tar -xf tig-2.5.12.tar.gz
 # cd tig-2.5.12/
 # ./configure
 # make
 # sudo make install
+# https://jonas.github.io/tig
