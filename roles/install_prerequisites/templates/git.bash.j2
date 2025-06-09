@@ -1,5 +1,6 @@
 #!/bin/bash
-alias gitc="cd `git rev-parse --show-toplevel`;git pull; git add .; git commit -m updates; git push;cd -"
-alias gr="cd `git rev-parse --show-toplevel`"
+export GIT_DISCOVERY_ACROSS_FILESYSTEM=0
+alias gitc='cd "$(git rev-parse --show-toplevel)";git pull; git add .; git commit -m updates; git push;cd -'
+alias gr='cd "$(git rev-parse --show-toplevel)"'
 #  git config --global user.email "you@example.com"
 #  git config --global user.name "Your Name"
