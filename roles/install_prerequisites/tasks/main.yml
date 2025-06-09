@@ -718,7 +718,7 @@
 
 - name: Install Jira CLI
   ansible.builtin.copy:
-    src: "/opt/installers/difftastic/jira_1.6.0_linux_x86_64/bin/{{ item.src }}"
+    src: "/opt/installers/jira/jira_1.6.0_linux_x86_64/bin/{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: 0755
   with_items:
@@ -728,20 +728,20 @@
 # /home/sbennett/.config/.jira/.config.yml
 # C:\Users\AAA3AZZ/.config/.jira/.config.yml
 
-- name: Install ncurses-devel for Tig
+- name: Install ncurses-dev for Tig
   ansible.builtin.apt:
-    name: ncurses-devel
+    name: ncurses-dev
     state: present
   become: true
   tags: tig
 
-- name: Download rg
+- name: Download tig
   ansible.builtin.get_url:
     url: https://github.com/jonas/tig/releases/download/tig-2.5.12/tig-2.5.12.tar.gz
     dest: /opt/installers/tig.tar.gz
     validate_certs: false
     mode: '0755'
-  tags: gitg
+  tags: tig
 
 - name: Extract tig
   ansible.builtin.unarchive:
@@ -749,28 +749,26 @@
     dest: /opt/installers
     remote_src: true
   tags: tig
-  become: true
 
-- name: Install tig
-  ansible.builtin.copy:
-    src: "/opt/installers/ripgrep-13.0.0-x86_64-unknown-linux-musl/{{ item.src }}"
-    dest: "{{ item.dest }}"
-    mode: 0755
-    remote_src: true
-  with_items:
-    - {src: 'rg', dest: '/usr/bin/rg'}
+- name: configure Tig
+  command:
+    cmd: ./configure
+    chdir: /opt/installers/tig-2.5.12/
   become: true
-  tags: tig,never
+  tags: tig
 
-- name: Retreive rg version
-  ansible.builtin.command:
-    cmd: "rg --version"
-  register: rg_version
-  tags: tig,never
-  changed_when: false
-# tar -xf tig-2.5.12.tar.gz
-# cd tig-2.5.12/
-# ./configure
-# make
-# sudo make install
+- name: make Tig
+  command:
+    cmd: make
+    chdir: /opt/installers/tig-2.5.12/
+  become: true
+  tags: tig
+
+- name: install Tig
+  command:
+    cmd: make install
+    chdir: /opt/installers/tig-2.5.12/
+  become: true
+  tags: tig
+
 # https://jonas.github.io/tig
