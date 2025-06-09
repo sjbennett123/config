@@ -9,9 +9,10 @@
   longpaths = true
   autocrlf = false  
 [push]
+  # git config --global --type bool push.autoSetupRemote true
   autoSetupRemote = true
 [filter "lfs"]
-        process = git-lfs filter-process
-        required = true
-        clean = git-lfs clean -- %f
-        smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
