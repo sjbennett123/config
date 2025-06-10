@@ -12,6 +12,7 @@ sudo apt install python3-full
 sudo apt install pipx
 
 pipx install j2lint
+j2lint bash
 
 ## Windows
 
