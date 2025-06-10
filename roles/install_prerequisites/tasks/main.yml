@@ -748,6 +748,7 @@
     src: /opt/installers/tig.tar.gz
     dest: /opt/installers
     remote_src: true
+    creates: /opt/installers/tig-2.5.12
   tags: tig
 
 - name: Configure Tig
