@@ -563,7 +563,6 @@
     - {src: 'history.bash.j2', dest: '~/.bashrc.d/history.bash'}
     - {src: 'fzf.bash.j2', dest: '~/.bashrc.d/fzf.bash'}
     - {src: 'ansible.bash.j2', dest: '~/.bashrc.d/ansible.bash'}
-    - {src: 'autojump.bash.j2', dest: '~/.bashrc.d/autojump.bash'}
     - {src: 'kcat.bash.j2', dest: '~/.bashrc.d/kcat.bash'}
     - {src: 'glow.bash.j2', dest: '~/.bashrc.d/glow.bash'}
     - {src: 'terraform.bash.j2', dest: '~/.bashrc.d/terraform.bash'}
@@ -781,7 +780,7 @@
 
 - name: Install python3-full
   ansible.builtin.apt:
-    name: install python3-full
+    name: python3-full
     state: present
   become: true
   tags: python
@@ -793,8 +792,8 @@
   become: true
   tags: python
 
-- name: Install pipx
-  ansible.builtin.command:
-    cmd: pipx install j2lint
+- name: Install j2lint
+  community.general.pipx:
+    name: j2lint
   become: true
   tags: python
