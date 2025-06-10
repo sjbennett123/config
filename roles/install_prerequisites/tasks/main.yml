@@ -750,24 +750,24 @@
     remote_src: true
   tags: tig
 
-- name: configure Tig
-  command:
+- name: Configure Tig
+  ansible.builtin.command:
     cmd: ./configure
     chdir: /opt/installers/tig-2.5.12/
     creates: /opt/installers/tig-2.5.12/config.status
   become: true
   tags: tig
 
-- name: make Tig
-  command:
+- name: Make Tig
+  ansible.builtin.command:
     cmd: make
     chdir: /opt/installers/tig-2.5.12/
     creates: /opt/installers/tig-2.5.12/src/tig
   become: true
   tags: tig
 
-- name: install Tig
-  command:
+- name: Install Tig
+  ansible.builtin.command:
     cmd: make install
     chdir: /opt/installers/tig-2.5.12/
     creates: /usr/local/bin
