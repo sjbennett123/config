@@ -3,7 +3,8 @@
 
 
 j2lint() {
+# args: [--ignore, jinja-statements-indentation, jinja-variable-format, single-statement-per-line, jinja-variable-lower-case, --]
 
-command  j2lint $1 --ignore jinja-variable-lower-case
+command  j2lint $1 --ignore jinja-variable-lower-case jinja-statements-indentation
 }
 
