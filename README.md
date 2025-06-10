@@ -5,7 +5,7 @@ update environment variables
 
 pre-commit run --all-files
 
-
+│exec: "wslview": executable file not found in $PATH
 
 sudo apt install python3-full
 
