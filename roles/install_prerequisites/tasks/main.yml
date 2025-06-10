@@ -754,6 +754,7 @@
   command:
     cmd: ./configure
     chdir: /opt/installers/tig-2.5.12/
+    creates: /opt/installers/tig-2.5.12/config.status
   become: true
   tags: tig
 
@@ -761,6 +762,7 @@
   command:
     cmd: make
     chdir: /opt/installers/tig-2.5.12/
+    creates: /opt/installers/tig-2.5.12/src/tig
   become: true
   tags: tig
 
@@ -768,6 +770,7 @@
   command:
     cmd: make install
     chdir: /opt/installers/tig-2.5.12/
+    creates: /usr/local/bin
   become: true
   tags: tig
 
