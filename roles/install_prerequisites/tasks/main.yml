@@ -558,14 +558,14 @@
     mode: '0644'
   with_items:
     - {src: 'bashrc.j2', dest: '~/.bashrc'}
-    - {src: 'tmux.bash', dest: '~/.bashrc.d/tmux.bash'}
-    - {src: 'eza.bash', dest: '~/.bashrc.d/eza.bash'}
-    - {src: 'history.bash', dest: '~/.bashrc.d/history.bash'}
+    - {src: 'tmux.bash.j2', dest: '~/.bashrc.d/tmux.bash'}
+    - {src: 'eza.bash.j2', dest: '~/.bashrc.d/eza.bash'}
+    - {src: 'history.bash.j2', dest: '~/.bashrc.d/history.bash'}
     - {src: 'fzf.bash.j2', dest: '~/.bashrc.d/fzf.bash'}
-    - {src: 'ansible.bash', dest: '~/.bashrc.d/ansible.bash'}
-    - {src: 'autojump.bash', dest: '~/.bashrc.d/autojump.bash'}
-    - {src: 'kcat.bash', dest: '~/.bashrc.d/kcat.bash'}
-    - {src: 'glow.bash', dest: '~/.bashrc.d/glow.bash'}
+    - {src: 'ansible.bash.j2', dest: '~/.bashrc.d/ansible.bash'}
+    - {src: 'autojump.bash.j2', dest: '~/.bashrc.d/autojump.bash'}
+    - {src: 'kcat.bash.j2', dest: '~/.bashrc.d/kcat.bash'}
+    - {src: 'glow.bash.j2', dest: '~/.bashrc.d/glow.bash'}
     - {src: 'terraform.bash.j2', dest: '~/.bashrc.d/terraform.bash'}
     - {src: 'git.bash.j2', dest: '~/.bashrc.d/git.bash'}
     - {src: 'ssh.bash.j2', dest: '~/.bashrc.d/ssh.bash'}
@@ -574,6 +574,8 @@
     - {src: 'vim.bash.j2', dest: '~/.bashrc.d/vim.bash'}
     - {src: 'chrome.bash.j2', dest: '~/.bashrc.d/chrome.bash'}
     - {src: 'wsl.bash.j2', dest: '~/.bashrc.d/wsl.bash'}
+    - {src: 'python.bash.j2', dest: '~/.bashrc.d/python.bash'}
+    - {src: 'j2lint.bash.j2', dest: '~/.bashrc.d/j2lint.bash'}
   tags: bashrc
 
 - name: Copy Solventum man in the middle certs
@@ -776,3 +778,23 @@
   tags: tig
 
 # https://jonas.github.io/tig
+
+- name: Install python3-full
+  ansible.builtin.apt:
+    name: install python3-full
+    state: present
+  become: true
+  tags: python
+
+- name: Install pipx
+  ansible.builtin.apt:
+    name: pipx
+    state: present
+  become: true
+  tags: python
+
+- name: Install pipx
+  ansible.builtin.command:
+    cmd: pipx install j2lint
+  become: true
+  tags: python
