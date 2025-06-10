@@ -5,6 +5,14 @@ update environment variables
 
 pre-commit run --all-files
 
+
+
+sudo apt install python3-full
+
+sudo apt install pipx
+
+pipx install j2lint
+
 ## Windows
 
 ## Linux
