@@ -852,6 +852,11 @@ function carrie()
         jira issue list -q "project IN ('OCDI','HCC') and assignee = 'Carolyn Williams' and status NOT IN ('closed','resolved')" --order-by updated
     }
 
+function ocdi_resolved()
+    {
+        jira issue list -q "project IN ('OCDI') and status IN ('resolved')" --order-by updated
+    }
+
 function jenny()
     {
         jira issue list -q "project IN ('OCDI','HCC') and assignee = '70121:4978c4d9-686d-41d9-9c16-8dfe84615137' and status NOT IN ('closed','resolved')" --order-by updated
@@ -874,7 +879,7 @@ function chlab_capd()
 
 function chprod()
     {
-        jira issue list -q "project IN ('CHPROD') AND status != Closed AND component IN ('HCC-Collaborate','HCC Collaborate','CAPD') and key NOT IN('CHPROD-46823','CHPROD-48189')"
+        jira issue list -q "project IN ('CHPROD') AND status != Closed AND component IN ('HCC-Collaborate','HCC Collaborate','CAPD') and key NOT IN ('CHPROD-46823','CHPROD-48189')"
     }
 
 function chprod_hcc()
