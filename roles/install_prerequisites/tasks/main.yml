@@ -685,7 +685,7 @@
   tags: apt
   become: true
 
-- name: Copy script to run apt update and upgrade on boot
+- name: Patch system at noon
   ansible.builtin.cron:
     minute: "0"
     hour: "12"
@@ -695,7 +695,7 @@
   become: true
   tags: apt
 
-- name: Copy script to run apt update and upgrade on boot
+- name: Patch system on Reboot
   ansible.builtin.cron:
     special_time: reboot
     name: Patching on system start
