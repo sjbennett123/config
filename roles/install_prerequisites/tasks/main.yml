@@ -859,3 +859,29 @@
     dest: ~/.selected_editor
     mode: '0644'
   become: true
+
+- name: Template selected editor file
+  ansible.builtin.template:
+    src: git_update.bash
+    dest: "{{ playbook_dir }}/../git_update.bash"
+    mode: '0755'
+  tags: git_update
+
+- name: Update Repos at Noon
+  ansible.builtin.cron:
+    minute: "0"
+    hour: "12"
+    name: Update Repos at Noon
+    user: root
+    job: "{{ playbook_dir }}/../git_update.bash"
+  become: true
+  tags: git_update
+
+- name: Patch system on Reboot
+  ansible.builtin.cron:
+    special_time: reboot
+    name: Update repos at Reboot
+    user: root
+    job: "{{ playbook_dir }}/../git_update.bash"
+  become: true
+  tags: git_update
