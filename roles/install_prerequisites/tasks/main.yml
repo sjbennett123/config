@@ -798,26 +798,32 @@
   become: true
   tags: python
 
-- name: Template aws configuration file
+- name: Template Ubuntu Pro configuration file
   ansible.builtin.template:
     src: ubuntu_pro__uaclient.conf.j2
     dest: /etc/ubuntu-advantage/uaclient.conf
-    mode: '0664'
+    mode: '0644'
   tags: ubuntu_advantage
+  become: true
 
-- name: Set rustup default to stable
+- name: Turn off Ubuntu Pro apt news
   ansible.builtin.command: sudo pro config set apt_news=false
   become: true
   changed_when: true
   # when: rustup.changed # noqa: no-handler
   tags: ubuntu_advantage
 
-- name: Set rustup default to stable
+- name: Refresh Ubuntu pro configuration
   ansible.builtin.command: sudo pro refresh config
   become: true
   changed_when: true
   # when: rustup.changed # noqa: no-handler
   tags: ubuntu_advantage
 
-# sudo pro config set apt_news=false
-# sudo pro refresh config
+- name: Copy using inline content
+  ansible.builtin.copy:
+    content: ''
+    dest: /etc/apt/apt.conf.d/20apt-esm-hook.conf
+    mode: '0644'
+  become: true
+  tags: ubuntu_advantage
