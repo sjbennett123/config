@@ -872,16 +872,12 @@
     minute: "0"
     hour: "12"
     name: Update Repos at Noon
-    user: root
     job: "{{ playbook_dir }}/../git_update.bash"
-  become: true
   tags: git_update
 
 - name: Patch system on Reboot
   ansible.builtin.cron:
     special_time: reboot
     name: Update repos at Reboot
-    user: root
     job: "{{ playbook_dir }}/../git_update.bash"
-  become: true
   tags: git_update
