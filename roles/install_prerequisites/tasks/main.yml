@@ -689,7 +689,7 @@
   ansible.builtin.cron:
     minute: "0"
     hour: "12"
-    name: Patching on system start
+    name: Patch at noon
     user: root
     job: "/root/aptcron.bash"
   become: true
