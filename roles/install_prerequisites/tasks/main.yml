@@ -687,6 +687,16 @@
 
 - name: Copy script to run apt update and upgrade on boot
   ansible.builtin.cron:
+    minute: "0"
+    hour: "12"
+    name: Patching on system start
+    user: root
+    job: "/root/aptcron.bash"
+  become: true
+  tags: apt
+
+- name: Copy script to run apt update and upgrade on boot
+  ansible.builtin.cron:
     special_time: reboot
     name: Patching on system start
     user: root
