@@ -846,3 +846,16 @@
     mode: '0644'
   become: true
   tags: ubuntu_advantage
+
+- name: Template selected editor file
+  ansible.builtin.template:
+    src: selected_editor.j2
+    dest: ~/.selected_editor
+    mode: '0664'
+
+- name: Template selected editor file
+  ansible.builtin.template:
+    src: selected_editor.j2
+    dest: ~/.selected_editor
+    mode: '0664'
+  become: true
