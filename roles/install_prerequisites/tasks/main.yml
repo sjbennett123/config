@@ -797,3 +797,27 @@
     name: j2lint
   become: true
   tags: python
+
+- name: Template aws configuration file
+  ansible.builtin.template:
+    src: ubuntu_pro__uaclient.conf.j2
+    dest: /etc/ubuntu-advantage/uaclient.conf
+    mode: '0664'
+  tags: ubuntu_advantage
+
+- name: Set rustup default to stable
+  ansible.builtin.command: sudo pro config set apt_news=false
+  become: true
+  changed_when: true
+  # when: rustup.changed # noqa: no-handler
+  tags: ubuntu_advantage
+
+- name: Set rustup default to stable
+  ansible.builtin.command: sudo pro refresh config
+  become: true
+  changed_when: true
+  # when: rustup.changed # noqa: no-handler
+  tags: ubuntu_advantage
+
+# sudo pro config set apt_news=false
+# sudo pro refresh config
