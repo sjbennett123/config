@@ -681,7 +681,7 @@
   ansible.builtin.copy:
     src: aptcron.bash
     dest: /root/aptcron.bash
-    mode: '0644'
+    mode: '775'
   tags: apt
   become: true
 
@@ -696,11 +696,20 @@
 
 - name: Copy using inline content
   ansible.builtin.copy:
-    content: '# instructions on how to use the systemd syslog'
+    content: |
+      # instructions on how to use the systemd syslog
+      # grep CRON /var/log/syslog
     dest: /var/log/cron
     mode: '0644'
   tags: cron
   become: true
+
+- name: Install postfix for cron messages
+  ansible.builtin.apt:
+    name: postfix
+    state: present
+  become: true
+  tags: cron
 
 - name: Download jira cli
   ansible.builtin.get_url:
