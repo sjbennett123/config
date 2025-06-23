@@ -808,7 +808,7 @@
 
 - name: Print the verson
   ansible.builtin.debug:
-    var: tig_version
+    var: tig_version.stdout
   tags: tig
 
 - name: Install python3-full
