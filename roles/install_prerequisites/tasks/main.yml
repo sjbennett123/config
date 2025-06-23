@@ -887,3 +887,5 @@
 
 # pylintrc.j2
 # ~/.pylintrc
+
+# watchexec.bash.j2
