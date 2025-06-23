@@ -46,7 +46,9 @@
 
     - name: Install python3
       ansible.builtin.apt:
-        name: python3
+        name:
+          - python3
+          - python-is-python3
         state: present
       become: true
       tags: python3
@@ -575,6 +577,8 @@
     - {src: 'wsl.bash.j2', dest: '~/.bashrc.d/wsl.bash'}
     - {src: 'python.bash.j2', dest: '~/.bashrc.d/python.bash'}
     - {src: 'j2lint.bash.j2', dest: '~/.bashrc.d/j2lint.bash'}
+    - {src: 'watchexec.bash.j2', dest: '~/.bashrc.d/watchexec.bash'}
+    - {src: 'pylintrc.j2', dest: '~/.pylintrc'}
   tags: bashrc
 
 - name: Copy Solventum man in the middle certs
@@ -795,7 +799,16 @@
   become: true
   tags: tig
 
-# https://jonas.github.io/tig
+- name: Confirm that tig runs https://jonas.github.io/tig
+  ansible.builtin.command:
+    cmd: tig --version
+  tags: tig
+  register: tig_version
+
+- name: print the verson
+  ansible.builtin.debug:
+    var: tig_version
+  tags: tig
 
 - name: Install python3-full
   ansible.builtin.apt:
@@ -814,6 +827,12 @@
 - name: Install j2lint
   community.general.pipx:
     name: j2lint
+  become: true
+  tags: python
+
+- name: Install pylint
+  community.general.pipx:
+    name: pylint
   become: true
   tags: python
 
@@ -881,11 +900,3 @@
     name: Update repos at Reboot
     job: "{{ playbook_dir }}/../git_update.bash"
   tags: git_update
-# apt install python-is-python3
-
-# pipx install pylint
-
-# pylintrc.j2
-# ~/.pylintrc
-
-# watchexec.bash.j2
