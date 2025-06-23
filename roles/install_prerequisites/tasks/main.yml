@@ -793,9 +793,9 @@
 
 - name: Install Tig
   ansible.builtin.command:
-    cmd: make install
+    cmd: sudo make install
     chdir: /opt/installers/tig-2.5.12/
-    creates: /usr/local/bin
+    creates: /usr/local/bin/tig
   become: true
   tags: tig
 
@@ -803,9 +803,10 @@
   ansible.builtin.command:
     cmd: tig --version
   tags: tig
+  changed_when: false
   register: tig_version
 
-- name: print the verson
+- name: Print the verson
   ansible.builtin.debug:
     var: tig_version
   tags: tig
