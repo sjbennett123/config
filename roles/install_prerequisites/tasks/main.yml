@@ -883,4 +883,7 @@
   tags: git_update
 # apt install python-is-python3
 
-# pipx install pylint^C
+# pipx install pylint
+
+# pylintrc.j2
+# ~/.pylintrc
