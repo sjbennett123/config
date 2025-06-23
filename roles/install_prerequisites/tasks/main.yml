@@ -881,3 +881,5 @@
     name: Update repos at Reboot
     job: "{{ playbook_dir }}/../git_update.bash"
   tags: git_update
+
+# pipx install pylint^C
