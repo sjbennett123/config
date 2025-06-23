@@ -860,7 +860,7 @@
     mode: '0644'
   become: true
 
-- name: Template selected editor file
+- name: Template git update cron script
   ansible.builtin.template:
     src: git_update.bash
     dest: "{{ playbook_dir }}/../git_update.bash"
