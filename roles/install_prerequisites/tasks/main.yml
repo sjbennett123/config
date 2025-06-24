@@ -844,20 +844,21 @@
     mode: '0644'
   tags: ubuntu_advantage
   become: true
+  register: ubuntu_advantage
 
 - name: Turn off Ubuntu Pro apt news
-  ansible.builtin.command: sudo pro config set apt_news=false
+  ansible.builtin.command: "sudo pro config set apt_news=false"
   become: true
   changed_when: true
-  # when: rustup.changed # noqa: no-handler
   tags: ubuntu_advantage
+  when: ubuntu_advantage.changed # noqa: no-handler
 
 - name: Refresh Ubuntu pro configuration
   ansible.builtin.command: sudo pro refresh config
   become: true
   changed_when: true
-  # when: rustup.changed # noqa: no-handler
   tags: ubuntu_advantage
+  when: ubuntu_advantage.changed # noqa: no-handler
 
 - name: Copy using inline content
   ansible.builtin.copy:
