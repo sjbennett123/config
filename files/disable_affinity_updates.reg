@@ -1,0 +1,10 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Serif\Affinity\Designer\2]
+"No Update Check"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Serif\Affinity\Photo\2]
+"No Update Check"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Serif\Affinity\Publisher\2]
+"No Update Check"=dword:00000001
