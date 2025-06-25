@@ -376,6 +376,8 @@
       become: true
       tags: jq
 
+# sudo apt install python3-demjson
+
     - name: Install ncdu
       ansible.builtin.apt:
         name: ncdu
