@@ -1402,3 +1402,9 @@ function owlbear()
 
 
 # https://sshx.s3.amazonaws.com/sshx-x86_64-pc-windows-msvc.zip
+
+# scoop install pipx
+# pipx ensurepath
+# pipx install jsonlint
+# C:\Users\AAA3AZZ\.local\bin
+Set-Alias -Name jsonlint -Value json-linter
