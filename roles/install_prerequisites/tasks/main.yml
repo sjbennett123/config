@@ -726,9 +726,12 @@
     state: present
   become: true
   tags: cron
+
 # roles/install_prerequisites/templates/postfix_main.cf.j2
 # /etc/aliases.db
 # postalias /etc/aliases
+# postconf alias_maps
+
 - name: Download jira cli
   ansible.builtin.get_url:
     url: https://github.com/ankitpokhrel/jira-cli/releases/download/v1.6.0/jira_1.6.0_linux_x86_64.tar.gz
