@@ -725,12 +725,26 @@
     name: postfix
     state: present
   become: true
-  tags: cron
+  tags: postfix
+  register: postfix_install
 
 # roles/install_prerequisites/templates/postfix_main.cf.j2
-# /etc/aliases.db
-# postalias /etc/aliases
-# postconf alias_maps
+
+- name: Configure alaises with postalias command
+  ansible.builtin.command:
+    cmd: postalias /etc/aliases
+    creates: /etc/aliases
+  become: true
+  tags: postfix
+  when: postfix_install.changed
+
+- name: Configure alias_maps
+  ansible.builtin.command:
+    cmd: postconf alias_maps
+    creates: /etc/aliases.db
+  become: true
+  tags: postfix
+  when: postfix_install.changed
 
 - name: Download jira cli
   ansible.builtin.get_url:
