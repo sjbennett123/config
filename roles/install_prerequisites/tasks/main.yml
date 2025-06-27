@@ -21,6 +21,8 @@
   become: true
   when: "ansible_env.WSL_DISTRO_NAME"
 
+# sudo apt install wslu
+
 - name: Install Troubleshooting Tools
   block:
     - name: Install hugo
@@ -849,13 +851,21 @@
 - name: Install j2lint
   community.general.pipx:
     name: j2lint
-  become: true
   tags: python
 
 - name: Install pylint
   community.general.pipx:
     name: pylint
-  become: true
+  tags: python
+
+- name: Install visidata
+  community.general.pipx:
+    name: visidata
+  tags: python
+
+- name: Install termdown
+  community.general.pipx:
+    name: termdown
   tags: python
 
 - name: Template Ubuntu Pro configuration file
@@ -928,6 +938,3 @@
   ansible.builtin.file:
     path: /etc/apt/sources.list.d/shiftkey-packages.list
     state: absent
-# sudo apt install wslu
-# pipx install visidata
-# pipx install termdown
