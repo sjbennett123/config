@@ -930,3 +930,4 @@
     state: absent
 # sudo apt install wslu
 # pipx install visidata
+# pipx install termdown
