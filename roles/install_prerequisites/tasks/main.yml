@@ -928,3 +928,5 @@
   ansible.builtin.file:
     path: /etc/apt/sources.list.d/shiftkey-packages.list
     state: absent
+# sudo apt install wslu
+# pipx install visidata
