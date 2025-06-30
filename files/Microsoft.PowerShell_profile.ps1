@@ -1408,3 +1408,7 @@ function owlbear()
 # pipx install jsonlint
 # C:\Users\AAA3AZZ\.local\bin
 Set-Alias -Name jsonlint -Value json-linter
+
+# 
+# https://github.com/mike-engel/jwt-cli/releases/download/6.2.0/jwt-windows.tar.gz
+# https://github.com/rs/curlie/releases/download/v1.8.2/curlie_1.8.2_windows_amd64.zip
