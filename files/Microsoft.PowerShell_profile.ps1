@@ -399,11 +399,11 @@ else
 
 function fl()
     {
-        fed --manual --idp jitney list
+        fed list
     }
 function fu($envname)
     {
-        fed --manual --idp jitney up $envname
+        fed up
     }
 function creds()
     {
@@ -750,12 +750,12 @@ else
 
 function j()
     {
-        jira issue list -q "project IN ('CHLAB','CHPROD','HCC','Write-Output','DECOM') AND assignee IN (currentUser()) AND status != Closed"
+        jira issue list -q "project IN ('CHLAB','CHPROD','HCC','OCDI','DECOM') AND assignee IN (currentUser()) AND status != Closed"
     }
 
 function jh()
     {
-        jira issue list --history -q "project IN ('CHLAB','CHPROD','HCC','Write-Output','DECOM')"
+        jira issue list --history -q "project IN ('CHLAB','CHPROD','HCC','OCDI','DECOM')"
     }
 
 function jv($a)
@@ -1258,7 +1258,15 @@ function ssm {
         if ($profile -eq 692859943168){
           Set-Variable -Name "profile" -Value "us-ocdi-non-prod-non-phi"
         }
-        aws ec2 describe-tags --profile $profile --filters "Name=resource-id,Values=$instanceid" "Name=key,Values=Name" |jq -r .Tags[].Value
+        
+        $ec2_describe_instances = aws ec2 describe-instances --no-paginate --profile $profile --instance-ids $instanceid 
+        Write-Host -NoNewline "Instance Name: "
+        aws ec2 describe-tags --profile $profile --filters "Name=resource-id,Values=$instanceid" "Name=key,Values=Name" | jq -r .Tags[].Value
+        Write-Host -NoNewline "Intance VPC: "
+        $ec2_describe_instances| jq .Reservations[].Instances[].VpcId
+        Write-Host -NoNewline "Intance Subnet: "
+        $ec2_describe_instances | jq .Reservations[].Instances[].SubnetId
+        
         aws ssm start-session --profile $profile --target $instanceid
     }
 }
@@ -1412,3 +1420,5 @@ Set-Alias -Name jsonlint -Value json-linter
 # 
 # https://github.com/mike-engel/jwt-cli/releases/download/6.2.0/jwt-windows.tar.gz
 # https://github.com/rs/curlie/releases/download/v1.8.2/curlie_1.8.2_windows_amd64.zip
+
+# C:\Users\AAA3AZZ\Desktop> rm .\Postman.lnk
