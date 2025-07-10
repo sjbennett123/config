@@ -707,6 +707,14 @@ if ($condition) {
             chrome https://alacritty.org/config-alacritty.html
             Start-Process $env:APPDATA\alacritty\alacritty.toml
         }
+    function al()
+        {
+          cp $env:APPDATA\alacritty\alacritty_light.toml $env:APPDATA\alacritty\alacritty.toml
+        }
+function ad()
+        {
+          cp $env:APPDATA\alacritty\alacritty_dark.toml $env:APPDATA\alacritty\alacritty.toml
+        }
 }
 else
 {
@@ -1259,15 +1267,15 @@ function ssm {
           Set-Variable -Name "profile" -Value "us-ocdi-non-prod-non-phi"
         }
         
-        $ec2_describe_instances = aws ec2 describe-instances --no-paginate --profile $profile --instance-ids $instanceid 
+        $ec2_describe_instances = aws ec2 --region us-east-1 describe-instances --no-paginate --profile $profile --instance-ids $instanceid 
         Write-Host -NoNewline "Instance Name: "
-        aws ec2 describe-tags --profile $profile --filters "Name=resource-id,Values=$instanceid" "Name=key,Values=Name" | jq -r .Tags[].Value
+        aws ec2 describe-tags --region us-east-1 --profile $profile --filters "Name=resource-id,Values=$instanceid" "Name=key,Values=Name" | jq -r .Tags[].Value
         Write-Host -NoNewline "Intance VPC: "
         $ec2_describe_instances| jq .Reservations[].Instances[].VpcId
         Write-Host -NoNewline "Intance Subnet: "
         $ec2_describe_instances | jq .Reservations[].Instances[].SubnetId
         
-        aws ssm start-session --profile $profile --target $instanceid
+        aws ssm start-session --region us-east-1 --profile $profile --target $instanceid
     }
 }
 else
