@@ -1253,29 +1253,35 @@ function ssm {
         
         if ($profile -eq 830301468378){
           Set-Variable -Name "profile" -Value "us-catalyst-dev"
+          Set-Variable -Name "aws_region" -Value "us-east-1"
         }
         if ($profile -eq 316401171432){
           Set-Variable -Name "profile" -Value "us-catalyst-nonprod-phi"
+          Set-Variable -Name "aws_region" -Value "us-east-1"
         }
         if ($profile -eq 557690604736){
           Set-Variable -Name "profile" -Value "us-ocdi-prod-phi"
+          Set-Variable -Name "aws_region" -Value "us-east-1"
         }
         if ($profile -eq 030442966757){
           Set-Variable -Name "profile" -Value "3mhis-catalyst"
+          Set-Variable -Name "aws_region" -Value "us-east-1"
         }
         if ($profile -eq 692859943168){
           Set-Variable -Name "profile" -Value "us-ocdi-non-prod-non-phi"
+          Set-Variable -Name "aws_region" -Value "us-east-1"
+
         }
         
-        $ec2_describe_instances = aws ec2 --region us-east-1 describe-instances --no-paginate --profile $profile --instance-ids $instanceid 
+        $ec2_describe_instances = aws ec2 --region $aws_region describe-instances --no-paginate --profile $profile --instance-ids $instanceid 
         Write-Host -NoNewline "Instance Name: "
-        aws ec2 describe-tags --region us-east-1 --profile $profile --filters "Name=resource-id,Values=$instanceid" "Name=key,Values=Name" | jq -r .Tags[].Value
+        aws ec2 describe-tags --region $aws_region --profile $profile --filters "Name=resource-id,Values=$instanceid" "Name=key,Values=Name" | jq -r .Tags[].Value
         Write-Host -NoNewline "Intance VPC: "
         $ec2_describe_instances| jq .Reservations[].Instances[].VpcId
         Write-Host -NoNewline "Intance Subnet: "
         $ec2_describe_instances | jq .Reservations[].Instances[].SubnetId
         
-        aws ssm start-session --region us-east-1 --profile $profile --target $instanceid
+        aws ssm start-session --region $aws_region --profile $profile --target $instanceid
     }
 }
 else
