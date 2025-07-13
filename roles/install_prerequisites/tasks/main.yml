@@ -39,6 +39,18 @@
       become: true
       tags: watchexec
 
+    - name: Install wslu
+      ansible.builtin.apt:
+        name: wslu
+        state: present
+      become: true
+
+    - name: Install lynx
+      ansible.builtin.apt:
+        name: lynx
+        state: present
+      become: true
+
     - name: Install ansible-lint
       ansible.builtin.apt:
         name: ansible-lint
