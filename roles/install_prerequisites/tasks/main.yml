@@ -750,7 +750,7 @@
     creates: /etc/aliases
   become: true
   tags: postfix
-  when: postfix_install.changed
+  when: postfix_install.changed # noqa: no-handler
 
 - name: Configure alias_maps
   ansible.builtin.command:
@@ -758,7 +758,7 @@
     creates: /etc/aliases.db
   become: true
   tags: postfix
-  when: postfix_install.changed
+  when: postfix_install.changed # noqa: no-handler
 
 - name: Download jira cli
   ansible.builtin.get_url:
