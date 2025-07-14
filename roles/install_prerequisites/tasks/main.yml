@@ -946,7 +946,7 @@
     job: "{{ playbook_dir }}/../git_update.bash"
   tags: git_update
 
-- name: remove shiftkey-packages
+- name: Remove shiftkey-packages
   ansible.builtin.file:
     path: /etc/apt/sources.list.d/shiftkey-packages.list
     state: absent

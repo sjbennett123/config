@@ -14,6 +14,9 @@ sudo apt install pipx
 pipx install j2lint
 j2lint bash
 
+apt install btop
+clean up linting errors noqa on changed
+
 ## Windows
 
 ## Linux
