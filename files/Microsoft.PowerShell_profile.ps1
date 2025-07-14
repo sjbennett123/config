@@ -1277,9 +1277,9 @@ function ssm {
         Write-Host -NoNewline "Instance Name: "
         aws ec2 describe-tags --region $aws_region --profile $profile --filters "Name=resource-id,Values=$instanceid" "Name=key,Values=Name" | jq -r .Tags[].Value
         Write-Host -NoNewline "Intance VPC: "
-        $ec2_describe_instances| jq .Reservations[].Instances[].VpcId
+        $ec2_describe_instances| jq -r .Reservations[].Instances[].VpcId
         Write-Host -NoNewline "Intance Subnet: "
-        $ec2_describe_instances | jq .Reservations[].Instances[].SubnetId
+        $ec2_describe_instances | jq -r .Reservations[].Instances[].SubnetId
         
         aws ssm start-session --region $aws_region --profile $profile --target $instanceid
     }
@@ -1436,3 +1436,6 @@ Set-Alias -Name jsonlint -Value json-linter
 # https://github.com/rs/curlie/releases/download/v1.8.2/curlie_1.8.2_windows_amd64.zip
 
 # C:\Users\AAA3AZZ\Desktop> rm .\Postman.lnk
+
+# https://github.com/aristocratos/btop4win/releases/tag/v1.0.4
+Set-Alias -Name top -Value btop
