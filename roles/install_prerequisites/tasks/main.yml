@@ -39,9 +39,9 @@
       become: true
       tags: watchexec
 
-    - name: Install wslu
+    - name: Install btop
       ansible.builtin.apt:
-        name: wslu
+        name: btop
         state: present
       become: true
 
