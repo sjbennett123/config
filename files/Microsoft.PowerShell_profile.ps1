@@ -1250,7 +1250,10 @@ $condition = Get-Command session-manager-plugin.exe
 if ($condition) {
 function ssm {
         param($profile, $instanceid)
-        
+        # If instanceid is not passed return a list of instances and names
+        # aws ec2 list-instances --filters "Name=tag-key,Values=Name"
+
+        Set-Variable -Name "aws_region" -Value "us-east-1"
         if ($profile -eq 830301468378){
           Set-Variable -Name "profile" -Value "us-catalyst-dev"
           Set-Variable -Name "aws_region" -Value "us-east-1"
@@ -1270,9 +1273,16 @@ function ssm {
         if ($profile -eq 692859943168){
           Set-Variable -Name "profile" -Value "us-ocdi-non-prod-non-phi"
           Set-Variable -Name "aws_region" -Value "us-east-1"
-
         }
-        
+
+
+    if ($instanceid -eq $null) {
+        Write-Host "No Instance specified.... listing instances! "
+        $ec2_describe_instances = aws ec2 --region $aws_region describe-instances --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=230"
+ | jq .Reservations[].Instances[]
+        $ec2_describe_instances | jq -r   '"Instance Name : " + (.Tags[]|select(.Key=="Name")|.Value) + "Instance ID : " + .InstanceId +"\n"'
+
+    } else {
         $ec2_describe_instances = aws ec2 --region $aws_region describe-instances --no-paginate --profile $profile --instance-ids $instanceid 
         Write-Host -NoNewline "Instance Name: "
         aws ec2 describe-tags --region $aws_region --profile $profile --filters "Name=resource-id,Values=$instanceid" "Name=key,Values=Name" | jq -r .Tags[].Value
@@ -1280,8 +1290,10 @@ function ssm {
         $ec2_describe_instances| jq -r .Reservations[].Instances[].VpcId
         Write-Host -NoNewline "Intance Subnet: "
         $ec2_describe_instances | jq -r .Reservations[].Instances[].SubnetId
-        
-        aws ssm start-session --region $aws_region --profile $profile --target $instanceid
+        Write-Host -NoNewline "Region: $aws_region"
+
+        aws ssm start-session --region $aws_region --profile $profile --target $instanceid    }
+
     }
 }
 else
@@ -1439,3 +1451,11 @@ Set-Alias -Name jsonlint -Value json-linter
 
 # https://github.com/aristocratos/btop4win/releases/tag/v1.0.4
 Set-Alias -Name top -Value btop
+
+function gbc {
+        param($oldversion, $newversion)
+      
+        $oldversion_git_output = git log --oneline remotes/origin/release/$oldversion | sort
+        $newversion_git_output = git log --oneline remotes/origin/release/$newversion | sort
+        difft "$oldversion_git_output" "$newversion_git_output"
+}
