@@ -3,6 +3,7 @@ $gitdirs = Get-ChildItem -Directory
 foreach ($dir in $gitdirs)
 {
   Set-Location $dir
-  git pull -q
+  git fetch --all
+  git pull --all -q
   Set-Location ..
 }
