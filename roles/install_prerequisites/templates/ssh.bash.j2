@@ -6,19 +6,25 @@ fi
 
 
 if [[ ! -e "$HOME/.ssh/windows_ssh_config" && -e /mnt/c/Users/AAA3AZZ/.ssh/config ]]; then
-  ln -s /mnt/c/Users/AAA3AZZ/.ssh/config windows_ssh_config      
-  ln -s /mnt/c/Users/AAA3AZZ/.ssh/*.pub .
-  ln -s /mnt/c/Users/AAA3AZZ/.ssh/*.pem .
+  cd ~/.ssh  || return
+  ln -s /mnt/c/Users/AAA3AZZ/.ssh/config windows_ssh_config
+  cd ~- || return
 fi
 
-if [[ ! -e "$HOME/.ssh/" && -e /mnt/c/Users/AAA3AZZ/.ssh/ ]]; then
-  ln -s /mnt/c/Users/AAA3AZZ/.ssh/*.pub .
-  ln -s /mnt/c/Users/AAA3AZZ/.ssh/*.pem .
+if [[  -e /mnt/c/Users/AAA3AZZ/.ssh/ ]]; then
+   cd ~/.ssh || return
+   cp /mnt/c/Users/AAA3AZZ/.ssh/*.pub .
+   cp /mnt/c/Users/AAA3AZZ/.ssh/*.pem .
+   cd ~- || return
 fi
 
 if [ -e "$HOME/.ssh/windows_ssh_config" ] ; then
- sed -r 's/C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe //' ~/.ssh/windows_ssh_config > ~/.ssh/config
+  cp ~/.ssh/windows_ssh_config ~/.ssh/config
+  sed -ri 's/C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe //g' ~/.ssh/config
+  aws_path=$(which aws)
+  sed -ri "s|aws ssm |$aws_path ssm --no-verify-ssl |g" ~/.ssh/config
+  sed -ri 's|C:\\Users\\AAA3AZZ\\.ssh\\|~/.ssh/|g' ~/.ssh/config
 fi
 
-eval $(wsl2-ssh-agent)
+eval "$(wsl2-ssh-agent)"
 
