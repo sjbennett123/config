@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 for dir in */; do
   cd "$dir" || exit ; 
   if [[ $(git branch 2> /dev/null)  ]]; then 
