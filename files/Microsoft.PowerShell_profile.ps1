@@ -1277,7 +1277,7 @@ function ssm {
 
 
     if ($instanceid -eq $null) {
-        Write-Host "No Instance specified.... listing instances! "
+        Write-Host "No Instance specified.... listing instances for app id 230! "
         $ec2_describe_instances = aws ec2 --region $aws_region describe-instances --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=230"
  | jq .Reservations[].Instances[]
         $ec2_describe_instances | jq -r   '"Instance Name : " + (.Tags[]|select(.Key=="Name")|.Value) + "Instance ID : " + .InstanceId +"\n"'
