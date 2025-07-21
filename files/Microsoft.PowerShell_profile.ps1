@@ -272,9 +272,9 @@ function gum()
     {
         # Get the latest metadata
         $current_branch = git rev-parse --abbrev-ref HEAD
-        git fetch
+        git fetch --all -q
         git switch main
-        git pull -q
+        git pull --all -q
         git switch $current_branch
         git merge main
     }
@@ -1280,7 +1280,7 @@ function ssm {
         Write-Host "No Instance specified.... listing instances for app id 230! "
         $ec2_describe_instances = aws ec2 --region $aws_region describe-instances --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=230"
  | jq .Reservations[].Instances[]
-        $ec2_describe_instances | jq -r   '"Instance Name : " + (.Tags[]|select(.Key=="Name")|.Value) + "Instance ID : " + .InstanceId +"\n"'
+        $ec2_describe_instances | jq -r   '"Instance Name : " + (.Tags[]|select(.Key=="Name")|.Value) + " | Instance ID : " + .InstanceId'
 
     } else {
         $ec2_describe_instances = aws ec2 --region $aws_region describe-instances --no-paginate --profile $profile --instance-ids $instanceid 
@@ -1452,10 +1452,53 @@ Set-Alias -Name jsonlint -Value json-linter
 # https://github.com/aristocratos/btop4win/releases/tag/v1.0.4
 Set-Alias -Name top -Value btop
 
-function gbc {
+function gitbc {
         param($oldversion, $newversion)
-      
-        $oldversion_git_output = git log --oneline remotes/origin/release/$oldversion | sort
-        $newversion_git_output = git log --oneline remotes/origin/release/$newversion | sort
-        difft "$oldversion_git_output" "$newversion_git_output"
+        if ($newversion -eq $null) {
+          Write-Host "No version passed to command it should look like this..."
+          Write-Host "gitbc 8.5.1 8.7.1"
+          git fetch --all -q
+          git pull --all -q
+          Write-Host "Availibe branches are..."
+          git branch -a | grep release | Sort-Object
+          break
+        }
+        git fetch --all -q
+        git pull --all -q
+        $oldversion_git_diff = git log origin/release/$newversion..origin/release/$oldversion --oneline --decorate
+        $oldversion_git_diff_count = $oldversion_git_diff | wc -l
+        $oldversion_git_diff_count = $oldversion_git_diff_count.Trim()
+
+        if ($oldversion_git_diff_count -ne "0") {
+          Write-Host  -ForegroundColor DarkGreen -BackgroundColor White "Only in $oldversion"
+          Write-Host -ForegroundColor Red "This should be empty!"
+          [System.Media.SystemSounds]::Beep.Play()
+          Write-Output  $oldversion_git_diff
+        }
+        Write-Host  -ForegroundColor DarkGreen -BackgroundColor White "Only in $newversion"
+        $newversion_git_diff = git log origin/release/$oldversion..origin/release/$newversion --oneline --decorate
+        $newversion_git_diff
+
 }
+
+function token {
+        param($env,$tenant)
+$env
+$uaa_username = yq ".$env.username" "$HOME\ocdi_creds.yml"
+$uaa_password = yq ".$env.password" "$HOME\ocdi_creds.yml"
+$ocdi_external_services_address = yq ".$env.ocdi_external_services_address" "$HOME\ocdi_creds.yml"
+# curl -X POST --user $uaa_username:$uaa_password https://$ocdi_external_services_address/uaa/oauth/token -d "grant_type=client_credentials&tenant=mcleodhealth" | jq -c -r '.access_token'
+
+$uaa_username
+$uaa_password
+$ocdi_external_services_address
+}
+# USERPROFILE
+# [Environment]::SetEnvironmentVariable("token", token, "Machine")
+# $uaa_username = yq '.$env.username' $env:USERPROFILE/ocdi_creds.yml
+# $uaa_password = yq '.$env.password' $env:USERPROFILE/ocdi_creds.yml
+# $ocdi_external_services_address = yq '.$env.ocdi_external_services_address' $env:USERPROFILE/ocdi_creds.yml
+
+# curl -X POST --user $uaa_username:$uaa_password= https://$ocdi_external_services_address/uaa/oauth/token -d "grant_type=client_credentials&tenant=mcleodhealth" | jq -c -r '.access_token'
+# token=$(curl -X POST --user ocdiops:BgsrR4fbetswdA9Im6ViSEwX6xs= https://catalyst.3mhis.com/uaa/oauth/token -d "grant_type=client_credentials&tenant=mcleodhealth" | jq -c -r '.access_token ')
+# curl -H "Authorization: Bearer $token" https://ocdi-services-external.cpm-pb.us.amz.3mhis.net/ocdi-services-external/api/diagnosis-code-risk-model-mappings/E11.22
