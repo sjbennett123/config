@@ -4,3 +4,15 @@ alias gitc='cd "$(git rev-parse --show-toplevel)";git pull; git add .; git commi
 alias gr='cd "$(git rev-parse --show-toplevel)"'
 #  git config --global user.email "you@example.com"
 #  git config --global user.name "Your Name"
+
+# Convert to bash 
+function gum()
+    {
+        # Get the latest metadata
+        $current_branch = git rev-parse --abbrev-ref HEAD
+        git fetch --all -q
+        git switch main
+        git pull --all -q
+        git switch $current_branch
+        git merge main
+    }
