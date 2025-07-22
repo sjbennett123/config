@@ -1231,7 +1231,14 @@ else
 }
 
 $condition = where.exe j2lint
-if ($condition) {}
+if ($condition) {
+# function j2lint_function {
+        # param($directory)
+        # j2lint $directory --ignore jinja-statements-indentation jinja-variable-format single-statement-per-line jinja-variable-lower-case
+        # }
+        # Set-Alias -Name j2lint_function -Value j2lint_function
+
+}
 else
 {
     Write-Output "https://pypi.org/project/j2lint/"
@@ -1272,6 +1279,14 @@ function ssm {
         }
         if ($profile -eq 692859943168){
           Set-Variable -Name "profile" -Value "us-ocdi-non-prod-non-phi"
+          Set-Variable -Name "aws_region" -Value "us-east-1"
+        }
+        if ($profile -eq 692859943168){
+          Set-Variable -Name "profile" -Value "us-ocdi-non-prod-non-phi"
+          Set-Variable -Name "aws_region" -Value "us-east-1"
+        }
+        if (($profile -eq 805627377939) -or ($profile -eq "us-catalyst-prod-phi")){
+          Set-Variable -Name "profile" -Value "pa"
           Set-Variable -Name "aws_region" -Value "us-east-1"
         }
 
