@@ -958,6 +958,7 @@ else
 {
   Write-Output "Install Netcat"
   Write-Output "https://nmap.org/ncat/"
+  Write-Output "https://nmap.org/dist/nmap-7.97-setup.exe"
 }
 
 
