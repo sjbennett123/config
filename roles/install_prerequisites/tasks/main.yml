@@ -21,7 +21,11 @@
   become: true
   when: "ansible_env.WSL_DISTRO_NAME"
 
-# sudo apt install wslu
+- name: Install wslu
+  ansible.builtin.apt:
+    name: wslu
+    state: present
+  become: true
 
 - name: Install Troubleshooting Tools
   block:
@@ -950,3 +954,9 @@
   ansible.builtin.file:
     path: /etc/apt/sources.list.d/shiftkey-packages.list
     state: absent
+
+- name: Install bind9-dnsutils
+  ansible.builtin.apt:
+    name: bind9-dnsutils
+    state: present
+  become: true
