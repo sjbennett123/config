@@ -1266,7 +1266,7 @@ function ssm {
           Set-Variable -Name "profile" -Value "us-catalyst-dev"
           Set-Variable -Name "aws_region" -Value "us-east-1"
         }
-        if ($profile -eq 316401171432){
+        if (($profile -eq 316401171432) -or ($profile -eq "ct")){
           Set-Variable -Name "profile" -Value "us-catalyst-nonprod-phi"
           Set-Variable -Name "aws_region" -Value "us-east-1"
         }
@@ -1293,18 +1293,23 @@ function ssm {
 
 
     if ($instanceid -eq $null) {
-        Write-Host "No Instance specified.... listing instances for app id 230! "
+        Write-Host "No Instance specified..."
+        Write-Host "Listing instances for HCC app id 230."
         $ec2_describe_instances = aws ec2 --region $aws_region describe-instances --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=230"
+ | jq .Reservations[].Instances[]
+        $ec2_describe_instances | jq -r   '"Instance Name : " + (.Tags[]|select(.Key=="Name")|.Value) + " | Instance ID : " + .InstanceId'
+        Write-Host "Listing instances for OCDI app id 838."
+        $ec2_describe_instances = aws ec2 --region $aws_region describe-instances --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=838"
  | jq .Reservations[].Instances[]
         $ec2_describe_instances | jq -r   '"Instance Name : " + (.Tags[]|select(.Key=="Name")|.Value) + " | Instance ID : " + .InstanceId'
 
     } else {
         $ec2_describe_instances = aws ec2 --region $aws_region describe-instances --no-paginate --profile $profile --instance-ids $instanceid 
-        Write-Host -NoNewline "Instance Name: "
+        Write-Host -NoNewline "Name: "
         aws ec2 describe-tags --region $aws_region --profile $profile --filters "Name=resource-id,Values=$instanceid" "Name=key,Values=Name" | jq -r .Tags[].Value
-        Write-Host -NoNewline "Intance VPC: "
+        Write-Host -NoNewline "VPC: "
         $ec2_describe_instances| jq -r .Reservations[].Instances[].VpcId
-        Write-Host -NoNewline "Intance Subnet: "
+        Write-Host -NoNewline "Subnet: "
         $ec2_describe_instances | jq -r .Reservations[].Instances[].SubnetId
         Write-Host -NoNewline "Region: $aws_region"
 
@@ -1524,3 +1529,6 @@ if (Test-Path -Path "C:\Users\Public\Desktop\Synergy.lnk" -PathType Leaf) {
       Write-Output ("To delete the awful shortcut delete the file...")
       Write-Output ("C:\Users\Public\Desktop\Synergy.lnk")
 }
+
+# pre-commit run --all-files
+# alias to pc
