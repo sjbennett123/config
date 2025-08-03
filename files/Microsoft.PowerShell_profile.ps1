@@ -651,6 +651,12 @@ function pictures()
     }
 Set-Alias pics pictures
 
+function installers()
+    {
+         Set-Location $env:OneDrive\Installers\
+    }
+Set-Alias installer installers
+
 $condition = where.exe eza
 if ($condition) {
     Set-Alias ls eza
@@ -1532,3 +1538,5 @@ if (Test-Path -Path "C:\Users\Public\Desktop\Synergy.lnk" -PathType Leaf) {
 
 # pre-commit run --all-files
 # alias to pc
+
+# https://releases.hashicorp.com/vault/1.20.1/vault_1.20.1_windows_386.zip
