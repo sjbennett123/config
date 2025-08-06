@@ -1540,5 +1540,9 @@ if (Test-Path -Path "C:\Users\Public\Desktop\Synergy.lnk" -PathType Leaf) {
 
 # https://releases.hashicorp.com/vault/1.20.1/vault_1.20.1_windows_386.zip
 
-
+if ($Env:WSLENV)
+{
+}
+else{
 echo "https://devblogs.microsoft.com/commandline/share-environment-vars-between-wsl-and-windows/"
+}
