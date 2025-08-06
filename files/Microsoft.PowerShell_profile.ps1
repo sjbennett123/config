@@ -480,7 +480,7 @@ function config_update()
         git pull -q
         Set-Location -
         difft $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
-        Copy-Item  $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
+        Copy-Item $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
         # hide config files
     $condition = Test-Path -Path "$env:USERPROFILE/.bash_history"
     if ($condition) {
@@ -819,7 +819,7 @@ function ocdi_backlog_web()
 
 function ocdi_epics()
     {
-        jira issue list -q "project in ('OCDI')  and type = Epic AND status NOT IN ('Closed')" --order-by updated
+        jira issue list -q "project in ('OCDI') and type = Epic AND status NOT IN ('Closed')" --order-by updated
     }
 
 Set-Alias ocdi_epic ocdi_epics
@@ -1029,7 +1029,7 @@ function yaml2json($yamlfile)
     {
         $yamlfile_basename = (Get-Item $yamlfile ).Basename
         $yamlfile_dot_json = "$yamlfile_basename.json"
-        yq -o=json '.'  $yamlfile > $yamlfile_dot_json
+        yq -o=json '.' $yamlfile > $yamlfile_dot_json
     }
 function json2yaml($jsonfile)
     {
@@ -1053,7 +1053,7 @@ $condition = where.exe chafa
 if ($condition){
     function dup()
     {
-        czkawka.exe dup  --directories .
+        czkawka.exe dup --directories .
     }
 }
 else
@@ -1192,7 +1192,7 @@ if ($condition) {
         }
     function gcal_config_update(){
         Copy-Item "$env:OneDrive\Documents\GitHub\config"
-        difft  $env:OneDrive\Documents\GitHub\config\files\gcalcli_config.toml $env:localappdata\gcalcli\config.toml
+        difft $env:OneDrive\Documents\GitHub\config\files\gcalcli_config.toml $env:localappdata\gcalcli\config.toml
         Copy-Item $env:OneDrive\Documents\GitHub\config\files\gcalcli_config.toml $env:localappdata\gcalcli\config.toml
         git pull -q
         Set-Location -
@@ -1232,8 +1232,8 @@ else
     Write-Output "https://pre-commit.com/"
     # https://pre-commit.com/#install
     # https://github.com/pre-commit/pre-commit.com/blob/main/sections/advanced.md
-    Write-Output  "Set environment variable to skip ansible lint"
-    Write-Output  "SKIP=ansible-lint"
+    Write-Output "Set environment variable to skip ansible lint"
+    Write-Output "SKIP=ansible-lint"
     pip install pre-commit
 }
 
@@ -1429,7 +1429,6 @@ function owlbear()
 # | || (_) | (_| | (_) |
 #  \__\___/ \__,_|\___/
 
-# https://devblogs.microsoft.com/commandline/share-environment-vars-between-wsl-and-windows/
 
 # remove context menu entries
 # Disable file locksmith in powertoys
@@ -1540,3 +1539,6 @@ if (Test-Path -Path "C:\Users\Public\Desktop\Synergy.lnk" -PathType Leaf) {
 # alias to pc
 
 # https://releases.hashicorp.com/vault/1.20.1/vault_1.20.1_windows_386.zip
+
+
+echo "https://devblogs.microsoft.com/commandline/share-environment-vars-between-wsl-and-windows/"
