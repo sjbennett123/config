@@ -1,5 +1,7 @@
 ALL=(ALL) NOPASSWD:ALL
 
+makepasswd
+
 update environment variables
 
 │exec: "wslview": executable file not found in $PATH
