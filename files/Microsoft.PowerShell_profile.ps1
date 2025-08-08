@@ -387,24 +387,29 @@ else
   Write-Output "https://github.com/sindresorhus/caprine/releases/latest"
 }
 
+$condition = where.exe fed.exe
+if ($condition) {
+function fu()
+    {
+        fed up
+        
+    }
 
-# https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/12995020/Fed+Statically+Compiled+Federation+CLI
-# https://teams.microsoft.com/l/channel/19%3Aa683a8d136774d7ebb297da5d09b6ab7%40thread.tacv2/Fed%20-%20Support?groupId=fc1db881-0935-4edc-9869-c7a4f3f1977e&tenantId=c3bf4e61-4ab4-4b2b-bd3a-fc85c7a1c0f1
-# https://github.3mhealth.com/3MHISCloudEngineering/fed
-# fed requires google chrome https://www.google.com/chrome/
+}
+else
+{
+  Write-Output "https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/12995020/Fed+Statically+Compiled+Federation+CLI"
+  Write-Output "https://teams.microsoft.com/l/channel/19%3Aa683a8d136774d7ebb297da5d09b6ab7%40thread.tacv2/Fed%20-%20Support?groupId=fc1db881-0935-4edc-9869-c7a4f3f1977e&tenantId=c3bf4e61-4ab4-4b2b-bd3a-fc85c7a1c0f1"
+  Write-Output "https://github.3mhealth.com/3MHISCloudEngineering/fed"
+  Write-Output "fed requires google chrome https://www.google.com/chrome/"
+}
+
 
 # USAC username used to authenticate [%FED_USERNAME%]
 # USAC password used to authenticate [%FED_PASSWORD%]
 # alias jitney='fed --manual --idp jitney'
 
-function fl()
-    {
-        fed list
-    }
-function fu($envname)
-    {
-        fed up
-    }
+
 function creds()
     {
         np $env:homedrive\$env:homepath\.aws\credentials
@@ -807,6 +812,12 @@ function capd_current()
         jira issue list -q "project in ('CAPD', 'CHPROD', 'CHLAB') AND assignee in (618aea7df1ff560069c1ff24, 70121:b02faff2-b816-430d-b3bc-e7e08b7403bf, 6222858fb7e7c7007157fab1, 61a77f3e3618cd006feca193, 61dc62370586a20069a11899, 629df191932059006f8ec707, 5ffc99bd642089014136f0ad) AND summary !~ 'HCC' AND status IN ('In Development')"
     }
 
+
+function ocdi_backlog_web()
+    {
+        chrome https://mmodal.atlassian.net/jira/software/c/projects/OCDI/boards/909/backlog
+    }
+    
 function ocdi_backlog()
     {
         jira issue list -q "project in ('OCDI') AND status IN ('Open')"
@@ -814,12 +825,12 @@ function ocdi_backlog()
 
 function ocdi_backlog_web()
     {
-        chrome https://mmodal.atlassian.net/jira/software/c/projects/OCDI/boards/909/backlog
+        chrome https://mmodal.atlassian.net/jira/software/c/projects/OCDI/boards/909/backlog?epics=visible
     }
 
 function ocdi_epics()
     {
-        jira issue list -q "project in ('OCDI') and type = Epic AND status NOT IN ('Closed')" --order-by updated
+        jira issue list -q "project in ('OCDI') and type = Epic AND status NOT IN ('Closed')" --order-by priority,rank
     }
 
 Set-Alias ocdi_epic ocdi_epics
