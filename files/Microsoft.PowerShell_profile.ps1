@@ -1279,7 +1279,7 @@ function ssm {
         # aws ec2 list-instances --filters "Name=tag-key,Values=Name"
 
         Set-Variable -Name "aws_region" -Value "us-east-1"
-        if ($profile -eq 830301468378){
+        if (($profile -eq 830301468378) -or ($profile -eq "gi") -or ($profile -eq "ci")){
           Set-Variable -Name "profile" -Value "us-catalyst-dev"
           Set-Variable -Name "aws_region" -Value "us-east-1"
         }
@@ -1312,12 +1312,10 @@ function ssm {
     if ($instanceid -eq $null) {
         Write-Host "No Instance specified..."
         Write-Host "Listing instances for HCC app id 230."
-        $ec2_describe_instances = aws ec2 --region $aws_region describe-instances --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=230"
- | jq .Reservations[].Instances[]
+        $ec2_describe_instances = aws ec2 describe-instances --region $aws_region  --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=230" | jq .Reservations[].Instances[]
         $ec2_describe_instances | jq -r   '"Instance Name : " + (.Tags[]|select(.Key=="Name")|.Value) + " | Instance ID : " + .InstanceId'
         Write-Host "Listing instances for OCDI app id 838."
-        $ec2_describe_instances = aws ec2 --region $aws_region describe-instances --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=838"
- | jq .Reservations[].Instances[]
+        $ec2_describe_instances = aws ec2 describe-instances --region $aws_region --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=838"  | jq .Reservations[].Instances[]
         $ec2_describe_instances | jq -r   '"Instance Name : " + (.Tags[]|select(.Key=="Name")|.Value) + " | Instance ID : " + .InstanceId'
 
     } else {
@@ -1325,9 +1323,12 @@ function ssm {
         Write-Host -NoNewline "Name: "
         aws ec2 describe-tags --region $aws_region --profile $profile --filters "Name=resource-id,Values=$instanceid" "Name=key,Values=Name" | jq -r .Tags[].Value
         Write-Host -NoNewline "VPC: "
-        $ec2_describe_instances| jq -r .Reservations[].Instances[].VpcId
+        $ec2_describe_instances | jq -r .Reservations[].Instances[].VpcId
         Write-Host -NoNewline "Subnet: "
         $ec2_describe_instances | jq -r .Reservations[].Instances[].SubnetId
+        Write-Host -NoNewline "Ip Address: "
+        $ec2_describe_instances | jq -r .Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddress
+
         Write-Host -NoNewline "Region: $aws_region"
 
         aws ssm start-session --region $aws_region --profile $profile --target $instanceid    }
