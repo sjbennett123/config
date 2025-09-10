@@ -1277,13 +1277,21 @@ function ssm {
         param($profile, $instanceid)
         # If instanceid is not passed return a list of instances and names
         # aws ec2 list-instances --filters "Name=tag-key,Values=Name"
+        fed up
 
         Set-Variable -Name "aws_region" -Value "us-east-1"
-        if (($profile -eq 830301468378) -or ($profile -eq "gi") -or ($profile -eq "ci")){
+        if (
+            ($profile -eq 830301468378) -or 
+            ($profile -eq "gi") -or 
+            ($profile -eq "ci")
+            ){
           Set-Variable -Name "profile" -Value "us-catalyst-dev"
           Set-Variable -Name "aws_region" -Value "us-east-1"
         }
-        if (($profile -eq 316401171432) -or ($profile -eq "ct")){
+        if (
+              ($profile -eq 316401171432) -or 
+              ($profile -eq "ct")
+           ){
           Set-Variable -Name "profile" -Value "us-catalyst-nonprod-phi"
           Set-Variable -Name "aws_region" -Value "us-east-1"
         }
@@ -1291,7 +1299,11 @@ function ssm {
           Set-Variable -Name "profile" -Value "us-ocdi-prod-phi"
           Set-Variable -Name "aws_region" -Value "us-east-1"
         }
-        if ($profile -eq 030442966757){
+        if (
+            ($profile -eq 030442966757) -or 
+            ($profile -eq "pr") -or 
+            ($profile -eq "cpm")
+            ){
           Set-Variable -Name "profile" -Value "3mhis-catalyst"
           Set-Variable -Name "aws_region" -Value "us-east-1"
         }
@@ -1310,6 +1322,7 @@ function ssm {
 
 
     if ($instanceid -eq $null) {
+        fed up
         Write-Host "No Instance specified..."
         Write-Host "Listing instances for HCC app id 230."
         $ec2_describe_instances = aws ec2 describe-instances --region $aws_region  --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=230" | jq .Reservations[].Instances[]
