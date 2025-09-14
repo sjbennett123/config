@@ -120,7 +120,7 @@ else
   Write-Output "https://download.typora.io/windows/typora-setup-x64.exe"
 }
   Set-Alias system_properties sysdm.cpl
-
+# C:\Users\deadk\AppData\Local\PowerToys  
 $condition = Test-Path -Path "$env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe"
 if ($condition) {
   Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
@@ -130,7 +130,7 @@ else
 {
   Write-Output "Install Powertoys"
   Write-Output "# https://learn.microsoft.com/en-us/windows/powertoys/environment-variables"
-  Write-Output "https://github.com/microsoft/PowerToys/releases/tag/v0.90.1"
+  Write-Output "https://github.com/microsoft/PowerToys/releases/latest"
 }
 
 Set-Alias recycle Clear-RecycleBin
@@ -1570,4 +1570,16 @@ if ($Env:WSLENV)
 }
 else{
 echo "https://devblogs.microsoft.com/commandline/share-environment-vars-between-wsl-and-windows/"
+}
+
+
+$condition = where.exe sncli.exe
+if ($condition) {
+  Set-Alias -Name sn -Value sncli
+  Set-Alias -Name simplenote -Value sncli
+
+}
+else
+{
+  Write-Output "Install simplenote cli"
 }
