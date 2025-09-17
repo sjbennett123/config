@@ -960,3 +960,10 @@
     name: bind9-dnsutils
     state: present
   become: true
+
+# pipx install sncli
+# cp .snclirc ~/.snclirc
+# movify to have a good location for temp files in linux
+
+# alias sn sncli
+# alias simplenote sncli
