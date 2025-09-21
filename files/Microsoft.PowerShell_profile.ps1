@@ -119,7 +119,7 @@ else
   Write-Output "https://typora.io"
   Write-Output "https://download.typora.io/windows/typora-setup-x64.exe"
 }
-# C:\Users\deadk\AppData\Local\PowerToys  
+
 $powertoys_programfiles = Test-Path -Path "$env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe"
 $powertoys_appdata = Test-Path -Path "$env:LOCALAPPDATA\PowerToys"
 
@@ -393,14 +393,16 @@ else
 }
 
 $condition = where.exe fed.exe
-if ($condition) {
+if ($env:COMPUTERNAME -eq "SCOTTTHINKPAD") {
+}
+elseif ($condition) {
 function fu()
     {
         fed up
         
     }
-
 }
+
 else
 {
   Write-Output "https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/12995020/Fed+Statically+Compiled+Federation+CLI"
@@ -687,7 +689,7 @@ if ($condition) {
 else
 {
     Write-Output "install the LS alterantive eza"
-    Write-Output "https://github.com/eza-community/eza/releases/download/v0.21.3/eza.exe_x86_64-pc-windows-gnu.zip"ll
+    Write-Output "https://github.com/eza-community/eza/releases/download/latest/eza.exe_x86_64-pc-windows-gnu.zip"ll
 }
 
 $condition = where.exe notepad++.exe
@@ -719,7 +721,7 @@ if ($condition) {
     function alacritty_config()
         {
             alacritty --version
-            Write-Output "https://github.com/alacritty/alacritty/release"b
+            Write-Output "https://github.com/alacritty/alacritty/release"
             chrome https://alacritty.org/config-alacritty.html
             Start-Process $env:APPDATA\alacritty\alacritty.toml
         }
@@ -1330,11 +1332,11 @@ function ssm {
         fed up
         Write-Host "No Instance specified..."
         Write-Host "Listing instances for HCC app id 230."
-        $ec2_describe_instances = aws ec2 describe-instances --region $aws_region  --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=230" | jq .Reservations[].Instances[]
-        $ec2_describe_instances | jq -r   '"Instance Name : " + (.Tags[]|select(.Key=="Name")|.Value) + " | Instance ID : " + .InstanceId'
+        $ec2_describe_instances = aws ec2 describe-instances --region $aws_region --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=230" | jq .Reservations[].Instances[]
+        $ec2_describe_instances | jq -r '"Instance Name : " + (.Tags[]|select(.Key=="Name")|.Value) + " | Instance ID : " + .InstanceId'
         Write-Host "Listing instances for OCDI app id 838."
-        $ec2_describe_instances = aws ec2 describe-instances --region $aws_region --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=838"  | jq .Reservations[].Instances[]
-        $ec2_describe_instances | jq -r   '"Instance Name : " + (.Tags[]|select(.Key=="Name")|.Value) + " | Instance ID : " + .InstanceId'
+        $ec2_describe_instances = aws ec2 describe-instances --region $aws_region --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=838" | jq .Reservations[].Instances[]
+        $ec2_describe_instances | jq -r '"Instance Name : " + (.Tags[]|select(.Key=="Name")|.Value) + " | Instance ID : " + .InstanceId'
 
     } else {
         $ec2_describe_instances = aws ec2 --region $aws_region describe-instances --no-paginate --profile $profile --instance-ids $instanceid 
@@ -1349,7 +1351,7 @@ function ssm {
 
         Write-Host -NoNewline "Region: $aws_region"
 
-        aws ssm start-session --region $aws_region --profile $profile --target $instanceid    }
+        aws ssm start-session --region $aws_region --profile $profile --target $instanceid }
 
     }
 }
@@ -1526,12 +1528,12 @@ function gitbc {
         $oldversion_git_diff_count = $oldversion_git_diff_count.Trim()
 
         if ($oldversion_git_diff_count -ne "0") {
-          Write-Host  -ForegroundColor DarkGreen -BackgroundColor White "Only in $oldversion"
+          Write-Host -ForegroundColor DarkGreen -BackgroundColor White "Only in $oldversion"
           Write-Host -ForegroundColor Red "This should be empty!"
           [System.Media.SystemSounds]::Beep.Play()
-          Write-Output  $oldversion_git_diff
+          Write-Output $oldversion_git_diff
         }
-        Write-Host  -ForegroundColor DarkGreen -BackgroundColor White "Only in $newversion"
+        Write-Host -ForegroundColor DarkGreen -BackgroundColor White "Only in $newversion"
         $newversion_git_diff = git log origin/release/$oldversion..origin/release/$newversion --oneline --decorate
         $newversion_git_diff
 
