@@ -392,8 +392,11 @@ else
   Write-Output "https://github.com/sindresorhus/caprine/releases/latest"
 }
 
-$condition = where.exe fed.exe
+$condition = true # where.exe fed.exe
+
+
 if ($env:COMPUTERNAME -eq "SCOTTTHINKPAD") {
+  [void] 'foo'
 }
 elseif ($condition) {
 function fu()
@@ -689,7 +692,7 @@ if ($condition) {
 else
 {
     Write-Output "install the LS alterantive eza"
-    Write-Output "https://github.com/eza-community/eza/releases/download/latest/eza.exe_x86_64-pc-windows-gnu.zip"ll
+    Write-Output "https://github.com/eza-community/eza/releases/download/latest/eza.exe_x86_64-pc-windows-gnu.zip"
 }
 
 $condition = where.exe notepad++.exe
@@ -1379,7 +1382,6 @@ else
 {
   pip install termdown
 }
-
 
 # C:\Users\AAA3AZZ\AppData\Local\Postman
 # choco install postman
