@@ -119,11 +119,16 @@ else
   Write-Output "https://typora.io"
   Write-Output "https://download.typora.io/windows/typora-setup-x64.exe"
 }
-  Set-Alias system_properties sysdm.cpl
 # C:\Users\deadk\AppData\Local\PowerToys  
-$condition = Test-Path -Path "$env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe"
-if ($condition) {
+$powertoys_programfiles = Test-Path -Path "$env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe"
+$powertoys_appdata = Test-Path -Path "$env:LOCALAPPDATA\PowerToys"
+
+if ($powertoys_programfiles) {
   Set-Alias env_edit $env:ProgramFiles\powertoys\winui3apps\powertoys.environmentvariables.exe
+  Set-Alias env_config env_edit
+}
+elseif ($powertoys_appdata) {
+  Set-Alias env_edit $env:LOCALAPPDATA\PowerToys\winui3apps\powertoys.environmentvariables.exe
   Set-Alias env_config env_edit
 }
 else
