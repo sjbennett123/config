@@ -1592,3 +1592,5 @@ else
 {
   Write-Output "Install simplenote cli"
 }
+
+# alias gu = 'git reset --soft HEAD~1'
