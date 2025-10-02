@@ -1629,6 +1629,8 @@ function ocdi-local-postgres-restore {
   docker system prune --all --volumes --force
   Write-Output ("Create OCDI Network")
   docker network create ocdi
+  Write-Output ("Create pgdata Volume")
+  docker volume create pgdata
   Write-Output ("Pull container ocdi-local-postgres:latest")
   docker pull docker-hosted-pd.udapp-appsec.us.amz.3mhis.net/ocdi-local-postgres:latest
   Write-Output ("Start ocdi-local-postgres container")
