@@ -374,6 +374,7 @@ else
      Write-Output "$env:LOCALAPPDATA\nvim\init.vim"
      
    # https://github.com/dense-analysis/ale
+   
 }
 
 $condition = Test-Path -Path "$env:ProgramFiles\Typora\Typora.exe"
@@ -392,7 +393,7 @@ else
   Write-Output "https://github.com/sindresorhus/caprine/releases/latest"
 }
 
-$condition = true # where.exe fed.exe
+$condition = where.exe fed.exe
 
 
 if ($env:COMPUTERNAME -eq "SCOTTTHINKPAD") {
@@ -614,16 +615,19 @@ function paper()
       chrome https://www.dropbox.com/paper
     }
 
+
+$mmmdev = Test-Path -Path "c:\mmmdev"
+$onedrive = Test-Path -Path "$env:OneDrive\Documents\GitHub\"
+if ($mmmdev) {
 function repo()
+    {
+        Set-Location c:\mmmdev\$($args)
+    }
+}elseif(onedrive){
+  function repo()
     {
         Set-Location $env:OneDrive\Documents\GitHub\$($args)
     }
-
-function stat()
-    {
-      Get-Item $($args) | Format-List
-    }
-
 function repo_update()
     {
         Set-Location $env:OneDrive\Documents\GitHub\
@@ -636,6 +640,10 @@ function repo_update()
         }
         Set-Location -
     }
+}
+
+
+
 
 function gitc()
     {   
@@ -941,8 +949,8 @@ else
 }
 # Remember to add the hcc and ocdi repos to your PATH
 Set-Alias tunnel tunnel.ps1
-Set-Alias ocditunnel ocditunnel.ps1
-Set-Alias ocdi_tunnel ocditunnel.ps1
+Set-Alias ocditunnel C:\mmmdev\ocdi\ocditunnel.ps1
+Set-Alias ocdi_tunnel C:\mmmdev\ocdi\ocditunnel.ps1
 
 
 
@@ -1591,6 +1599,47 @@ if ($condition) {
 else
 {
   Write-Output "Install simplenote cli"
+  # https://github.com/insanum/sncli
 }
 
 # alias gu = 'git reset --soft HEAD~1'
+
+
+# https://podman.io/docs/installation
+# https://podman-desktop.io/downloads
+# https://github.com/docker/compose/releases
+# C:\Program Files\RedHat\Podman
+  Set-Alias -Name docker -Value podman
+# podmandesktop
+# C:\Users\AAA3AZZ\AppData\Local\Programs\Podman Desktop
+# Unable to download docker-compose binary: HttpError: unable to get local issuer certificate
+# podman machine init
+# https://podman-desktop.io/docs/podman/accessing-podman-from-another-wsl-instance
+# sudo apt install podman -y
+# https://github.com/containers/podman-machine-os/releases/download/v5.6.1/podman-machine.x86_64.wsl.tar.zst
+# wsl.exe --import <Distro> <InstallLocation> <FileName> [Options]
+#     wsl --update
+function ocdi-local-postgres-restore {
+
+  Write-Output ("Stopping local postgres container ... ocdi-local-postgres")
+  docker stop ocdi-local-postgres
+  $ErrorActionPreference = "Stop"
+  $PSNativeCommandUseErrorActionPreference = $true
+  Write-Output ("Prune all unused docker containers, networks and volumes")
+  docker system prune --all --volumes --force
+  Write-Output ("Create OCDI Network")
+  docker network create ocdi
+  Write-Output ("Pull container ocdi-local-postgres:latest")
+  docker pull docker-hosted-pd.udapp-appsec.us.amz.3mhis.net/ocdi-local-postgres:latest
+  Write-Output ("Start ocdi-local-postgres container")
+  docker run -d -ti -p 5433:5432 --network=ocdi -e POSTGRES_DB=ocdilocal -e POSTGRES_USER=ocdi -e POSTGRES_PASSWORD=ocdi --name=ocdi-local-postgres docker-hosted-pd.udapp-appsec.us.amz.3mhis.net/ocdi-local-postgres:latest
+  Write-Output ("Set Postgres to debug mode and to write ALL sql to log")
+  docker exec -it ocdi-local-postgres '/tmp/postgresql_debug_conf.bash'
+  docker restart ocdi-local-postgres
+  docker exec -it ocdi-local-postgres '/tmp/postgresql_log_to_stdout.bash'
+  docker restart ocdi-local-postgres
+}
+
+# Restart podman
+# podman machine stop
+# podman machine start
