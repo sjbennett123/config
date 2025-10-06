@@ -1605,11 +1605,17 @@ else
 # alias gu = 'git reset --soft HEAD~1'
 
 
-# https://podman.io/docs/installation
+$condition = where.exe podman.exe
+if ($condition) {
+    Set-Alias -Name docker -Value podman
+}
+else
+{
+  Write-Output "Install podman"
+  # https://podman.io/docs/installation
 # https://podman-desktop.io/downloads
 # https://github.com/docker/compose/releases
 # C:\Program Files\RedHat\Podman
-  Set-Alias -Name docker -Value podman
 # podmandesktop
 # C:\Users\AAA3AZZ\AppData\Local\Programs\Podman Desktop
 # Unable to download docker-compose binary: HttpError: unable to get local issuer certificate
@@ -1619,27 +1625,56 @@ else
 # https://github.com/containers/podman-machine-os/releases/download/v5.6.1/podman-machine.x86_64.wsl.tar.zst
 # wsl.exe --import <Distro> <InstallLocation> <FileName> [Options]
 #     wsl --update
-function ocdi-local-postgres-restore {
+}
 
-  Write-Output ("Stopping local postgres container ... ocdi-local-postgres")
+
+function ocdi-local-postgres-refresh {
+
+  Write-Host ("Stopping local postgres container ... ocdi-local-postgres") -ForegroundColor Green  -BackgroundColor red
+  Write-Host ("") -NoNewline
   docker stop ocdi-local-postgres
   $ErrorActionPreference = "Stop"
   $PSNativeCommandUseErrorActionPreference = $true
-  Write-Output ("Prune all unused docker containers, networks and volumes")
+  Write-Host ("Prune all unused docker containers, networks and volumes") -ForegroundColor Green  -BackgroundColor red
+  Write-Host ("") -NoNewline
   docker system prune --all --volumes --force
-  Write-Output ("Create OCDI Network")
+  Write-Host ("Create OCDI Network") -ForegroundColor Green
   docker network create ocdi
-  Write-Output ("Create pgdata Volume")
+  Write-Host ("Create pgdata Volume") -ForegroundColor Green
   docker volume create pgdata
-  Write-Output ("Pull container ocdi-local-postgres:latest")
+  Write-Host ("Pull container ocdi-local-postgres:latest") -ForegroundColor Green
   docker pull docker-hosted-pd.udapp-appsec.us.amz.3mhis.net/ocdi-local-postgres:latest
-  Write-Output ("Start ocdi-local-postgres container")
+  Write-Host ("Start ocdi-local-postgres container") -ForegroundColor Green
   docker run -d -ti -p 5433:5432 --network=ocdi -e POSTGRES_DB=ocdilocal -e POSTGRES_USER=ocdi -e POSTGRES_PASSWORD=ocdi --name=ocdi-local-postgres docker-hosted-pd.udapp-appsec.us.amz.3mhis.net/ocdi-local-postgres:latest
-  Write-Output ("Set Postgres to debug mode and to write ALL sql to log")
-  docker exec -it ocdi-local-postgres '/tmp/postgresql_debug_conf.bash'
-  docker restart ocdi-local-postgres
-  docker exec -it ocdi-local-postgres '/tmp/postgresql_log_to_stdout.bash'
-  docker restart ocdi-local-postgres
+  if ($args -eq "debug"){
+      Write-Host ("🐛 🐛 🐛 🐛 🐛 🐛 🐛 🐛 🐛 🐛")
+      Write-Host ("Enabling Debug Mode to log postgress logs stdout ") -ForegroundColor Green
+      Write-Host ("Wait 10 Seconds for the container to come up ") -ForegroundColor Green -NoNewline
+      $i = 10
+      do {
+        Write-Host -NoNewline -ForegroundColor Green  -BackgroundColor red "$i "
+        Sleep 1
+        $i--
+      } while ($i -gt 0)
+      Write-Host ""
+      Write-Host ("Set Postgres to debug mode and to write ALL sql to log") -ForegroundColor Green
+      docker exec ocdi-local-postgres '/tmp/postgresql_debug_conf.bash'
+      Write-Host ("restarting postgres docker container") -ForegroundColor Green
+      docker restart ocdi-local-postgres
+      Write-Host ("Wait 10 Seconds for the container to come up ") -ForegroundColor Green -NoNewline
+      $i = 10
+      do {
+        Write-Host -NoNewline -ForegroundColor Green  -BackgroundColor red "$i "
+        Sleep 1
+        $i--
+      } while ($i -gt 0)
+      Write-Host ""
+      Write-Host ("pointing postgres logs to stdout") -ForegroundColor Green
+      docker exec ocdi-local-postgres "/tmp/postgresql_log_to_stdout.bash"
+      Write-Host ("restarting postgres docker container") -ForegroundColor Green
+      docker restart ocdi-local-postgres
+  }
+  Write-Host ("🛢️  🛢️  🐘  Postgress is ready!  🐘 🛢️  🛢️") -ForegroundColor Green
 }
 
 # Restart podman
