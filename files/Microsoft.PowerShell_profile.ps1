@@ -112,6 +112,8 @@ function slack()
 $condition = Test-Path -Path "$env:ProgramFiles\Typora\Typora.exe"
 if ($condition) {
   Set-Alias typora "$env:ProgramFiles\Typora\Typora.exe"
+  Set-Alias t typora
+
 }
 else
 {
