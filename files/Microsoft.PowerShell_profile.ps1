@@ -1570,7 +1570,6 @@ $ocdi_external_services_address
 # $ocdi_external_services_address = yq '.$env.ocdi_external_services_address' $env:USERPROFILE/ocdi_creds.yml
 
 # curl -X POST --user $uaa_username:$uaa_password= https://$ocdi_external_services_address/uaa/oauth/token -d "grant_type=client_credentials&tenant=mcleodhealth" | jq -c -r '.access_token'
-# token=$(curl -X POST --user ocdiops:BgsrR4fbetswdA9Im6ViSEwX6xs= https://catalyst.3mhis.com/uaa/oauth/token -d "grant_type=client_credentials&tenant=mcleodhealth" | jq -c -r '.access_token ')
 # curl -H "Authorization: Bearer $token" https://ocdi-services-external.cpm-pb.us.amz.3mhis.net/ocdi-services-external/api/diagnosis-code-risk-model-mappings/E11.22
 if (Test-Path -Path "C:\Users\Public\Desktop\WinSCP.lnk" -PathType Leaf) {
       Write-Output ("To delete the awful shortcut delete the file...")
