@@ -330,7 +330,13 @@ Set-Alias ghb gb
 
 function e()
     {
+        $condition = where.exe fpilot
+        if ($condition){
+          fpilot .
+        }
+        else {
         explorer .
+        }
     }
 function explorer_restart()
     {
