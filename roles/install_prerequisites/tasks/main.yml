@@ -19,13 +19,14 @@
     mode: '0644'
   tags: wsl
   become: true
-  when: "ansible_env.WSL_DISTRO_NAME"
+  when: "ansible_env.WSL_DISTRO_NAME is defined"
 
 - name: Install wslu
   ansible.builtin.apt:
     name: wslu
     state: present
   become: true
+  when: "ansible_env.WSL_DISTRO_NAME is defined"
 
 - name: Install Troubleshooting Tools
   block:
@@ -84,6 +85,7 @@
       become: true
       changed_when: true
       when: rustup.changed # noqa: no-handler
+      tags: rustup
 
     - name: Install protobuf-compiler
       ansible.builtin.apt:
@@ -170,8 +172,8 @@
         path: "{{ item }}"
         state: directory
         mode: '0755'
-        owner: sbennett
-        group: sbennett
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
       with_items:
         - /opt/installers
         - ~/.bashrc.d
@@ -519,6 +521,7 @@
         mode: '0755'
       tags: ssh
       become: true
+      when: "ansible_env.WSL_DISTRO_NAME is defined"
 
     - name: Download lnav
       ansible.builtin.get_url:
