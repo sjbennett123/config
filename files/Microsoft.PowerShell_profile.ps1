@@ -2,6 +2,8 @@
 # https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-7.5
 
+# Set-PSDebug -Trace 1
+
 # To reload the powersasdfhell profile run & $profile
 
 Set-Alias -Name which -Value Get-Command
@@ -401,26 +403,26 @@ else
   Write-Output "https://github.com/sindresorhus/caprine/releases/latest"
 }
 
-$condition = where.exe fed.exe
+# $where_fed = where.exe fed.exe
 
 
-if ($env:COMPUTERNAME -eq "SCOTTTHINKPAD") {
-  [void] 'foo'
-}
-elseif ($condition) {
-function fu()
-    {
-        fed up
+# if ($env:COMPUTERNAME -eq "SCOTTTHINKPAD") {
+  # [void] 'foo'
+# }
+# elseif ($condition) {
+# function fu()
+    # {
+        # fed up
         
-    }
-}
+    # }
+# }
 
-else
-{
-  Write-Output "https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/12995020/Fed+Statically+Compiled+Federation+CLI"
-  Write-Output "https://teams.microsoft.com/l/channel/19%3Aa683a8d136774d7ebb297da5d09b6ab7%40thread.tacv2/Fed%20-%20Support?groupId=fc1db881-0935-4edc-9869-c7a4f3f1977e&tenantId=c3bf4e61-4ab4-4b2b-bd3a-fc85c7a1c0f1"
-  Write-Output "https://github.3mhealth.com/3MHISCloudEngineering/fed"
-  Write-Output "fed requires google chrome https://www.google.com/chrome/"
+# else
+# {
+  # Write-Output "https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/12995020/Fed+Statically+Compiled+Federation+CLI"
+  # Write-Output "https://teams.microsoft.com/l/channel/19%3Aa683a8d136774d7ebb297da5d09b6ab7%40thread.tacv2/Fed%20-%20Support?groupId=fc1db881-0935-4edc-9869-c7a4f3f1977e&tenantId=c3bf4e61-4ab4-4b2b-bd3a-fc85c7a1c0f1"
+  # Write-Output "https://github.3mhealth.com/3MHISCloudEngineering/fed"
+  # Write-Output "fed requires google chrome https://www.google.com/chrome/"
 }
 
 
@@ -709,6 +711,15 @@ else
 {
     Write-Output "install the LS alterantive eza"
     Write-Output "https://github.com/eza-community/eza/releases/download/latest/eza.exe_x86_64-pc-windows-gnu.zip"
+}
+$condition = where.exe duf.exe
+if ($condition) {
+    Set-Alias du duf.exe
+}
+else
+{
+    # Write-Output "https://notepad-plus-plus.org/downloads/"
+
 }
 
 $condition = where.exe notepad++.exe
