@@ -420,10 +420,10 @@ else
 # else
 # {
   # Write-Output "https://3mhealth.atlassian.net/wiki/spaces/HIS/pages/12995020/Fed+Statically+Compiled+Federation+CLI"
-  # Write-Output "https://teams.microsoft.com/l/channel/19%3Aa683a8d136774d7ebb297da5d09b6ab7%40thread.tacv2/Fed%20-%20Support?groupId=fc1db881-0935-4edc-9869-c7a4f3f1977e&tenantId=c3bf4e61-4ab4-4b2b-bd3a-fc85c7a1c0f1"
+  # Write-Output # "https://team# s.microsoft.com/l/channel/19%3Aa683a8d136774d7ebb297da5d09b6ab7%40thread.tacv2/Fed%20-%20Support?groupId=fc1db881-0935-4edc-9869-c7a4f3f1977e&tenantId=c3bf4e61-4ab4-4b2b-bd3a-fc85c7a1c0f1"
   # Write-Output "https://github.3mhealth.com/3MHISCloudEngineering/fed"
   # Write-Output "fed requires google chrome https://www.google.com/chrome/"
-}
+# }# 
 
 
 # USAC username used to authenticate [%FED_USERNAME%]
