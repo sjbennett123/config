@@ -2,7 +2,7 @@
 # https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-7.5
 
-Set-PSDebug -Trace 1
+# Set-PSDebug -Trace 1
 
 # To reload the powersasdfhell profile run & $profile
 
