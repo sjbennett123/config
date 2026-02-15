@@ -11,3 +11,5 @@
 *.afphoto~lock~
 *.afdesign~lock~
 ~$w*
+
+defaults/
