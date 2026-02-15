@@ -5,8 +5,8 @@
     - name: Get the distribution details
       ansible.builtin.setup:
         filter:
-          - ansible_distribution
-          - ansible_distribution_major_version
+          - "ansible_distribution"
+          - "ansible_distribution_major_version"
 
     - name: Print the distriburion version
       ansible.builtin.debug:
@@ -44,6 +44,12 @@
       become: true
       tags: watchexec
 
+    - name: Install curl
+      ansible.builtin.apt:
+        name: curl
+        state: present
+      become: true
+    
     - name: Install btop
       ansible.builtin.apt:
         name: btop
