@@ -77,7 +77,7 @@
         state: present
       become: true
       tags: python3
-
+# https://stackoverflow.com/questions/57251508/run-rustups-curl-fetched-installer-script-non-interactively
     - name: Install rustup
       ansible.builtin.apt:
         name: rustup
@@ -615,9 +615,9 @@
     - {src: 'chrome.bash.j2', dest: '~/.bashrc.d/chrome.bash'}
     - {src: 'python.bash.j2', dest: '~/.bashrc.d/python.bash'}
     - {src: 'j2lint.bash.j2', dest: '~/.bashrc.d/j2lint.bash'}
+    - {src: 'myip.bash.j2', dest: '~/.bashrc.d/myip.bahs'}
     - {src: 'watchexec.bash.j2', dest: '~/.bashrc.d/watchexec.bash'}
     - {src: 'pylintrc.j2', dest: '~/.pylintrc'}
-    - {src: 'myip.bash.j2', dest: '~/.bahsrc.d/myip.bahs'}
   tags: bashrc
 
 - name: Template bashrc configurations for wsl
