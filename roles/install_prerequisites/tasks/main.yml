@@ -229,7 +229,8 @@
       register: awscli_download
       become: true
       when: awscli_version is search("aws-cli/1") or awscli_version.rc == 2
-
+# confirm that session manager plugin is installed
+# session-manager-plugin
     - name: Download aws cli session manager plugin
       ansible.builtin.get_url:
         url: "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb"
@@ -617,6 +618,7 @@
     - {src: 'ssh_wsl.bash.j2', dest: '~/.bashrc.d/ssh_wsl.bash'}
     - {src: 'wsl.bash.j2', dest: '~/.bashrc.d/wsl.bash'}
   tags: bashrc
+  when: "ansible_env.WSL_DISTRO_NAME is defined"
 
 - name: Copy Solventum man in the middle certs
   ansible.builtin.copy:
