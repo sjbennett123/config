@@ -650,16 +650,16 @@
     - {name: '3MHEALTH-ROOTCA.crt' }
     - {name: '3MHealth-CA01.crt' }
     - {name: '3MHealth-CA02.crt' }
-  tags: mitm_certs
   register: mitm_certs
-  when: ansible_env.NAME != 'scottthinkpad'
+  when: ansible_hostname != 'scottthinkpad'
+  tags: mitm_certs,never
 
 - name: Update certificate store
   ansible.builtin.command: sudo update-ca-certificates
-  become: true
+  become: truei
   changed_when: true
   when: mitm_certs.changed # noqa: no-handler
-  tags: mitm_certs
+  tags: mitm_certs, never
 
 # - tmux -V
 # install dependencies
