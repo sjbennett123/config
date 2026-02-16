@@ -11,6 +11,11 @@
     - name: Print the distriburion version
       ansible.builtin.debug:
         msg: "The version is {{ ansible_distribution_major_version }}"
+# add git username and email add ress commands to config as mesags that pop up if not set
+#git config user.name
+# git config user.email
+# git config --global credential.helper store
+# ~/.git-credentials
 
 - name: Create wsl.conf
   ansible.builtin.copy:
