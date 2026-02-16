@@ -731,7 +731,7 @@
     path: ~/.hushlogin
     state: file
   tags: hushlogin
-  when: "ansible_env.WSL_DISTRO_NAME"
+  when: "ansible_env.WSL_DISTRO_NAME is defined"
 
 - name: Ensure hushlogin is created for root
   ansible.builtin.file:
@@ -739,7 +739,7 @@
     state: file
   become: true
   tags: hushlogin
-  when: "ansible_env.WSL_DISTRO_NAME"
+  when: "ansible_env.WSL_DISTRO_NAME is defined"
 
 # https://askubuntu.com/questions/334318/sudoers-file-enable-nopasswd-for-user-all-commands
 # %sudo  ALL=(ALL) NOPASSWD: ALL
