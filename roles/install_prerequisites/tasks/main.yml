@@ -49,9 +49,12 @@
       become: true
       tags: watchexec
 
-    - name: Install curl
+    - name: Install curl, net-tools and ssh
       ansible.builtin.apt:
-        name: curl
+        name:
+          - curl
+          - net-tools
+          - ssh
         state: present
       become: true
 
@@ -658,17 +661,17 @@
   tags: mitm_certs
 
 # - tmux -V
-# install dependencies 
-# clone tmux repo
-# https://github.com/tmux/tmux
-# ./autogen.sh
+# install dependencies
 # sudo apt-get install autotools-dev
 # sudo apt-get install automake
 # apt-get install libevent-dev
+# sudo apt-get install libncurses5-dev libncursesw5-dev
 # sudo apt-get install bison flex
+# clone tmux repo
+# https://github.com/tmux/tmux
+# ./autogen.sh
 # ./configure
 # sudo make install
-# sudo apt-get install libncurses5-dev libncursesw5-dev
 
 
 - name: Template tmux configuration
