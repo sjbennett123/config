@@ -257,6 +257,7 @@
         cmd: session-manager-plugin
       tags: awscli
       changed_when: false
+      failed_when: false
       register: session_manager_plugin_status
 
     - name: Download aws cli session manager plugin
