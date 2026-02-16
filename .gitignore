@@ -4,7 +4,8 @@
 *~
 *.swp
 *.swo
-
+# ignore log files
+*.log
 # Local Netlify folder
 .netlify
 *.afpub~lock~
