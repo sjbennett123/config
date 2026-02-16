@@ -190,6 +190,20 @@
       become: true
       tags: lnav, lazydocker, difftastic, rg, awscli, jira
 
+    - name: Create .aws Directory
+      ansible.builtin.file:
+        path: ~/.aws
+        state: directory
+        mode: '0755'
+      tags: awscli
+
+    - name: Template aws configuration file
+      ansible.builtin.template:
+        src: aws_cli_config
+        dest: ~/.aws/config
+        mode: '0664'
+      tags: awscli
+
     - name: Get the aws cli version
       ansible.builtin.command: aws --version
       register: awscli_version
@@ -203,7 +217,7 @@
       tags: awscli
       when: awscli_version is search("aws-cli/1")
 
-    - name: Remove aws cli if installed
+    - name: Remove aws cli version 1if installed
       ansible.builtin.pip:
         name: awscli
         state: absent
@@ -219,7 +233,7 @@
       tags: awscli
       when: awscli_version is search("aws-cli/1")
 
-    - name: Download aws cli
+    - name: Download aws cli v2 zip
       ansible.builtin.get_url:
         url: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
         dest: /opt/installers/awscli/awscliv2.zip
@@ -229,8 +243,14 @@
       register: awscli_download
       become: true
       when: awscli_version is search("aws-cli/1") or awscli_version.rc == 2
-# confirm that session manager plugin is installed
-# session-manager-plugin
+
+    - name: Confirm that session manager plugin is installed
+      ansible.builtin.command:
+        cmd: session-manager-plugin
+      tags: awscli
+      changed_when: false
+      register: session_manager_plugin_status
+
     - name: Download aws cli session manager plugin
       ansible.builtin.get_url:
         url: "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb"
@@ -240,6 +260,7 @@
       tags: awscli
       become: true
       register: awscli_download
+      when: session_manager_plugin_status.stdout is not search("The Session Manager plugin was installed successfully")
 
     - name: Extract aws cli
       ansible.builtin.unarchive:
@@ -275,19 +296,6 @@
       tags: awscli
       when: awscli_version is search("aws-cli/1") or awscli_version.rc == 2
 
-    - name: Create .aws Directory
-      ansible.builtin.file:
-        path: ~/.aws
-        state: directory
-        mode: '0755'
-      tags: awscli
-
-    - name: Template aws configuration file
-      ansible.builtin.template:
-        src: aws_cli_config
-        dest: ~/.aws/config
-        mode: '0664'
-      tags: awscli
 
     - name: Get the aws cli version
       ansible.builtin.command: aws --version
@@ -295,11 +303,13 @@
       tags: awscli
       failed_when: false
       changed_when: false
+      when: awscli_version is search("aws-cli/1") or awscli_version.rc == 2
 
     - name: Print the awscli version
       ansible.builtin.debug:
         var: awscli_version.stdout
       tags: awscli
+      when: awscli_version is search("aws-cli/1") or awscli_version.rc == 2
 
     - name: Download Difftastic
       ansible.builtin.get_url:
@@ -641,6 +651,20 @@
   changed_when: true
   when: mitm_certs.changed # noqa: no-handler
   tags: mitm_certs
+
+# - tmux -V
+# install dependencies 
+# clone tmux repo
+# https://github.com/tmux/tmux
+# ./autogen.sh
+# sudo apt-get install autotools-dev
+# sudo apt-get install automake
+# apt-get install libevent-dev
+# sudo apt-get install bison flex
+# ./configure
+# sudo make install
+# sudo apt-get install libncurses5-dev libncursesw5-dev
+
 
 - name: Template tmux configuration
   ansible.builtin.template:
