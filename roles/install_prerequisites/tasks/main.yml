@@ -607,6 +607,7 @@
     - {src: 'j2lint.bash.j2', dest: '~/.bashrc.d/j2lint.bash'}
     - {src: 'watchexec.bash.j2', dest: '~/.bashrc.d/watchexec.bash'}
     - {src: 'pylintrc.j2', dest: '~/.pylintrc'}
+    - {src: 'myip.bash.j2', dest: '~/.bahsrc.d/myip.bahs'}
   tags: bashrc
 
 - name: Template bashrc configurations for wsl
