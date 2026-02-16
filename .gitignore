@@ -13,4 +13,4 @@
 *.afdesign~lock~
 ~$w*
 
-defaults/
+default/
