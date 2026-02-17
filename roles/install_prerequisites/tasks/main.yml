@@ -656,7 +656,7 @@
 
 - name: Update certificate store
   ansible.builtin.command: sudo update-ca-certificates
-  become: truei
+  become: true
   changed_when: true
   when: mitm_certs.changed # noqa: no-handler
   tags: mitm_certs, never
