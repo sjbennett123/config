@@ -1702,3 +1702,5 @@ function ocdi-local-postgres-refresh {
 # Restart podman
 # podman machine stop
 # podman machine start
+
+# WSLENV
