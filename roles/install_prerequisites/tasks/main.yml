@@ -92,7 +92,7 @@
         name: rustup
         state: present
       become: true
-      tags: rustup
+      tags: rustup,never
       register: rustup
 
     - name: Set rustup default to stable
