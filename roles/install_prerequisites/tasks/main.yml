@@ -41,6 +41,7 @@
         state: present
       become: true
       tags: hugo
+      ignore_errors: true
 
     - name: Install watchexec
       ansible.builtin.apt:
