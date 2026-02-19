@@ -100,7 +100,7 @@
       become: true
       changed_when: true
       when: rustup.changed # noqa: no-handler
-      tags: rustup
+      tags: rustup,never
 
     - name: Install protobuf-compiler
       ansible.builtin.apt:
