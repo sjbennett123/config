@@ -631,13 +631,34 @@ $onedrive = Test-Path -Path "$env:OneDrive\Documents\GitHub\"
 if ($mmmdev) {
 function repo()
     {
-        # if  Test-Path -Path c:\mmmdev\$($args)
-        Set-Location c:\mmmdev\$($args)
+        if (!$args[0]) {
+          Set-Location c:\mmmdev\
+          git statuses
+        }
+        elseif (Test-Path -Path c:\mmmdev\$($args)) {
+              Set-Location c:\mmmdev\$($args)
+        }
+        else {
+          Set-Location c:\mmmdev\
+          Write-Host "Red on white text." -ForegroundColor red -BackgroundColor white
+          git statuses
+        }
     }
 }elseif ($onedrive){
   function repo()
     {
-        Set-Location $env:OneDrive\Documents\GitHub\$($args)
+              if (!$args[0]) {
+                Set-Location $env:OneDrive\Documents\GitHub\
+                git statuses}
+              if  (Test-Path -Path $env:OneDrive\Documents\GitHub\$($args)) {
+                Set-Location $env:OneDrive\Documents\GitHub\$($args)
+              }
+              else {
+               Set-Location $env:OneDrive\Documents\GitHub\
+               Write-Host "Red on white text." -ForegroundColor red -BackgroundColor white
+                git statuses
+              }
+        }
     }
 function repo_update()
     {
@@ -651,7 +672,7 @@ function repo_update()
         }
         Set-Location -
     }
-}
+
 
 
 
@@ -1705,3 +1726,4 @@ function ocdi-local-postgres-refresh {
 # podman machine start
 
 # WSLENV
+# https://crates.io/crates/git-statuses
