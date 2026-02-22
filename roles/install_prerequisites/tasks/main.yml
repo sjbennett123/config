@@ -16,6 +16,22 @@
 # git config user.email
 # git config --global credential.helper store
 # ~/.git-credentials
+- name: Install alacritty if not in wsl
+  ansible.builtin.apt:
+    name: alacritty
+    state: present
+  tags: wsl
+  become: true
+  when: "ansible_env.WSL_DISTRO_NAME is not defined"
+
+- name: Create wsl.conf
+  ansible.builtin.copy:
+    src: alacritty_linux.toml
+    dest: $HOME/.alacritty.toml
+    mode: '0644'
+  tags: wsl
+  become: true
+  when: "ansible_env.WSL_DISTRO_NAME is defined"
 
 - name: Create wsl.conf
   ansible.builtin.copy:
