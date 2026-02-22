@@ -24,14 +24,14 @@
   become: true
   when: "ansible_env.WSL_DISTRO_NAME is not defined"
 
-- name: Create wsl.conf
+- name: Create alacritty.toml
   ansible.builtin.copy:
     src: alacritty_linux.toml
     dest: $HOME/.alacritty.toml
     mode: '0644'
   tags: wsl
   become: true
-  when: "ansible_env.WSL_DISTRO_NAME is defined"
+  when: "ansible_env.WSL_DISTRO_NAME is not defined"
 
 - name: Create wsl.conf
   ansible.builtin.copy:
