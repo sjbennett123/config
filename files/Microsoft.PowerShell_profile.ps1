@@ -631,6 +631,7 @@ $onedrive = Test-Path -Path "$env:OneDrive\Documents\GitHub\"
 if ($mmmdev) {
 function repo()
     {
+        # if  Test-Path -Path c:\mmmdev\$($args)
         Set-Location c:\mmmdev\$($args)
     }
 }elseif ($onedrive){
