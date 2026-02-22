@@ -10,8 +10,11 @@ background = "0x000000"
 foreground = "0xeaeaea"
 
 [font]
+# https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaCode.zip
+# fc-list
+# /usr/local/share/fonts
 size = 16.0
-
+ 
 [font.bold]
 family = "CaskaydiaCove NF"
 style = "Bold"
