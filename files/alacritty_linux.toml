@@ -34,11 +34,4 @@ mouse = "Right"
 [selection]
 save_to_clipboard = true
 
-[general]
-# working_directory = 'C:\Users\AAA3AZZ\OneDrive - Solventum\Desktop'
 
-[terminal]
-
-[terminal.shell]
-#args = ["-NoLogo"]
-#program = 'C:\Program Files\PowerShell\7\pwsh.exe'
