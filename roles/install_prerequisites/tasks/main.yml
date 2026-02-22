@@ -678,14 +678,23 @@
   when: mitm_certs.changed # noqa: no-handler
   tags: mitm_certs, never
 
-# - tmux -V
-# install dependencies
-# sudo apt-get install autotools-dev
-# sudo apt-get install automake
-# apt-get install libevent-dev
-# sudo apt-get install libncurses5-dev libncursesw5-dev
-# sudo apt-get install bison flex
-# clone tmux repo
+# - name: check currently installed tmux version
+#  tmux -V
+
+- name: Install tmux dependencies to build from source
+  ansible.builtin.apt:
+    name:
+      - autotools-dev
+      - automake
+      - libevent-dev
+      - libncurses5-dev
+      - libncursesw5-dev
+      - bison
+      - flex
+    state: present
+  tags: tmux
+  become: true
+# - name: clone tmux repo
 # https://github.com/tmux/tmux
 # ./autogen.sh
 # ./configure
