@@ -505,7 +505,7 @@ function config_update()
         Set-Location $env:OneDrive\Documents\GitHub\config
         git pull -q
         Set-Location -
-        difft $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
+        difft  $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1
         Copy-Item $env:OneDrive\Documents\GitHub\config\files\Microsoft.PowerShell_profile.ps1 $env:OneDrive\Documents\Powershell\Microsoft.PowerShell_profile.ps1
         # hide config files
     $condition = Test-Path -Path "$env:USERPROFILE/.bash_history"
