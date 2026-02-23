@@ -971,6 +971,11 @@ function chprod_hcc()
         jira issue list -q "project IN ('CHPROD') AND status != Closed AND component IN ('HCC-Collaborate','HCC Collaborate')"
     }
 
+function chprod_ocdi()
+    {
+        jira issue list -q "project IN ('CHPROD') AND status != Closed AND component IN ('Outpatient CDI')"
+    }
+
 function chprod_capd()
     {
         jira issue list -q "project IN ('CHPROD') AND status != Closed AND component IN ('CAPD') and key and key NOT IN('CHPROD-46823','CHPROD-48189') "
