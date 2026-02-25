@@ -329,7 +329,7 @@
       tags: awscli
       failed_when: false
       changed_when: false
-      when: awscli_version is search("aws-cli/1") or awscli_version.rc == 2
+      when: awscli_version is not search("aws-cli/1") or awscli_version.rc != 2
 
     - name: Print the awscli version
       ansible.builtin.debug:
