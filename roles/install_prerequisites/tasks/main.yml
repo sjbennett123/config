@@ -51,13 +51,21 @@
 
 - name: Install Troubleshooting Tools
   block:
+    - name: Check if hugo is installed
+      ansible.builtin.command:
+        cmd: hugo version
+      register: hugo_version
+      failed_when: false
+      changed_when: false
+      tags: hugo
+
     - name: Install hugo
       ansible.builtin.apt:
         deb: https://github.com/gohugoio/hugo/releases/download/v0.147.5/hugo_0.147.5_linux-amd64.deb
         state: present
       become: true
       tags: hugo
-      ignore_errors: true
+      when: hugo_version.rc != 0
 
     - name: Install watchexec
       ansible.builtin.apt:
