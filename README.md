@@ -1,3 +1,23 @@
+
+
+
+
+
+
+add chafa to linux setup
+
+https://github.com/o2sh/onefetch
+
+wget https://github.com/o2sh/onefetch/releases/latest/download/onefetch_amd64.deb && sudo dpkg -i ./onefetch_amd64.deb && rm onefetch_amd64.deb
+
+
+
+
+
+
+
+# todo
+
 ALL=(ALL) NOPASSWD:ALL
 
 makepasswd
