@@ -5,7 +5,10 @@
 # Set-PSDebug -Trace 1
 
 # To reload the powersasdfhell profile run.....  & $profile
-
+Function standby
+  {
+      rundll32.exe powrprof.dll,SetSuspendState Standby
+}
 Set-Alias -Name which -Value Get-Command
 Set-Alias -Name cron -Value taskschd.msc
 Set-Alias -Name ifconfig -Value ipconfig
@@ -1732,3 +1735,4 @@ function ocdi-local-postgres-refresh {
 
 # WSLENV
 # https://crates.io/crates/git-statuses
+
