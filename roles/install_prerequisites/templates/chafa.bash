@@ -1,2 +1,2 @@
 #!/bin/bash
-alias chafa=img
+alias img=chafa
