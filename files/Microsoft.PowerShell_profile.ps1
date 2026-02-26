@@ -1736,3 +1736,14 @@ function ocdi-local-postgres-refresh {
 # WSLENV
 # https://crates.io/crates/git-statuses
 
+function ecs_logs {
+  param($logGroupName)
+  if (($logGroupName -eq $null)) {
+  echo "No log group specified! Listing log groups."
+  aws logs describe-log-groups --region us-east-1 --profile us-ocdi-prod-phi  --query logGroups[].logGroupName --log-group-name-prefix ocdi | jq -r .[]
+  }
+  else {
+     $logStreamName =  aws --region us-east-1 --profile us-ocdi-prod-phi logs describe-log-streams --log-group-name $logGroupName --order-by LastEventTime --descending --max-items 1 --query logStreams[0].logStreamName| jq -r
+     aws --region us-east-1 --profile us-ocdi-prod-phi logs get-log-events --log-group-name $logGroupName --log-stream-name $logStreamName | jq -r .events.[].message
+  }
+}
