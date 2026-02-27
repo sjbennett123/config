@@ -635,15 +635,17 @@ if ($mmmdev) {
 function repo()
     {
         if (!$args[0]) {
+          Write-Host "No Repository set. Going to c:\mmmdev\ and listing repositories"
           Set-Location c:\mmmdev\
           git statuses
         }
         elseif (Test-Path -Path c:\mmmdev\$($args)) {
               Set-Location c:\mmmdev\$($args)
+              Start-Process -NoNewWindow get pull
         }
         else {
           Set-Location c:\mmmdev\
-          Write-Host "Red on white text." -ForegroundColor red -BackgroundColor white
+          Write-Host "No Repository set. Going to c:\mmmdev\ and listing repositories"
           git statuses
         }
     }
@@ -651,14 +653,16 @@ function repo()
   function repo()
     {
               if (!$args[0]) {
+                Write-Host "No Repository set. Going to $env:OneDrive\Documents\GitHub\ and listing repositories"
                 Set-Location $env:OneDrive\Documents\GitHub\
                 git statuses}
               if  (Test-Path -Path $env:OneDrive\Documents\GitHub\$($args)) {
                 Set-Location $env:OneDrive\Documents\GitHub\$($args)
+                Start-Process -NoNewWindow get pull
               }
               else {
                Set-Location $env:OneDrive\Documents\GitHub\
-               Write-Host "Red on white text." -ForegroundColor red -BackgroundColor white
+                 Write-Host "No Repository found. Going to $env:OneDrive\Documents\GitHub\ and listing repositories"
                 git statuses
               }
         }
