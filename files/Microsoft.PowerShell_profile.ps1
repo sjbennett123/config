@@ -641,7 +641,7 @@ function repo()
         }
         elseif (Test-Path -Path c:\mmmdev\$($args)) {
               Set-Location c:\mmmdev\$($args)
-              Start-Process -NoNewWindow get pull
+              Start-Process -NoNewWindow git pull
         }
         else {
           Set-Location c:\mmmdev\
@@ -658,12 +658,12 @@ function repo()
                 git statuses}
               if  (Test-Path -Path $env:OneDrive\Documents\GitHub\$($args)) {
                 Set-Location $env:OneDrive\Documents\GitHub\$($args)
-                Start-Process -NoNewWindow get pull
+                Start-Process -NoNewWindow git pull
               }
               else {
                Set-Location $env:OneDrive\Documents\GitHub\
                  Write-Host "No Repository found. Going to $env:OneDrive\Documents\GitHub\ and listing repositories"
-                git statuses
+                 git statuses
               }
         }
     }
