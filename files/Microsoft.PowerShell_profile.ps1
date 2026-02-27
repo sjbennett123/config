@@ -635,7 +635,7 @@ if ($mmmdev) {
 function repo()
     {
         if (!$args[0]) {
-          Write-Host "No Repository set. Going to c:\mmmdev\ and listing repositories"
+          Write-Host "No Repository set. Going to c:\mmmdev\ and listing repositories" -BackgroundColor Red
           Set-Location c:\mmmdev\
           git statuses
         }
@@ -645,7 +645,7 @@ function repo()
         }
         else {
           Set-Location c:\mmmdev\
-          Write-Host "No Repository set. Going to c:\mmmdev\ and listing repositories"
+          Write-Host "No Repository set. Going to c:\mmmdev\ and listing repositories" -BackgroundColor Red
           git statuses
         }
     }
@@ -653,7 +653,7 @@ function repo()
   function repo()
     {
               if (!$args[0]) {
-                Write-Host "No Repository set. Going to $env:OneDrive\Documents\GitHub\ and listing repositories"
+                Write-Host "No Repository set. Going to $env:OneDrive\Documents\GitHub\ and listing repositories" -BackgroundColor Red
                 Set-Location $env:OneDrive\Documents\GitHub\
                 git statuses}
               if  (Test-Path -Path $env:OneDrive\Documents\GitHub\$($args)) {
@@ -662,7 +662,7 @@ function repo()
               }
               else {
                Set-Location $env:OneDrive\Documents\GitHub\
-                 Write-Host "No Repository found. Going to $env:OneDrive\Documents\GitHub\ and listing repositories"
+                 Write-Host "No Repository found. Going to $env:OneDrive\Documents\GitHub\ and listing repositories"  -BackgroundColor Red
                  git statuses
               }
         }
@@ -1642,7 +1642,7 @@ if ($Env:WSLENV)
 {
 }
 else{
-echo "https://devblogs.microsoft.com/commandline/share-environment-vars-between-wsl-and-windows/"
+  Write-Host "https://devblogs.microsoft.com/commandline/share-environment-vars-between-wsl-and-windows/"  -BackgroundColor Red
 }
 
 
@@ -1743,7 +1743,7 @@ function ocdi-local-postgres-refresh {
 function ecs_logs {
   param($logGroupName)
   if (($logGroupName -eq $null)) {
-  echo "No log group specified! Listing log groups."
+  Write-Host "No log group specified! Listing log groups." -ForegroundColor Green
   aws logs describe-log-groups --region us-east-1 --profile us-ocdi-prod-phi  --query logGroups[].logGroupName --log-group-name-prefix ocdi | jq -r .[]
   }
   else {
@@ -1751,3 +1751,5 @@ function ecs_logs {
      aws --region us-east-1 --profile us-ocdi-prod-phi logs get-log-events --log-group-name $logGroupName --log-stream-name $logStreamName | jq -r .events.[].message
   }
 }
+
+# https://github.com/tstack/lnav/releases/latest
