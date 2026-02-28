@@ -97,6 +97,7 @@ if ($condition) {
 }
 else
 {
+    Write-Output "Installing Bat it's cat with wings"
   scoop install bat
 }
 
