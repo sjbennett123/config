@@ -648,6 +648,8 @@ function repo()
         if ($directory -eq $null) {
           
           Write-Host "No Repository set. Going to $gitdir and listing repositories" -BackgroundColor Red
+          Write-Host ""
+
           Set-Location $gitdir
           git statuses
         }
@@ -658,6 +660,8 @@ function repo()
         else {
           Set-Location $gitdir
           Write-Host "No Repository found at that path. Going to $gitdir and listing repositories" -BackgroundColor Red
+          Write-Host ""
+
           git statuses
         }
     }
