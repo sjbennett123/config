@@ -2,7 +2,7 @@
 # https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-7.5
 
-# Set-PSDebug -Trace 1
+#Set-PSDebug -Trace 1
 
 # To reload the powersasdfhell profile run.....  & $profile
 Function standby
@@ -628,53 +628,47 @@ function paper()
       chrome https://www.dropbox.com/paper
     }
 
-
 $mmmdev = Test-Path -Path "c:\mmmdev"
 $onedrive = Test-Path -Path "$env:OneDrive\Documents\GitHub\"
-if ($mmmdev) {
+$gitdir = ""
+    if ($mmmdev) {
+        $gitdir = "c:\mmmdev\"
+        
+        }
+        elseif ($onedrive){
+          $gitdir = "$env:OneDrive\Documents\GitHub\"
+        }
+
 function repo()
     {
-        if (!$args[0]) {
-          Write-Host "No Repository set. Going to c:\mmmdev\ and listing repositories" -BackgroundColor Red
-          Set-Location c:\mmmdev\
+        param($directory)
+    
+       
+        if ($directory -eq $null) {
+          
+          Write-Host "No Repository set. Going to $gitdir and listing repositories" -BackgroundColor Red
+          Set-Location $gitdir
           git statuses
         }
-        elseif (Test-Path -Path c:\mmmdev\$($args)) {
-              Set-Location c:\mmmdev\$($args)
-              Start-Process -NoNewWindow git pull
+        elseif (Test-Path -Path $gitdir\$directory) {
+              Set-Location $gitdir\$directory
+              Start-Process -NoNewWindow "git" -ArgumentList "pull -q"
         }
         else {
-          Set-Location c:\mmmdev\
-          Write-Host "No Repository set. Going to c:\mmmdev\ and listing repositories" -BackgroundColor Red
+          Set-Location $gitdir
+          Write-Host "No Repository found at that path. Going to $gitdir and listing repositories" -BackgroundColor Red
           git statuses
         }
     }
-}elseif ($onedrive){
-  function repo()
-    {
-              if (!$args[0]) {
-                Write-Host "No Repository set. Going to $env:OneDrive\Documents\GitHub\ and listing repositories" -BackgroundColor Red
-                Set-Location $env:OneDrive\Documents\GitHub\
-                git statuses}
-              if  (Test-Path -Path $env:OneDrive\Documents\GitHub\$($args)) {
-                Set-Location $env:OneDrive\Documents\GitHub\$($args)
-                Start-Process -NoNewWindow git pull
-              }
-              else {
-               Set-Location $env:OneDrive\Documents\GitHub\
-                 Write-Host "No Repository found. Going to $env:OneDrive\Documents\GitHub\ and listing repositories"  -BackgroundColor Red
-                 git statuses
-              }
-        }
-    }
+ 
 function repo_update()
     {
-        Set-Location $env:OneDrive\Documents\GitHub\
+        Set-Location $gitdir
         $gitdirs = Get-ChildItem -Directory
         foreach ($dir in $gitdirs)
         {
           Set-Location $dir
-          git pull -q
+            Start-Process -NoNewWindow "git" -ArgumentList "pull -q"
           Set-Location ..
         }
         Set-Location -
