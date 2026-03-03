@@ -648,20 +648,16 @@ function repo()
         if ($directory -eq $null) {
           
           Write-Host "No Repository set. Going to $gitdir and listing repositories" -BackgroundColor Red
-          Write-Host ""
-
           Set-Location $gitdir
           git statuses
         }
         elseif (Test-Path -Path $gitdir\$directory) {
               Set-Location $gitdir\$directory
-              Start-Process -NoNewWindow "git" -ArgumentList "pull -q"
+              Start-Process -NoNewWindow "git" -ArgumentList "pull -q"  | out-null
         }
         else {
           Set-Location $gitdir
           Write-Host "No Repository found at that path. Going to $gitdir and listing repositories" -BackgroundColor Red
-          Write-Host ""
-
           git statuses
         }
     }
@@ -673,7 +669,7 @@ function repo_update()
         foreach ($dir in $gitdirs)
         {
           Set-Location $dir
-            Start-Process -NoNewWindow "git" -ArgumentList "pull -q"
+            Start-Process -NoNewWindow "git" -ArgumentList "pull -q"  | out-null
           Set-Location ..
         }
         Set-Location -
