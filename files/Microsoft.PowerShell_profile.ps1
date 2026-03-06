@@ -1640,6 +1640,15 @@ else{
   Write-Host "https://devblogs.microsoft.com/commandline/share-environment-vars-between-wsl-and-windows/"  -BackgroundColor Red
 }
 
+$condition = where.exe lnav
+if ($condition) {
+
+}
+else
+{
+  Write-Output "Install LNAV Log Navigator"
+  Write-Output "https://github.com/tstack/lnav/releases/latest"
+}
 
 $condition = where.exe sncli.exe
 if ($condition) {
@@ -1650,7 +1659,7 @@ if ($condition) {
 else
 {
   Write-Output "Install simplenote cli"
-  # https://github.com/insanum/sncli
+  Write-Output "https://github.com/insanum/sncli"
 }
 
 # alias gu = 'git reset --soft HEAD~1'
@@ -1747,4 +1756,8 @@ function ecs_logs {
   }
 }
 
-# https://github.com/tstack/lnav/releases/latest
+
+function tempo()
+    {
+        chrome https://3mhealth.atlassian.net/plugins/servlet/ac/io.tempo.jira/tempo-app
+    }
