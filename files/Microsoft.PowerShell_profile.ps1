@@ -1187,6 +1187,18 @@ else
     Write-Output "https://curl.se/windows/latest.cgi?p=win64-mingw.zip"
 }
 
+$condition = where.exe yazi
+if ($condition)
+{
+ Set-Alias y yazi.exe
+}
+else
+{
+    Write-Host "https://yazi-rs.github.io/docs/installation/#install-with-scoop"
+    Write-Host "scoop install yazi"
+    Write-Host "scoop install ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick"
+}
+
 # $condition = which bandwhich
 # if ($condition)
 # {
@@ -1761,3 +1773,4 @@ function tempo()
     {
         chrome https://3mhealth.atlassian.net/plugins/servlet/ac/io.tempo.jira/tempo-app
     }
+
