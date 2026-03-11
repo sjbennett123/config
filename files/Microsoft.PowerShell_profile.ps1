@@ -337,6 +337,7 @@ Set-Alias ghb gb
 function e()
     {
         $condition = where.exe fpilot
+        # # https://filepilot.tech/download
         if ($condition){
           fpilot .
         }
@@ -1773,4 +1774,5 @@ function tempo()
     {
         chrome https://3mhealth.atlassian.net/plugins/servlet/ac/io.tempo.jira/tempo-app
     }
+
 
