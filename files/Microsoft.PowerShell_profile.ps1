@@ -1780,7 +1780,12 @@ function tempo()
 
 
 
-# 7z -x alias to unzip
+function unzip()
+    {
+        param($file)
+        7z x $file
+    }
+
 $condition = where.exe tickli.exe
 if ($condition) {
     Set-Alias -Name tt -Value 'tickli.exe'
@@ -1792,5 +1797,24 @@ if ($condition) {
 else
 {
     Write-Output "https://github.com/sho0pi/tickli"
+
+}
+
+
+$condition = where.exe yazi.exe
+if ($condition) {
+    Set-Alias -Name y -Value 'yazi.exe'
+}
+else
+{
+    Write-Output "https://yazi-rs.github.io/docs/installation/#install-with-scoop"
+    Write-Output "scoop install yazi"
+    Write-Output "scoop install ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick"
+    
+
+
+
+# wget https://github.com/sxyazi/yazi/releases/download/nightly/yazi-x86_64-unknown-linux-musl.zip
+# sudo cp yazi /usr/bin/
 
 }
