@@ -1776,3 +1776,21 @@ function tempo()
     }
 
 
+
+
+
+
+# 7z -x alias to unzip
+$condition = where.exe tickli.exe
+if ($condition) {
+    Set-Alias -Name tt -Value 'tickli.exe'
+  function tasks()
+      {
+          tickli.exe task list
+      }
+}
+else
+{
+    Write-Output "https://github.com/sho0pi/tickli"
+
+}
