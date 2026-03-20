@@ -608,7 +608,11 @@ function ssh_config_git()
         git push
         Set-Location -
     }
-
+function aws_config()
+  {
+        np $env:homedrive\$env:homepath\.aws\credentials
+  }
+  
 $condition = where.exe glow
 if ($condition) {
   Set-Alias g glow
@@ -1684,8 +1688,8 @@ if ($condition) {
 }
 else
 {
-  Write-Output "Install podman"
-  # https://podman.io/docs/installation
+#Write-Output "Install podman"
+# https://podman.io/docs/installation
 # https://podman-desktop.io/downloads
 # https://github.com/docker/compose/releases
 # C:\Program Files\RedHat\Podman
