@@ -1822,3 +1822,4 @@ else
 # sudo cp yazi /usr/bin/
 
 }
+# dism /online /Enable-Feature /FeatureName:TelnetClient
