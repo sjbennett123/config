@@ -608,11 +608,12 @@ function ssh_config_git()
         git push
         Set-Location -
     }
+
 function aws_config()
   {
         np $env:homedrive\$env:homepath\.aws\credentials
   }
-  
+
 $condition = where.exe glow
 if ($condition) {
   Set-Alias g glow
@@ -886,7 +887,13 @@ function ocdi_backlog_web()
     
 function ocdi_backlog()
     {
-        jira issue list -q "project in ('OCDI') AND status IN ('Open')"
+        jira issue list -q "project in ('OCDI') AND status IN ('Open') and issuetype not in (Epic, subTaskIssueTypes()) and (sprint is empty or sprint not in (futureSprints(), openSprints()))" --order-by rank
+    }
+Set-Alias backlog ocdi_backlog
+
+function ocdi_defects()
+    {
+        jira issue list -q "project =  ocdi AND status ='Open and issuetype = Defect" --order-by rank
     }
 
 function ocdi_backlog_web()
@@ -900,6 +907,8 @@ function ocdi_epics()
     }
 
 Set-Alias ocdi_epic ocdi_epics
+Set-Alias epics ocdi_epics
+
 
 function ocdi_epics_web()
     {
@@ -1822,41 +1831,3 @@ else
 # sudo cp yazi /usr/bin/
 
 }
-# dism /online /Enable-Feature /FeatureName:TelnetClient
-
-function cmatrix()
-    {
-      wsl cmatrix
-    }
-    
-   
-function mapscii()
-    {
-      wsl /snap/bin/mapscii
-      # https://github.com/rastapasta/mapscii
-      # https://terminaltrove.com/mapscii/
-    }
-  
-function mapscii()
-    {
-      wsl /snap/bin/mapscii
-      # https://github.com/rastapasta/mapscii
-      # https://terminaltrove.com/mapscii/
-    }
-
-Set-Alias -Name maps -Value mapscii
-Set-Alias -Name map -Value mapscii
-
-
-# go install github.com/maaslalani/sheets@main
-
-function vd()
-    {
-      $file = $args[0]
-      if($null -eq $file) {
-         wsl /home/sbennett/.local/bin/vd  
-     }
-      wsl /home/sbennett/.local/bin/vd  $file
-    }
-    
-    
