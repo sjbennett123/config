@@ -1831,3 +1831,41 @@ else
 # sudo cp yazi /usr/bin/
 
 }
+
+# dism /online /Enable-Feature /FeatureName:TelnetClient
+
+function cmatrix()
+    {
+      wsl cmatrix
+    }
+
+
+function mapscii()
+    {
+      wsl /snap/bin/mapscii
+      # https://github.com/rastapasta/mapscii
+      # https://terminaltrove.com/mapscii/
+    }
+
+function mapscii()
+    {
+      wsl /snap/bin/mapscii
+      # https://github.com/rastapasta/mapscii
+      # https://terminaltrove.com/mapscii/
+    }
+
+Set-Alias -Name maps -Value mapscii
+Set-Alias -Name map -Value mapscii
+
+
+# go install github.com/maaslalani/sheets@main
+
+function vd()
+    {
+      $file = $args[0]
+      if($null -eq $file) {
+         wsl /home/sbennett/.local/bin/vd
+     }
+      wsl /home/sbennett/.local/bin/vd  $file
+    }
+
