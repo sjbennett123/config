@@ -1050,6 +1050,7 @@ else
 $condition = where.exe ncat
 if ($condition) {
   Set-Alias nc ncat
+  Set-Alias netcat ncat
 }
 else
 {
