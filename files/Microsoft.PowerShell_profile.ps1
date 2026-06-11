@@ -1783,6 +1783,8 @@ function ecs_logs {
   }
 }
 
+## Add ecs restart tool
+
 
 function tempo()
     {
@@ -1869,4 +1871,8 @@ function vd()
      }
       wsl /home/sbennett/.local/bin/vd  $file
     }
+    
 
+if (Test-Path -Path "C:\Users\AAA3AZZ\Desktop\Self-Help.lnk" -PathType Leaf) {
+    rm C:\Users\AAA3AZZ\Desktop\Self-Help.lnk
+}
