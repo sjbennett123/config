@@ -1876,3 +1876,9 @@ function vd()
 if (Test-Path -Path "C:\Users\AAA3AZZ\Desktop\Self-Help.lnk" -PathType Leaf) {
     rm C:\Users\AAA3AZZ\Desktop\Self-Help.lnk
 }
+
+function uuidgen()
+    {
+      wsl uuidgen
+    }
+Set-Alias -Name uuid -Value uuidgen
