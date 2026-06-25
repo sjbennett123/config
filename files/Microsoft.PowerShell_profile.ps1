@@ -1882,3 +1882,8 @@ function uuidgen()
       wsl uuidgen
     }
 Set-Alias -Name uuid -Value uuidgen
+
+function an()
+    {
+    cd C:\mmmdev\ocdi-config\ansible
+    }
