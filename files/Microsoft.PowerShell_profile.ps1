@@ -2,7 +2,7 @@
 # https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-7.5
 
-#Set-PSDebug -Trace 1
+# Set-PSDebug -Trace 1
 
 # To reload the powersasdfhell profile run.....  & $profile
 Function standby
@@ -1418,8 +1418,15 @@ function ssm {
         fed up
         Write-Host "No Instance specified..."
         Write-Host "Listing instances for HCC app id 230."
-        $ec2_describe_instances = aws ec2 describe-instances --region $aws_region --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=230" | jq .Reservations[].Instances[]
-        $ec2_describe_instances | jq -r '"Instance Name : " + (.Tags[]|select(.Key=="Name")|.Value) + " | Instance ID : " + .InstanceId'
+        # instance-state-name
+        $ec2_describe_instances = aws ec2 describe-instances --region $aws_region --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=230" "Name=instance-state-name,Values=running" | jq .Reservations[].Instances[]
+        $ec2_describe_instances | jq -r '"Instance Name : " + (.Tags[]|select(.Key=="Name")|.Value) + " | Instance ID : " + .InstanceId   + " | ImageId : " + .ImageId'
+        $images = $ec2_describe_instances | jq -r ' .ImageId' | uniq 
+        $images = $images -join " "
+# ForEach ($image in $images) {
+    aws ec2 --profile  us-catalyst-dev  --region us-east-1 describe-images --image-ids  "$images"  --query 'Images[*].[Description]' | jq .
+# }
+
         Write-Host "Listing instances for OCDI app id 838."
         $ec2_describe_instances = aws ec2 describe-instances --region $aws_region --no-paginate --profile $profile --filters "Name=tag:ApplicationID,Values=838" | jq .Reservations[].Instances[]
         $ec2_describe_instances | jq -r '"Instance Name : " + (.Tags[]|select(.Key=="Name")|.Value) + " | Instance ID : " + .InstanceId'
@@ -1791,7 +1798,7 @@ function tempo()
         chrome https://3mhealth.atlassian.net/plugins/servlet/ac/io.tempo.jira/tempo-app
     }
 
-
+Set-Alias -Name timesheet -Value 'tempo'
 
 
 
