@@ -1924,3 +1924,5 @@ function an()
     {
     cd C:\mmmdev\ocdi-config\ansible
     }
+
+# https://github.com/AlexanderGrooff/mermaid-ascii
