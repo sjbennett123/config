@@ -1925,4 +1925,13 @@ function an()
     cd C:\mmmdev\ocdi-config\ansible
     }
 
-# https://github.com/AlexanderGrooff/mermaid-ascii
+
+
+$condition = where.exe mermaid-ascii.exe
+if ($condition) {
+    Set-Alias -Name mm -Value 'mermaid-ascii.exe'
+}
+else
+{
+    Write-Output "https://github.com/AlexanderGrooff/mermaid-ascii"
+}
