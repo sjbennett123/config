@@ -1779,15 +1779,45 @@ function ocdi-local-postgres-refresh {
 # https://crates.io/crates/git-statuses
 
 function ecs_logs {
-  param($logGroupName)
+  param($profile, $logGroupName)
+   #  Set-PSDebug -Trace 1
+
+        Set-Variable -Name "aws_region" -Value "us-east-1"
+        if (
+            ($profile -eq 692859943168) -or 
+            ($profile -eq "ci") -or 
+            ($profile -eq "rd") -or 
+            ($profile -eq "gi")
+            ){
+          Set-Variable -Name "profile" -Value "us-ocdi-non-prod-non-phi"
+          Set-Variable -Name "aws_region" -Value "us-east-1"
+        }
+
+  
+        Set-Variable -Name "aws_region" -Value "us-east-1"
+        if (
+            ($profile -eq 557690604736) -or 
+            ($profile -eq "ct") -or 
+            ($profile -eq "cpm")
+            ){
+          Set-Variable -Name "profile" -Value "us-ocdi-prod-phi"
+          Set-Variable -Name "aws_region" -Value "us-east-1"
+        }
+
+  if (($profile -eq $null)) {
+      Write-Host "No aws profile selected! Listing profile options  " -ForegroundColor Green
+      Write-Host "ci, rd, gi, ct, cpm, 692859943168, 557690604736" -ForegroundColor Green
+      return
+  }
   if (($logGroupName -eq $null)) {
-  Write-Host "No log group specified! Listing log groups." -ForegroundColor Green
-  aws logs describe-log-groups --region us-east-1 --profile us-ocdi-prod-phi  --query logGroups[].logGroupName --log-group-name-prefix ocdi | jq -r .[]
+      Write-Host "No log group specified! Listing log groups." -ForegroundColor Green
+      aws logs describe-log-groups --region $aws_region --profile $profile  --query logGroups[].logGroupName --log-group-name-prefix ocdi | jq -r .[]
+      return
   }
-  else {
-     $logStreamName =  aws --region us-east-1 --profile us-ocdi-prod-phi logs describe-log-streams --log-group-name $logGroupName --order-by LastEventTime --descending --max-items 1 --query logStreams[0].logStreamName| jq -r
-     aws --region us-east-1 --profile us-ocdi-prod-phi logs get-log-events --log-group-name $logGroupName --log-stream-name $logStreamName | jq -r .events.[].message
-  }
+  
+  $logStreamName =  aws  logs describe-log-streams --log-group-name $logGroupName --order-by LastEventTime --descending --max-items 1 --query logStreams[0].logStreamName --region $aws_region --profile $profile | jq -r
+  aws logs get-log-events --log-group-name $logGroupName --log-stream-name $logStreamName --region us-east-1 --profile $profile | jq -r .events.[].message
+  
 }
 
 ## Add ecs restart tool
