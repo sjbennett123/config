@@ -650,7 +650,9 @@ function repo()
     {
         param($directory)
     
-       
+        if ($directory -eq "sb") {
+          Set-Variable -Name "directory" -Value "scottjbennett"
+        }
         if ($directory -eq $null) {
           
           Write-Host "No Repository set. Going to $gitdir and listing repositories" -BackgroundColor Red
