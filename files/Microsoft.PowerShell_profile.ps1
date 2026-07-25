@@ -1476,6 +1476,7 @@ if ($condition) {
 else
 {
   pip install termdown
+  # https://github.com/trehn/termdown
 }
 
 # C:\Users\AAA3AZZ\AppData\Local\Postman
@@ -1921,7 +1922,7 @@ if (Test-Path -Path "C:\Users\AAA3AZZ\Desktop\Self-Help.lnk" -PathType Leaf) {
 
 function clock()
     {
-      wsl clock -c
+      wsl clock -c -t
       # Mkae sure that tty-clock is installed in wsl
     }
 
