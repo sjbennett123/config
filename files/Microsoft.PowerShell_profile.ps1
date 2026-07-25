@@ -5,6 +5,7 @@
 # Set-PSDebug -Trace 1
 
 # To reload the powersasdfhell profile run.....  & $profile
+# 🪟
 Function standby
   {
       rundll32.exe powrprof.dll,SetSuspendState Standby
@@ -658,6 +659,7 @@ function repo()
           Write-Host "No Repository set. Going to $gitdir and listing repositories" -BackgroundColor Red
           Set-Location $gitdir
           git statuses
+          # https://github.com/bircni/git-statuses
         }
         elseif (Test-Path -Path $gitdir\$directory) {
               Set-Location $gitdir\$directory
@@ -667,6 +669,7 @@ function repo()
           Set-Location $gitdir
           Write-Host "No Repository found at that path. Going to $gitdir and listing repositories" -BackgroundColor Red
           git statuses
+          # https://github.com/bircni/git-statuses
         }
     }
  
