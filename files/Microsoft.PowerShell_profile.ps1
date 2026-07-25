@@ -1922,6 +1922,7 @@ if (Test-Path -Path "C:\Users\AAA3AZZ\Desktop\Self-Help.lnk" -PathType Leaf) {
 function clock()
     {
       wsl clock -c
+      # Mkae sure that tty-clock is installed in wsl
     }
 
 function uuidgen()
