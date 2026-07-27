@@ -1884,6 +1884,7 @@ function cmatrix()
     {
       wsl cmatrix
     }
+Set-Alias -Name matrix -Value cmatrix
 
 
 function mapscii()
