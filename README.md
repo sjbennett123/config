@@ -3,6 +3,17 @@
 
 
 
+https://github.com/o2sh/onefetch
+
+https://github.com/o2sh/onefetch/releases/download/2.27.1/onefetch-linux.tar.gz
+
+
+
+wget https://github.com/bircni/git-statuses/releases/download/0.8.2/git-statuses-0.8.2-x86_64-unknown-linux-musl.tar.gz
+
+
+
+
 
 add chafa to linux setup
 
