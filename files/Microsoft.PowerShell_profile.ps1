@@ -1892,6 +1892,7 @@ function mapscii()
       wsl /snap/bin/mapscii
       # https://github.com/rastapasta/mapscii
       # https://terminaltrove.com/mapscii/
+      # Use your cursors to navigate, a/z to zoom, q to quit.
     }
 
 function mapscii()
