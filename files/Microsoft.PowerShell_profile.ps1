@@ -1899,6 +1899,7 @@ function mapscii()
       wsl /snap/bin/mapscii
       # https://github.com/rastapasta/mapscii
       # https://terminaltrove.com/mapscii/
+      # sudo snap install mapscii
     }
 
 Set-Alias -Name maps -Value mapscii
@@ -1925,6 +1926,9 @@ function clock()
     {
       wsl clock -c -t
       # Mkae sure that tty-clock is installed in wsl
+      # https://github.com/xorg62/tty-clock
+      # sudo cp tty-clock /usr/bin/
+
     }
 
 function uuidgen()
