@@ -7,8 +7,8 @@
 # To reload the powersasdfhell profile run.....  & $profile
 # 🪟
 Function standby
-  {
-      rundll32.exe powrprof.dll,SetSuspendState Standby
+{
+  rundll32.exe powrprof.dll,SetSuspendState Standby
 }
 Set-Alias -Name which -Value Get-Command
 Set-Alias -Name cron -Value taskschd.msc
@@ -435,7 +435,6 @@ else
 # USAC username used to authenticate [%FED_USERNAME%]
 # USAC password used to authenticate [%FED_PASSWORD%]
 # alias jitney='fed --manual --idp jitney'
-
 
 function creds()
     {
@@ -1786,7 +1785,7 @@ function ocdi-local-postgres-refresh {
 
 function ecs_logs {
   param($profile, $logGroupName)
-   #  Set-PSDebug -Trace 1
+   # Set-PSDebug -Trace 1
 
         Set-Variable -Name "aws_region" -Value "us-east-1"
         if (
@@ -1817,11 +1816,11 @@ function ecs_logs {
   }
   if (($logGroupName -eq $null)) {
       Write-Host "No log group specified! Listing log groups." -ForegroundColor Green
-      aws logs describe-log-groups --region $aws_region --profile $profile  --query logGroups[].logGroupName --log-group-name-prefix ocdi | jq -r .[]
+      aws logs describe-log-groups --region $aws_region --profile $profile --query logGroups[].logGroupName --log-group-name-prefix ocdi | jq -r .[]
       return
   }
   
-  $logStreamName =  aws  logs describe-log-streams --log-group-name $logGroupName --order-by LastEventTime --descending --max-items 1 --query logStreams[0].logStreamName --region $aws_region --profile $profile | jq -r
+  $logStreamName = aws logs describe-log-streams --log-group-name $logGroupName --order-by LastEventTime --descending --max-items 1 --query logStreams[0].logStreamName --region $aws_region --profile $profile | jq -r
   aws logs get-log-events --log-group-name $logGroupName --log-stream-name $logStreamName --region us-east-1 --profile $profile | jq -r .events.[].message
   
 }
@@ -1931,7 +1930,8 @@ function clock()
       # sudo cp tty-clock /usr/bin/
 
     }
-
+ Set-Alias -Name clcok -Value clock
+   
 function uuidgen()
     {
       wsl uuidgen
@@ -1942,8 +1942,6 @@ function an()
     {
     cd C:\mmmdev\ocdi-config\ansible
     }
-
-
 
 $condition = where.exe mermaid-ascii.exe
 if ($condition) {
