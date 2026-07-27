@@ -1897,7 +1897,6 @@ function mapscii()
 function mapscii()
     {
       wsl /snap/bin/mapscii
-      # Use your cursors to navigate, a/z to zoom, q to quit.
       # https://github.com/rastapasta/mapscii
       # https://terminaltrove.com/mapscii/
       # sudo snap install mapscii
@@ -1953,3 +1952,5 @@ else
 {
     Write-Output "https://github.com/AlexanderGrooff/mermaid-ascii"
 }
+
+Set-Alias -Name vlc -Value "$env:ProgramFiles\VideoLAN\VLC\vlc.exe"
