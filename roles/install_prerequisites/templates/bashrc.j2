@@ -17,19 +17,30 @@ fi
 
 
 parse_git_branch() {
+
+  if [[   $(pwd)  != /mnt/* ]]; then   
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+fi
 }
 
 parse_git_dirty() {
+
+  if [[   $(pwd)  != /mnt/* ]]; then   
   [[ -n "$(git status -s 2> /dev/null)" ]] && echo ☠
+fi
 }
 
 parse_git_unpushed() {
+
+  if [[   $(pwd)  != /mnt/* ]]; then   
   [[ -n "$(git status 2> /dev/null | grep -E "Your branch is ahead of '.*' by ([0-9]*) commit.")" ]] && echo 🛸
+  fi
 }
 
 parse_git_user() {
+     if [[   $(pwd)  != /mnt/* ]]; then   
      git config --get user.email 2> /dev/null
+     fi
 }
 
 export PS1="\u@\h \[\033[32m\]\w\[\033[33m\] \$(parse_git_branch) \$(parse_git_user) \[\033[00m\] \$(parse_git_dirty) \$(parse_git_unpushed) \n$" 
