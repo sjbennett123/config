@@ -653,6 +653,12 @@ function repo()
         if ($directory -eq "sb") {
           Set-Variable -Name "directory" -Value "scottjbennett"
         }
+        if ($directory -eq "sjb") {
+          Set-Variable -Name "directory" -Value "scottjbennett"
+        }
+        if ($directory -eq "nlu-bridge") {
+          Set-Variable -Name "directory" -Value "scottjbennett"
+        }
         if ($directory -eq $null) {
           
           Write-Host "No Repository set. Going to $gitdir and listing repositories" -BackgroundColor Red
@@ -1953,3 +1959,16 @@ else
 }
 
 Set-Alias -Name vlc -Value "$env:ProgramFiles\VideoLAN\VLC\vlc.exe"
+
+
+
+ 
+# pip install codespell
+# https://github.com/codespell-project/codespell
+Set-Alias -Name cs -Value codespell
+
+
+# npm install markdownlint-cli2 --global
+Set-Alias -Name mdl -Value markdownlint-cli2
+Set-Alias -Name markdownlint-cli -Value markdownlint-cli2
+Set-Alias -Name markdownlint -Value markdownlint-cli2
