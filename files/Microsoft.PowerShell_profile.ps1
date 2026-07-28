@@ -749,7 +749,7 @@ if ($condition) {
 }
 else
 {
-    Write-Output "install the LS alterantive eza"
+    Write-Output "install the LS alternative eza"
     Write-Output "https://github.com/eza-community/eza/releases/download/latest/eza.exe_x86_64-pc-windows-gnu.zip"
 }
 $condition = where.exe duf.exe
@@ -1753,7 +1753,7 @@ function ocdi-local-postgres-refresh {
   docker run -d -ti -p 5433:5432 --network=ocdi -e POSTGRES_DB=ocdilocal -e POSTGRES_USER=ocdi -e POSTGRES_PASSWORD=ocdi --name=ocdi-local-postgres docker-hosted-pd.udapp-appsec.us.amz.3mhis.net/ocdi-local-postgres:latest
   if ($args -eq "debug"){
       Write-Host ("🐛 🐛 🐛 🐛 🐛 🐛 🐛 🐛 🐛 🐛")
-      Write-Host ("Enabling Debug Mode to log postgress logs stdout ") -ForegroundColor Green
+      Write-Host ("Enabling Debug Mode to log postgresql logs stdout ") -ForegroundColor Green
       Write-Host ("Wait 10 Seconds for the container to come up ") -ForegroundColor Green -NoNewline
       $i = 10
       do {
@@ -1779,7 +1779,7 @@ function ocdi-local-postgres-refresh {
       Write-Host ("restarting postgres docker container") -ForegroundColor Green
       docker restart ocdi-local-postgres
   }
-  Write-Host ("🛢️  🛢️  🐘  Postgress is ready!  🐘 🛢️  🛢️") -ForegroundColor Green
+  Write-Host ("🛢️  🛢️  🐘  Postgresql is ready!  🐘 🛢️  🛢️") -ForegroundColor Green
 }
 
 # Restart podman
@@ -1931,7 +1931,7 @@ if (Test-Path -Path "C:\Users\AAA3AZZ\Desktop\Self-Help.lnk" -PathType Leaf) {
 function clock()
     {
       wsl clock -c -t
-      # Mkae sure that tty-clock is installed in wsl
+      # Make sure that tty-clock is installed in wsl
       # https://github.com/xorg62/tty-clock
       # sudo cp tty-clock /usr/bin/
 
