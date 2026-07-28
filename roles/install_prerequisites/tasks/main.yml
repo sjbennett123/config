@@ -380,7 +380,7 @@
       become: true
       tags: rg
 
-    - name: Retreive rg version
+    - name: Retrieve rg version
       ansible.builtin.command:
         cmd: "rg --version"
       register: rg_version
@@ -421,7 +421,7 @@
         dest: ~/.fzf/
       tags: rg
 
-    - name: Dowload fzf binary
+    - name: Download fzf binary
       ansible.builtin.command:
         chdir: ~/.fzf
         cmd: ./install --bin
@@ -469,7 +469,7 @@
       become: true
       tags: htop
 
-    - name: Retreive eza version
+    - name: Retrieve eza version
       ansible.builtin.command:
         cmd: "eza --version"
       register: eza_version_before_install
@@ -510,7 +510,7 @@
       when: eza_version_before_install.failed
       tags: fd
 
-    - name: Retreive fd version
+    - name: Retrieve fd version
       ansible.builtin.command:
         cmd: "fd --version"
       register: fd_version_before_install
@@ -556,7 +556,7 @@
       tags: fd
       when: fd_version_before_install.failed
 
-    - name: Retreive fd version
+    - name: Retrieve fd version
       ansible.builtin.command:
         cmd: "fd --version"
       register: fd_version_after_install
@@ -932,7 +932,7 @@
   changed_when: false
   register: tig_version
 
-- name: Print the verson
+- name: Print the version
   ansible.builtin.debug:
     var: tig_version.stdout
   tags: tig
