@@ -1,5 +1,9 @@
 # 
 # %APPDATA%\alacritty\alacritty.toml
+# n $env:APPDATA\alacritty\alacritty.toml
+
+#:schema https://github.com/distinction-dev/alacritty-schema/raw/refs/heads/main/alacritty/reference.json
+
 
 [colors]
 draw_bold_text_with_bright_colors = false
@@ -41,3 +45,54 @@ working_directory = 'C:\Users\AAA3AZZ\OneDrive - Solventum\Desktop'
 [terminal.shell]
 args = ["-NoLogo"]
 program = 'C:\Program Files\PowerShell\7\pwsh.exe'
+
+
+
+
+### https://alacritty.org/config-alacritty.html
+
+[mouse]
+hide_when_typing = true
+
+[cursor]
+thickness = 0.5
+  [cursor.style]
+  shape = "Beam"
+  
+[colors]
+draw_bold_text_with_bright_colors = false
+
+  [colors.primary]
+  background = "0x000000"
+  foreground = "0xeaeaea"
+
+[font]
+size = 16
+
+  [font.bold]
+  family = "CaskaydiaCove NF"
+  style = "Bold"
+
+  [font.bold_italic]
+  family = "CaskaydiaCove NF"
+  style = "Bold Italic"
+
+  [font.italic]
+  family = "CaskaydiaCove NF"
+
+  [font.normal]
+  family = "CaskaydiaCove NF"
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mouse = "Right"
+
+[selection]
+save_to_clipboard = true
+
+[general]
+working_directory = "C:\\Users\\AAA3AZZ\\Desktop"
+
+[terminal.shell]
+args = [ "-NoLogo" ]
+program = "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
