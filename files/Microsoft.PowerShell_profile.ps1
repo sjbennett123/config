@@ -1821,7 +1821,7 @@ function ecs_logs {
       return
   }
   if (($logGroupName -eq $null)) {
-      Write-Host "No log group specified! Listing log groups." -ForegroundColor Green
+      Write-Host "No log group specified! Listing log groups for profile $profile ...." -ForegroundColor Green
       aws logs describe-log-groups --region $aws_region --profile $profile --query logGroups[].logGroupName --log-group-name-prefix ocdi | jq -r .[]
       return
   }
@@ -1968,3 +1968,22 @@ Set-Alias -Name cs -Value codespell
 Set-Alias -Name mdl -Value markdownlint-cli2
 Set-Alias -Name markdownlint-cli -Value markdownlint-cli2
 Set-Alias -Name markdownlint -Value markdownlint-cli2
+
+$condition = where.exe elinks
+if ($condition) {
+ #   lynx windows
+ # https://github.com/rkd77/elinks/releases/tag/v0.20.0
+ Set-Alias -Name el -Value elinks
+ Set-Alias -Name lynx -Value elinks
+
+ $env:ELINKS_CONFDIR="$env:ProgramFiles\elinks\"
+ $env:XDG_CONFIG_HOME="$env:ProgramFiles\elinks\"
+ $env:CURL_CA_BUNDLE="$env:ProgramFiles\elinks\curl-ca-bundle.crt"
+ $env:TMPDIR="$env:ProgramFiles\elinks\"
+
+}
+
+
+# https://remyservices.net/Durable/Unidex/elinks-Disable-Certificate-Validation/
+
+# elinks.conf
