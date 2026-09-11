@@ -711,6 +711,11 @@ function downloads()
     }
 Set-Alias dl downloads
 
+function recordings()
+    {
+        Set-Location $env:homedrive\$env:homepath\Dropbox\Recordings\
+    }
+Set-Alias rec recordings
 
 function desktop()
     {
@@ -1821,7 +1826,7 @@ function ecs_logs {
       return
   }
   if (($logGroupName -eq $null)) {
-      Write-Host "No log group specified! Listing log groups for profile $profile ...." -ForegroundColor Green
+      Write-Host "No log group specified! Listing log groups." -ForegroundColor Green
       aws logs describe-log-groups --region $aws_region --profile $profile --query logGroups[].logGroupName --log-group-name-prefix ocdi | jq -r .[]
       return
   }
@@ -1969,21 +1974,20 @@ Set-Alias -Name mdl -Value markdownlint-cli2
 Set-Alias -Name markdownlint-cli -Value markdownlint-cli2
 Set-Alias -Name markdownlint -Value markdownlint-cli2
 
-$condition = where.exe elinks
-if ($condition) {
- #   lynx windows
- # https://github.com/rkd77/elinks/releases/tag/v0.20.0
- Set-Alias -Name el -Value elinks
- Set-Alias -Name lynx -Value elinks
 
- $env:ELINKS_CONFDIR="$env:ProgramFiles\elinks\"
- $env:XDG_CONFIG_HOME="$env:ProgramFiles\elinks\"
- $env:CURL_CA_BUNDLE="$env:ProgramFiles\elinks\curl-ca-bundle.crt"
- $env:TMPDIR="$env:ProgramFiles\elinks\"
+Function mdfix
+{
+      $file = $args[0]
+    if($null -eq $file) {
+        throw "No filename supplied"
+    }
+$ErrorActionPreference = "Stop"
+cs -w $file
+mdl --config c:\Users\deadk\.markdownlint-cli2.yaml --fix $file
+$file_full_path = Get-ChildItem $file | % { $_.FullName }
+copilot -p "check the markdown file $file_full_path" --allow-all-paths --allow-all-tools
 
 }
+Set-Alias -Name mdf -Value mdfix
 
 
-# https://remyservices.net/Durable/Unidex/elinks-Disable-Certificate-Validation/
-
-# elinks.conf
