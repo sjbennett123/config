@@ -1,3 +1,4 @@
+set mouse=
 set relativenumber
 set number
 set shiftwidth=2
