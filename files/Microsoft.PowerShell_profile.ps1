@@ -1985,7 +1985,7 @@ $ErrorActionPreference = "Stop"
 # Check spelling with Codespell
 cs -w $file
 # Run markdownlink
-mdl --config c:\Users\deadk\.markdownlint-cli2.yaml --fix $file
+mdl --config $env:homedrive\$env:homepath\.markdownlint-cli2.yaml --fix $file
 $file_full_path = Get-ChildItem $file | % { $_.FullName }
 copilot -p "correct spelling and grammer on the markdown file $file_full_path and apply those changes to the file" --allow-all-paths --allow-all-tools
 
@@ -2001,3 +2001,4 @@ Function mdfa
   mdf $item
   }  
 }
+
