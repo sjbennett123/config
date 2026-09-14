@@ -1982,12 +1982,22 @@ Function mdfix
         throw "No filename supplied"
     }
 $ErrorActionPreference = "Stop"
+# Check spelling with Codespell
 cs -w $file
+# Run markdownlink
 mdl --config c:\Users\deadk\.markdownlint-cli2.yaml --fix $file
 $file_full_path = Get-ChildItem $file | % { $_.FullName }
-copilot -p "check the markdown file $file_full_path" --allow-all-paths --allow-all-tools
+copilot -p "correct spelling and grammer on the markdown file $file_full_path and apply those changes to the file" --allow-all-paths --allow-all-tools
 
 }
 Set-Alias -Name mdf -Value mdfix
 
 
+Function mdfa
+{
+    $list = fd md$ 
+  foreach ($item in $list) 
+  { 
+  mdf $item
+  }  
+}
