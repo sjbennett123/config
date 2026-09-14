@@ -1973,7 +1973,7 @@ Set-Alias -Name cs -Value codespell
 Set-Alias -Name mdl -Value markdownlint-cli2
 Set-Alias -Name markdownlint-cli -Value markdownlint-cli2
 Set-Alias -Name markdownlint -Value markdownlint-cli2
-
+# check for $env:homedrive\$env:homepath\.markdownlint-cli2.yaml
 
 Function mdfix
 {
