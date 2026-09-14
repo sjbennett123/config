@@ -1967,6 +1967,7 @@ Set-Alias -Name vlc -Value "$env:ProgramFiles\VideoLAN\VLC\vlc.exe"
 
 # pip install codespell
 # https://github.com/codespell-project/codespell
+# --exclude-file 
 Set-Alias -Name cs -Value codespell
 
 # npm install markdownlint-cli2 --global
@@ -1984,7 +1985,7 @@ Function mdfix
 $ErrorActionPreference = "Stop"
 # Check spelling with Codespell
 cs -w $file
-# Run markdownlink
+# Run markdownlint
 mdl --config $env:homedrive\$env:homepath\.markdownlint-cli2.yaml --fix $file
 $file_full_path = Get-ChildItem $file | % { $_.FullName }
 copilot -p "correct spelling and grammer on the markdown file $file_full_path and apply those changes to the file" --allow-all-paths --allow-all-tools
@@ -2001,4 +2002,3 @@ Function mdfa
   mdf $item
   }  
 }
-
