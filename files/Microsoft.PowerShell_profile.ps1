@@ -2005,5 +2005,6 @@ Function mdfa
 
 Set-Alias -Name lynx -Value elinks
 $env:ELINKS_CONFDIR= "$env:homedrive\$env:homepath\.elinks\"
+# https://remyservices.net/Durable/Unidex/elinks-Disable-Certificate-Validation/
 # FWIW, the file is ~/.elinks/elinks.conf (and doesn't exist by default) and the syntax is set connection.ssl.cert_verify = 0 – this is very poorly documented.
 # https://linux.die.net/man/5/elinks.conf
