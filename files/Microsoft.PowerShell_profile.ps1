@@ -2002,3 +2002,8 @@ Function mdfa
   mdf $item
   }  
 }
+
+Set-Alias -Name lynx -Value elinks
+$env:ELINKS_CONFDIR= "$env:homedrive\$env:homepath\.elinks\"
+# FWIW, the file is ~/.elinks/elinks.conf (and doesn't exist by default) and the syntax is set connection.ssl.cert_verify = 0 – this is very poorly documented.
+# https://linux.die.net/man/5/elinks.conf
