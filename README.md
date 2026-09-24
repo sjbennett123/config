@@ -1,3 +1,9 @@
+sudo apt install elinks
+
+
+
+
+
 https://github.com/bircni/git-statuses/releases/download/0.8.2/git-statuses-0.8.2-x86_64-unknown-linux-musl.tar.gz
 
 
