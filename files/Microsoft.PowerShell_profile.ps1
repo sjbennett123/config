@@ -649,14 +649,13 @@ $gitdir = ""
 function repo()
     {
         param($directory)
-    
+        if ($directory -eq "scott") {
+          Set-Variable -Name "directory" -Value "scottjbennett"
+        }    
         if ($directory -eq "sb") {
           Set-Variable -Name "directory" -Value "scottjbennett"
         }
         if ($directory -eq "sjb") {
-          Set-Variable -Name "directory" -Value "scottjbennett"
-        }
-        if ($directory -eq "nlu-bridge") {
           Set-Variable -Name "directory" -Value "scottjbennett"
         }
         if ($directory -eq $null) {
