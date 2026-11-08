@@ -625,6 +625,13 @@ else
   Write-Output "https://github.com/charmbracelet/glow/releases/download/v1.5.1/glow_Windows_x86_64.zip"
 }
 
+
+function bloom()
+    {
+      Set-Location $env:homedrive\$env:homepath\Dropbox\Roleplaying\liminal_horror\the_bloom\
+
+    }
+    
 function dropbox()
     {
       Set-Location $env:homedrive\$env:homepath\Dropbox
@@ -696,12 +703,17 @@ function repo_update()
 
 function gitc()
     {   
-        Set-Location "$(git rev-parse --show-toplevel)";
-        git pull -q;
-        git add .;
-        git commit -m updates;
-        git push;
-        cd -;
+        $is_git_dir =  git rev-parse --is-inside-work-tree
+        if ($is_git_dir -eq "true") {
+            Set-Location "$(git rev-parse --show-toplevel)";
+            git pull -q;
+            git add .;
+            git commit -m updates;
+            git push;
+            cd -;
+        }
+          else { Write-Host -f red "not a git directory" }
+
     }
 
 function downloads()
